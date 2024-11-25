@@ -1,4 +1,6 @@
 header {
+  max-width: 90rem;
+  margin: 0 auto;
   padding: 1.25rem 5rem;
 
   display: flex;
@@ -21,23 +23,29 @@ header {
   align-items: center;
 }
 
-.header-content-search > i {
+.header-content-search > a > i {
   color: var(--gray-500);
-  font-size: 20px;
+  font-size: 1.25rem;
   cursor: pointer;
   transition: color 0.2s;
 
   margin: 0 1.5rem;
 }
 
-.header-content-search i:hover {
-  color: var(--green-900);
-}
-
 #moon-icon {
+  color: var(--gray-500);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.2s;
+
   padding: 0 1.5rem;
   margin: 0;
   border-left: 1px solid var(--gray-200);
+}
+
+.header-content-search i:hover,
+#moon-icon:hover {
+  color: var(--green-900);
 }
 
 .search-box {
@@ -46,8 +54,8 @@ header {
 }
 
 .search-box input[type="text"] {
-  padding: 8px 0 8px 32px;
-  font-size: 12px;
+  padding: 0.5rem 0 0.5rem 2rem;
+  font-size: 0.75rem;
   border-radius: 6px;
   border: 0.5px solid var(--gray-400);
 }
@@ -57,14 +65,14 @@ header {
   left: 8px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
   color: var(--gray-500);
 }
 
 .btn-login {
-  padding: 8px 20px;
-  font-size: 12px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.75rem;
   border-radius: 20px;
   border: 0.5px solid var(--gray-500);
   background: none;
@@ -72,9 +80,10 @@ header {
 }
 
 .navigation {
+  max-width: calc(90rem - 10rem);
+  margin: 0 auto;
   border-bottom: 0.5px solid #dddddd;
   padding: 1rem 5rem;
-  margin: 0 5rem;
 
   display: flex;
   justify-content: center;
@@ -84,7 +93,7 @@ header {
 .navigation > a {
   color: var(--green-900);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 500;
 
   transition: color 0.2s;
@@ -97,6 +106,8 @@ header {
 main {
   padding: 3rem 5rem;
   min-height: 100vh;
+  max-width: 90rem;
+  margin: 0 auto;
 }
 
 footer {
@@ -104,20 +115,21 @@ footer {
 }
 
 .footer-content {
+  max-width: 90rem;
+  margin: 0 auto;
+
   padding: 1.75rem 5rem;
   color: var(--white);
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .nav-icon {
   display: none;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .nav-icon.active {
   position: fixed;
-  top: 40px;
-  right: 80px;
   display: block;
 }
 
@@ -154,7 +166,7 @@ footer {
 }
 
 .nav-list ul {
-  margin-top: 13rem;
+  margin-top: 12rem;
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -249,5 +261,11 @@ footer {
     padding: 1.75rem 2rem;
     text-align: center;
     line-height: 1.4;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-content {
+    font-size: 85.71%;
   }
 }
