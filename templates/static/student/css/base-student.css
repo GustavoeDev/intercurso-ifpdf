@@ -80,17 +80,21 @@ header {
 }
 
 .navigation {
-  max-width: calc(90rem - 10rem);
+  max-width: 90rem;
   margin: 0 auto;
-  border-bottom: 0.5px solid #dddddd;
-  padding: 1rem 5rem;
+}
 
+.navigation > ul {
   display: flex;
   justify-content: center;
   gap: 2rem;
+
+  padding: 1rem 5rem;
+  margin: 0 5rem;
+  border-bottom: 0.5px solid #dddddd;
 }
 
-.navigation > a {
+.navigation a {
   color: var(--green-900);
   text-decoration: none;
   font-size: 0.875rem;
@@ -99,7 +103,7 @@ header {
   transition: color 0.2s;
 }
 
-.navigation > a:hover {
+.navigation a:hover {
   color: var(--green-500);
 }
 
