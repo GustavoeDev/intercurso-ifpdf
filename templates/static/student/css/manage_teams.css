@@ -1,0 +1,48 @@
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-info h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Baloo 2', 'Inter', sans-serif;
+    color: var(--green-900);
+    line-height: 130%;
+}
+
+.card-info p {
+    color: var(--gray-600);
+    font: 1rem, 'Inter', 130%;
+    max-width: 630px;
+    width: 100%;
+}
+
+.card-teams {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: start;
+
+    margin-top: 48px;
+}
+
+.card-teams h1{
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Baloo 2', 'Inter', sans-serif;
+    color: var(--green-900);
+    line-height: 130%;
+}
+
+.button {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    background-color: var(--green-100);
+    color: var(--white);
+    font-weight: 600;
+    filter: drop-shadow(1px 2px 2px #000000);
+}

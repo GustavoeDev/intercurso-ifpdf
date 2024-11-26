@@ -1,0 +1,21 @@
+{% extends "base-student.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'student/css/manage_teams.css' %}" />
+{% endblock %} 
+
+{% block main %}
+
+<div class="card-info">
+    <h1>Gerenciar equipes</h1>
+    <p>Nesta seção, você terá a possibilidade de gerenciar todas as suas equipes para o Intercurso. Será possível cadastrar suas equipes em diferentes competições, adicionar e organizar os membros em cada uma delas, além de acompanhar e atualizar as informações dos participantes de forma prática e eficiente. Clique na sua equipe, e gerencie os participantes de cada competição</p>    
+</div>
+
+<div class="card-teams">
+    <h1>Minhas Equipes</h1>
+    <button class="button">Cadastrar nova equipe</button>
+</div>
+
+<div>
+    <h1>TABELA</h1>
+</div>
+
+{% endblock %}
