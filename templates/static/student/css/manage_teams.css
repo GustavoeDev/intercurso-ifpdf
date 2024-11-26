@@ -29,12 +29,16 @@
     margin-top: 48px;
 }
 
-.card-teams h1{
+.card-teams h1 {
     font-size: 1.5rem;
     font-weight: bold;
     font-family: 'Baloo 2', 'Inter', sans-serif;
     color: var(--green-900);
     line-height: 130%;
+}
+
+button {
+    cursor: pointer;
 }
 
 .button {
@@ -44,5 +48,148 @@
     background-color: var(--green-100);
     color: var(--white);
     font-weight: 600;
-    filter: drop-shadow(1px 2px 2px #000000);
+    cursor: pointer;
+}
+
+table {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    width: 100%;
+
+    margin-top: 20px;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-gap: auto;
+
+    padding: 8px 16px;
+
+    background-color: #F9FAFB;
+    color: #9CA3AF;
+
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-gap: auto;
+
+    padding: 20px 16px;
+    color: #1E1D26;
+
+    border-bottom: 1px solid #E2E8F0;
+}
+
+td,
+th {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    gap: 8px
+}
+
+.title-image {
+    height: 24px;
+    width: 24px;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.card-title span {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.table-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.card-actions button {
+    font: 600 12px 'Inter';
+
+    background-color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.button-image {
+    height: 14px;
+    width: 14px;
+    border-radius: 0;
+}
+
+.image-button {
+    border: none;
+    background-color: #00000000;
+}
+
+.add-new-member {
+    color: var(--green-100);
+    padding: 8px 16px;
+
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+}
+
+.add-new-member .button-image {
+    stroke-width: 2px;
+}
+
+.delete-team {
+    color: var(--red-500);
+    padding: 8px 32px;
+
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+}
+
+.table-container {
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 8px 20px 8px 12px;
+    margin: 32px 0px;
+
+    width: 100%;
+}
+
+.small-image {
+    height: 16px;
+    width: 16px;
+}
+
+.not-active button,
+.not-active table {
+    display: none;
+}
+
+.not-active #test {
+    display: block;
 }
