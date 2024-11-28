@@ -22,11 +22,17 @@
     <script src="{% static 'student/js/menu-hamburguer.js' %}" defer></script>
     {% block js %} {% endblock %}
     <title>Início</title>
+    {% block title %} {% endblock %}
   </head>
   <body>
     <header>
       <div class="header-content-logo">
-        <img src="{% static 'student/img/logo.svg' %}" alt="" />
+        <a class="logo-normal" href="/"
+          ><img src="{% static 'student/img/logo.svg' %}" alt=""
+        /></a>
+        <a class="logo-small" href="/"
+          ><img src="{% static 'student/img/logo-small.svg' %}" alt=""
+        /></a>
         <p>
           Educação, Ciência, Cultura e Tecnologia em <br />
           todo o Rio Grande do Norte

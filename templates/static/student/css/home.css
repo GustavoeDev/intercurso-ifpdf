@@ -14,7 +14,7 @@
   font-family: "Baloo 2", sans-serif;
   line-height: 1.3;
   font-weight: 700;
-  font-size: 48px;
+  font-size: 3rem;
   color: var(--green-900);
 }
 
@@ -74,6 +74,8 @@
 
 .competitions-card {
   max-width: 23rem;
+  width: 100%;
+  height: 26.063rem;
   padding: 1.5rem;
   border-radius: 4px;
   box-shadow: 0 0 2.188rem 0 rgba(0, 0, 0, 0.2);
@@ -81,12 +83,14 @@
 
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-start;
   gap: 1.5rem;
 }
 
 .competitions-card > img {
   border-radius: 4px;
+  width: 100%;
 }
 
 .competitions-card-text {
@@ -111,6 +115,7 @@
   border: 0;
   padding: 0.5rem 2rem;
   color: var(--white);
+  font-size: 0.875rem;
   font-weight: bold;
   background-color: var(--green-100);
   border-radius: 4px;
@@ -130,12 +135,13 @@
 }
 
 .carousel-item {
-  padding: 2rem 0;
+  padding: 0 4rem;
+  margin: 2rem 0;
   min-width: 100%;
   height: 100%;
 
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 1.5rem;
 }
@@ -214,22 +220,26 @@
 }
 
 .games-today-select {
-  display: flex; /* Torna os elementos filhos flexíveis e alinhados */
+  display: flex;
   align-items: stretch;
-  gap: 0; /* Garante que o select e o button tenham a mesma altura */
-  width: fit-content; /* Adapta o tamanho da div ao conteúdo */
-  border-radius: 6px; /* Aplica bordas arredondadas em conjunto */
+  gap: 0;
+  width: fit-content;
+  border-radius: 6px;
   overflow: hidden;
+
+  width: 100%; /* Faz o componente ocupar a largura disponível */
+  max-width: 18.75rem;
 }
 
 .games-today-select > select {
+  width: 100%;
   appearance: none;
   border: 1px solid #ccc;
   border-radius: 6px 0 0 6px;
   padding: 1.25rem 2.5rem 1.25rem 1.875rem;
   outline: none;
   cursor: pointer;
-  font-size: 0.875rem;
+  font-size: 1rem;
 
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M1 4l5 5 5-5' fill='none' stroke='%23666' stroke-width='2'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -270,9 +280,9 @@
   border-radius: 4px;
 
   display: grid;
-  grid-template-columns: 2fr repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr;
   align-items: center;
-  gap: 1rem;
+  gap: 4rem;
 }
 
 .games-today-card > div {
@@ -281,6 +291,13 @@
 
 .games-today-card-game {
   display: flex;
+  justify-content: space-around;
+}
+
+.games-today-card-info-container {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
   justify-content: space-around;
 }
 
@@ -340,7 +357,67 @@
   color: var(--white);
   letter-spacing: 1px;
   cursor: pointer;
+  font-size: 0.875rem;
 
   display: flex;
   margin-left: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .banner-home {
+    flex-direction: column;
+  }
+
+  .carousel-item {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .games-today-card-game {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .games-today-content {
+    padding: 2rem 3rem 3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cards-info-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .games-today-card {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .games-today-card-game {
+    flex: 0 0 auto;
+    text-align: center;
+  }
+
+  .games-today-card-info-container {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .banner-home-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .games-today-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
