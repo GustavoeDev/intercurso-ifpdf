@@ -39,6 +39,7 @@
 
 button {
     cursor: pointer;
+    border: none;
 }
 
 .button {
@@ -127,6 +128,8 @@ th {
     display: flex;
     align-items: center;
     gap: 16px;
+
+    min-height: 46px;
 }
 
 .card-actions button {
@@ -190,6 +193,14 @@ th {
     display: none;
 }
 
-.not-active #test {
+.not-active .min-max-button {
     display: block;
+}
+
+.min-max-button {
+    border: none;
+}
+  
+.min {
+    transform: rotate(180deg);
 }

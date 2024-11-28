@@ -1,7 +1,9 @@
 {% extends "base-student.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'student/css/manage_teams.css' %}" />
 {% endblock %}
-
+{% block js%}
+<script src="{% static 'student/js/manage-teams/table-min-max.js' %}" defer></script>
+{% endblock %}
 {% block main %}
 
 <div class="card-info">
@@ -34,7 +36,7 @@
                 Excluir equipe
                 <img class='button-image' src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
             </button>
-            <button class="image-button">
+            <button class="image-button min-max-button min">
                 <img class='button-image' src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
             </button>
         </div>
