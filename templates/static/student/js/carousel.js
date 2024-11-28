@@ -1,9 +1,14 @@
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
-const totalSlides = document.querySelectorAll(".carousel-item").length;
 const indicatorContainer = document.querySelector(".carousel-indicators");
+let totalSlides = document.querySelectorAll(".carousel-item").length;
 
 let currentSlide = 0;
+
+window.addEventListener("load", indicatorTotal);
+window.addEventListener("load", updateCarousel);
+window.addEventListener("load", redistributeCards);
+window.addEventListener("resize", redistributeCards);
 
 function updateCarousel() {
   const wrapper = document.querySelector(".carousel-wrapper");
@@ -45,11 +50,8 @@ function indicatorTotal() {
   }
 }
 
-window.addEventListener("load", indicatorTotal);
-window.addEventListener("load", updateCarousel);
-
 function updateIndicators() {
-  indicators = document.querySelectorAll(".indicator");
+  const indicators = document.querySelectorAll(".indicator");
 
   indicators.forEach((indicator, index) => {
     indicator.addEventListener("click", () => {
@@ -64,6 +66,109 @@ function updateIndicators() {
       indicator.classList.remove("active");
     }
   });
+}
+
+function redistributeCards() {
+  const carouselWrapper = document.querySelector(".carousel-wrapper");
+  let carouselItems = Array.from(document.querySelectorAll(".carousel-item"));
+
+  if (window.innerWidth >= 1000) {
+    carouselWrapper.innerHTML = "";
+
+    let allCards = [];
+
+    carouselItems.forEach((item) => {
+      const cards = Array.from(item.querySelectorAll(".competitions-card"));
+      allCards = allCards.concat(cards);
+    });
+
+    for (let i = 0; i < allCards.length; i += 3) {
+      const newCarouselItem = document.createElement("div");
+      newCarouselItem.classList.add("carousel-item");
+
+      newCarouselItem.appendChild(allCards[i]);
+
+      if (allCards[i + 1]) {
+        newCarouselItem.appendChild(allCards[i + 1]);
+      }
+
+      if (allCards[i + 2]) {
+        newCarouselItem.appendChild(allCards[i + 2]);
+      }
+
+      carouselWrapper.appendChild(newCarouselItem);
+    }
+
+    carouselItems = Array.from(document.querySelectorAll(".carousel-item"));
+
+    totalSlides = carouselItems.length;
+    currentSlide = 0;
+
+    indicatorContainer.innerHTML = "";
+    indicatorTotal();
+    updateIndicators();
+    updateCarousel();
+  } else if (window.innerWidth >= 650) {
+    let allCards = [];
+
+    carouselItems.forEach((item) => {
+      const cards = Array.from(item.querySelectorAll(".competitions-card"));
+      allCards = allCards.concat(cards);
+    });
+
+    carouselWrapper.innerHTML = "";
+
+    for (let i = 0; i < allCards.length; i += 2) {
+      const newCarouselItem = document.createElement("div");
+      newCarouselItem.classList.add("carousel-item");
+
+      newCarouselItem.appendChild(allCards[i]);
+
+      if (allCards[i + 1]) {
+        newCarouselItem.appendChild(allCards[i + 1]);
+      }
+
+      carouselWrapper.appendChild(newCarouselItem);
+    }
+
+    carouselItems = Array.from(document.querySelectorAll(".carousel-item"));
+
+    totalSlides = carouselItems.length;
+    currentSlide = 0;
+
+    indicatorContainer.innerHTML = "";
+    indicatorTotal();
+    updateIndicators();
+    updateCarousel();
+  } else {
+    let allCards = [];
+
+    carouselItems.forEach((item) => {
+      const cards = Array.from(item.querySelectorAll(".competitions-card"));
+      allCards = allCards.concat(cards);
+    });
+
+    carouselWrapper.innerHTML = "";
+
+    for (let i = 0; i < allCards.length; i += 1) {
+      const newCarouselItem = document.createElement("div");
+      newCarouselItem.classList.add("carousel-item");
+
+      newCarouselItem.appendChild(allCards[i]);
+
+      carouselWrapper.appendChild(newCarouselItem);
+    }
+
+    carouselItems = Array.from(document.querySelectorAll(".carousel-item"));
+
+    totalSlides = carouselItems.length;
+    currentSlide = 0;
+
+    indicatorContainer.innerHTML = "";
+    indicatorTotal();
+    updateIndicators();
+    updateCarousel();
+  }
 }
 
 next.addEventListener("click", () => {
