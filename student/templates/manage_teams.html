@@ -1,0 +1,114 @@
+{% extends "base-student.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'student/css/manage_teams.css' %}" />
+{% endblock %}
+{% block js%}
+<script src="{% static 'student/js/manage-teams/table-min-max.js' %}" defer></script>
+{% endblock %}
+{% block main %}
+
+<div class="card-info">
+    <h1>Gerenciar equipes</h1>
+    <p>Nesta seção, você terá a possibilidade de gerenciar todas as suas equipes para o Intercurso. Será possível
+        cadastrar suas equipes em diferentes competições, adicionar e organizar os membros em cada uma delas, além de
+        acompanhar e atualizar as informações dos participantes de forma prática e eficiente. Clique na sua equipe, e
+        gerencie os participantes de cada competição</p>
+</div>
+
+<div class="card-teams">
+    <h1>Minhas Equipes</h1>
+    <button class="button">Cadastrar nova equipe</button>
+</div>
+
+<div class="table-container">
+    <div class='table-title'>
+        <div class='card-title'>
+            <div class='title-image'>
+                <img class='button-image' src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
+            </div>
+            <span>Equipirangaz</span>
+        </div>
+        <div class='card-actions'>
+            <button class="add-new-member">
+                Adicionar novo participante
+                <img class='button-image' src="{% static 'student/img/manage-teams/add-new-member.svg' %}" />
+            </button>
+            <button class="delete-team">
+                Excluir equipe
+                <img class='button-image' src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
+            </button>
+            <button class="image-button min-max-button min">
+                <img class='button-image' src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
+            </button>
+        </div>
+    </div>
+
+    <table>
+        <tr class='table-header'>
+            <th>Nome do participante</th>
+            <th>Matricula</th>
+            <th>Curso</th>
+            <th>Ações</th>
+        </tr>
+        <tr class='table-row'>
+            <td>Gustavo</td>
+            <td>20231094040023</td>
+            <td>ADS</td>
+            <td>
+                <button class="image-button">
+                    <img class='small-image' src="{% static 'student/img/manage-teams/pencil-icon.svg' %}" />
+                </button>
+
+                <button class="image-button">
+                    <img class='small-image' src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
+                </button>
+            </td>
+        </tr>
+
+        <tr class='table-row'>
+            <td>Gustavo</td>
+            <td>20231094040023</td>
+            <td>ADS</td>
+            <td>
+                <button class="image-button">
+                    <img class='small-image' src="{% static 'student/img/manage-teams/pencil-icon.svg' %}" />
+                </button>
+
+                <button class="image-button">
+                    <img class='small-image' src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
+                </button>
+            </td>
+        </tr>
+
+        <tr class='table-row'>
+            <td>Gustavo</td>
+            <td>20231094040023</td>
+            <td>ADS</td>
+            <td>
+                <button class="image-button">
+                    <img class='small-image' src="{% static 'student/img/manage-teams/pencil-icon.svg' %}" />
+                </button>
+
+                <button class="image-button">
+                    <img class='small-image' src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
+                </button>
+            </td>
+        </tr>
+
+        <tr class='table-row'>
+            <td>Gustavo</td>
+            <td>20231094040023</td>
+            <td>ADS</td>
+            <td>
+                <button class="image-button">
+                    <img class='small-image' src="{% static 'student/img/manage-teams/pencil-icon.svg' %}" />
+                </button>
+
+                <button class="image-button">
+                    <img class='small-image' src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}
