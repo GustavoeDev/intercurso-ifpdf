@@ -1,206 +1,210 @@
 .card-info {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .card-info h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    font-family: 'Baloo 2', 'Inter', sans-serif;
-    color: var(--green-900);
-    line-height: 130%;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: "Baloo 2", "Inter", sans-serif;
+  color: var(--green-900);
+  line-height: 130%;
 }
 
 .card-info p {
-    color: var(--gray-600);
-    font: 1rem, 'Inter', 130%;
-    max-width: 630px;
-    width: 100%;
+  color: var(--gray-600);
+  font: 1rem, "Inter", 130%;
+  max-width: 630px;
+  width: 100%;
 }
 
 .card-teams {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-    align-items: start;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: start;
 
-    margin-top: 48px;
+  margin-top: 48px;
 }
 
 .card-teams h1 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    font-family: 'Baloo 2', 'Inter', sans-serif;
-    color: var(--green-900);
-    line-height: 130%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Baloo 2", "Inter", sans-serif;
+  color: var(--green-900);
+  line-height: 130%;
 }
 
 button {
-    cursor: pointer;
-    border: none;
+  cursor: pointer;
+  border: none;
 }
 
 .button {
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    background-color: var(--green-100);
-    color: var(--white);
-    font-weight: 600;
-    cursor: pointer;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background-color: var(--green-100);
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
 }
 
 table {
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    width: 100%;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  width: 100%;
 
-    margin-top: 20px;
+  margin-top: 0.5rem;
 }
 
 .table-header {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    grid-gap: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-gap: 9.375rem;
 
-    padding: 8px 16px;
+  padding: 8px 16px;
 
-    background-color: #F9FAFB;
-    color: #9CA3AF;
+  background-color: #f9fafb;
+  color: #9ca3af;
 
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
 }
 
 .table-row {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    grid-gap: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-gap: 9.375rem;
 
-    padding: 20px 16px;
-    color: #1E1D26;
+  padding: 1rem;
+  color: #1e1d26;
 
-    border-bottom: 1px solid #E2E8F0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+table .table-row:last-child {
+  border-bottom: none;
 }
 
 td,
 th {
-    width: 100%;
-    text-align: left;
-    display: flex;
-    gap: 8px
+  width: 100%;
+  display: flex;
+  gap: 8px;
 }
 
 .title-image {
-    height: 24px;
-    width: 24px;
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
+  height: 24px;
+  width: 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-title {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    gap: 8px;
+  gap: 8px;
 }
 
 .card-title span {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .table-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.5rem 0;
 }
 
 .card-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 
-    min-height: 46px;
+  min-height: 46px;
 }
 
 .card-actions button {
-    font: 600 12px 'Inter';
+  font: 600 12px "Inter";
 
-    background-color: #ffffff;
+  background-color: #ffffff;
 
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-
 .button-image {
-    height: 14px;
-    width: 14px;
-    border-radius: 0;
+  height: 14px;
+  width: 14px;
+  border-radius: 0;
 }
 
 .image-button {
-    border: none;
-    background-color: #00000000;
+  border: none;
+  background-color: #00000000;
 }
 
 .add-new-member {
-    color: var(--green-100);
-    padding: 8px 16px;
+  color: var(--green-100);
+  padding: 8px 16px;
 
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
 }
 
 .add-new-member .button-image {
-    stroke-width: 2px;
+  stroke-width: 2px;
 }
 
 .delete-team {
-    color: var(--red-500);
-    padding: 8px 32px;
+  color: var(--red-500);
+  padding: 8px 32px;
 
-    border: 1px solid #E2E8F0;
-    border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
 }
 
 .table-container {
-    border: 1px solid #E2E8F0;
-    border-radius: 16px;
-    padding: 8px 20px 8px 12px;
-    margin: 32px 0px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 0 20px 0 12px;
+  margin: 32px 0px;
 
-    width: 100%;
+  width: 100%;
 }
 
 .small-image {
-    height: 16px;
-    width: 16px;
+  height: 16px;
+  width: 16px;
 }
 
 .not-active button,
 .not-active table {
-    display: none;
+  display: none;
 }
 
 .not-active .min-max-button {
-    display: block;
+  display: block;
 }
 
 .min-max-button {
-    border: none;
+  border: none;
 }
-  
+
 .min {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
