@@ -1,0 +1,171 @@
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card-info h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: "Baloo 2", "Inter", sans-serif;
+  color: var(--green-900);
+  line-height: 1.3;
+}
+
+.card-info p {
+  color: var(--gray-600);
+  font: 1rem, "Inter", 1.3;
+  max-width: 39.375rem;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  margin: 3rem 0px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+.button {
+  border: none;
+  border-radius: 8px;
+
+  padding: 1.25rem 0rem;
+  
+  max-width: 25.313rem;
+  width: 100%;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font: 600 1rem 'Inter', sans-serif;
+  color: var(--white);
+
+  background-color: var(--green-100);
+}
+
+#add-new-member {
+  font: 600 0.75rem 'Inter', sans-serif;
+  color: var(--green-100);
+
+  max-width: 25.313rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  border: 1px solid var(--gray-500);
+  border-radius: 8px;
+
+  padding: 16px 0px;
+
+  background-color: #00000000;
+}
+
+.button-image {
+  width: 1rem;
+}
+/* input styles */
+
+input::placeholder {
+  color: #a9a9a9;
+}
+
+.two-inputs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.three-inputs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+label {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--green-900)
+}
+
+.input {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  padding: 16px 20px;
+  
+  border: 1px solid #D9E1E7;
+  border-radius: 8px;
+}
+
+select{
+  border: none;
+  background-color: #00000000;
+  outline: none;
+  
+  width: 100%;
+  padding: 16px 0px;
+  color: #a9a9a9;
+  
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
+
+select.invalid {
+  color: #a9a9a9;
+}
+
+select.valid {
+  color: var(--green-900);
+}
+
+option {
+  color: var(--green-900);
+}
+
+.select-container {
+  max-width: 100%;
+  
+  border: 1px solid #D9E1E7;
+  border-radius: 8px;
+  padding: 0px 20px;
+}
+
+.checkbox-container {
+  font: 500 0.75rem 'Inter', sans-serif;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.checkbox-container a{
+  color: var(--blue-500)
+}
+
+#agree {
+  cursor: pointer;
+}
+
+.submit-container {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+}
