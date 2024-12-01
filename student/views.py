@@ -6,3 +6,6 @@ def view_homepage(request):
 
 def view_manage_teams(request):
     return render(request, 'manage_teams.html')
+
+def view_register_team(request):
+    return render(request, 'register_team.html')
