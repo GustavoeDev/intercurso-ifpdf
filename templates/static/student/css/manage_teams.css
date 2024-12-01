@@ -57,7 +57,7 @@ table {
   font-size: 14px;
   width: 100%;
 
-  margin-top: 0.5rem;
+  margin-top: 20px;
 }
 
 .table-header {
@@ -125,8 +125,6 @@ th {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding: 0.5rem 0;
 }
 
 .card-actions {
@@ -181,7 +179,7 @@ th {
 .table-container {
   border: 1px solid #e2e8f0;
   border-radius: 16px;
-  padding: 0 20px 0 12px;
+  padding: 8px 20px 8px 12px;
   margin: 32px 0px;
 
   width: 100%;
