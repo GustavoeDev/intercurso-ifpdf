@@ -37,14 +37,14 @@
     </div>
     <div class="card-actions">
       <button class="add-new-member">
-        Adicionar novo participante
+        <span>Adicionar novo participante</span>
         <img
           class="button-image"
           src="{% static 'student/img/manage-teams/add-new-member.svg' %}"
         />
       </button>
       <button class="delete-team">
-        Excluir equipe
+        <span>Excluir equipe</span>
         <img
           class="button-image"
           src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -59,97 +59,99 @@
     </div>
   </div>
 
-  <table>
-    <tr class="table-header">
-      <th>Nome do participante</th>
-      <th>Matricula</th>
-      <th>Curso</th>
-      <th>Ações</th>
-    </tr>
-    <tr class="table-row">
-      <td>Gustavo</td>
-      <td>20231094040023</td>
-      <td>ADS</td>
-      <td>
-        <button class="image-button">
-          <img
-            class="small-image"
-            src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-          />
-        </button>
+  <div class="table-container-wrapper">
+    <table>
+      <tr class="table-header">
+        <th>Nome do participante</th>
+        <th>Matricula</th>
+        <th>Curso</th>
+        <th>Ações</th>
+      </tr>
+      <tr class="table-row">
+        <td>Gustavo</td>
+        <td>20231094040023</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
 
-        <button class="image-button">
-          <img
-            class="small-image"
-            src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-          />
-        </button>
-      </td>
-    </tr>
+          <button class="image-button">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
 
-    <tr class="table-row">
-      <td>Gustavo</td>
-      <td>20231094040023</td>
-      <td>ADS</td>
-      <td>
-        <button class="image-button">
-          <img
-            class="small-image"
-            src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-          />
-        </button>
+      <tr class="table-row">
+        <td>Gustavo</td>
+        <td>20231094040023</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
 
-        <button class="image-button">
-          <img
-            class="small-image"
-            src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-          />
-        </button>
-      </td>
-    </tr>
+          <button class="image-button">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
 
-    <tr class="table-row">
-      <td>Gustavo</td>
-      <td>20231094040023</td>
-      <td>ADS</td>
-      <td>
-        <button class="image-button">
-          <img
-            class="small-image"
-            src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-          />
-        </button>
+      <tr class="table-row">
+        <td>Gustavo</td>
+        <td>20231094040023</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
 
-        <button class="image-button">
-          <img
-            class="small-image"
-            src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-          />
-        </button>
-      </td>
-    </tr>
+          <button class="image-button">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
 
-    <tr class="table-row">
-      <td>Gustavo</td>
-      <td>20231094040023</td>
-      <td>ADS</td>
-      <td>
-        <button class="image-button">
-          <img
-            class="small-image"
-            src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-          />
-        </button>
+      <tr class="table-row">
+        <td>Gustavo</td>
+        <td>20231094040023</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
 
-        <button class="image-button">
-          <img
-            class="small-image"
-            src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-          />
-        </button>
-      </td>
-    </tr>
-  </table>
+          <button class="image-button">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </div>
 
 {% endblock %}
