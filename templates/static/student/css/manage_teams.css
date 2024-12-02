@@ -222,8 +222,13 @@ th {
   border: none;
 }
 
-.min {
+.min-max-button img {
+  transition: transform 0.3s ease;
   transform: rotate(180deg);
+}
+
+.min-max-button.min img {
+  transform: rotate(0deg);
 }
 
 /* MODAL */
