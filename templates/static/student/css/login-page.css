@@ -9,7 +9,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8.125rem;
-  padding: 3rem 0;
+  padding: 3rem;
+}
+
+.login-wrapper > img {
+  max-width: 30.813rem;
+  width: 100%;
 }
 
 .login-container {
@@ -102,7 +107,7 @@ form > button[type="submit"] {
 }
 
 .login-footer > button {
-  padding: 1.25rem;
+  padding: 0.75rem;
   background-color: var(--green-100);
   color: var(--white);
   border-radius: 8px;
@@ -110,7 +115,6 @@ form > button[type="submit"] {
   cursor: pointer;
   font-weight: 500;
   font-size: 0.875rem;
-  line-height: 0;
 
   display: flex;
   align-items: center;
@@ -137,10 +141,29 @@ footer {
   font-size: 0.875rem;
 }
 
+@media screen and (max-width: 1240px) {
+  .login-header {
+    text-align: center;
+  }
+  .login-wrapper > img {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   .footer-content {
     padding: 1.75rem 2rem;
     text-align: center;
     line-height: 1.4;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .login-container {
+    padding: 3rem 2rem;
+  }
+
+  .login-wrapper {
+    padding: 2rem;
   }
 }
