@@ -5,6 +5,10 @@
   src="{% static 'student/js/manage-teams/table-min-max.js' %}"
   defer
 ></script>
+<script
+  src="{% static 'student/js/manage-teams/create-modal.js' %}"
+  defer
+></script>
 {% endblock %} {% block main %}
 
 <div class="card-info">
@@ -33,7 +37,10 @@
           src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
         />
       </div>
-      <span>Equipirangaz</span>
+      <div class="title-text">
+        <span>Equipirangaz</span>
+        <p>Basquete</p>
+      </div>
     </div>
     <div class="card-actions">
       <button class="add-new-member">
@@ -72,14 +79,14 @@
         <td>20231094040023</td>
         <td>ADS</td>
         <td>
-          <button class="image-button">
+          <button class="image-button edit-player">
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
             />
           </button>
 
-          <button class="image-button">
+          <button class="image-button remove-player">
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -89,18 +96,18 @@
       </tr>
 
       <tr class="table-row">
-        <td>Gustavo</td>
-        <td>20231094040023</td>
-        <td>ADS</td>
+        <td>Hian Sebasthian</td>
+        <td>20231094040043</td>
+        <td>Informática</td>
         <td>
-          <button class="image-button">
+          <button class="image-button edit-player">
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
             />
           </button>
 
-          <button class="image-button">
+          <button class="image-button remove-player">
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -110,18 +117,18 @@
       </tr>
 
       <tr class="table-row">
-        <td>Gustavo</td>
-        <td>20231094040023</td>
+        <td>João Neto</td>
+        <td>20231094040011</td>
         <td>ADS</td>
         <td>
-          <button class="image-button">
+          <button class="image-button edit-player">
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
             />
           </button>
 
-          <button class="image-button">
+          <button class="image-button remove-player">
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -131,18 +138,18 @@
       </tr>
 
       <tr class="table-row">
-        <td>Gustavo</td>
-        <td>20231094040023</td>
+        <td>Arthur Lola</td>
+        <td>20231094040029</td>
         <td>ADS</td>
         <td>
-          <button class="image-button">
+          <button class="image-button edit-player">
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
             />
           </button>
 
-          <button class="image-button">
+          <button class="image-button remove-player">
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -153,5 +160,88 @@
     </table>
   </div>
 </div>
+
+<dialog class="edit-player-dialog">
+  <div class="dialog-header">
+    <h3>Editar dados de <span></span></h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="edit-player-name">Nome completo</label>
+      <input type="text" id="edit-player-name" />
+    </div>
+    <div class="inputs-container">
+      <label for="edit-player-enrollment">Matrícula</label>
+      <input type="text" id="edit-player-enrollment" />
+    </div>
+    <div class="inputs-container">
+      <label for="edit-player-course">Curso</label>
+      <input type="text" id="edit-player-course" />
+    </div>
+    <div class="inputs-container">
+      <label for="edit-player-reason">Motivo da alteração</label>
+      <textarea
+        id="edit-player-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+
+    <button type="submit">Confirmar alterações</button>
+  </form>
+</dialog>
+
+<dialog class="remove-player-dialog">
+  <div class="dialog-header">
+    <h3>Excluir <span></span> da equipe?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="remove-player-reason">Motivo da alteração</label>
+      <textarea
+        id="remove-player-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+
+    <button type="submit" class="remove-btn-modal">Excluir</button>
+  </form>
+</dialog>
+
+<dialog class="add-player-dialog">
+  <div class="dialog-header">
+    <h3>Adicionar participante</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="add-player-name">Nome completo</label>
+      <input type="text" id="add-player-name" />
+    </div>
+    <div class="inputs-container">
+      <label for="add-player-enrollment">Matrícula</label>
+      <input type="text" id="add-player-enrollment" />
+    </div>
+    <div class="inputs-container">
+      <label for="add-player-course">Curso</label>
+      <input type="text" id="add-player-course" />
+    </div>
+
+    <button type="submit">Confirmar alterações</button>
+  </form>
+</dialog>
+
+<dialog class="remove-team-dialog">
+  <div class="dialog-header">
+    <h3>Excluir equipe <span></span>?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <button>Excluir</button>
+</dialog>
 
 {% endblock %}
