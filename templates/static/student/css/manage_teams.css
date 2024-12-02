@@ -330,6 +330,12 @@ dialog .inputs-container > textarea {
   .card-actions span {
     display: none;
   }
+
+  dialog {
+    width: 100vw;
+    max-width: 100%;
+    margin: 0;
+  }
 }
 
 @media screen and (max-width: 530px) {
