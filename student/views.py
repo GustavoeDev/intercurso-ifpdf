@@ -9,3 +9,6 @@ def view_manage_teams(request):
 
 def view_register_team(request):
     return render(request, 'register_team.html')
+
+def view_login_page(request):
+    return render(request, 'login_page.html')
