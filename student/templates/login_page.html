@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'student/css/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'student/css/login-page.css' %}" />
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="login-wrapper">
+      <img src="{% static 'student/img/login_page/login-img.png' %}" alt="" />
+      <div class="login-container">
+        <div class="login-header">
+          <h2>LOGIN</h2>
+          <h3>Acesse o sistema do Intercurso IFPDF</h3>
+        </div>
+
+        <form action="">
+          <div class="inputs-container">
+            <label for="login-user">Usuário</label>
+            <input type="text" id="login-user" placeholder="Usuário" />
+          </div>
+          <div class="inputs-container">
+            <label for="login-password">Senha</label>
+            <input type="text" id="login-password" placeholder="Senha" />
+          </div>
+
+          <button type="submit">Entrar</button>
+        </form>
+
+        <div class="login-footer">
+          <div class="login-footer-hr">
+            <hr />
+            <p>ou</p>
+            <hr />
+          </div>
+
+          <button>
+            <span>IF</span>
+            Continuar com o SUAP
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <p>
+          Copyright © 2024 | Instituto Federal de Educação, Ciência e Tecnologia
+          do Rio Grande do Norte
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
