@@ -37,7 +37,10 @@
           src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
         />
       </div>
-      <span>Equipirangaz</span>
+      <div class="title-text">
+        <span>Equipirangaz</span>
+        <p>Basquete</p>
+      </div>
     </div>
     <div class="card-actions">
       <button class="add-new-member">
@@ -197,15 +200,48 @@
 
   <form action="">
     <div class="inputs-container">
-      <label for="edit-player-reason">Motivo da alteração</label>
+      <label for="remove-player-reason">Motivo da alteração</label>
       <textarea
-        id="edit-player-reason"
+        id="remove-player-reason"
         placeholder="Explique o motivo..."
       ></textarea>
     </div>
 
     <button type="submit" class="remove-btn-modal">Excluir</button>
   </form>
+</dialog>
+
+<dialog class="add-player-dialog">
+  <div class="dialog-header">
+    <h3>Adicionar participante</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="add-player-name">Nome completo</label>
+      <input type="text" id="add-player-name" />
+    </div>
+    <div class="inputs-container">
+      <label for="add-player-enrollment">Matrícula</label>
+      <input type="text" id="add-player-enrollment" />
+    </div>
+    <div class="inputs-container">
+      <label for="add-player-course">Curso</label>
+      <input type="text" id="add-player-course" />
+    </div>
+
+    <button type="submit">Confirmar alterações</button>
+  </form>
+</dialog>
+
+<dialog class="remove-team-dialog">
+  <div class="dialog-header">
+    <h3>Excluir equipe <span></span>?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <button>Excluir</button>
 </dialog>
 
 {% endblock %}

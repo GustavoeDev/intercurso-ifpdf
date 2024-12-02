@@ -130,6 +130,16 @@ th {
   font-weight: 500;
 }
 
+.title-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-text > p {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
 .table-title {
   display: flex;
   justify-content: space-between;
@@ -280,7 +290,8 @@ dialog .inputs-container > textarea {
   resize: none;
 }
 
-.edit-player-dialog > form > button[type="submit"] {
+.edit-player-dialog > form > button[type="submit"],
+.add-player-dialog > form > button[type="submit"] {
   padding: 1.25rem;
   background-color: var(--green-100);
   border: 0;
@@ -290,7 +301,8 @@ dialog .inputs-container > textarea {
   font-weight: 500;
 }
 
-.remove-player-dialog > form > button[type="submit"] {
+.remove-player-dialog > form > button[type="submit"],
+.remove-team-dialog > button {
   background-color: var(--red-500);
   padding: 1.25rem;
   border: 0;
@@ -298,6 +310,11 @@ dialog .inputs-container > textarea {
   text-align: center;
   color: var(--white);
   font-weight: 500;
+}
+
+.remove-team-dialog > button {
+  margin-top: 2rem;
+  width: 100%;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,3 +1,5 @@
+// Players Data
+
 const btnEditPlayer = document.querySelectorAll(".table-row .edit-player");
 const modalEditPlayer = document.querySelector(".edit-player-dialog");
 const btnCloseModalEditPlayer = document.querySelector(
@@ -62,4 +64,48 @@ btnRemovePlayer.forEach((btn) => {
 
 btnCloseModalRemovePlayer.addEventListener("click", () => {
   modalRemovePlayer.close();
+});
+
+// Teams Data
+
+const btnAddPlayer = document.querySelectorAll(".add-new-member");
+const modalAddPlayer = document.querySelector(".add-player-dialog");
+const btnCloseModalAddPlayer = document.querySelector(
+  ".add-player-dialog .dialog-header button"
+);
+
+btnAddPlayer.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    modalAddPlayer.showModal();
+  });
+});
+
+btnCloseModalAddPlayer.addEventListener("click", () => {
+  modalAddPlayer.close();
+});
+
+const btnRemoveTeam = document.querySelectorAll(".delete-team");
+const modalRemoveTeam = document.querySelector(".remove-team-dialog");
+const btnCloseModalRemoveTeam = document.querySelector(
+  ".remove-team-dialog .dialog-header button"
+);
+
+btnRemoveTeam.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    modalRemoveTeam.showModal();
+
+    const tableTitle = btn.closest(".table-title");
+
+    const titleText = tableTitle.querySelector(".title-text");
+
+    const teamName = titleText.querySelector("span").textContent;
+    const competitionName = titleText.querySelector("p").textContent;
+
+    const modalSpan = modalRemoveTeam.querySelector("h3 span");
+    modalSpan.innerText = teamName;
+  });
+});
+
+btnCloseModalRemoveTeam.addEventListener("click", () => {
+  modalRemoveTeam.close();
 });
