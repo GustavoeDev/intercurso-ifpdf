@@ -1,0 +1,147 @@
+.league-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.league-header > h2 {
+  font-size: 2rem;
+  color: var(--green-900);
+  font-family: "Baloo 2", sans-serif;
+}
+
+.league-header > p {
+  max-width: 39.375rem;
+  width: 100%;
+}
+
+.table-wrapper {
+  margin-top: 3rem;
+}
+
+.table-name {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.table-name > h3 {
+  font-size: 1.5rem;
+  color: var(--green-900);
+  font-family: "Baloo 2", sans-serif;
+}
+
+.table-header > hr {
+  color: #c5c7c9;
+}
+
+/* TABELA DE CLASSIFICAÇÃO */
+
+.table-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.card-title span {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.title-image {
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-image {
+  height: 0.875rem;
+  width: 0.875rem;
+  border-radius: 0;
+}
+
+.title-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-text > p {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.table-container-wrapper {
+  overflow-x: auto;
+}
+
+.table-container {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+  margin: 2rem 0 3rem;
+
+  width: 100%;
+}
+
+.table-container-wrapper > table {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  width: 100%;
+
+  margin-top: 1.25rem;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr repeat(8, 1fr);
+  grid-gap: auto;
+  gap: 4rem;
+  align-items: center;
+
+  padding: 0.5rem 1rem;
+
+  background-color: #f9fafb;
+  color: #9ca3af;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr repeat(8, 1fr);
+  grid-gap: auto;
+  gap: 4rem;
+
+  padding: 1rem;
+  color: #1e1d26;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table-container-wrapper > table .table-row:last-child {
+  border-bottom: none;
+}
+
+.table-container-wrapper > table td,
+.table-container-wrapper > table th {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: left;
+}
