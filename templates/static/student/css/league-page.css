@@ -244,20 +244,31 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 1.5rem;
 
   padding: 0 1rem;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .card-all-games-content .card-all-games-score {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 0.5rem;
 
   color: #322d2d;
   font-size: 0.875rem;
   font-weight: 600;
+}
+
+.card-all-games-score > p {
+  flex: 1;
+}
+
+.card-all-games-score > span {
+  font-size: 1rem;
 }
 
 .card-all-games-content .card-all-games-score:nth-child(2) {
