@@ -2,19 +2,28 @@ const cardGameContainer = document.querySelectorAll(".games-card-container");
 const buttonsCardToggle = document.querySelectorAll(
   ".all-games-navigation button"
 );
+const buttonsCardContainer = document.querySelector(".all-games-navigation");
 
 cardGameContainer[0].classList.add("enabled");
 
-buttonsCardToggle.forEach((button, indexButton) => {
-  button.addEventListener("click", () => {
-    buttonsCardToggle.forEach((btn) => btn.classList.remove("active"));
+cardGameContainer.forEach((container, index) => {
+  const newBtn = document.createElement("button");
+  newBtn.textContent = `Rodada ${index + 1}`;
+  buttonsCardContainer.appendChild(newBtn);
 
-    button.classList.add("active");
+  const firstButton = buttonsCardContainer.querySelector("button");
+  if (firstButton) {
+    firstButton.classList.add("active");
+  }
 
-    cardGameContainer.forEach((container) =>
-      container.classList.remove("enabled")
-    );
+  newBtn.addEventListener("click", () => {
+    const allButtons = buttonsCardContainer.querySelectorAll("button");
+    allButtons.forEach((btn) => btn.classList.remove("active"));
 
-    cardGameContainer[indexButton].classList.add("enabled");
+    newBtn.classList.add("active");
+
+    cardGameContainer.forEach((cont) => cont.classList.remove("enabled"));
+
+    container.classList.add("enabled");
   });
 });
