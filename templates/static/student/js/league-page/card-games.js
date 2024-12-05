@@ -27,3 +27,14 @@ cardGameContainer.forEach((container, index) => {
     container.classList.add("enabled");
   });
 });
+
+const nameTeam = document.querySelectorAll(".card-all-games-score p");
+
+nameTeam.forEach((team) => {
+  const originalText = team.textContent;
+
+  if (team.textContent.length > 18) {
+    team.textContent = team.textContent.substring(0, 18) + "...";
+    team.setAttribute("title", originalText);
+  }
+});
