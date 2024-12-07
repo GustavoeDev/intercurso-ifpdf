@@ -90,6 +90,11 @@ input::placeholder {
   color: #a9a9a9;
 }
 
+hr {
+  color: #a9a9a9;
+  display: none;
+}
+
 .two-inputs-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -183,4 +188,33 @@ option {
 button:disabled {
   cursor: not-allowed;
   background-color: #4caf5070;
+}
+
+@media screen and (max-width: 800px) {
+  .member-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .blank-label {
+    display: none;
+  }
+  #members-input-container {
+    gap: 1rem;
+  }
+  hr {
+    display: block;
+  }
+  hr:last-of-type {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .two-inputs-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }

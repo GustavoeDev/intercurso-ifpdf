@@ -71,6 +71,8 @@ function addNewInput() {
   selectContainer.appendChild(select);
   inputContainer3.appendChild(selectContainer);
 
+  const hr = document.createElement("hr")
+
   row.appendChild(inputContainer1);
   row.appendChild(inputContainer2);
   row.appendChild(inputContainer3);
@@ -78,7 +80,7 @@ function addNewInput() {
   const container = document.querySelector('#members-input-container')
 
   container.appendChild(row)
-  
+  container.appendChild(hr)  
 }
 
 const addInputButton = document.querySelector('#add-new-member')
