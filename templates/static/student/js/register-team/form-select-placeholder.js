@@ -15,4 +15,4 @@ function changeSelect(){
 });
 }
 
-window.addEventListener("load", changeSelect());
+window.addEventListener("load", changeSelect);

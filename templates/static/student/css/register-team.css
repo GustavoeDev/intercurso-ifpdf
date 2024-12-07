@@ -19,12 +19,20 @@
   width: 100%;
 }
 
+
+#members-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 
-  margin: 3rem 0px;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 button {
@@ -34,7 +42,7 @@ button {
 
 .button {
   border: none;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 
   padding: 1.25rem 0rem;
   
@@ -56,17 +64,19 @@ button {
   color: var(--green-100);
 
   max-width: 25.313rem;
+  width: 100%;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  gap: 8px;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 
   border: 1px solid var(--gray-500);
-  border-radius: 8px;
+  border-radius: 0.5rem;
 
-  padding: 16px 0px;
+  padding: 1rem 0px;
 
   background-color: #00000000;
 }
@@ -80,13 +90,18 @@ input::placeholder {
   color: #a9a9a9;
 }
 
+hr {
+  color: #a9a9a9;
+  display: none;
+}
+
 .two-inputs-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 }
 
-.three-inputs-row {
+.member-inputs {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
@@ -98,7 +113,7 @@ input::placeholder {
   gap: 1.5rem;
 }
 
-label {
+label, label span {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   color: var(--green-900)
@@ -107,10 +122,10 @@ label {
 .input {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
-  padding: 16px 20px;
+  padding: 1rem 1.25rem;
   
   border: 1px solid #D9E1E7;
-  border-radius: 8px;
+  border-radius: 0.5rem;
 }
 
 select{
@@ -119,7 +134,7 @@ select{
   outline: none;
   
   width: 100%;
-  padding: 16px 0px;
+  padding: 1rem 0px;
   color: #a9a9a9;
   
   font-family: 'Inter', sans-serif;
@@ -142,8 +157,8 @@ option {
   max-width: 100%;
   
   border: 1px solid #D9E1E7;
-  border-radius: 8px;
-  padding: 0px 20px;
+  border-radius: 0.5rem;
+  padding: 0px 1.25rem;
 }
 
 .checkbox-container {
@@ -168,4 +183,38 @@ option {
   flex-direction: column;
 
   gap: 2rem;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: #4caf5070;
+}
+
+@media screen and (max-width: 800px) {
+  .member-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .blank-label {
+    display: none;
+  }
+  #members-input-container {
+    gap: 1rem;
+  }
+  hr {
+    display: block;
+  }
+  hr:last-of-type {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .two-inputs-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
