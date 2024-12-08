@@ -1,5 +1,15 @@
 {% extends "base-student.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'student/css/group-stage.css' %}" />
+{% endblock %} {% block js %}
+<script
+  src="{% static 'student/js/group-stage/competition-stage.js' %}"
+  defer
+></script>
+
+<script
+  src="{% static 'student/js/group-stage/card-round-container-header.js' %}"
+  defer
+></script>
 {% endblock %} {% block main %}
 
 <div class="group-stage-header">
@@ -17,401 +27,620 @@
   <button class="competition-stage-button prev">
     <i class="fa-solid fa-angle-left"></i>
   </button>
-  <h3>FASE DE GRUPOS</h3>
+  <h3 class="active">FASE DE GRUPOS</h3>
+  <h3>OITAVAS DE FINAL</h3>
+  <h3>QUARTAS DE FINAL</h3>
+  <h3>SEMIFINAL</h3>
+  <h3>FINAL</h3>
   <button class="competition-stage-button next">
     <i class="fa-solid fa-angle-right"></i>
   </button>
 </div>
 
 <div class="competition-stage-wrapper-table">
-  <div class="group-stage-round">
-    <div class="table-container">
-      <div class="table-title">
-        <div class="card-title">
-          <div class="title-image">
-            <img
-              class="button-image"
-              src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-            />
-          </div>
-          <div class="title-text">
-            <p>Grupo <span>A</span></p>
+  <div class="competition-stage-group-stage">
+    <div class="group-stage-round">
+      <div class="table-container">
+        <div class="table-title">
+          <div class="card-title">
+            <div class="title-image">
+              <img
+                class="button-image"
+                src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+              />
+            </div>
+            <div class="title-text">
+              <p>Grupo <span>A</span></p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="table-container-wrapper">
-        <table>
-          <tr class="table-header">
-            <th>Nome da equipe</th>
-            <th>P</th>
-            <th>J</th>
-            <th>V</th>
-            <th>E</th>
-            <th>D</th>
-            <th>GP</th>
-            <th>GC</th>
-            <th>SG</th>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-        </table>
+        <div class="table-container-wrapper">
+          <table>
+            <tr class="table-header">
+              <th>Nome da equipe</th>
+              <th>P</th>
+              <th>J</th>
+              <th>V</th>
+              <th>E</th>
+              <th>D</th>
+              <th>GP</th>
+              <th>GC</th>
+              <th>SG</th>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="round-container">
+        <div class="round-container-header">
+          <button class="round-container-button prev">
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <p>1° RODADA</p>
+          <button class="round-container-button next">
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+        </div>
+        <div class="card-round-container">
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
+          <div class="card-round-container-header">
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
+            <span>Encerrado</span>
+          </div>
+          <div class="card-round-container-content">
+            <div class="card-round-container-score">
+              <p>INFORMÁTICA</p>
+              <span>2</span>
+            </div>
+            <div class="card-round-container-score">
+              <p>ADS FC</p>
+              <span>2</span>
+            </div>
+          </div>
+          <div class="card-round-container-footer">
+            <p>22 / 12 -<span>19:00</span></p>
+          </div>
+        </div>
+        <div class="card-round-container">
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
+          <div class="card-round-container-header">
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
+            <span>Encerrado</span>
+          </div>
+          <div class="card-round-container-content">
+            <div class="card-round-container-score">
+              <p>INFORMÁTICA</p>
+              <span>2</span>
+            </div>
+            <div class="card-round-container-score">
+              <p>ADS FC</p>
+              <span>2</span>
+            </div>
+          </div>
+          <div class="card-round-container-footer">
+            <p>22 / 12 -<span>19:00</span></p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="round-container">
-      <div class="round-container-header">
-        <button class="round-container-button prev">
-          <i class="fa-solid fa-angle-left"></i>
-        </button>
-        <p>1° RODADA</p>
-        <button class="round-container-button next">
-          <i class="fa-solid fa-angle-right"></i>
-        </button>
+
+    <div class="group-stage-round">
+      <div class="table-container">
+        <div class="table-title">
+          <div class="card-title">
+            <div class="title-image">
+              <img
+                class="button-image"
+                src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+              />
+            </div>
+            <div class="title-text">
+              <p>Grupo <span>B</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-container-wrapper">
+          <table>
+            <tr class="table-header">
+              <th>Nome da equipe</th>
+              <th>P</th>
+              <th>J</th>
+              <th>V</th>
+              <th>E</th>
+              <th>D</th>
+              <th>GP</th>
+              <th>GC</th>
+              <th>SG</th>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+          </table>
+        </div>
       </div>
-      <div class="card-round-container">
-        <img
-          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-          alt=""
-        />
-        <div class="card-round-container-header">
-          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-          <span>Encerrado</span>
+      <div class="round-container">
+        <div class="round-container-header">
+          <button class="round-container-button prev">
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <p>1° RODADA</p>
+          <button class="round-container-button next">
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
         </div>
-        <div class="card-round-container-content">
-          <div class="card-round-container-score">
-            <p>INFORMÁTICA</p>
-            <span>2</span>
+        <div class="card-round-container">
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
+          <div class="card-round-container-header">
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
+            <span>Encerrado</span>
           </div>
-          <div class="card-round-container-score">
-            <p>ADS FC</p>
-            <span>2</span>
+          <div class="card-round-container-content">
+            <div class="card-round-container-score">
+              <p>INFORMÁTICA</p>
+              <span>2</span>
+            </div>
+            <div class="card-round-container-score">
+              <p>ADS FC</p>
+              <span>2</span>
+            </div>
+          </div>
+          <div class="card-round-container-footer">
+            <p>22 / 12 -<span>19:00</span></p>
           </div>
         </div>
-        <div class="card-round-container-footer">
-          <p>22 / 12 -<span>19:00</span></p>
+        <div class="card-round-container">
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
+          <div class="card-round-container-header">
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
+            <span>Encerrado</span>
+          </div>
+          <div class="card-round-container-content">
+            <div class="card-round-container-score">
+              <p>INFORMÁTICA</p>
+              <span>2</span>
+            </div>
+            <div class="card-round-container-score">
+              <p>ADS FC</p>
+              <span>2</span>
+            </div>
+          </div>
+          <div class="card-round-container-footer">
+            <p>22 / 12 -<span>19:00</span></p>
+          </div>
         </div>
       </div>
-      <div class="card-round-container">
-        <img
-          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-          alt=""
-        />
-        <div class="card-round-container-header">
-          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-          <span>Encerrado</span>
-        </div>
-        <div class="card-round-container-content">
-          <div class="card-round-container-score">
-            <p>INFORMÁTICA</p>
-            <span>2</span>
-          </div>
-          <div class="card-round-container-score">
-            <p>ADS FC</p>
-            <span>2</span>
+    </div>
+
+    <div class="group-stage-round">
+      <div class="table-container">
+        <div class="table-title">
+          <div class="card-title">
+            <div class="title-image">
+              <img
+                class="button-image"
+                src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+              />
+            </div>
+            <div class="title-text">
+              <p>Grupo <span>C</span></p>
+            </div>
           </div>
         </div>
-        <div class="card-round-container-footer">
-          <p>22 / 12 -<span>19:00</span></p>
+
+        <div class="table-container-wrapper">
+          <table>
+            <tr class="table-header">
+              <th>Nome da equipe</th>
+              <th>P</th>
+              <th>J</th>
+              <th>V</th>
+              <th>E</th>
+              <th>D</th>
+              <th>GP</th>
+              <th>GC</th>
+              <th>SG</th>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+            <tr class="table-row">
+              <td>Falcons</td>
+              <td>3</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+              <td>2</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="round-container">
+        <div class="round-container-header">
+          <button class="round-container-button prev">
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <p>1° RODADA</p>
+          <button class="round-container-button next">
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+        </div>
+        <div class="card-round-container">
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
+          <div class="card-round-container-header">
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
+            <span>Encerrado</span>
+          </div>
+          <div class="card-round-container-content">
+            <div class="card-round-container-score">
+              <p>INFORMÁTICA</p>
+              <span>2</span>
+            </div>
+            <div class="card-round-container-score">
+              <p>ADS FC</p>
+              <span>2</span>
+            </div>
+          </div>
+          <div class="card-round-container-footer">
+            <p>22 / 12 -<span>19:00</span></p>
+          </div>
+        </div>
+        <div class="card-round-container">
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
+          <div class="card-round-container-header">
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
+            <span>Encerrado</span>
+          </div>
+          <div class="card-round-container-content">
+            <div class="card-round-container-score">
+              <p>INFORMÁTICA</p>
+              <span>2</span>
+            </div>
+            <div class="card-round-container-score">
+              <p>ADS FC</p>
+              <span>2</span>
+            </div>
+          </div>
+          <div class="card-round-container-footer">
+            <p>22 / 12 -<span>19:00</span></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="group-stage-round">
-    <div class="table-container">
-      <div class="table-title">
-        <div class="card-title">
-          <div class="title-image">
-            <img
-              class="button-image"
-              src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-            />
-          </div>
-          <div class="title-text">
-            <p>Grupo <span>B</span></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="table-container-wrapper">
-        <table>
-          <tr class="table-header">
-            <th>Nome da equipe</th>
-            <th>P</th>
-            <th>J</th>
-            <th>V</th>
-            <th>E</th>
-            <th>D</th>
-            <th>GP</th>
-            <th>GC</th>
-            <th>SG</th>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="round-container">
-      <div class="round-container-header">
-        <button class="round-container-button prev">
-          <i class="fa-solid fa-angle-left"></i>
-        </button>
-        <p>1° RODADA</p>
-        <button class="round-container-button next">
-          <i class="fa-solid fa-angle-right"></i>
-        </button>
-      </div>
-      <div class="card-round-container">
-        <img
-          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-          alt=""
-        />
-        <div class="card-round-container-header">
+  <div class="card-container-round-of-16">
+    <div class="card-container-round-of-16-row">
+      <div class="card-round-of-16">
+        <div class="card-round-of-16-header">
           <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
           <span>Encerrado</span>
         </div>
-        <div class="card-round-container-content">
-          <div class="card-round-container-score">
+        <div class="card-round-of-16-content">
+          <div class="card-round-of-16-score">
             <p>INFORMÁTICA</p>
             <span>2</span>
           </div>
-          <div class="card-round-container-score">
+          <div class="card-round-of-16-score">
+            <span>X</span>
+          </div>
+          <div class="card-round-of-16-score">
             <p>ADS FC</p>
             <span>2</span>
           </div>
         </div>
-        <div class="card-round-container-footer">
+        <div class="card-round-of-16-footer">
+          <p>ELIMINATÓRIAS</p>
           <p>22 / 12 -<span>19:00</span></p>
         </div>
       </div>
-      <div class="card-round-container">
-        <img
-          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-          alt=""
-        />
-        <div class="card-round-container-header">
+      <div class="card-round-of-16">
+        <div class="card-round-of-16-header">
           <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
           <span>Encerrado</span>
         </div>
-        <div class="card-round-container-content">
-          <div class="card-round-container-score">
+        <div class="card-round-of-16-content">
+          <div class="card-round-of-16-score">
             <p>INFORMÁTICA</p>
             <span>2</span>
           </div>
-          <div class="card-round-container-score">
+          <div class="card-round-of-16-score">
+            <span>X</span>
+          </div>
+          <div class="card-round-of-16-score">
             <p>ADS FC</p>
             <span>2</span>
           </div>
         </div>
-        <div class="card-round-container-footer">
+        <div class="card-round-of-16-footer">
+          <p>ELIMINATÓRIAS</p>
           <p>22 / 12 -<span>19:00</span></p>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="group-stage-round">
-    <div class="table-container">
-      <div class="table-title">
-        <div class="card-title">
-          <div class="title-image">
-            <img
-              class="button-image"
-              src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-            />
-          </div>
-          <div class="title-text">
-            <p>Grupo <span>C</span></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="table-container-wrapper">
-        <table>
-          <tr class="table-header">
-            <th>Nome da equipe</th>
-            <th>P</th>
-            <th>J</th>
-            <th>V</th>
-            <th>E</th>
-            <th>D</th>
-            <th>GP</th>
-            <th>GC</th>
-            <th>SG</th>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-          <tr class="table-row">
-            <td>Falcons</td>
-            <td>3</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <div class="round-container">
-      <div class="round-container-header">
-        <button class="round-container-button prev">
-          <i class="fa-solid fa-angle-left"></i>
-        </button>
-        <p>1° RODADA</p>
-        <button class="round-container-button next">
-          <i class="fa-solid fa-angle-right"></i>
-        </button>
-      </div>
-      <div class="card-round-container">
-        <img
-          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-          alt=""
-        />
-        <div class="card-round-container-header">
+    <div class="card-container-round-of-16-row">
+      <div class="card-round-of-16">
+        <div class="card-round-of-16-header">
           <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
           <span>Encerrado</span>
         </div>
-        <div class="card-round-container-content">
-          <div class="card-round-container-score">
+        <div class="card-round-of-16-content">
+          <div class="card-round-of-16-score">
             <p>INFORMÁTICA</p>
             <span>2</span>
           </div>
-          <div class="card-round-container-score">
+          <div class="card-round-of-16-score">
+            <span>X</span>
+          </div>
+          <div class="card-round-of-16-score">
             <p>ADS FC</p>
             <span>2</span>
           </div>
         </div>
-        <div class="card-round-container-footer">
+        <div class="card-round-of-16-footer">
+          <p>ELIMINATÓRIAS</p>
           <p>22 / 12 -<span>19:00</span></p>
         </div>
       </div>
-      <div class="card-round-container">
-        <img
-          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-          alt=""
-        />
-        <div class="card-round-container-header">
+      <div class="card-round-of-16">
+        <div class="card-round-of-16-header">
           <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
           <span>Encerrado</span>
         </div>
-        <div class="card-round-container-content">
-          <div class="card-round-container-score">
+        <div class="card-round-of-16-content">
+          <div class="card-round-of-16-score">
             <p>INFORMÁTICA</p>
             <span>2</span>
           </div>
-          <div class="card-round-container-score">
+          <div class="card-round-of-16-score">
+            <span>X</span>
+          </div>
+          <div class="card-round-of-16-score">
             <p>ADS FC</p>
             <span>2</span>
           </div>
         </div>
-        <div class="card-round-container-footer">
+        <div class="card-round-of-16-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="card-container-round-of-16-row">
+      <div class="card-round-of-16">
+        <div class="card-round-of-16-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-of-16-content">
+          <div class="card-round-of-16-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-of-16-score">
+            <span>X</span>
+          </div>
+          <div class="card-round-of-16-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-of-16-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-round-of-16">
+        <div class="card-round-of-16-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-of-16-content">
+          <div class="card-round-of-16-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-of-16-score">
+            <span>X</span>
+          </div>
+          <div class="card-round-of-16-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-of-16-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="card-container-round-of-16-row">
+      <div class="card-round-of-16">
+        <div class="card-round-of-16-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-of-16-content">
+          <div class="card-round-of-16-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-of-16-score">
+            <span>X</span>
+          </div>
+          <div class="card-round-of-16-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-of-16-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-round-of-16">
+        <div class="card-round-of-16-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-of-16-content">
+          <div class="card-round-of-16-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-of-16-score">
+            <span>X</span>
+          </div>
+          <div class="card-round-of-16-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-of-16-footer">
+          <p>ELIMINATÓRIAS</p>
           <p>22 / 12 -<span>19:00</span></p>
         </div>
       </div>
