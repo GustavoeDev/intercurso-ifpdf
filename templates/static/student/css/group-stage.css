@@ -401,10 +401,10 @@
 
 /* CARDS - QUARTAS DE FINAL */
 
-#FASE_DE_GRUPOS.disabled,
-#QUARTAS_DE_FINAL.disabled,
-#OITAVAS_DE_FINAL.disabled,
-#SEMIFINAL.disabled,
-#FINAL.disabled {
+#group-stage.disabled,
+#quarter-finals.disabled,
+#round-of-16.disabled,
+#semifinal.disabled,
+#final.disabled {
   display: none;
 }

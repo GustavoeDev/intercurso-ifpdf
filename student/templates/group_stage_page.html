@@ -27,18 +27,18 @@
   <button class="competition-stage-button prev">
     <i class="fa-solid fa-angle-left"></i>
   </button>
-  <h3 class="active">FASE DE GRUPOS</h3>
-  <h3>OITAVAS DE FINAL</h3>
-  <h3>QUARTAS DE FINAL</h3>
-  <h3>SEMIFINAL</h3>
-  <h3>FINAL</h3>
+  <h3 class="active" data-stage="group-stage">FASE DE GRUPOS</h3>
+  <h3 data-stage="round-of-16">OITAVAS DE FINAL</h3>
+  <h3 data-stage="quarter-finals">QUARTAS DE FINAL</h3>
+  <h3 data-stage="semifinal">SEMIFINAL</h3>
+  <h3 data-stage="final">FINAL</h3>
   <button class="competition-stage-button next">
     <i class="fa-solid fa-angle-right"></i>
   </button>
 </div>
 
 <div class="competition-stage-wrapper-table">
-  <div class="competition-stage-group-stage" id="FASE_DE_GRUPOS">
+  <div class="competition-stage-group-stage" id="group-stage">
     <div class="group-stage-round">
       <div class="table-container">
         <div class="table-title">
@@ -452,7 +452,7 @@
     </div>
   </div>
 
-  <div class="card-container-qualifiers disabled" id="OITAVAS_DE_FINAL">
+  <div class="card-container-qualifiers disabled" id="round-of-16">
     <div class="card-container-qualifiers-row">
       <div class="card-qualifiers">
         <div class="card-qualifiers-header">
@@ -647,7 +647,7 @@
     </div>
   </div>
 
-  <div class="card-container-qualifiers disabled" id="QUARTAS_DE_FINAL">
+  <div class="card-container-qualifiers disabled" id="quarter-finals">
     <div class="card-container-qualifiers-row">
       <div class="card-qualifiers">
         <div class="card-qualifiers-header">
@@ -746,7 +746,7 @@
     </div>
   </div>
 
-  <div class="card-container-qualifiers disabled" id="SEMIFINAL">
+  <div class="card-container-qualifiers disabled" id="semifinal">
     <div class="card-container-qualifiers-row">
       <div class="card-qualifiers">
         <div class="card-qualifiers-header">
@@ -797,7 +797,7 @@
     </div>
   </div>
 
-  <div class="card-container-qualifiers disabled" id="FINAL">
+  <div class="card-container-qualifiers disabled" id="final">
     <div class="card-qualifiers">
       <div class="card-qualifiers-header">
         <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />

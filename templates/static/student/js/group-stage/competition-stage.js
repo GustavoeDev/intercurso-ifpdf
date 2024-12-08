@@ -54,7 +54,7 @@ buttonPrev.addEventListener("click", () => {
 // Troca dos containers
 
 function updateContainer(title) {
-  const titleCurrent = title.textContent.trim().replace(/\s+/g, "_");
+  const titleCurrent = title.dataset.stage;
 
   const containerTable = document.querySelector(
     ".competition-stage-wrapper-table"
