@@ -2,6 +2,421 @@
 <link rel="stylesheet" href="{% static 'student/css/group-stage.css' %}" />
 {% endblock %} {% block main %}
 
-<h1>group-stage</h1>
+<div class="group-stage-header">
+  <h2>Futsal Masculino</h2>
+  <p>
+    Nesta seção, você poderá visualizar todos os dados relacionados à competição
+    de futsal masculino, incluindo as equipes participantes, tabelas de
+    classificação atualizadas e todas as rodadas de partidas. Aqui, você
+    acompanha os resultados e o cronograma completo dos jogos de forma detalhada
+    e prática.
+  </p>
+</div>
+
+<div class="competition-stage">
+  <button class="competition-stage-button prev">
+    <i class="fa-solid fa-angle-left"></i>
+  </button>
+  <h3>FASE DE GRUPOS</h3>
+  <button class="competition-stage-button next">
+    <i class="fa-solid fa-angle-right"></i>
+  </button>
+</div>
+
+<div class="competition-stage-wrapper-table">
+  <div class="group-stage-round">
+    <div class="table-container">
+      <div class="table-title">
+        <div class="card-title">
+          <div class="title-image">
+            <img
+              class="button-image"
+              src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+            />
+          </div>
+          <div class="title-text">
+            <p>Grupo <span>A</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-container-wrapper">
+        <table>
+          <tr class="table-header">
+            <th>Nome da equipe</th>
+            <th>P</th>
+            <th>J</th>
+            <th>V</th>
+            <th>E</th>
+            <th>D</th>
+            <th>GP</th>
+            <th>GC</th>
+            <th>SG</th>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="round-container">
+      <div class="round-container-header">
+        <button class="round-container-button prev">
+          <i class="fa-solid fa-angle-left"></i>
+        </button>
+        <p>1° RODADA</p>
+        <button class="round-container-button next">
+          <i class="fa-solid fa-angle-right"></i>
+        </button>
+      </div>
+      <div class="card-round-container">
+        <img
+          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+          alt=""
+        />
+        <div class="card-round-container-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-container-content">
+          <div class="card-round-container-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-container-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-container-footer">
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-round-container">
+        <img
+          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+          alt=""
+        />
+        <div class="card-round-container-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-container-content">
+          <div class="card-round-container-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-container-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-container-footer">
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group-stage-round">
+    <div class="table-container">
+      <div class="table-title">
+        <div class="card-title">
+          <div class="title-image">
+            <img
+              class="button-image"
+              src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+            />
+          </div>
+          <div class="title-text">
+            <p>Grupo <span>B</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-container-wrapper">
+        <table>
+          <tr class="table-header">
+            <th>Nome da equipe</th>
+            <th>P</th>
+            <th>J</th>
+            <th>V</th>
+            <th>E</th>
+            <th>D</th>
+            <th>GP</th>
+            <th>GC</th>
+            <th>SG</th>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="round-container">
+      <div class="round-container-header">
+        <button class="round-container-button prev">
+          <i class="fa-solid fa-angle-left"></i>
+        </button>
+        <p>1° RODADA</p>
+        <button class="round-container-button next">
+          <i class="fa-solid fa-angle-right"></i>
+        </button>
+      </div>
+      <div class="card-round-container">
+        <img
+          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+          alt=""
+        />
+        <div class="card-round-container-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-container-content">
+          <div class="card-round-container-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-container-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-container-footer">
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-round-container">
+        <img
+          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+          alt=""
+        />
+        <div class="card-round-container-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-container-content">
+          <div class="card-round-container-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-container-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-container-footer">
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group-stage-round">
+    <div class="table-container">
+      <div class="table-title">
+        <div class="card-title">
+          <div class="title-image">
+            <img
+              class="button-image"
+              src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+            />
+          </div>
+          <div class="title-text">
+            <p>Grupo <span>C</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-container-wrapper">
+        <table>
+          <tr class="table-header">
+            <th>Nome da equipe</th>
+            <th>P</th>
+            <th>J</th>
+            <th>V</th>
+            <th>E</th>
+            <th>D</th>
+            <th>GP</th>
+            <th>GC</th>
+            <th>SG</th>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+          <tr class="table-row">
+            <td>Falcons</td>
+            <td>3</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="round-container">
+      <div class="round-container-header">
+        <button class="round-container-button prev">
+          <i class="fa-solid fa-angle-left"></i>
+        </button>
+        <p>1° RODADA</p>
+        <button class="round-container-button next">
+          <i class="fa-solid fa-angle-right"></i>
+        </button>
+      </div>
+      <div class="card-round-container">
+        <img
+          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+          alt=""
+        />
+        <div class="card-round-container-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-container-content">
+          <div class="card-round-container-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-container-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-container-footer">
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-round-container">
+        <img
+          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+          alt=""
+        />
+        <div class="card-round-container-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-round-container-content">
+          <div class="card-round-container-score">
+            <p>INFORMÁTICA</p>
+            <span>2</span>
+          </div>
+          <div class="card-round-container-score">
+            <p>ADS FC</p>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="card-round-container-footer">
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
