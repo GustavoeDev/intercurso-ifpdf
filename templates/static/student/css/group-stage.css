@@ -116,13 +116,16 @@
   border-radius: 16px 0 0 16px;
   padding: 1.5rem 1.5rem 0 1.5rem;
 
-  width: 78%;
+  width: 61.063rem;
+  overflow: hidden;
+  flex-grow: 1;
 }
 
 .table-container-wrapper > table {
   font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
-  width: 100%;
+  width: 51.9rem;
+  border-collapse: collapse;
 
   margin-top: 1.25rem;
 }
@@ -177,8 +180,6 @@
 /* ROUND CONTAINER */
 
 .round-container {
-  flex: 1;
-
   display: flex;
   flex-direction: column;
 }
@@ -220,8 +221,7 @@
   gap: 0.75rem;
   padding-top: 1rem;
 
-  max-width: 18.875rem;
-  width: 100%;
+  width: 18.875rem;
   overflow: hidden;
   position: relative;
 }
@@ -262,21 +262,18 @@
 .card-round-container-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.5rem;
 
-  padding: 0 1rem;
-
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  height: 2.4rem;
+  padding: 0.85rem 1rem;
 }
 
-.card-round-container-content .card-round-container-score {
+.card-round-container-content .card-round-container-score,
+.card-round-container-name {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 3rem;
 
   color: #322d2d;
   font-size: 0.75rem;
@@ -284,8 +281,13 @@
   text-align: center;
 }
 
-.card-round-container-score > p {
-  flex: 1;
+.card-round-container-score {
+  gap: 3rem;
+}
+
+.card-round-container-name {
+  width: 4rem;
+  word-break: break-word;
 }
 
 .card-round-container-score > span {
@@ -357,6 +359,7 @@
 }
 
 .card-qualifiers-content {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -367,10 +370,11 @@
   height: 2.4rem;
 }
 
-.card-qualifiers-content .card-qualifiers-score {
+.card-qualifiers-content .card-qualifiers-score,
+.card-qualifiers-name {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 2rem;
 
   color: #322d2d;
@@ -379,8 +383,10 @@
   text-align: center;
 }
 
-.card-qualifiers-score > p {
-  flex: 1;
+.card-qualifiers-name {
+  width: 9.375rem;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .card-qualifiers-score > span {
@@ -415,4 +421,45 @@
 #semifinal.disabled,
 #final.disabled {
   display: none;
+}
+
+@media screen and (max-width: 850px) {
+  .competition-stage-group-stage {
+    gap: 4rem;
+  }
+
+  .group-stage-round {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .table-container,
+  .card-round-container {
+    width: 100%;
+  }
+
+  .round-container-header {
+    border-top: 0;
+    border-right: 0;
+  }
+
+  .round-container {
+    border: 1px solid #e2e8f0;
+  }
+
+  .card-round-container-name {
+    width: 8rem;
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .card-container-qualifiers-row {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .card-qualifiers-content .card-qualifiers-score {
+    gap: 1rem;
+  }
 }
