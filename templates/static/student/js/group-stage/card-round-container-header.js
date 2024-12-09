@@ -44,6 +44,7 @@ groupStageRounds.forEach((groupStageRound) => {
   buttonRoundPrev.forEach((button) => {
     button.addEventListener("click", () => {
       if (currentRoundIndex <= 0) {
+        return;
       }
 
       roundContainers[currentRoundIndex].classList.add("disabled");
@@ -59,4 +60,17 @@ groupStageRounds.forEach((groupStageRound) => {
       }
     });
   });
+});
+
+// Colocar tamanho fixo no nome da equipe
+
+const teamNames = document.querySelectorAll(".card-round-container-name p");
+
+teamNames.forEach((name) => {
+  const nameText = name.textContent;
+  if (nameText.length > 3) {
+    const newName = nameText.substring(0, 3);
+    name.textContent = newName;
+    name.setAttribute("title", nameText);
+  }
 });
