@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'global.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'organizer/css/base-organizer.css' %}"
+    />
+    {% block css %} {% endblock %} {% block js %} {% endblock %}
+    <title>Organizador</title>
+    {% block title %} {% endblock %}
+  </head>
+  <body>
+    <header>olá</header>
+    <main>{% block main %} {% endblock %}</main>
+    <footer></footer>
+  </body>
+</html>
