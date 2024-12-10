@@ -26,8 +26,55 @@
     {% block title %} {% endblock %}
   </head>
   <body>
-    <header>olá</header>
-    <main>{% block main %} {% endblock %}</main>
-    <footer></footer>
+    <main>
+      <div class="navigation">
+        <div class="navigation-header">
+          <img src="{% static 'organizer/img/logo.svg' %}" alt="" />
+          <button>
+            <img
+              src="{% static 'organizer/img/template-base/sidebar.svg' %}"
+              alt=""
+            />
+          </button>
+        </div>
+        <p>Menu</p>
+        <div class="navigation-content">
+          <button>
+            <i class="fa-solid fa-basketball"></i>
+            <span>Modalidades</span>
+          </button>
+          <button>
+            <i class="fa-solid fa-user-group"></i>
+            <span>Equipes</span>
+          </button>
+          <button>
+            <i class="fa-solid fa-trophy"></i>
+            <span>Competições</span>
+          </button>
+          <button>
+            <i class="fa-solid fa-bell"></i>
+            <span>Solicitações</span>
+          </button>
+        </div>
+      </div>
+      <div class="header-content">
+        <header>
+          <p>Olá, <span>organizador</span></p>
+          <img
+            src="{% static 'organizer/img/template-base/profile.svg' %}"
+            alt=""
+          />
+        </header>
+        <div class="block-main">{% block main %} {% endblock %}</div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <p>
+          Copyright © 2024 | Instituto Federal de Educação, Ciência e Tecnologia
+          do Rio Grande do Norte
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
