@@ -31,11 +31,6 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  background-color: var(--white);
-  color: var(--gray-600);
-}
-
 body,
 button,
 input,
