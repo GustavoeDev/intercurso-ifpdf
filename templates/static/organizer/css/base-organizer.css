@@ -32,6 +32,11 @@ body {
   padding: 1rem;
 }
 
+.navigation-content-clicked.active {
+  background-color: var(--green-900);
+  color: var(--white);
+}
+
 .navigation-menu-hamburguer .navigation-content > p {
   font-size: 0.75rem;
   color: #7e7d86;

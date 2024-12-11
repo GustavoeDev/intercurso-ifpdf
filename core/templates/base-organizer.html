@@ -41,19 +41,28 @@
         </div>
         <p>Menu</p>
         <div class="navigation-content">
-          <button>
+          {% url 'view_modalitypage' as current_url %}
+          <button
+            class="navigation-content-clicked {% if request.path == current_url %}active{% endif %}"
+          >
             <i class="fa-solid fa-basketball"></i>
             <span>Modalidades</span>
           </button>
-          <button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/equipes/' %}active{% endif %}"
+          >
             <i class="fa-solid fa-user-group"></i>
             <span>Equipes</span>
           </button>
-          <button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/competicoes/' %}active{% endif %}"
+          >
             <i class="fa-solid fa-trophy"></i>
             <span>Competições</span>
           </button>
-          <button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/solicitacoes/' %}active{% endif %}"
+          >
             <i class="fa-solid fa-bell"></i>
             <span>Solicitações</span>
           </button>
@@ -72,19 +81,27 @@
             </button>
           </div>
           <p>Menu</p>
-          <button>
+          <button
+            class="navigation-content-clicked {% if request.path == current_url %}active{% endif %}"
+          >
             <i class="fa-solid fa-basketball"></i>
             <span>Modalidades</span>
           </button>
-          <button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/equipes/' %}active{% endif %}"
+          >
             <i class="fa-solid fa-user-group"></i>
             <span>Equipes</span>
           </button>
-          <button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/competicoes/' %}active{% endif %}"
+          >
             <i class="fa-solid fa-trophy"></i>
             <span>Competições</span>
           </button>
-          <button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/solicitacoes/' %}active{% endif %}"
+          >
             <i class="fa-solid fa-bell"></i>
             <span>Solicitações</span>
           </button>
