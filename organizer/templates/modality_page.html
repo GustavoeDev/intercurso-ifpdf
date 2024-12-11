@@ -1,7 +1,268 @@
 {% extends "base-organizer.html" %} {% load static %} {% block css %}
-<link rel="stylesheet" href="{% static 'admin/css/modality-page.css' %}" />
-{% endblock %} {% block js %} {% endblock %} {% block main %}
+<link rel="stylesheet" href="{% static 'organizer/css/modality-page.css' %}" />
+{% endblock %} {% block js %}
+<script src="{% static 'table-min-max.js' %}" defer></script>
+{% endblock %} {% block main %}
 
-<h1>admin</h1>
+<div class="modality-title">
+  <h3>Modalidades</h3>
+  <button>Cadastrar modalidade</button>
+</div>
+
+<div class="modality-container-wrapper">
+  <div class="table-container not-active">
+    <div class="table-title">
+      <div class="card-title">
+        <div class="title-image">
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+          />
+        </div>
+        <div class="title-text">
+          <span>Basquete</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="create-new-competition">
+          <span>Criar nova competição</span>
+          <i class="fa-solid fa-trophy"></i>
+        </button>
+        <button class="edit-modality">
+          <span>Editar modalidade</span>
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button class="delete-team">
+          <span>Excluir equipe</span>
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+        <button class="image-button min-max-button max">
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
+          />
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container-wrapper">
+      <table>
+        <tr class="table-header">
+          <th>Nome da competição</th>
+          <th>Equipes inscritas</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+        <tr class="table-row">
+          <td>Basquete masculino</td>
+          <td>20 equipes</td>
+          <td>
+            <span>Em andamento</span>
+          </td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="table-row">
+          <td>Basquete feminino</td>
+          <td>20 equipes</td>
+          <td>
+            <span>Em andamento</span>
+          </td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="table-container not-active">
+    <div class="table-title">
+      <div class="card-title">
+        <div class="title-image">
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+          />
+        </div>
+        <div class="title-text">
+          <span>Vôlei</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="create-new-competition">
+          <span>Criar nova competição</span>
+          <i class="fa-solid fa-trophy"></i>
+        </button>
+        <button class="edit-modality">
+          <span>Editar modalidade</span>
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button class="delete-team">
+          <span>Excluir equipe</span>
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+        <button class="image-button min-max-button max">
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
+          />
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container-wrapper">
+      <table>
+        <tr class="table-header">
+          <th>Nome da competição</th>
+          <th>Equipes inscritas</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+        <tr class="table-row">
+          <td>Vôlei Indoor</td>
+          <td>20 equipes</td>
+          <td>
+            <span>Em andamento</span>
+          </td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="table-row">
+          <td>Vôlei de areia masculino</td>
+          <td>20 equipes</td>
+          <td>
+            <span>Em andamento</span>
+          </td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td>Vôlei de areia feminino</td>
+          <td>20 equipes</td>
+          <td>
+            <span>Em andamento</span>
+          </td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="table-container not-active">
+    <div class="table-title">
+      <div class="card-title">
+        <div class="title-image">
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+          />
+        </div>
+        <div class="title-text">
+          <span>Futsal</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="create-new-competition">
+          <span>Criar nova competição</span>
+          <i class="fa-solid fa-trophy"></i>
+        </button>
+        <button class="edit-modality">
+          <span>Editar modalidade</span>
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button class="delete-team">
+          <span>Excluir equipe</span>
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+        <button class="image-button min-max-button max">
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
+          />
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container-wrapper">
+      <table>
+        <tr class="table-header">
+          <th>Nome da competição</th>
+          <th>Equipes inscritas</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+        <tr class="table-row">
+          <td>Futsal masculino</td>
+          <td>20 equipes</td>
+          <td>
+            <span>Em andamento</span>
+          </td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="table-row">
+          <td>Futsal feminino</td>
+          <td>20 equipes</td>
+          <td>
+            <span>Em andamento</span>
+          </td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
