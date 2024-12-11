@@ -1,3 +1,8 @@
+body {
+  background-color: var(--white);
+  color: var(--gray-600);
+}
+
 header {
   max-width: 90rem;
   margin: 0 auto;

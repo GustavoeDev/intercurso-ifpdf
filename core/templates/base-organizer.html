@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'global.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'organizer/css/base-organizer.css' %}"
+    />
+    {% block css %} {% endblock %}
+    <script src="{% static 'organizer/js/menu-hamburguer.js' %}" defer></script>
+    {% block js %} {% endblock %}
+    <title>Organizador</title>
+    {% block title %} {% endblock %}
+  </head>
+  <body>
+    <main>
+      <div class="navigation">
+        <div class="navigation-header">
+          <img src="{% static 'organizer/img/logo.svg' %}" alt="" />
+          <button>
+            <img
+              src="{% static 'organizer/img/template-base/sidebar.svg' %}"
+              alt=""
+            />
+          </button>
+        </div>
+        <p>Menu</p>
+        <div class="navigation-content">
+          {% url 'view_modalitypage' as current_url %}
+          <button
+            class="navigation-content-clicked {% if request.path == current_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-basketball"></i>
+            <span>Modalidades</span>
+          </button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/equipes/' %}active{% endif %}"
+          >
+            <i class="fa-solid fa-user-group"></i>
+            <span>Equipes</span>
+          </button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/competicoes/' %}active{% endif %}"
+          >
+            <i class="fa-solid fa-trophy"></i>
+            <span>Competições</span>
+          </button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/solicitacoes/' %}active{% endif %}"
+          >
+            <i class="fa-solid fa-bell"></i>
+            <span>Solicitações</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="navigation-menu-hamburguer">
+        <div class="navigation-content">
+          <div class="navigation-header">
+            <img src="{% static 'organizer/img/logo.svg' %}" alt="" />
+            <button>
+              <img
+                src="{% static 'organizer/img/template-base/sidebar.svg' %}"
+                alt=""
+              />
+            </button>
+          </div>
+          <p>Menu</p>
+          <button
+            class="navigation-content-clicked {% if request.path == current_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-basketball"></i>
+            <span>Modalidades</span>
+          </button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/equipes/' %}active{% endif %}"
+          >
+            <i class="fa-solid fa-user-group"></i>
+            <span>Equipes</span>
+          </button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/competicoes/' %}active{% endif %}"
+          >
+            <i class="fa-solid fa-trophy"></i>
+            <span>Competições</span>
+          </button>
+          <button
+            class="navigation-content-clicked {% if request.path == '/organizador/solicitacoes/' %}active{% endif %}"
+          >
+            <i class="fa-solid fa-bell"></i>
+            <span>Solicitações</span>
+          </button>
+        </div>
+      </div>
+      <div class="header-content">
+        <header>
+          <div class="header-title">
+            <button class="header-title-bars">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <button class="header-title-x">
+              <i class="fa-solid fa-x"></i>
+            </button>
+            <p>Olá, <span>organizador</span></p>
+          </div>
+
+          <img
+            src="{% static 'organizer/img/template-base/profile.svg' %}"
+            alt=""
+          />
+        </header>
+        <div class="block-main">{% block main %} {% endblock %}</div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer-content">
+        <p>
+          Copyright © 2024 | Instituto Federal de Educação, Ciência e Tecnologia
+          do Rio Grande do Norte
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
