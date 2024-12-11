@@ -21,7 +21,9 @@
       rel="stylesheet"
       href="{% static 'organizer/css/base-organizer.css' %}"
     />
-    {% block css %} {% endblock %} {% block js %} {% endblock %}
+    {% block css %} {% endblock %}
+    <script src="{% static 'organizer/js/menu-hamburguer.js' %}" defer></script>
+    {% block js %} {% endblock %}
     <title>Organizador</title>
     {% block title %} {% endblock %}
   </head>
@@ -57,9 +59,49 @@
           </button>
         </div>
       </div>
+
+      <div class="navigation-menu-hamburguer">
+        <div class="navigation-content">
+          <div class="navigation-header">
+            <img src="{% static 'organizer/img/logo.svg' %}" alt="" />
+            <button>
+              <img
+                src="{% static 'organizer/img/template-base/sidebar.svg' %}"
+                alt=""
+              />
+            </button>
+          </div>
+          <p>Menu</p>
+          <button>
+            <i class="fa-solid fa-basketball"></i>
+            <span>Modalidades</span>
+          </button>
+          <button>
+            <i class="fa-solid fa-user-group"></i>
+            <span>Equipes</span>
+          </button>
+          <button>
+            <i class="fa-solid fa-trophy"></i>
+            <span>Competições</span>
+          </button>
+          <button>
+            <i class="fa-solid fa-bell"></i>
+            <span>Solicitações</span>
+          </button>
+        </div>
+      </div>
       <div class="header-content">
         <header>
-          <p>Olá, <span>organizador</span></p>
+          <div class="header-title">
+            <button class="header-title-bars">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <button class="header-title-x">
+              <i class="fa-solid fa-x"></i>
+            </button>
+            <p>Olá, <span>organizador</span></p>
+          </div>
+
           <img
             src="{% static 'organizer/img/template-base/profile.svg' %}"
             alt=""
