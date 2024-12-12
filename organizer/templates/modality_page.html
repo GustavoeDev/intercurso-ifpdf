@@ -2,6 +2,10 @@
 <link rel="stylesheet" href="{% static 'organizer/css/modality-page.css' %}" />
 {% endblock %} {% block js %}
 <script src="{% static 'table-min-max.js' %}" defer></script>
+<script
+  src="{% static 'organizer/js/modality-page/create-modal.js' %}"
+  defer
+></script>
 {% endblock %} {% block main %}
 
 <div class="modality-title">
@@ -32,8 +36,8 @@
           <span>Editar modalidade</span>
           <i class="fa-solid fa-pencil"></i>
         </button>
-        <button class="delete-team">
-          <span>Excluir equipe</span>
+        <button class="delete-modality">
+          <span>Excluir modalidade</span>
           <i class="fa-solid fa-trash-can"></i>
         </button>
         <button class="image-button min-max-button max">
@@ -60,11 +64,11 @@
             <span>Em andamento</span>
           </td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-competition">
               <i class="fa-solid fa-pencil"></i>
             </button>
 
-            <button class="image-button remove-player">
+            <button class="image-button remove-competition">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -77,11 +81,11 @@
             <span>Em andamento</span>
           </td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-competition">
               <i class="fa-solid fa-pencil"></i>
             </button>
 
-            <button class="image-button remove-player">
+            <button class="image-button remove-competition">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -111,8 +115,8 @@
           <span>Editar modalidade</span>
           <i class="fa-solid fa-pencil"></i>
         </button>
-        <button class="delete-team">
-          <span>Excluir equipe</span>
+        <button class="delete-modality">
+          <span>Excluir modalidade</span>
           <i class="fa-solid fa-trash-can"></i>
         </button>
         <button class="image-button min-max-button max">
@@ -139,11 +143,11 @@
             <span>Em andamento</span>
           </td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-competition">
               <i class="fa-solid fa-pencil"></i>
             </button>
 
-            <button class="image-button remove-player">
+            <button class="image-button remove-competition">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -156,11 +160,11 @@
             <span>Em andamento</span>
           </td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-competition">
               <i class="fa-solid fa-pencil"></i>
             </button>
 
-            <button class="image-button remove-player">
+            <button class="image-button remove-competition">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -172,11 +176,11 @@
             <span>Em andamento</span>
           </td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-competition">
               <i class="fa-solid fa-pencil"></i>
             </button>
 
-            <button class="image-button remove-player">
+            <button class="image-button remove-competition">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -206,8 +210,8 @@
           <span>Editar modalidade</span>
           <i class="fa-solid fa-pencil"></i>
         </button>
-        <button class="delete-team">
-          <span>Excluir equipe</span>
+        <button class="delete-modality">
+          <span>Excluir modalidade</span>
           <i class="fa-solid fa-trash-can"></i>
         </button>
         <button class="image-button min-max-button max">
@@ -234,11 +238,11 @@
             <span>Em andamento</span>
           </td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-competition">
               <i class="fa-solid fa-pencil"></i>
             </button>
 
-            <button class="image-button remove-player">
+            <button class="image-button remove-competition">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -251,11 +255,11 @@
             <span>Em andamento</span>
           </td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-competition">
               <i class="fa-solid fa-pencil"></i>
             </button>
 
-            <button class="image-button remove-player">
+            <button class="image-button remove-competition">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -264,5 +268,129 @@
     </div>
   </div>
 </div>
+
+<dialog class="add-new-modality-dialog">
+  <div class="dialog-header">
+    <h3>Cadastrar nova modalidade</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="new-modality-name">Nome da modalidade</label>
+      <input type="text" id="new-modality-name" placeholder="Modalidade" />
+    </div>
+
+    <button type="submit" class="create-new-modality-btn">
+      Criar modalidade
+    </button>
+  </form>
+</dialog>
+
+<dialog class="edit-modality-dialog">
+  <div class="dialog-header">
+    <h3>Editar modalidade</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="edit-modality-name">Nome da modalidade</label>
+      <input type="text" id="edit-modality-name" />
+    </div>
+
+    <button type="submit" class="create-new-modality-btn">
+      Concluir alterações
+    </button>
+  </form>
+</dialog>
+
+<dialog class="remove-modality-dialog">
+  <div class="dialog-header">
+    <h3>Excluir modalidade <span></span>?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <button>Excluir</button>
+</dialog>
+
+<dialog class="remove-competition-dialog">
+  <div class="dialog-header">
+    <h3>Excluir competição <span></span>?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <button>Excluir</button>
+</dialog>
+
+<dialog class="create-new-competition-dialog">
+  <div class="dialog-header">
+    <h3>Criar nova competição de <span></span></h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="new-competition-name">Nome da competição</label>
+      <input
+        type="text"
+        id="new-competition-name"
+        placeholder="Basquete masculino"
+      />
+    </div>
+    <div class="inputs-container">
+      <label for="new-competition-system">Sistema da competição</label>
+
+      <div class="competition-type-selection">
+        <div class="new-competition-radio-group">
+          <input
+            type="radio"
+            id="grupos"
+            name="competition-type"
+            value="grupos"
+          />
+          <label for="grupos">Grupos</label>
+        </div>
+
+        <div class="new-competition-radio-group">
+          <input
+            type="radio"
+            id="pontos-corridos"
+            name="competition-type"
+            value="pontos-corridos"
+          />
+          <label for="pontos-corridos">Pontos Corridos</label>
+        </div>
+
+        <div class="new-competition-radio-group">
+          <input
+            type="radio"
+            id="eliminatorias"
+            name="competition-type"
+            value="eliminatorias"
+          />
+          <label for="eliminatorias">Eliminatórias</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="inputs-container">
+      <label for="image-competition">Imagem da competição</label>
+      <label for="image-competition" class="upload-label">
+        <i class="fa-solid fa-upload"></i>
+        Inserir imagem
+      </label>
+      <input
+        type="file"
+        id="image-competition"
+        name="imagem-competicao"
+        accept="image/*"
+        class="file-input"
+      />
+    </div>
+
+    <button type="submit">Criar competição</button>
+  </form>
+</dialog>
 
 {% endblock %}
