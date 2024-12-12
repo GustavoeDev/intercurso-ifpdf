@@ -1,0 +1,247 @@
+{% extends "base-organizer.html" %} {% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'organizer/css/teams-page.css' %}" />
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'table-min-max.js' %}" defer></script>
+{% endblock %}
+
+{% block title %}
+<title>Equipes</title>
+{% endblock %}
+
+{% block main %}
+
+<div class="title">
+  <h3>Equipes</h3>
+</div>
+
+<div class="container-wrapper">
+  <div class="table-container not-active">
+    <div class="table-title">
+      <div class="card-title">
+        <div class="title-image">
+          <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
+        </div>
+        <div class="title-text">
+          <span>Basquete</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="create-new-competition">
+          <span>Adicionar nova equipe</span>
+          <i class="fa-solid fa-user-group"></i>
+        </button>
+
+        <button class="image-button min-max-button max">
+          <img class="button-image" src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container-wrapper">
+      <table>
+        <tr class="table-header">
+          <th>Nome da Equipe</th>
+          <th>Participantes inscritos</th>
+          <th>Data de inscrição</th>
+          <th>Ações</th>
+        </tr>
+
+        <tr class="table-row">
+          <td class="team-item">
+            <span>Equipirangaz</span>
+            <span class="modality-span">Basquete</span>
+          </td>
+          <td>8 participantes</td>
+          <td>27/11/2024</td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="table-row">
+          <td class="team-item">
+            <span>Amigos do vôlei</span>
+            <span class="modality-span">Basquete</span>
+          </td>
+          <td>8 participantes</td>
+          <td>27/11/2024</td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="table-container not-active">
+    <div class="table-title">
+      <div class="card-title">
+        <div class="title-image">
+          <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
+        </div>
+        <div class="title-text">
+          <span>Vôlei</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="create-new-competition">
+          <span>Criar nova competição</span>
+          <i class="fa-solid fa-trophy"></i>
+        </button>
+        <button class="edit-modality">
+          <span>Editar modalidade</span>
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button class="delete-team">
+          <span>Excluir equipe</span>
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+        <button class="image-button min-max-button max">
+          <img class="button-image" src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container-wrapper">
+      <table>
+        <tr class="table-header">
+          <th>Nome da Equipe</th>
+          <th>Participantes inscritos</th>
+          <th>Data de inscrição</th>
+          <th>Ações</th>
+        </tr>
+
+        <tr class="table-row">
+          <td class="team-item">
+            <span>Equipirangaz</span>
+            <span class="modality-span">Basquete</span>
+          </td>
+          <td>8 participantes</td>
+          <td>27/11/2024</td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="table-row">
+          <td class="team-item">
+            <span>Amigos do Baskas</span>
+            <span class="modality-span">Basquete</span>
+          </td>
+          <td>8 participantes</td>
+          <td>27/11/2024</td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="table-container not-active">
+    <div class="table-title">
+      <div class="card-title">
+        <div class="title-image">
+          <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
+        </div>
+        <div class="title-text">
+          <span>Futsal</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="create-new-competition">
+          <span>Criar nova competição</span>
+          <i class="fa-solid fa-trophy"></i>
+        </button>
+        <button class="edit-modality">
+          <span>Editar modalidade</span>
+          <i class="fa-solid fa-pencil"></i>
+        </button>
+        <button class="delete-team">
+          <span>Excluir equipe</span>
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+        <button class="image-button min-max-button max">
+          <img class="button-image" src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
+        </button>
+      </div>
+    </div>
+
+    <div class="table-container-wrapper">
+      <table>
+        <tr class="table-header">
+          <th>Nome da Equipe</th>
+          <th>Participantes inscritos</th>
+          <th>Data de inscrição</th>
+          <th>Ações</th>
+        </tr>
+
+        <tr class="table-row">
+          <td class="team-item">
+            <span>Equipirangaz</span>
+            <span class="modality-span">Basquete</span>
+          </td>
+          <td>8 participantes</td>
+          <td>27/11/2024</td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr class="table-row">
+          <td class="team-item">
+            <span>Amigos do Futsal</span>
+            <span class="modality-span">Basquete</span>
+          </td>
+          <td>8 participantes</td>
+          <td>27/11/2024</td>
+          <td>
+            <button class="image-button edit-player">
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+
+            <button class="image-button remove-player">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
