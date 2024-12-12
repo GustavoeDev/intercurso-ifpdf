@@ -18,3 +18,6 @@ def view_league_page(request):
 
 def view_group_stage_page(request):
     return render(request, 'group_stage_page.html')
+
+def view_qualifiers_stage_page(request):
+    return render(request, 'qualifiers_stage_page.html')
