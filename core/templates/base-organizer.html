@@ -28,7 +28,7 @@
     {% block title %} {% endblock %}
   </head>
   <body>
-    <main>
+    <div class="page-wrapper">
       <div class="navigation">
         <div class="navigation-header">
           <img src="{% static 'organizer/img/logo.svg' %}" alt="" />
@@ -68,7 +68,6 @@
           </button>
         </div>
       </div>
-
       <div class="navigation-menu-hamburguer">
         <div class="navigation-content">
           <div class="navigation-header">
@@ -107,6 +106,7 @@
           </button>
         </div>
       </div>
+
       <div class="header-content">
         <header>
           <div class="header-title">
@@ -124,9 +124,10 @@
             alt=""
           />
         </header>
-        <div class="block-main">{% block main %} {% endblock %}</div>
+        <main class="block-main">{% block main %} {% endblock %}</main>
       </div>
-    </main>
+    </div>
+
     <footer>
       <div class="footer-content">
         <p>

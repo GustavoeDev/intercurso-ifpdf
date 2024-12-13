@@ -3,6 +3,11 @@ body {
   color: #1e1d26;
 }
 
+.page-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
 .navigation {
   background-color: var(--white);
   max-width: 22.125rem;
@@ -100,7 +105,7 @@ body {
 .header-content {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  width: 100%;
 }
 
 .header-content > header {
@@ -112,6 +117,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.block-main {
+  padding: 2rem 1.5rem 3rem;
 }
 
 .header-title {
@@ -126,19 +135,6 @@ body {
   font-size: 1.25rem;
   cursor: pointer;
   display: none;
-}
-
-.block-main {
-  padding: 2rem 1.5rem 3rem;
-}
-
-main {
-  min-height: 100vh;
-  display: flex;
-}
-
-.header-content {
-  display: flex;
 }
 
 footer {
