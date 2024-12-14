@@ -6,6 +6,8 @@
 
 {% block js %}
 <script src="{% static 'table-min-max.js' %}" defer></script>
+<script src="{% static 'organizer/js/teams-page/create-modal.js' %}" defer></script>
+
 {% endblock %}
 
 {% block title %}
@@ -30,7 +32,7 @@
         </div>
       </div>
       <div class="card-actions">
-        <button class="create-new-competition">
+        <button class="create-new-team">
           <span>Adicionar nova equipe</span>
           <i class="fa-solid fa-user-group"></i>
         </button>
@@ -58,11 +60,11 @@
           <td>8 participantes</td>
           <td>27/11/2024</td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-team">
               <i class="fa-solid fa-pencil"></i>
             </button>
 
-            <button class="image-button remove-player">
+            <button class="image-button remove-team">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -76,11 +78,11 @@
           <td>8 participantes</td>
           <td>27/11/2024</td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-team">
               <i class="fa-solid fa-pencil"></i>
             </button>
 
-            <button class="image-button remove-player">
+            <button class="image-button remove-team">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </td>
@@ -243,5 +245,14 @@
     </div>
   </div>
 </div>
+
+<dialog class="remove-team-dialog">
+  <div class="dialog-header">
+    <h3>Excluir a equipe <span class="team-name"></span>?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <button>Excluir</button>
+</dialog>
 
 {% endblock %}

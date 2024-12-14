@@ -97,17 +97,12 @@
   gap: 0.5rem;
 }
 
-.create-new-competition,
-.edit-modality {
+.create-new-team{
   color: var(--green-100);
   padding: 0.5rem 1rem;
 
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-}
-
-.create-new-competition i {
-  stroke-width: 2px;
 }
 
 .delete-team {
@@ -131,7 +126,7 @@
   font-size: 0.75rem;
 }
 
-.remove-player > i {
+.remove-team > i {
   color: var(--red-500);
 }
 
@@ -227,4 +222,54 @@ th {
 
 .team-item .modality-span {
   font: 300 0.75rem "Inter";
+}
+
+dialog::backdrop {
+  background-color: #00000075;
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  max-width: 42.438rem;
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  padding: 2rem;
+  background-color: #f5f6fa;
+}
+
+dialog > .dialog-header {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+dialog > .dialog-header > button {
+  background: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border: 0;
+}
+
+dialog > .dialog-header > h3 {
+  font-size: 1.5rem;
+  font-family: "Baloo 2", sans-serif;
+  color: var(--green-900);
+}
+
+dialog > button {
+  background-color: var(--red-500);
+  padding: 1.25rem;
+  border: 0;
+  border-radius: 6px;
+  text-align: center;
+  color: var(--white);
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 2rem;
+  width: 100%;
 }
