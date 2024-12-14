@@ -273,3 +273,23 @@ dialog > button {
   margin-top: 2rem;
   width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+  table {
+    width: 47rem;
+  }
+  .card-actions span {
+    display: none;
+  }
+  dialog {
+    width: 100vw;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .button {
+    font-size: 87.5%;
+  }
+}

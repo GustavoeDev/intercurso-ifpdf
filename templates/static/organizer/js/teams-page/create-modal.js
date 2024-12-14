@@ -5,8 +5,6 @@ const buttonCloseModalRemoveTeam = document.querySelector(
   ".remove-team-dialog .dialog-header button"
 );
 
-console.log(removeTeamButtons)
-
 removeTeamButtons.forEach(button => {
   button.addEventListener("click", () => {
     const teamNameContent = button.parentElement.parentElement.querySelector('span').textContent
