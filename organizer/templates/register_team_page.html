@@ -1,7 +1,10 @@
 {% extends "base-organizer.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'organizer/css/register-team.css' %}" />
-{% endblock %} {% block js%}
+{% endblock %} 
 
+{% block js%}
+<script src="{% static 'organizer/js/register-team-page/form-select-placeholder.js' %}" defer></script>
+<script src="{% static 'organizer/js/register-team-page/append-new-input.js' %}" defer></script>
 {% endblock %}
 
 {% block main %}
@@ -64,6 +67,6 @@
       <span>Adicionar novo participante</span>
       <img class="button-image" src="{% static 'student/img/register-team/group.svg' %}" />
     </button>
-    <button type="submit" form="new-team" class="button" id="submit-form" disabled>Cadastrar equipe</button>
+    <button type="submit" form="new-team" class="button" id="submit-form">Cadastrar equipe</button>
   </div>
 {% endblock %}
