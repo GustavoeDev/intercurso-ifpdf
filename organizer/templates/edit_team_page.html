@@ -5,7 +5,8 @@
 {% endblock %} 
 
 {% block js %}
-
+<script src="{% static 'organizer/js/edit-team-page/create-modal.js' %}" defer></script>
+<script src="{% static 'organizer/js/edit-team-page/form-select-placeholder.js' %}" defer></script>
 {% endblock %} 
 
 {% block main %}
@@ -59,14 +60,14 @@
           <td>20231094040023</td>
           <td>ADS</td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-member">
               <img
                 class="small-image"
                 src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
               />
             </button>
   
-            <button class="image-button remove-player">
+            <button class="image-button remove-member">
               <img
                 class="small-image"
                 src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -80,14 +81,14 @@
           <td>20231094040043</td>
           <td>Informática</td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-member">
               <img
                 class="small-image"
                 src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
               />
             </button>
   
-            <button class="image-button remove-player">
+            <button class="image-button remove-member">
               <img
                 class="small-image"
                 src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -101,14 +102,14 @@
           <td>20231094040011</td>
           <td>ADS</td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-member">
               <img
                 class="small-image"
                 src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
               />
             </button>
   
-            <button class="image-button remove-player">
+            <button class="image-button remove-member">
               <img
                 class="small-image"
                 src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -122,14 +123,14 @@
           <td>20231094040029</td>
           <td>ADS</td>
           <td>
-            <button class="image-button edit-player">
+            <button class="image-button edit-member">
               <img
                 class="small-image"
                 src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
               />
             </button>
   
-            <button class="image-button remove-player">
+            <button class="image-button remove-member">
               <img
                 class="small-image"
                 src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -140,4 +141,51 @@
       </table>
     </div>
   </div>
+
+  <dialog class="add-new-member-dialog">
+    <div class="dialog-header">
+      <h3>Adicionar um participante</h3>
+      <button><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  
+    <form action="">
+      <div class="inputs-container">
+        <label for="new-member-name">Nome completo</label>
+        <input
+          type="text"
+          id="new-member-name"
+          placeholder="Nome completo"
+          required
+        />
+      </div>
+
+      <div class="inputs-container">
+        <label for="new-member-registration">Matricula</label>
+        <input
+          type="text"
+          id="new-member-registration"
+          placeholder="Matricula"
+          required
+        />
+      </div>
+
+      <div class='inputs-container'>
+        <label for="new-member-course"> Curso </label>
+        <div id="new-member-course" class='select-container'>
+          <select required name="course">
+            <option value="" selected disabled> Curso </option>
+            <option value="ads">ADS</option>
+            <option value="agro-industria">Agroindústria</option>
+            <option value="alimentos">Alimentos</option>
+            <option value="apicultura">Apicultura</option>
+            <option value="informatica">Informática</option>
+            <option value="quimica">Química</option>
+          </select>
+        </div>
+      </div>
+      
+  
+      <button type="submit">Confirmar</button>
+    </form>
+  </dialog>
 {% endblock %}

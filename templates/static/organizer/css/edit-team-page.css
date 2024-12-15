@@ -202,3 +202,118 @@ button {
     font-size: 87.5%;
   }
 }
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  max-width: 42.438rem;
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  padding: 2rem;
+  background-color: #f5f6fa;
+}
+
+dialog > .dialog-header {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+dialog > .dialog-header > button {
+  background: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border: 0;
+}
+
+dialog > .dialog-header > h3 {
+  font-size: 1.5rem;
+  font-family: "Baloo 2", sans-serif;
+  color: var(--green-900);
+}
+
+dialog > button {
+  background-color: var(--red-500);
+  padding: 1.25rem;
+  border: 0;
+  border-radius: 6px;
+  text-align: center;
+  color: var(--green-100);
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+
+dialog > form {
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+dialog .inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+dialog .inputs-container > input {
+  padding: 1.25rem 1rem;
+  border: 0;
+  border-radius: 6px;
+}
+
+
+dialog > form > button[type="submit"] {
+  padding: 1.25rem;
+  background-color: var(--green-100);
+  border: 0;
+  border-radius: 6px;
+  text-align: center;
+  color: var(--white);
+  font-weight: 500;
+  cursor: pointer;
+
+  margin-top: 3rem;
+  width: 100%;
+}
+
+select{
+  border: none;
+  background-color: #00000000;
+  outline: none;
+  
+  width: 100%;
+  padding: 1rem 0px;
+  color: #a9a9a9;
+  
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
+
+select.invalid {
+  color: #a9a9a9;
+}
+
+select.valid {
+  color: var(--green-900);
+}
+
+option {
+  color: var(--green-900);
+}
+
+.select-container {
+  max-width: 100%;
+  
+  border: 1px solid #D9E1E7;
+  border-radius: 0.5rem;
+  padding: 0px 1.25rem;
+}
