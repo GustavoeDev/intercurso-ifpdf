@@ -8,3 +8,6 @@ def view_teams_page(request):
 
 def view_register_team(request):
     return render(request, 'register_team_page.html')
+
+def view_edit_team(request):
+    return render(request, 'edit_team_page.html')
