@@ -5,12 +5,12 @@ typeRequest.forEach((type) => {
     type.textContent.trim() === "Aprovar equipe" ||
     type.textContent.trim() === "Editar dados"
   ) {
-    type.style.color = "#4caf50";
+    type.classList.add("approve-request");
   }
   if (
     type.textContent.trim() === "Excluir equipe" ||
     type.textContent.trim() === "Excluir participante"
   ) {
-    type.style.color = "#c90c10";
+    type.classList.add("delete-request");
   }
 });

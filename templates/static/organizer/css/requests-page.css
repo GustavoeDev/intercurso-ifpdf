@@ -190,6 +190,14 @@ th {
   text-align: left;
 }
 
+.approve-request {
+  color: var(--green-100);
+}
+
+.delete-request {
+  color: var(--red-500);
+}
+
 @media screen and (max-width: 768px) {
   table {
     width: 47rem;
