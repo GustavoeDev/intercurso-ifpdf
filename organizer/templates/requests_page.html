@@ -1,0 +1,91 @@
+{% extends "base-organizer.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'organizer/css/requests-page.css' %}" />
+{% endblock %} {% block js %} {% endblock %} {% block main %}
+
+<div class="table-container">
+  <div class="table-title">
+    <div class="card-title">
+      <div class="title-image">
+        <i class="fa-regular fa-bell"></i>
+      </div>
+      <div class="title-text">
+        <span>Solicitações</span>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="manage-teams-container">
+        <i class="fa-solid fa-user-group"></i>
+        <span>Equipes</span>
+      </button>
+      <button class="manage-players-container">
+        <i class="fa-solid fa-user"></i>
+        <span>Participantes</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container-wrapper">
+    <table class="table-teams">
+      <tr class="table-header">
+        <th>Equipe solicitante</th>
+        <th>Tipo de solicitação</th>
+        <th>Data da solicitação</th>
+        <th>Ações</th>
+      </tr>
+      <tr class="table-row">
+        <td>
+          <p>Equipirangaz</p>
+          <span>Futsal Masculino</span>
+        </td>
+        <td>Aprovar Equipe</td>
+        <td>10/11/24</td>
+        <td>
+          <button>Exibir solicitação</button>
+        </td>
+      </tr>
+      <tr class="table-row">
+        <td>
+          <p>Equipirangaz</p>
+          <span>Futsal Masculino</span>
+        </td>
+        <td>Excluir Equipe</td>
+        <td>10/11/24</td>
+        <td>
+          <button>Exibir solicitação</button>
+        </td>
+      </tr>
+    </table>
+    <table class="table-players">
+      <tr class="table-header">
+        <th>Equipe solicitante</th>
+        <th>Tipo de solicitação</th>
+        <th>Data da solicitação</th>
+        <th>Ações</th>
+      </tr>
+      <tr class="table-row">
+        <td>
+          <p>Equipirangaz</p>
+          <span>Futsal Masculino</span>
+        </td>
+        <td>Editar dados</td>
+        <td>10/11/24</td>
+        <td>
+          <button>Exibir solicitação</button>
+        </td>
+      </tr>
+      <tr class="table-row">
+        <td>
+          <p>Equipirangaz</p>
+          <span>Futsal Masculino</span>
+        </td>
+        <td>Excluir participante</td>
+        <td>10/11/24</td>
+        <td>
+          <button>Exibir solicitação</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
