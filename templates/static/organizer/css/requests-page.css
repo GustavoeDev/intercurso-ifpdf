@@ -189,3 +189,13 @@ th {
   align-items: center;
   text-align: left;
 }
+
+@media screen and (max-width: 768px) {
+  table {
+    width: 47rem;
+  }
+
+  .card-actions span {
+    display: none;
+  }
+}
