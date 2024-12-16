@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% load custom_tags %}
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -52,7 +52,7 @@
           {% url 'view_teams_page' as teams_url %}
           <a
             href="{{ teams_url }}"
-            class="navigation-content-clicked {% if request.path == teams_url %}active{% endif %}"
+            class="navigation-content-clicked {% if request.path == teams_url or request.path|startswith:teams_url %}active{% endif %}"
           >
             <i class="fa-solid fa-user-group"></i>
             <span>Equipes</span>
@@ -60,7 +60,7 @@
           {% url 'view_competitions_page' as competitions_url %}
           <a
             href="{{ competitions_url }}"
-            class="navigation-content-clicked {% if request.path == competitions_url %}active{% endif %}"
+            class="navigation-content-clicked {% if request.path == competitions_url or request.path|startswith:competitions_url %}active{% endif %}"
           >
             <i class="fa-solid fa-trophy"></i>
             <span>Competições</span>
@@ -98,7 +98,7 @@
           {% url 'view_teams_page' as teams_url %}
           <a
             href="{{ teams_url }}"
-            class="navigation-content-clicked {% if request.path == teams_url %}active{% endif %}"
+            class="navigation-content-clicked {% if request.path == teams_url or request.path|startswith:teams_url %}active{% endif %}"
           >
             <i class="fa-solid fa-user-group"></i>
             <span>Equipes</span>
@@ -106,7 +106,7 @@
           {% url 'view_competitions_page' as competitions_url %}
           <a
             href="{{ competitions_url }}"
-            class="navigation-content-clicked {% if request.path == competitions_url %}active{% endif %}"
+            class="navigation-content-clicked {% if request.path == competitions_url or request.path|startswith:competitions_url %}active{% endif %}"
           >
             <i class="fa-solid fa-trophy"></i>
             <span>Competições</span>
