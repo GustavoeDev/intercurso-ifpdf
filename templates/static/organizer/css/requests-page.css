@@ -124,6 +124,11 @@ table {
   margin-top: 1.25rem;
 }
 
+.table-teams.disabled,
+.table-players.disabled {
+  display: none;
+}
+
 .table-header {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;

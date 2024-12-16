@@ -1,6 +1,11 @@
 {% extends "base-organizer.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'organizer/css/requests-page.css' %}" />
-{% endblock %} {% block js %} {% endblock %} {% block main %}
+{% endblock %} {% block js %}
+<script
+  src="{% static 'organizer/js/requests-page/change-table.js' %}"
+  defer
+></script>
+{% endblock %} {% block main %}
 
 <div class="table-container">
   <div class="table-title">
@@ -13,7 +18,7 @@
       </div>
     </div>
     <div class="card-actions">
-      <button class="manage-teams-container">
+      <button class="manage-teams-container active">
         <i class="fa-solid fa-user-group"></i>
         <span>Equipes</span>
       </button>
@@ -55,7 +60,7 @@
         </td>
       </tr>
     </table>
-    <table class="table-players">
+    <table class="table-players disabled">
       <tr class="table-header">
         <th>Equipe solicitante</th>
         <th>Tipo de solicitação</th>
