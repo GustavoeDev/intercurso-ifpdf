@@ -8,3 +8,9 @@ def view_teams_page(request):
 
 def view_register_team(request):
     return render(request, 'register_team_page.html')
+
+def view_competitions_page(request):
+    return render(request, 'competitions_page.html')
+
+def view_requests(request):
+    return render(request, 'requests_page.html')
