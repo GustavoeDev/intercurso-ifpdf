@@ -11,3 +11,9 @@ def view_register_team(request):
 
 def view_edit_team(request):
     return render(request, 'edit_team_page.html')
+
+def view_competitions_page(request):
+    return render(request, 'competitions_page.html')
+
+def view_requests(request):
+    return render(request, 'requests_page.html')

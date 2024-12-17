@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %} {% load custom_tags %}
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
@@ -23,9 +23,8 @@
     />
     {% block css %} {% endblock %}
     <script src="{% static 'organizer/js/menu-hamburguer.js' %}" defer></script>
-    {% block js %} {% endblock %}
-    {% block title %} 
-      <title>Organizador</title>
+    {% block js %} {% endblock %} {% block title %}
+    <title>Organizador</title>
     {% endblock %}
   </head>
   <body>
@@ -42,31 +41,38 @@
         </div>
         <p>Menu</p>
         <div class="navigation-content">
-          {% url 'view_modalitypage' as current_url %}
-          <button
-            class="navigation-content-clicked {% if request.path == current_url %}active{% endif %}"
+          {% url 'view_modalitypage' as modality_url %}
+          <a
+            href="{{ modality_url  }}"
+            class="navigation-content-clicked {% if request.path == modality_url %}active{% endif %}"
           >
             <i class="fa-solid fa-basketball"></i>
             <span>Modalidades</span>
-          </button>
-          <button
-            class="navigation-content-clicked {% if request.path == '/organizador/equipes/' %}active{% endif %}"
+          </a>
+          {% url 'view_teams_page' as teams_url %}
+          <a
+            href="{{ teams_url }}"
+            class="navigation-content-clicked {% if request.path == teams_url or request.path|startswith:teams_url %}active{% endif %}"
           >
             <i class="fa-solid fa-user-group"></i>
             <span>Equipes</span>
-          </button>
-          <button
-            class="navigation-content-clicked {% if request.path == '/organizador/competicoes/' %}active{% endif %}"
+          </a>
+          {% url 'view_competitions_page' as competitions_url %}
+          <a
+            href="{{ competitions_url }}"
+            class="navigation-content-clicked {% if request.path == competitions_url or request.path|startswith:competitions_url %}active{% endif %}"
           >
             <i class="fa-solid fa-trophy"></i>
             <span>Competições</span>
-          </button>
-          <button
-            class="navigation-content-clicked {% if request.path == '/organizador/solicitacoes/' %}active{% endif %}"
+          </a>
+          {% url 'view_requests' as requests_url %}
+          <a
+            href="{{ requests_url }}"
+            class="navigation-content-clicked {% if request.path == requests_url %}active{% endif %}"
           >
             <i class="fa-solid fa-bell"></i>
             <span>Solicitações</span>
-          </button>
+          </a>
         </div>
       </div>
       <div class="navigation-menu-hamburguer">
@@ -81,30 +87,38 @@
             </button>
           </div>
           <p>Menu</p>
-          <button
-            class="navigation-content-clicked {% if request.path == current_url %}active{% endif %}"
+          {% url 'view_modalitypage' as modality_url %}
+          <a
+            href="{{ modality_url  }}"
+            class="navigation-content-clicked {% if request.path == modality_url %}active{% endif %}"
           >
             <i class="fa-solid fa-basketball"></i>
             <span>Modalidades</span>
-          </button>
-          <button
-            class="navigation-content-clicked {% if request.path == '/organizador/equipes/' %}active{% endif %}"
+          </a>
+          {% url 'view_teams_page' as teams_url %}
+          <a
+            href="{{ teams_url }}"
+            class="navigation-content-clicked {% if request.path == teams_url or request.path|startswith:teams_url %}active{% endif %}"
           >
             <i class="fa-solid fa-user-group"></i>
             <span>Equipes</span>
-          </button>
-          <button
-            class="navigation-content-clicked {% if request.path == '/organizador/competicoes/' %}active{% endif %}"
+          </a>
+          {% url 'view_competitions_page' as competitions_url %}
+          <a
+            href="{{ competitions_url }}"
+            class="navigation-content-clicked {% if request.path == competitions_url or request.path|startswith:competitions_url %}active{% endif %}"
           >
             <i class="fa-solid fa-trophy"></i>
             <span>Competições</span>
-          </button>
-          <button
-            class="navigation-content-clicked {% if request.path == '/organizador/solicitacoes/' %}active{% endif %}"
+          </a>
+          {% url 'view_requests' as requests_url %}
+          <a
+            href="{{ requests_url }}"
+            class="navigation-content-clicked {% if request.path == requests_url %}active{% endif %}"
           >
             <i class="fa-solid fa-bell"></i>
             <span>Solicitações</span>
-          </button>
+          </a>
         </div>
       </div>
 
