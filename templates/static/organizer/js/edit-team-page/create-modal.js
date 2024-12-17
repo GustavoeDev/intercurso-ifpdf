@@ -31,3 +31,42 @@ deleteTeamButton.addEventListener('click', () => {
 buttonCloseModalDeleteTeam.addEventListener('click', () => {
   modalDeleteTeam.close()
 })
+
+
+// Editar membro
+
+const modalEditMember = document.querySelector('.edit-member-dialog')
+const buttonCloseModalEditMember = modalEditMember.querySelector(".dialog-header button")
+
+const editMemberButtons = document.querySelectorAll('.edit-member')
+
+
+
+editMemberButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const memberInfos = button.parentElement.parentElement.children
+
+    const memberName = document.querySelector('#member-name')
+    memberName.value = memberInfos[0].textContent
+    
+    const memberRegistration = document.querySelector('#member-registration')
+    memberRegistration.value = memberInfos[1].textContent
+    
+    const memberCourse = memberInfos[2].textContent.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+    const courseOptions = modalEditMember.querySelector('select')
+
+    for (let i = 0; i < courseOptions.options.length; i++) {
+
+      if (courseOptions.options[i].value === memberCourse) {
+        courseOptions.options[i].selected = true;
+      }
+    }
+
+
+    modalEditMember.showModal()
+  })
+})
+
+buttonCloseModalEditMember.addEventListener('click', () => {
+  modalEditMember.close()
+})

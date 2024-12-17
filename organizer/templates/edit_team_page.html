@@ -9,6 +9,11 @@
 <script src="{% static 'organizer/js/edit-team-page/form-select-placeholder.js' %}" defer></script>
 {% endblock %} 
 
+{% block title%}
+  <title>Editar time</title>
+{% endblock %} 
+
+
 {% block main %}
   <div class="card-page-title">
     <button><i class="fa-sharp-duotone fa-solid fa-chevron-left" style="--fa-primary-color: #000000; --fa-secondary-color: #000000; --fa-secondary-opacity: 1;"></i></button>
@@ -24,7 +29,7 @@
             src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
           />
         </div>
-        <div class="title-text">
+        <div class="title-text"> 
           <span>Equipirangaz</span>
           <p>Basquete</p>
         </div>
@@ -196,5 +201,51 @@
     </div>
   
     <button>Excluir</button>
+  </dialog>
+
+  <dialog class="edit-member-dialog">
+    <div class="dialog-header">
+      <h3>Editar dados do participante</h3>
+      <button><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  
+    <form action="">
+      <div class="inputs-container">
+        <label for="member-name">Nome completo</label>
+        <input
+          type="text"
+          id="member-name"
+          placeholder="Nome completo"
+          required
+        />
+      </div>
+
+      <div class="inputs-container">
+        <label for="member-registration">Matricula</label>
+        <input
+          type="text"
+          id="member-registration"
+          placeholder="Matricula"
+          required
+        />
+      </div>
+
+      <div class='inputs-container'>
+        <label for="member-course"> Curso </label>
+        <div id="member-course" class='select-container'>
+          <select required name="course">
+            <option value="ads">ADS</option>
+            <option value="agro-industria">Agroindústria</option>
+            <option value="alimentos">Alimentos</option>
+            <option value="apicultura">Apicultura</option>
+            <option value="informatica">Informática</option>
+            <option value="quimica">Química</option>
+          </select>
+        </div>
+      </div>
+      
+  
+      <button type="submit">Confirmar alterações</button>
+    </form>
   </dialog>
 {% endblock %}

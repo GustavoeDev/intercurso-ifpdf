@@ -1,7 +1,6 @@
-const selectInputs = document.querySelectorAll('select')
+const select = document.querySelector('#new-member-course select')
 
 function changeSelect(){
-  selectInputs.forEach((select) => {
   select.addEventListener("click", () => {
     if (select.value === "") {
       select.classList.add("invalid"); 
@@ -12,7 +11,6 @@ function changeSelect(){
       console.log('enter')
     }
   });
-});
 }
 
 window.addEventListener("load", changeSelect);

@@ -317,3 +317,8 @@ option {
   border-radius: 0.5rem;
   padding: 0px 1.25rem;
 }
+
+#member-course > select {
+  color: black;
+  background-color: var(--white);
+}
