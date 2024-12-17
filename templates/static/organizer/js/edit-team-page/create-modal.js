@@ -40,8 +40,6 @@ const buttonCloseModalEditMember = modalEditMember.querySelector(".dialog-header
 
 const editMemberButtons = document.querySelectorAll('.edit-member')
 
-
-
 editMemberButtons.forEach(button => {
   button.addEventListener('click', () => {
     const memberInfos = button.parentElement.parentElement.children
@@ -69,4 +67,24 @@ editMemberButtons.forEach(button => {
 
 buttonCloseModalEditMember.addEventListener('click', () => {
   modalEditMember.close()
+})
+
+// Remover membro
+
+const modalDeleteMember = document.querySelector('.remove-member-dialog')
+const spanMemberName = modalDeleteMember.querySelector('.member-name-span')
+const buttonCloseModalDeleteMember = modalDeleteMember.querySelector(".dialog-header button")
+
+const deleteMemberButtons = document.querySelectorAll('.remove-member')
+
+deleteMemberButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const memberNameContent = button.parentElement.parentElement.children[0].textContent
+    spanMemberName.textContent = memberNameContent
+    modalDeleteMember.showModal()
+  })
+})
+
+buttonCloseModalDeleteMember.addEventListener('click', () => {
+  modalDeleteMember.close()
 })
