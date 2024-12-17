@@ -1,12 +1,11 @@
-//Adicionar novo membro
+// Adicionar novo membro
 
 const modalAddNewMember = document.querySelector(".add-new-member-dialog")
-const modalTeamNameSpan = document.querySelector(".team-name")
 const buttonCloseModalAddNewMember = modalAddNewMember.querySelector(".dialog-header button")
 
-const addNewMemberButtons = document.querySelector(".add-new-member")
+const addNewMemberButton = document.querySelector(".add-new-member")
 
-addNewMemberButtons.addEventListener("click", () => {
+addNewMemberButton.addEventListener("click", () => {
     modalAddNewMember.showModal()
 })
 
@@ -14,3 +13,21 @@ addNewMemberButtons.addEventListener("click", () => {
 buttonCloseModalAddNewMember.addEventListener("click", () => {
   modalAddNewMember.close();
 });
+
+// Excluir equipe
+
+const modalDeleteTeam = document.querySelector('.remove-team-dialog')
+const spanTeamName = modalDeleteTeam.querySelector('.team-name')
+const buttonCloseModalDeleteTeam = modalDeleteTeam.querySelector(".dialog-header button")
+
+const deleteTeamButton = document.querySelector('.delete-team')
+const teamNameContent = deleteTeamButton.parentElement.parentElement.querySelector('.card-title span').textContent
+
+deleteTeamButton.addEventListener('click', () => {
+  spanTeamName.textContent = teamNameContent
+  modalDeleteTeam.showModal()
+})
+
+buttonCloseModalDeleteTeam.addEventListener('click', () => {
+  modalDeleteTeam.close()
+})

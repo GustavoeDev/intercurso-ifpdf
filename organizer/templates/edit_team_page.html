@@ -11,7 +11,7 @@
 
 {% block main %}
   <div class="card-page-title">
-    <button><i class="fa-sharp-duotone fa-solid fa-chevron-left fa-xl" style="--fa-primary-color: #000000; --fa-secondary-color: #000000; --fa-secondary-opacity: 1;"></i></button>
+    <button><i class="fa-sharp-duotone fa-solid fa-chevron-left" style="--fa-primary-color: #000000; --fa-secondary-color: #000000; --fa-secondary-opacity: 1;"></i></button>
     <h1>Editar dados da equipe</h1>
   </div>
 
@@ -187,5 +187,14 @@
   
       <button type="submit">Confirmar</button>
     </form>
+  </dialog>
+
+  <dialog class="remove-team-dialog">
+    <div class="dialog-header">
+      <h3>Excluir a equipe <span class="team-name"></span>?</h3>
+      <button><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  
+    <button>Excluir</button>
   </dialog>
 {% endblock %}
