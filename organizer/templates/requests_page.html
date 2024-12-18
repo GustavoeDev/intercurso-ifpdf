@@ -106,7 +106,7 @@
     <h3>Aprovar equipe</h3>
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
-  <div class="approve-team-data">
+  <div class="team-data-container">
     <div class="team-data">
       <p>Nome da equipe</p>
       <span>Equipirangaz</span>
@@ -120,9 +120,9 @@
       <span>8 membros</span>
     </div>
   </div>
-  <div class="approve-team-table-players">
+  <div class="team-table-players">
     <p>Membros</p>
-    <div class="tabelinha-container-wrapper">
+    <div class="team-table-container-wrapper">
       <div class="table-container-approve">
         <table>
           <tr class="table-header">
@@ -171,12 +171,113 @@
       <textarea id="" placeholder="Explique o motivo..."></textarea>
     </div>
     <div class="radio-group">
-      <label for="approve">
-        <input type="radio" id="approve" name="type" value="approve" required />
+      <label for="approve_team_approve">
+        <input
+          type="radio"
+          id="approve_team_approve"
+          name="type"
+          value="approve"
+          required
+        />
         Aprovar solicitação
       </label>
       <label for="deny">
         <input type="radio" id="deny" name="type" value="deny" required />
+        Negar solicitação
+      </label>
+    </div>
+    <button type="submit">Confirmar</button>
+  </form>
+</dialog>
+
+<dialog class="remove-team-dialog">
+  <div class="dialog-header">
+    <h3>Excluir equipe</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="team-data-container">
+    <div class="team-data">
+      <p>Nome da equipe</p>
+      <span>Equipirangaz</span>
+    </div>
+    <div class="team-data">
+      <p>Competição</p>
+      <span>Futsal masculino</span>
+    </div>
+    <div class="team-data">
+      <p>Número de membros</p>
+      <span>8 membros</span>
+    </div>
+  </div>
+  <div class="team-table-players">
+    <p>Membros</p>
+    <div class="team-table-container-wrapper">
+      <div class="table-container-approve">
+        <table>
+          <tr class="table-header">
+            <th>Nome do participante</th>
+            <th>Matrícula</th>
+            <th>Curso</th>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <form action="">
+    <div class="reason-deny">
+      <p>Caso for negado, dê um motivo</p>
+      <textarea id="" placeholder="Explique o motivo..."></textarea>
+    </div>
+    <div class="radio-group">
+      <label for="remove_team_approve">
+        <input
+          type="radio"
+          id="remove_team_approve"
+          name="type"
+          value="approve"
+          required
+        />
+        Aprovar solicitação
+      </label>
+      <label for="remove_team_deny">
+        <input
+          type="radio"
+          id="remove_team_deny"
+          name="type"
+          value="deny"
+          required
+        />
         Negar solicitação
       </label>
     </div>

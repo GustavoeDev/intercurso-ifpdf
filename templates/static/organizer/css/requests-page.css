@@ -237,7 +237,7 @@ dialog > .dialog-header > h3 {
   color: var(--green-900);
 }
 
-.approve-team-dialog > .approve-team-data {
+.team-data-container {
   margin-top: 2rem;
 
   display: flex;
@@ -246,17 +246,17 @@ dialog > .dialog-header > h3 {
   gap: 1rem;
 }
 
-.approve-team-dialog > .approve-team-data > .team-data {
+.team-data-container > .team-data {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.approve-team-dialog > .approve-team-data > .team-data > p {
+.team-data-container > .team-data > p {
   font-weight: bold;
 }
 
-.approve-team-dialog > .approve-team-table-players {
+.team-table-players {
   margin-top: 2rem;
 
   display: flex;
@@ -264,39 +264,39 @@ dialog > .dialog-header > h3 {
   gap: 0.5rem;
 }
 
-.approve-team-dialog > .approve-team-table-players > p {
+.team-table-players > p {
   font-weight: bold;
 }
 
-.tabelinha-container-wrapper {
+.team-table-container-wrapper {
   padding: 1rem;
   border-radius: 8px;
   background-color: var(--white);
   padding-bottom: 0;
 }
 
-.approve-team-dialog > .approve-team-table-players .table-container-approve {
+.team-table-players .table-container-approve {
   height: 16rem;
   overflow-y: auto;
 }
 
-.approve-team-dialog > .approve-team-table-players table {
+.team-table-players table {
   margin-top: 0;
 }
 
-.approve-team-table-players .table-header {
+.team-table-players .table-header {
   gap: 4rem;
   display: grid;
   grid-template-columns: 1.5fr repeat(2, 1fr);
 }
 
-.approve-team-table-players .table-row {
+.team-table-players .table-row {
   gap: 4rem;
   display: grid;
   grid-template-columns: 1.5fr repeat(2, 1fr);
 }
 
-.approve-team-dialog > form {
+dialog > form {
   margin-top: 2rem;
 
   display: flex;
