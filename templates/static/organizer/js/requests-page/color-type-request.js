@@ -1,4 +1,4 @@
-const typeRequest = document.querySelectorAll(".table-row td");
+const typeRequest = document.querySelectorAll(".type-request");
 
 typeRequest.forEach((type) => {
   if (
