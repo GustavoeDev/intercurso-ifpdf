@@ -1,6 +1,6 @@
 .table-container {
   background-color: var(--white);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 0.5rem 1.25rem 0 0.75rem;
 
   width: 100%;
@@ -196,6 +196,156 @@ th {
 
 .delete-request {
   color: var(--red-500);
+}
+
+/* MODAL */
+
+dialog::backdrop {
+  background-color: #00000075;
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  max-width: 42.438rem;
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  padding: 2rem;
+  background-color: #f5f6fa;
+}
+
+dialog > .dialog-header {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+dialog > .dialog-header > button {
+  background: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border: 0;
+}
+
+dialog > .dialog-header > h3 {
+  font-size: 1.5rem;
+  font-family: "Baloo 2", sans-serif;
+  color: var(--green-900);
+}
+
+.approve-team-dialog > .approve-team-data {
+  margin-top: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.approve-team-dialog > .approve-team-data > .team-data {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.approve-team-dialog > .approve-team-data > .team-data > p {
+  font-weight: bold;
+}
+
+.approve-team-dialog > .approve-team-table-players {
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.approve-team-dialog > .approve-team-table-players > p {
+  font-weight: bold;
+}
+
+.tabelinha-container-wrapper {
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--white);
+  padding-bottom: 0;
+}
+
+.approve-team-dialog > .approve-team-table-players .table-container-approve {
+  height: 16rem;
+  overflow-y: auto;
+}
+
+.approve-team-dialog > .approve-team-table-players table {
+  margin-top: 0;
+}
+
+.approve-team-table-players .table-header {
+  gap: 4rem;
+  display: grid;
+  grid-template-columns: 1.5fr repeat(2, 1fr);
+}
+
+.approve-team-table-players .table-row {
+  gap: 4rem;
+  display: grid;
+  grid-template-columns: 1.5fr repeat(2, 1fr);
+}
+
+.approve-team-dialog > form {
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.reason-deny {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reason-deny > textarea {
+  padding: 1rem;
+  border: 0;
+  border-radius: 8px;
+  resize: none;
+  height: 8.75rem;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.radio-group > label {
+  cursor: pointer;
+  padding: 1rem;
+  max-width: 18.125rem;
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+form > button[type="submit"] {
+  border: 0;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--green-100);
+  cursor: pointer;
+  color: var(--white);
 }
 
 @media screen and (max-width: 768px) {

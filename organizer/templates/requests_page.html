@@ -9,6 +9,10 @@
   src="{% static 'organizer/js/requests-page/color-type-request.js' %}"
   defer
 ></script>
+<script
+  src="{% static 'organizer/js/requests-page/create-modal.js' %}"
+  defer
+></script>
 {% endblock %} {% block main %}
 
 <div class="table-container">
@@ -96,5 +100,88 @@
     </table>
   </div>
 </div>
+
+<dialog class="approve-team-dialog">
+  <div class="dialog-header">
+    <h3>Aprovar equipe</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="approve-team-data">
+    <div class="team-data">
+      <p>Nome da equipe</p>
+      <span>Equipirangaz</span>
+    </div>
+    <div class="team-data">
+      <p>Competição</p>
+      <span>Futsal masculino</span>
+    </div>
+    <div class="team-data">
+      <p>Número de membros</p>
+      <span>8 membros</span>
+    </div>
+  </div>
+  <div class="approve-team-table-players">
+    <p>Membros</p>
+    <div class="tabelinha-container-wrapper">
+      <div class="table-container-approve">
+        <table>
+          <tr class="table-header">
+            <th>Nome do participante</th>
+            <th>Matrícula</th>
+            <th>Curso</th>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <form action="">
+    <div class="reason-deny">
+      <p>Caso for negado, dê um motivo</p>
+      <textarea id="" placeholder="Explique o motivo..."></textarea>
+    </div>
+    <div class="radio-group">
+      <label for="approve">
+        <input type="radio" id="approve" name="type" value="approve" required />
+        Aprovar solicitação
+      </label>
+      <label for="deny">
+        <input type="radio" id="deny" name="type" value="deny" required />
+        Negar solicitação
+      </label>
+    </div>
+    <button type="submit">Confirmar</button>
+  </form>
+</dialog>
 
 {% endblock %}
