@@ -168,21 +168,30 @@
   <form action="">
     <div class="reason-deny">
       <p>Caso for negado, dê um motivo</p>
-      <textarea id="" placeholder="Explique o motivo..."></textarea>
+      <textarea
+        id="approve-team-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
     </div>
     <div class="radio-group">
-      <label for="approve_team_approve">
+      <label for="approve-team-approve">
         <input
           type="radio"
-          id="approve_team_approve"
+          id="approve-team-approve"
           name="type"
           value="approve"
           required
         />
         Aprovar solicitação
       </label>
-      <label for="deny">
-        <input type="radio" id="deny" name="type" value="deny" required />
+      <label for="approve-team-deny">
+        <input
+          type="radio"
+          id="approve-team-deny"
+          name="type"
+          value="deny"
+          required
+        />
         Negar solicitação
       </label>
     </div>
@@ -257,23 +266,108 @@
   <form action="">
     <div class="reason-deny">
       <p>Caso for negado, dê um motivo</p>
-      <textarea id="" placeholder="Explique o motivo..."></textarea>
+      <textarea
+        id="remove-team-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
     </div>
     <div class="radio-group">
-      <label for="remove_team_approve">
+      <label for="remove-team-approve">
         <input
           type="radio"
-          id="remove_team_approve"
+          id="remove-team-approve"
           name="type"
           value="approve"
           required
         />
         Aprovar solicitação
       </label>
-      <label for="remove_team_deny">
+      <label for="remove-team-deny">
         <input
           type="radio"
-          id="remove_team_deny"
+          id="remove-team-deny"
+          name="type"
+          value="deny"
+          required
+        />
+        Negar solicitação
+      </label>
+    </div>
+    <button type="submit">Confirmar</button>
+  </form>
+</dialog>
+
+<dialog class="edit-player-dialog">
+  <div class="dialog-header">
+    <h3>Aprovar edição</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="team-data-container">
+    <div class="team-data">
+      <p>Membro a ser editado</p>
+      <span>Gustavo Emanuel Queiroz Silva</span>
+    </div>
+    <div class="team-data">
+      <p>Equipe</p>
+      <span>Equipirangaz</span>
+    </div>
+    <div class="team-data">
+      <p>Competição</p>
+      <span>Futsal masculino</span>
+    </div>
+  </div>
+  <div class="details-request">
+    <p>Detalhes da solicitação</p>
+    <div class="details-request-wrapper">
+      <div class="details-request-content">
+        <span>Nome</span>
+        <div class="details-request-text">
+          <p>Gustavo Emanuel Queiroz Silva</p>
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>Gustavo Emanuel Silva Queiroz</span>
+        </div>
+      </div>
+      <div class="details-request-content">
+        <span>Matrícula</span>
+        <div class="details-request-text">
+          <p>20231094040023</p>
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>20231094040005</span>
+        </div>
+      </div>
+      <div class="details-request-content">
+        <span>Curso</span>
+        <div class="details-request-text">
+          <p>ADS</p>
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>Nada a modificar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form action="">
+    <div class="reason-deny">
+      <p>Caso for negado, dê um motivo</p>
+      <textarea
+        id="edit-player-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+    <div class="radio-group">
+      <label for="edit-player-approve">
+        <input
+          type="radio"
+          id="edit-player-approve"
+          name="type"
+          value="approve"
+          required
+        />
+        Aprovar solicitação
+      </label>
+      <label for="edit-player-deny">
+        <input
+          type="radio"
+          id="edit-player-deny"
           name="type"
           value="deny"
           required

@@ -16,6 +16,11 @@ const btnCloseRemoveTeamDialog = document.querySelector(
 
 // Editar dados do participante modal
 
+const editPlayerDialog = document.querySelector(".edit-player-dialog");
+const btnCloseEditPlayerDialog = document.querySelector(
+  ".edit-player-dialog .dialog-header button"
+);
+
 // Excluir participante modal
 
 btnShowRequest.forEach((btn) => {
@@ -30,6 +35,8 @@ btnShowRequest.forEach((btn) => {
       approveTeamDialog.showModal();
     } else if (typeRequestRelated === "excluir equipe") {
       removeTeamDialog.showModal();
+    } else if (typeRequestRelated === "editar dados") {
+      editPlayerDialog.showModal();
     }
   });
 });
@@ -40,4 +47,8 @@ btnCloseApproveTeamDialog.addEventListener("click", () => {
 
 btnCloseRemoveTeamDialog.addEventListener("click", () => {
   removeTeamDialog.close();
+});
+
+btnCloseEditPlayerDialog.addEventListener("click", () => {
+  editPlayerDialog.close();
 });
