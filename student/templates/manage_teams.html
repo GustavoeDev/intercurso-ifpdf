@@ -350,15 +350,15 @@
   <form action="">
     <div class="inputs-container">
       <label for="add-player-name">Nome completo</label>
-      <input type="text" id="add-player-name" />
+      <input type="text" id="add-player-name" placeholder="Nome" />
     </div>
     <div class="inputs-container">
       <label for="add-player-enrollment">Matrícula</label>
-      <input type="text" id="add-player-enrollment" />
+      <input type="text" id="add-player-enrollment" placeholder="Matrícula" />
     </div>
     <div class="inputs-container">
       <label for="add-player-course">Curso</label>
-      <input type="text" id="add-player-course" />
+      <input type="text" id="add-player-course" placeholder="Curso" />
     </div>
 
     <button type="submit">Confirmar alterações</button>
@@ -371,7 +371,17 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Excluir</button>
+  <form action="">
+    <div class="inputs-container">
+      <label for="remove-team-reason">Motivo da alteração</label>
+      <textarea
+        id="remove-team-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+
+    <button type="submit" class="remove-btn-modal">Excluir</button>
+  </form>
 </dialog>
 
 {% endblock %}

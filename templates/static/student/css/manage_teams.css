@@ -307,7 +307,7 @@ dialog .inputs-container > textarea {
 }
 
 .remove-player-dialog > form > button[type="submit"],
-.remove-team-dialog > button {
+.remove-team-dialog > form > button[type="submit"] {
   background-color: var(--red-500);
   padding: 1.25rem;
   border: 0;
