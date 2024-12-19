@@ -388,6 +388,26 @@ form > button[type="submit"] {
   gap: 0.5rem;
 }
 
+.reason-change {
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reason-change > span {
+  font-weight: bold;
+}
+
+.reason-change-content {
+  padding: 1rem;
+  background-color: var(--white);
+  border-radius: 8px;
+
+  min-height: 8.688rem;
+}
+
 @media screen and (max-width: 768px) {
   table {
     width: 47rem;

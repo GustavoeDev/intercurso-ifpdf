@@ -23,6 +23,11 @@ const btnCloseEditPlayerDialog = document.querySelector(
 
 // Excluir participante modal
 
+const removePlayerDialog = document.querySelector(".remove-player-dialog");
+const btnCloseRemovePlayerDialog = document.querySelector(
+  ".remove-player-dialog .dialog-header button"
+);
+
 btnShowRequest.forEach((btn) => {
   btn.addEventListener("click", () => {
     const tableRow = btn.closest(".table-row");
@@ -37,6 +42,8 @@ btnShowRequest.forEach((btn) => {
       removeTeamDialog.showModal();
     } else if (typeRequestRelated === "editar dados") {
       editPlayerDialog.showModal();
+    } else if (typeRequestRelated === "excluir participante") {
+      removePlayerDialog.showModal();
     }
   });
 });
@@ -51,4 +58,8 @@ btnCloseRemoveTeamDialog.addEventListener("click", () => {
 
 btnCloseEditPlayerDialog.addEventListener("click", () => {
   editPlayerDialog.close();
+});
+
+btnCloseRemovePlayerDialog.addEventListener("click", () => {
+  removePlayerDialog.close();
 });

@@ -379,4 +379,63 @@
   </form>
 </dialog>
 
+<dialog class="remove-player-dialog">
+  <div class="dialog-header">
+    <h3>Excluir participante</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="team-data-container">
+    <div class="team-data">
+      <p>Membro a ser excluído</p>
+      <span>Gustavo Emanuel Queiroz Silva</span>
+    </div>
+    <div class="team-data">
+      <p>Equipe</p>
+      <span>Equipirangaz</span>
+    </div>
+    <div class="team-data">
+      <p>Competição</p>
+      <span>Futsal masculino</span>
+    </div>
+  </div>
+  <div class="reason-change">
+    <span>Motivo da alteração</span>
+    <div class="reason-change-content">
+      <p>Ele não quer mais jogar!</p>
+    </div>
+  </div>
+  <form action="">
+    <div class="reason-deny">
+      <p>Caso for negado, dê um motivo</p>
+      <textarea
+        id="remove-player-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+    <div class="radio-group">
+      <label for="remove-player-approve">
+        <input
+          type="radio"
+          id="remove-player-approve"
+          name="type"
+          value="approve"
+          required
+        />
+        Aprovar solicitação
+      </label>
+      <label for="remove-player-deny">
+        <input
+          type="radio"
+          id="remove-player-deny"
+          name="type"
+          value="deny"
+          required
+        />
+        Negar solicitação
+      </label>
+    </div>
+    <button type="submit">Confirmar</button>
+  </form>
+</dialog>
+
 {% endblock %}
