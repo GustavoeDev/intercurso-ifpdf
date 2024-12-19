@@ -13,6 +13,10 @@
   src="{% static 'organizer/js/requests-page/create-modal.js' %}"
   defer
 ></script>
+<script
+  src="{% static 'organizer/js/requests-page/radio-change.js' %}"
+  defer
+></script>
 {% endblock %} {% block main %}
 
 <div class="table-container">
@@ -170,6 +174,7 @@
       <p>Caso for negado, dê um motivo</p>
       <textarea
         id="approve-team-reason"
+        name="reason"
         placeholder="Explique o motivo..."
       ></textarea>
     </div>
@@ -178,7 +183,7 @@
         <input
           type="radio"
           id="approve-team-approve"
-          name="type"
+          name="decision"
           value="approve"
           required
         />
@@ -188,7 +193,7 @@
         <input
           type="radio"
           id="approve-team-deny"
-          name="type"
+          name="decision"
           value="deny"
           required
         />
@@ -274,6 +279,7 @@
       <p>Caso for negado, dê um motivo</p>
       <textarea
         id="remove-team-reason"
+        name="reason"
         placeholder="Explique o motivo..."
       ></textarea>
     </div>
@@ -282,7 +288,7 @@
         <input
           type="radio"
           id="remove-team-approve"
-          name="type"
+          name="decision"
           value="approve"
           required
         />
@@ -292,7 +298,7 @@
         <input
           type="radio"
           id="remove-team-deny"
-          name="type"
+          name="decision"
           value="deny"
           required
         />
@@ -362,6 +368,7 @@
       <p>Caso for negado, dê um motivo</p>
       <textarea
         id="edit-player-reason"
+        name="reason"
         placeholder="Explique o motivo..."
       ></textarea>
     </div>
@@ -370,7 +377,7 @@
         <input
           type="radio"
           id="edit-player-approve"
-          name="type"
+          name="decision"
           value="approve"
           required
         />
@@ -380,7 +387,7 @@
         <input
           type="radio"
           id="edit-player-deny"
-          name="type"
+          name="decision"
           value="deny"
           required
         />
@@ -421,6 +428,7 @@
       <p>Caso for negado, dê um motivo</p>
       <textarea
         id="remove-player-reason"
+        name="reason"
         placeholder="Explique o motivo..."
       ></textarea>
     </div>
@@ -429,7 +437,7 @@
         <input
           type="radio"
           id="remove-player-approve"
-          name="type"
+          name="decision"
           value="approve"
           required
         />
@@ -439,7 +447,7 @@
         <input
           type="radio"
           id="remove-player-deny"
-          name="type"
+          name="decision"
           value="deny"
           required
         />
