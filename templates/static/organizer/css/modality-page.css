@@ -346,6 +346,25 @@ dialog .inputs-container > textarea {
   padding: 1.5rem 2rem;
   background-color: var(--white);
   border-radius: 6px;
+  cursor: pointer;
+}
+
+.quantity-players-teams-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quantity-players-teams-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quantity-players-teams-content > input {
+  border: 0;
+  padding: 1rem;
+  border-radius: 6px;
 }
 
 .file-input {

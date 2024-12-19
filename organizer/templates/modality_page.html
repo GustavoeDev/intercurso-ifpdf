@@ -278,7 +278,12 @@
   <form action="">
     <div class="inputs-container">
       <label for="new-modality-name">Nome da modalidade</label>
-      <input type="text" id="new-modality-name" placeholder="Modalidade" />
+      <input
+        type="text"
+        id="new-modality-name"
+        placeholder="Modalidade"
+        required
+      />
     </div>
 
     <button type="submit" class="create-new-modality-btn">
@@ -335,42 +340,71 @@
       <input
         type="text"
         id="new-competition-name"
-        placeholder="Basquete masculino"
+        placeholder="Ex: Basquete masculino"
+        required
       />
     </div>
     <div class="inputs-container">
       <label for="new-competition-system">Sistema da competição</label>
 
       <div class="competition-type-selection">
-        <div class="new-competition-radio-group">
+        <label class="new-competition-radio-group" for="grupos">
           <input
             type="radio"
             id="grupos"
             name="competition-type"
             value="grupos"
+            required
           />
-          <label for="grupos">Grupos</label>
-        </div>
+          Grupos
+        </label>
 
-        <div class="new-competition-radio-group">
+        <label class="new-competition-radio-group" for="pontos-corridos">
           <input
             type="radio"
             id="pontos-corridos"
             name="competition-type"
             value="pontos-corridos"
+            required
           />
-          <label for="pontos-corridos">Pontos Corridos</label>
-        </div>
+          Pontos Corridos
+        </label>
 
-        <div class="new-competition-radio-group">
+        <label class="new-competition-radio-group" for="eliminatorias">
           <input
             type="radio"
             id="eliminatorias"
             name="competition-type"
             value="eliminatorias"
+            required
           />
-          <label for="eliminatorias">Eliminatórias</label>
-        </div>
+          Eliminatórias
+        </label>
+      </div>
+    </div>
+
+    <div class="quantity-players-teams-container">
+      <div class="quantity-players-teams-content">
+        <label for="quantity-players-team"
+          >Quantidade mínima de participantes por equipe</label
+        >
+        <input
+          type="number"
+          id="quantity-players-team"
+          placeholder="Ex: 8"
+          required
+        />
+      </div>
+      <div class="quantity-players-teams-content">
+        <label for="quantity-players-team"
+          >Quantidade máxima de participantes por equipe</label
+        >
+        <input
+          type="number"
+          id="quantity-players-team"
+          placeholder="Ex: 12"
+          required
+        />
       </div>
     </div>
 
@@ -386,6 +420,7 @@
         name="imagem-competicao"
         accept="image/*"
         class="file-input"
+        required
       />
     </div>
 
