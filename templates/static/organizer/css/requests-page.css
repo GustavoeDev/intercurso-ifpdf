@@ -241,7 +241,7 @@ dialog > .dialog-header > h3 {
   margin-top: 2rem;
 
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
 }
@@ -411,6 +411,10 @@ form > button[type="submit"] {
 @media screen and (max-width: 768px) {
   table {
     width: 47rem;
+  }
+
+  .table-container-wrapper {
+    padding-bottom: 1rem;
   }
 
   .card-actions span {
