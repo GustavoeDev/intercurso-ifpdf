@@ -1,0 +1,39 @@
+{% extends "base-organizer.html" %} {% load static %} 
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'organizer/css/competitions-page.css' %}" />
+{% endblock %} 
+
+
+{% block title%}
+  <title>Competições</title>
+{% endblock %} 
+
+
+{% block main %}
+  <div class="table-container-wrapper">
+    <table>
+      <tr class="table-header">
+        <th>Nome da competição</th>
+        <th>Status</th>
+        <th>Equipes inscritas</th>
+        <th>Data inicio</th>
+        <th>Ações</th>
+      </tr>
+      <tr class="table-row">
+        <td class="team-item">
+          <span>Equipirangaz</span>
+          <span class="modality-span">Futsal</span>
+        </td>
+        <td> <span>Em andamento</span> </td>
+        <td>20 equipes</td>
+        <td>27/11/2025</td>
+        <td>
+          <a href="">Gerenciar competição</a>
+        </td>  
+      </tr>
+    </table>
+  </div>             
+{% endblock %}
+
+
