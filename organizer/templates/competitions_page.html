@@ -11,29 +11,39 @@
 
 
 {% block main %}
-  <div class="table-container-wrapper">
-    <table>
-      <tr class="table-header">
-        <th>Nome da competição</th>
-        <th>Status</th>
-        <th>Equipes inscritas</th>
-        <th>Data inicio</th>
-        <th>Ações</th>
-      </tr>
-      <tr class="table-row">
-        <td class="team-item">
-          <span>Equipirangaz</span>
-          <span class="modality-span">Futsal</span>
-        </td>
-        <td> <span>Em andamento</span> </td>
-        <td>20 equipes</td>
-        <td>27/11/2025</td>
-        <td>
-          <a href="">Gerenciar competição</a>
-        </td>  
-      </tr>
-    </table>
-  </div>             
+  <div class="main-table-container">
+    <div class="card-title">
+      <div class="title-image">
+        <img src="{% static 'organizer/img/competition-page/competition-icon.svg' %}">
+      </div>
+      <div class="title-text">
+        <span>Competições</span>
+      </div>
+    </div>
+    <div class="table-container-wrapper">
+      <table>
+        <tr class="table-header">
+          <th>Nome da competição</th>
+          <th>Status</th>
+          <th>Equipes inscritas</th>
+          <th>Data inicio</th>
+          <th>Ações</th>
+        </tr>
+        <tr class="table-row">
+          <td class="comp-item">
+            <span>Basquete masculino</span>
+            <span class="modality-span">Basquete</span>
+          </td>
+          <td> <span class="status">Em andamento</span> </td>
+          <td>20 equipes</td>
+          <td>27/11/2025</td>
+          <td>
+            <a href="">Gerenciar competição</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>            
 {% endblock %}
 
 
