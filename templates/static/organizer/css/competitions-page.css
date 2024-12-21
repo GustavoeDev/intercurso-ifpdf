@@ -35,6 +35,10 @@
   height: 1rem;
 }
 
+.table-container-wrapper {
+  overflow-x: auto;
+}
+
 table {
   font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
@@ -110,4 +114,10 @@ a {
   color: var(--blue-500);
   font: 500 0.875rem "Inter";
   text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  table {
+    width: 47rem;
+  }
 }
