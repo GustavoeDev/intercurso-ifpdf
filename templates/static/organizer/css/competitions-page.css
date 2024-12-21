@@ -40,7 +40,7 @@
 }
 
 table {
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 0.875rem;
   width: 100%;
 
@@ -110,7 +110,7 @@ th {
   font: 300 0.75rem "Inter";
 }
 
-a {
+td a {
   color: var(--blue-500);
   font: 500 0.875rem "Inter";
   text-decoration: none;
