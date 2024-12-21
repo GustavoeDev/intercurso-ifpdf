@@ -152,6 +152,7 @@ option {
   border: 1px solid #D9E1E7;
   border-radius: 0.5rem;
   padding: 0px 1.25rem;
+  background-color: var(--white);
 }
 
 .submit-container {
