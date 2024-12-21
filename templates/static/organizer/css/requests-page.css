@@ -1,6 +1,6 @@
 .table-container {
   background-color: var(--white);
-  border-radius: 8px;
+  border-radius: 1rem;
   padding: 0.5rem 1.25rem 0 0.75rem;
 
   width: 100%;

@@ -1,5 +1,5 @@
 .main-table-container {
-  padding: 1.25rem;
+  padding: 0.5rem 1.25rem 0 0.75rem;
   border-radius: 1rem;
 
   background-color: var(--white);
