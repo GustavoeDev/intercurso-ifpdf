@@ -120,3 +120,153 @@ button {
   justify-content: center;
   align-items: center;
 }
+
+.all-games-title h2{
+  font: 700 1.25rem "Baloo 2", "Inter", sans-serif;
+}
+
+.all-games-title p{
+  font: 500 1rem "Inter", sans-serif;
+  color: var(--gray-600);
+}
+
+/* ROUND CONTAINER */
+
+.round-container {
+  display: flex;
+  flex-direction: column;
+
+  width: fit-content;
+}
+
+.games-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.round-container-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-left: none;
+}
+
+.round-container-header > .round-span {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.round-container-header > button {
+  font-size: 0.875rem;
+  border: 0;
+  background: none;
+  color: var(--green-100);
+  cursor: pointer;
+}
+
+.round-container-header > button.disabled {
+  opacity: 0.5;
+}
+
+.card-round-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1rem;
+
+  width: 18.875rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-round-container > img {
+  position: absolute;
+  top: 50%;
+  right: -20%;
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+.card-round-container > span {
+  background-color: #eeeded;
+  padding: 20px;
+}
+
+.card-round-container-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.card-round-container-header > img {
+  width: 2rem;
+}
+
+.card-round-container-header > span {
+  padding: 0.25rem 0.5rem;
+  color: #322d2d;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #d6d5d5;
+}
+
+.card-round-container-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+  padding: 0.85rem 1rem;
+}
+
+.card-round-container-content .card-round-container-score,
+.card-round-container-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+
+  color: #322d2d;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.card-round-container-score {
+  gap: 3rem;
+}
+
+.card-round-container-name {
+  width: 4rem;
+  word-break: break-word;
+}
+
+.card-round-container-score > span {
+  font-size: 0.875rem;
+}
+
+.card-round-container-content .card-round-container-score:nth-child(2) {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.card-round-container-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.75rem;
+  color: var(--white);
+  font-weight: 600;
+  background-color: var(--green-100);
+  padding: 0.625rem 0;
+}
+
+.card-round-container-footer span {
+  margin-left: 0.3rem;
+}
