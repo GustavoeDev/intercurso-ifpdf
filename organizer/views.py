@@ -15,5 +15,8 @@ def view_edit_team(request):
 def view_competitions_page(request):
     return render(request, 'competitions_page.html')
 
+def view_detail_comp_page(request):
+    return render(request, 'detail_competition_page.html')
+
 def view_requests(request):
     return render(request, 'requests_page.html')
