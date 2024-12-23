@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="{% static 'organizer/css/detail-competition-page.css' %}" />
 {% endblock %}
 
+{% block js %}
+<script src="{% static 'organizer/js/datail-competition/create-modal.js' %}" defer></script>
+{% endblock %} 
+
 
 {% block title%}
 <title>Competições</title>
@@ -178,7 +182,7 @@
       <p class="detail-p" id="detail-comp-sistem">Sistema da competição: <span>Pontos corridos</span></p>
       <div class="p-with-button">
         <p class="detail-p" id="detail-comp-status">Status da competição: <span>Em andamento</span></p>
-        <button class="p-button">
+        <button class="p-button" id="datail-status-button">
           <i class="fa-regular fa-circle-xmark fa-sm" style="color: var(--red-500)"></i>
         </button>
       </div>
@@ -203,6 +207,15 @@
     </div>
   </div>
 </div>
+
+<dialog class="end-comp-dialog">
+  <div class="dialog-header">
+    <h3>Encerrar competição?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <button>Encerrar</button>
+</dialog>
 
 
 {% endblock %}
