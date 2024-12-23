@@ -279,8 +279,16 @@ button {
   padding: 0.625rem 0;
 }
 
-.card-round-container-footer span {
-  margin-left: 0.3rem;
+.card-round-container-footer p{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-round-container-footer button{
+  border: none;
+  background-color: transparent;
 }
 
 .comp-details {
