@@ -1,4 +1,4 @@
-{% extends "base-organizer.html" %} {% load static %}
+ {% extends "base-organizer.html" %} {% load static %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'organizer/css/detail-competition-page.css' %}" />
@@ -6,7 +6,7 @@
 
 {% block js %}
 <script src="{% static 'organizer/js/datail-competition/create-modal.js' %}" defer></script>
-{% endblock %} 
+{% endblock %}
 
 
 {% block title%}
@@ -110,15 +110,9 @@
       </div>
       <div class="games-container">
         <div class="card-round-container">
-          <img
-            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-            alt=""
-          />
+          <img src="{% static 'student/img/league-page/bg-rectangle.png' %}" alt="" />
           <div class="card-round-container-header">
-            <img
-              src="{% static 'student/img/league-page/header.svg' %}"
-              alt=""
-            />
+            <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
             <span class="game-status-span">Encerrado</span>
           </div>
           <div class="card-round-container-content">
@@ -141,15 +135,9 @@
           </div>
         </div>
         <div class="card-round-container">
-          <img
-            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-            alt=""
-          />
+          <img src="{% static 'student/img/league-page/bg-rectangle.png' %}" alt="" />
           <div class="card-round-container-header">
-            <img
-              src="{% static 'student/img/league-page/header.svg' %}"
-              alt=""
-            />
+            <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
             <span>Encerrado</span>
           </div>
           <div class="card-round-container-content">
@@ -184,7 +172,7 @@
     </div>
     <hr>
     <div class="comp-detail-container">
-      <p class="detail-p" id="detail-modality">Modalidade: <span>Basquete</span></p> 
+      <p class="detail-p" id="detail-modality">Modalidade: <span>Basquete</span></p>
       <p class="detail-p" id="detail-comp-sistem">Sistema da competição: <span>Pontos corridos</span></p>
       <div class="p-with-button">
         <p class="detail-p" id="detail-comp-status">Status da competição: <span>Em andamento</span></p>
@@ -223,5 +211,43 @@
   <button>Encerrar</button>
 </dialog>
 
+<dialog class="edit-scoreboard-dialog">
+  <div class="edit-scoreboard-dialog-content">
+    <div class="dialog-header">
+      <h3>Editar placar</h3>
+      <button><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form action="">
+      <div class="edit-scoreboard-container">
+        <div class="teams-container">
+          <div class="inputs-container">
+            <label for="home-team">Time casa</label>
+            <p class="team-name" id="home-team">ADS</p>
+          </div>
+          <div class="inputs-container">
+            <label for="away-team">Time fora</label>
+            <p class="team-name" id="away-team">INFORMÁTICA</p>
+          </div>
+        </div>
+        <div class="scoreboard-container">
+          <div class="inputs-container">
+            <label for="home-scoreboard">Placar</label>
+            <input type="number" id="home-scoreboard" name="home-scoreboard"/>
+          </div>
+          <div class="inputs-container">
+            <label for="home-scoreboard">Placar</label>
+            <input type="number" id="home-scoreboard" name="home-scoreboard"/>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="radio-input-container">
+        <input type="checkbox" name="end-game" id="end-game">
+        <label for="end-game">Jogo encerrado</label>
+      </div>
+      <button type="submit">Confirmar alterações</button>
+    </form>
+  </div>
+</dialog>
 
 {% endblock %}

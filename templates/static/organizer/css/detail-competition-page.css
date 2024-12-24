@@ -47,7 +47,7 @@ button {
   overflow-x: auto;
 }
 
-.table-container-wrapper > table {
+.table-container-wrapper>table {
   font-family: "Inter", sans-serif;
   font-size: 0.875rem;
   width: 100%;
@@ -83,12 +83,12 @@ button {
   border-bottom: 1px solid #e2e8f0;
 }
 
-.table-container-wrapper > table .table-row:last-child {
+.table-container-wrapper>table .table-row:last-child {
   border-bottom: none;
 }
 
-.table-container-wrapper > table td,
-.table-container-wrapper > table th {
+.table-container-wrapper>table td,
+.table-container-wrapper>table th {
   width: 100%;
   display: flex;
   gap: 0.5rem;
@@ -125,11 +125,11 @@ button {
   margin-top: 1.875rem;
 }
 
-.all-games-title h2{
+.all-games-title h2 {
   font: 700 1.25rem "Baloo 2", "Inter", sans-serif;
 }
 
-.all-games-title p{
+.all-games-title p {
   font: 500 1rem "Inter", sans-serif;
   color: var(--gray-600);
 }
@@ -166,12 +166,12 @@ button {
   border-left: none;
 }
 
-.round-container-header > .round-span {
+.round-container-header>.round-span {
   font-size: 0.875rem;
   font-weight: 600;
 }
 
-.round-container-header > button {
+.round-container-header>button {
   font-size: 0.875rem;
   border: 0;
   background: none;
@@ -179,7 +179,7 @@ button {
   cursor: pointer;
 }
 
-.round-container-header > button.disabled {
+.round-container-header>button.disabled {
   opacity: 0.5;
 }
 
@@ -194,7 +194,7 @@ button {
   position: relative;
 }
 
-.card-round-container > img {
+.card-round-container>img {
   position: absolute;
   top: 50%;
   right: -20%;
@@ -202,7 +202,7 @@ button {
   z-index: -1;
 }
 
-.card-round-container > span {
+.card-round-container>span {
   background-color: #eeeded;
   padding: 20px;
 }
@@ -215,11 +215,11 @@ button {
   padding: 0 1rem;
 }
 
-.card-round-container-header > img {
+.card-round-container-header>img {
   width: 2rem;
 }
 
-.card-round-container-header > span {
+.card-round-container-header>span {
   padding: 0.25rem 0.5rem;
   color: #322d2d;
   font-size: 0.75rem;
@@ -234,6 +234,7 @@ button {
   gap: 1.5rem;
 
   padding: 0.85rem 1rem;
+  cursor: pointer;
 }
 
 .card-round-container-content .card-round-container-score,
@@ -258,7 +259,7 @@ button {
   word-break: break-word;
 }
 
-.card-round-container-score > span {
+.card-round-container-score>span {
   font-size: 0.875rem;
 }
 
@@ -279,14 +280,14 @@ button {
   padding: 0.625rem 0;
 }
 
-.card-round-container-footer p{
+.card-round-container-footer p {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1rem;
 }
 
-.card-round-container-footer button{
+.card-round-container-footer button {
   border: none;
   background-color: transparent;
 }
@@ -322,7 +323,7 @@ button {
   color: var(--gray-900);
 }
 
-.detail-p span{
+.detail-p span {
   font: 500 0.75rem "Inter", sans-serif;
   color: var(--green-900);
 }
@@ -346,7 +347,7 @@ dialog {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  max-width: 42.438rem;
+  max-width: 25rem;
   width: 100%;
   border: 0;
   border-radius: 6px;
@@ -354,26 +355,35 @@ dialog {
   background-color: #f5f6fa;
 }
 
-dialog > .dialog-header {
+.edit-scoreboard-dialog-content {
   display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  align-items: auto;
+}
+
+.edit-scoreboard-dialog-content>.dialog-header, dialog>.dialog-header {
+  display: flex;
+  flex-direction: row;
   gap: 2rem;
   justify-content: space-between;
 }
 
-dialog > .dialog-header > button {
+dialog>.dialog-header>button {
   background: none;
   font-size: 1.25rem;
   cursor: pointer;
   border: 0;
 }
 
-dialog > .dialog-header > h3 {
+dialog>.dialog-header>h3 {
   font-size: 1.5rem;
   font-family: "Baloo 2", sans-serif;
   color: var(--green-900);
 }
 
-dialog > button {
+dialog>button {
   background-color: var(--red-500);
   padding: 1.25rem;
   border: 0;
@@ -384,4 +394,75 @@ dialog > button {
   cursor: pointer;
   margin-top: 2rem;
   width: 100%;
+}
+
+.radio-input-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.625rem;
+
+  font: 500 1rem "Inter", sans-serif;
+}
+
+.edit-scoreboard-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+}
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.inputs-container>p {
+  font: 700 1rem "Inter", sans-serif;
+  color: var(--green-900);
+}
+
+.edit-scoreboard-container>div {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+label {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: var(--green-900)
+}
+
+input[type="number"] {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  padding: 1rem 1rem;
+
+  border: 1px solid #D9E1E7;
+  border-radius: 0.5rem;
+  max-width: 4.5rem;
+}
+
+.scoreboard-container>div {
+  gap: 0.825rem;
+}
+
+
+.teams-container > :last-child > label {
+  margin-top: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.625rem;
+}
+
+form > button {
+  width: 100%;
+  background-color: var(--green-100);
+  font: 600 1rem "Inter", sans-serif;
+  color: var(--white);
+  padding: 1.25rem 0;
+  border-radius: 10px;
 }
