@@ -347,7 +347,7 @@ dialog {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  max-width: 25rem;
+  max-width: 42.438rem;
   width: 100%;
   border: 0;
   border-radius: 6px;
@@ -355,7 +355,17 @@ dialog {
   background-color: #f5f6fa;
 }
 
-.edit-scoreboard-dialog-content {
+.edit-scoreboard-dialog {
+  max-width: 25rem;
+  width: 100%; 
+}
+
+.edit-game-dialog {
+  max-width: 35rem;
+  width: 100%;
+}
+
+.edit-scoreboard-dialog-content, .edit-game-dialog-content {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -363,7 +373,7 @@ dialog {
   align-items: auto;
 }
 
-.edit-scoreboard-dialog-content>.dialog-header, dialog>.dialog-header {
+.edit-scoreboard-dialog-content>.dialog-header, .edit-game-dialog-content>.dialog-header, dialog>.dialog-header {
   display: flex;
   flex-direction: row;
   gap: 2rem;
@@ -410,7 +420,7 @@ dialog>button {
   gap: 2.5rem;
 }
 
-.inputs-container {
+.edit-scoreboard-container > .inputs-container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -427,19 +437,32 @@ dialog>button {
   gap: 1.25rem;
 }
 
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.edit-game-dialog > .inputs-container {
+  gap: 0.825rem;
+}
+
 label {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   color: var(--green-900)
 }
 
-input[type="number"] {
+input {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   padding: 1rem 1rem;
 
   border: 1px solid #D9E1E7;
   border-radius: 0.5rem;
+}
+
+input[type="number"] {
   max-width: 4.5rem;
 }
 
@@ -447,8 +470,7 @@ input[type="number"] {
   gap: 0.825rem;
 }
 
-
-.teams-container > :last-child > label {
+.edit-scoreboard-container > .teams-container > :last-child > label {
   margin-top: 15px;
 }
 
@@ -466,3 +488,69 @@ form > button {
   padding: 1.25rem 0;
   border-radius: 10px;
 }
+
+select{
+  border: none;
+  background-color: var(--white);
+  outline: none;
+  
+  width: 100%;
+  padding: 1rem 0px;
+  color: #a9a9a9;
+  
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
+
+select.invalid {
+  color: #a9a9a9;
+}
+
+select.valid {
+  color: var(--green-900);
+}
+
+option {
+  color: var(--green-900);
+}
+
+.select-container {
+  max-width: 100%;
+  
+  border: 1px solid #D9E1E7;
+  border-radius: 0.5rem;
+  padding: 0px 1.25rem;
+  background-color: var(--white);
+}
+
+#member-course > select {
+  color: black;
+  background-color: var(--white);
+}
+
+.edit-game-container {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 0.825rem;
+}
+
+.edit-game-container > .teams-container, .edit-game-container > .scoreboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+
+.data-inputs-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 7fr 1fr;
+  gap: 0.5rem;
+}
+
+.data-inputs-container input {
+  padding: 1rem 0.5rem;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator, input[type="date"]::-webkit-calendar-picker-indicator { 
+  display: none; 
+} 
