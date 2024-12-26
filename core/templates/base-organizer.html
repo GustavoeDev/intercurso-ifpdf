@@ -41,7 +41,7 @@
         </div>
         <p>Menu</p>
         <div class="navigation-content">
-          {% url 'view_modalitypage' as modality_url %}
+          {% url 'modality_list' as modality_url %}
           <a
             href="{{ modality_url  }}"
             class="navigation-content-clicked {% if request.path == modality_url %}active{% endif %}"
@@ -49,7 +49,7 @@
             <i class="fa-solid fa-basketball"></i>
             <span>Modalidades</span>
           </a>
-          {% url 'view_teams_page' as teams_url %}
+          {% url 'teams_list' as teams_url %}
           <a
             href="{{ teams_url }}"
             class="navigation-content-clicked {% if request.path == teams_url or request.path|startswith:teams_url %}active{% endif %}"
@@ -57,7 +57,7 @@
             <i class="fa-solid fa-user-group"></i>
             <span>Equipes</span>
           </a>
-          {% url 'view_competitions_page' as competitions_url %}
+          {% url 'competitions_list' as competitions_url %}
           <a
             href="{{ competitions_url }}"
             class="navigation-content-clicked {% if request.path == competitions_url or request.path|startswith:competitions_url %}active{% endif %}"
@@ -65,7 +65,7 @@
             <i class="fa-solid fa-trophy"></i>
             <span>Competições</span>
           </a>
-          {% url 'view_requests' as requests_url %}
+          {% url 'requests_list' as requests_url %}
           <a
             href="{{ requests_url }}"
             class="navigation-content-clicked {% if request.path == requests_url %}active{% endif %}"
