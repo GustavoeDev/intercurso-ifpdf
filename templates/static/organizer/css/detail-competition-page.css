@@ -23,6 +23,7 @@
 button {
   border: none;
   cursor: pointer;
+  background-color: transparent;
 }
 
 #end-comp-button {
@@ -554,3 +555,39 @@ option {
 input[type="time"]::-webkit-calendar-picker-indicator, input[type="date"]::-webkit-calendar-picker-indicator { 
   display: none; 
 } 
+
+@media screen and (max-width: 768px) {
+  .editable-data-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .games-container {
+    flex-direction: column;
+  }
+
+  .card-round-container {
+    width: 100%;
+  }
+
+  .round-container {
+    flex-direction: column;
+    width: 100%
+  }
+
+  .comp-details {
+    width: 100%;
+  }
+
+  dialog {
+    width: 100vw;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .button {
+    font-size: 87.5%;
+  }
+}
