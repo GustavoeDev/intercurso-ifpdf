@@ -1,5 +1,5 @@
 .main-table-container {
-  padding: 0.5rem 1.25rem 0 0.75rem;
+  padding: 1.1rem 1.25rem 0 0.75rem;
   border-radius: 1rem;
 
   background-color: var(--white);
@@ -73,6 +73,10 @@ table {
   color: #1e1d26;
 
   border-bottom: 1px solid #e2e8f0;
+}
+
+table .table-row:last-child {
+  border-bottom: none;
 }
 
 .status {
