@@ -535,6 +535,10 @@ option {
   gap: 0.825rem;
 }
 
+.edit-game-container > .teams-container > .inputs-container {
+  gap: 0.825rem;
+}
+
 .edit-game-container > .teams-container, .edit-game-container > .scoreboard-container {
   display: flex;
   flex-direction: column;
