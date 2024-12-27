@@ -1,37 +1,42 @@
-{% extends "base-organizer.html" %} {% load static %}
-
-{% block css %}
-<link rel="stylesheet" href="{% static 'organizer/css/detail-competition-page.css' %}" />
-{% endblock %}
-
-{% block js %}
-<script src="{% static 'organizer/js/datail-competition/create-modal.js' %}" defer></script>
-<script src="{% static 'organizer/js/datail-competition/form-select-placeholder.js' %}" defer></script>
-{% endblock %}
-
-
-{% block title%}
+{% extends "base-organizer.html" %} {% load static %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{% static 'organizer/css/detail-competition-page.css' %}"
+/>
+{% endblock %} {% block js %}
+<script
+  src="{% static 'organizer/js/datail-competition/create-modal.js' %}"
+  defer
+></script>
+<script
+  src="{% static 'organizer/js/datail-competition/form-select-placeholder.js' %}"
+  defer
+></script>
+{% endblock %} {% block title%}
 <title>Competições</title>
-{% endblock %}
-
-
-{% block main %}
+{% endblock %} {% block main %}
 <div class="page-title">
   <div>
-    <button id="previus-page-button"><i class="fa-sharp-duotone fa-solid fa-chevron-left"
-        style="--fa-primary-color: #000000; --fa-secondary-color: #000000; --fa-secondary-opacity: 1;"></i></button>
+    <button id="previus-page-button">
+      <i
+        class="fa-sharp-duotone fa-solid fa-chevron-left"
+        style="
+          --fa-primary-color: #000000;
+          --fa-secondary-color: #000000;
+          --fa-secondary-opacity: 1;
+        "
+      ></i>
+    </button>
     <h1>Basquete masculino</h1>
   </div>
 
-  <button id="end-comp-button">
-    Encerrar competição
-  </button>
+  <button id="end-comp-button">Encerrar competição</button>
 </div>
 
 <div class="main-table-container">
   <div class="card-title">
     <div class="title-image">
-      <img src="{% static 'student/img/manage-teams/sport-icon.svg' %}">
+      <img src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
     </div>
     <div class="title-text">
       <span>Competições</span>
@@ -111,9 +116,15 @@
       </div>
       <div class="games-container">
         <div class="card-round-container">
-          <img src="{% static 'student/img/league-page/bg-rectangle.png' %}" alt="" />
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
           <div class="card-round-container-header">
-            <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
             <span class="game-status-span">Encerrado</span>
           </div>
           <div class="card-round-container-content">
@@ -131,14 +142,25 @@
           <div class="card-round-container-footer">
             <p>
               <span class="date-hour-span">22 / 12 - 17:00</span>
-              <button class="edit-game-button"><i class="fa-solid fa-pen fa-xs" style="color: var(--white);"></i></button>
+              <button class="edit-game-button">
+                <i
+                  class="fa-solid fa-pen fa-xs"
+                  style="color: var(--white)"
+                ></i>
+              </button>
             </p>
           </div>
         </div>
         <div class="card-round-container">
-          <img src="{% static 'student/img/league-page/bg-rectangle.png' %}" alt="" />
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
           <div class="card-round-container-header">
-            <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
             <span>Encerrado</span>
           </div>
           <div class="card-round-container-content">
@@ -156,7 +178,12 @@
           <div class="card-round-container-footer">
             <p>
               <span class="date-hour-span">22 / 12 - 17:00</span>
-              <button class="edit-game-button"><i class="fa-solid fa-pen fa-xs" style="color: var(--white);"></i></button>
+              <button class="edit-game-button">
+                <i
+                  class="fa-solid fa-pen fa-xs"
+                  style="color: var(--white)"
+                ></i>
+              </button>
             </p>
           </div>
         </div>
@@ -167,38 +194,54 @@
   <div class="comp-details">
     <div class="comp-detail-header">
       <h2>Detalhes da competição</h2>
-      <p>
-        Visualize e gerencie os detalhes da competição
-      </p>
+      <p>Visualize e gerencie os detalhes da competição</p>
     </div>
-    <hr>
+    <hr />
     <div class="comp-detail-container">
-      <p class="detail-p" id="detail-modality">Modalidade: <span>Basquete</span></p>
-      <p class="detail-p" id="detail-comp-sistem">Sistema da competição: <span>Pontos corridos</span></p>
+      <p class="detail-p" id="detail-modality">
+        Modalidade: <span>Basquete</span>
+      </p>
+      <p class="detail-p" id="detail-comp-sistem">
+        Sistema da competição: <span>Pontos corridos</span>
+      </p>
       <div class="p-with-button">
-        <p class="detail-p" id="detail-comp-status">Status da competição: <span>Em andamento</span></p>
+        <p class="detail-p" id="detail-comp-status">
+          Status da competição: <span>Em andamento</span>
+        </p>
         <button class="p-button" id="datail-status-button">
-          <i class="fa-regular fa-circle-xmark fa-sm" style="color: var(--red-500)"></i>
+          <i
+            class="fa-regular fa-circle-xmark fa-sm"
+            style="color: var(--red-500)"
+          ></i>
         </button>
       </div>
       <div class="p-with-button">
-        <p class="detail-p" id="detail-teams">Equipes inscritas: <span>4 equipes</span></p>
+        <p class="detail-p" id="detail-teams">
+          Equipes inscritas: <span>4 equipes</span>
+        </p>
         <button class="p-button">
           <i class="fa-solid fa-eye fa-sm" style="color: var(--gray-600)"></i>
         </button>
       </div>
-
     </div>
-    <hr>
+    <hr />
     <div class="comp-detail-container">
-      <p class="detail-p" id="detail-start">Data de inicio: <span>10/12/2024</span></p>
+      <p class="detail-p" id="detail-start">
+        Data de inicio: <span>10/12/2024</span>
+      </p>
       <p class="detail-p" id="detail-end">Data fim: <span>---</span></p>
     </div>
-    <hr>
+    <hr />
     <div class="comp-detail-container">
-      <p class="detail-p" id="detail-realized-games">Jogos realizados: <span>4</span></p>
-      <p class="detail-p" id="detail-realized-games">Jogos não finalizados: <span>8</span></p>
-      <p class="detail-p" id="detail-not-ralized-games">Jogos realizados: <span>4</span></p>
+      <p class="detail-p" id="detail-realized-games">
+        Jogos realizados: <span>4</span>
+      </p>
+      <p class="detail-p" id="detail-realized-games">
+        Jogos não finalizados: <span>8</span>
+      </p>
+      <p class="detail-p" id="detail-not-ralized-games">
+        Jogos realizados: <span>4</span>
+      </p>
     </div>
   </div>
 </div>
@@ -241,9 +284,9 @@
           </div>
         </div>
       </div>
-      <hr>
+      <hr />
       <div class="radio-input-container">
-        <input type="checkbox" name="end-game" id="end-game">
+        <input type="checkbox" name="end-game" id="end-game" />
         <label for="end-game">Jogo encerrado</label>
       </div>
       <button type="submit">Confirmar alterações</button>
@@ -262,10 +305,12 @@
         <div class="teams-container">
           <div class="inputs-container">
             <label for="home-team">Time casa</label>
-            <div class='inputs-container'>
-              <div id="home-team" class='select-container'>
+            <div class="inputs-container">
+              <div id="home-team" class="select-container">
                 <select required name="course">
-                  <option value="" selected disabled> Selecione uma equipe </option>
+                  <option value="" selected disabled>
+                    Selecione uma equipe
+                  </option>
                   <option value="ads">ADS</option>
                   <option value="agro-industria">Agroindústria</option>
                   <option value="alimentos">Alimentos</option>
@@ -278,10 +323,12 @@
           </div>
           <div class="inputs-container">
             <label for="away-team">Time fora</label>
-            <div class='inputs-container'>
-              <div id="new-member-course" class='select-container'>
+            <div class="inputs-container">
+              <div id="new-member-course" class="select-container">
                 <select required name="course">
-                  <option value="" selected disabled> Selecione uma equipe </option>
+                  <option value="" selected disabled>
+                    Selecione uma equipe
+                  </option>
                   <option value="ads">ADS</option>
                   <option value="agro-industria">Agroindústria</option>
                   <option value="alimentos">Alimentos</option>
@@ -304,7 +351,7 @@
           </div>
         </div>
       </div>
-      <hr>
+      <hr />
       <div class="data-inputs-container">
         <div class="inputs-container">
           <label for="date">Data</label>
@@ -316,16 +363,16 @@
         </div>
         <div class="inputs-container">
           <label for="round-phase">Fase</label>
-            <div class='inputs-container'>
-              <div id="round-phase" class='select-container'>
-                <select required name="phase">
-                  <option value="" selected disabled> Selecione a fase </option>
-                  <option value="group-phase">Fase de grupos</option>
-                  <option value="eliminatorias">Eliminatorias</option>
-                  <option value="final">Final</option>
-                </select>
-              </div>
+          <div class="inputs-container">
+            <div id="round-phase" class="select-container">
+              <select required name="phase">
+                <option value="" selected disabled>Selecione a fase</option>
+                <option value="group-phase">Fase de grupos</option>
+                <option value="eliminatorias">Eliminatorias</option>
+                <option value="final">Final</option>
+              </select>
             </div>
+          </div>
         </div>
         <div class="inputs-container">
           <label for="round">Rodada</label>
@@ -333,7 +380,7 @@
         </div>
       </div>
       <div class="radio-input-container">
-        <input type="checkbox" name="end-game" id="end-game">
+        <input type="checkbox" name="end-game" id="end-game" />
         <label for="end-game">Jogo encerrado</label>
       </div>
 

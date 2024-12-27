@@ -1,20 +1,15 @@
-{% extends "base-organizer.html" %} {% load static %}
-
-{% block css %}
+{% extends "base-organizer.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'organizer/css/teams-page.css' %}" />
-{% endblock %}
-
-{% block js %}
+{% endblock %} {% block js %}
 <script src="{% static 'table-min-max.js' %}" defer></script>
-<script src="{% static 'organizer/js/teams-page/create-modal.js' %}" defer></script>
+<script
+  src="{% static 'organizer/js/teams-page/create-modal.js' %}"
+  defer
+></script>
 
-{% endblock %}
-
-{% block title %}
+{% endblock %} {% block title %}
 <title>Equipes</title>
-{% endblock %}
-
-{% block main %}
+{% endblock %} {% block main %}
 
 <div class="title">
   <h3>Equipes</h3>
@@ -25,7 +20,10 @@
     <div class="table-title">
       <div class="card-title">
         <div class="title-image">
-          <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+          />
         </div>
         <div class="title-text">
           <span>Basquete</span>
@@ -38,7 +36,10 @@
         </button>
 
         <button class="image-button min-max-button max">
-          <img class="button-image" src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
+          />
         </button>
       </div>
     </div>
@@ -95,7 +96,10 @@
     <div class="table-title">
       <div class="card-title">
         <div class="title-image">
-          <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+          />
         </div>
         <div class="title-text">
           <span>Vôlei</span>
@@ -108,7 +112,10 @@
         </button>
 
         <button class="image-button min-max-button max">
-          <img class="button-image" src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
+          />
         </button>
       </div>
     </div>
@@ -165,7 +172,10 @@
     <div class="table-title">
       <div class="card-title">
         <div class="title-image">
-          <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+          />
         </div>
         <div class="title-text">
           <span>Futsal</span>
@@ -178,7 +188,10 @@
         </button>
 
         <button class="image-button min-max-button max">
-          <img class="button-image" src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
+          <img
+            class="button-image"
+            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
+          />
         </button>
       </div>
     </div>
@@ -230,7 +243,6 @@
       </table>
     </div>
   </div>
-
 </div>
 
 <dialog class="remove-team-dialog">

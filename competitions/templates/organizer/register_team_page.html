@@ -1,0 +1,110 @@
+{% extends "base-organizer.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'organizer/css/register-team.css' %}" />
+{% endblock %} {% block js%}
+<script
+  src="{% static 'organizer/js/register-team-page/form-select-placeholder.js' %}"
+  defer
+></script>
+<script
+  src="{% static 'organizer/js/register-team-page/append-new-input.js' %}"
+  defer
+></script>
+{% endblock %} {% block main %}
+<div class="card-page-title">
+  <button>
+    <i
+      class="fa-sharp-duotone fa-solid fa-chevron-left"
+      style="
+        --fa-primary-color: #000000;
+        --fa-secondary-color: #000000;
+        --fa-secondary-opacity: 1;
+      "
+    ></i>
+  </button>
+  <h1>Adicionar nova equipe</h1>
+</div>
+
+<form action="" id="new-team">
+  <div class="two-inputs-row">
+    <div class="input-container">
+      <label for="team-name"> Nome da Equipe </label>
+      <input
+        required
+        class="input"
+        type="text"
+        id="team-name"
+        placeholder="Ex: Volei dos amigos"
+      />
+    </div>
+    <div class="input-container">
+      <label for="modality"> Modalidade </label>
+      <div class="select-container">
+        <select required name="modality">
+          <option value="" selected disabled>Selecione uma modalidade</option>
+          <option value="volei">Volei</option>
+          <option value="volei-praia">Volei de praia</option>
+          <option value="futsal">Futsal</option>
+          <option value="futsal-fem">Futsal feminino</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="members-input-container">
+    <div class="member-inputs">
+      <div class="input-container">
+        <label>
+          Participantes - <span id="total-inputs">5</span>/<span id="max-inputs"
+            >9</span
+          >
+        </label>
+        <input
+          required
+          class="input"
+          type="text"
+          id="member-name"
+          placeholder="Nome completo"
+        />
+      </div>
+      <div class="input-container">
+        <label class="blank-label"> &nbsp </label>
+        <input
+          required
+          class="input"
+          type="text"
+          id="registration-number"
+          placeholder="Matricula"
+        />
+      </div>
+      <div class="input-container">
+        <label class="blank-label"> &nbsp </label>
+        <div class="select-container">
+          <select required name="course">
+            <option value="" selected disabled>Curso</option>
+            <option value="ads">ADS</option>
+            <option value="agro-industria">Agroindústria</option>
+            <option value="alimentos">Alimentos</option>
+            <option value="apicultura">Apicultura</option>
+            <option value="informatica">Informática</option>
+            <option value="quimica">Química</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </div>
+</form>
+
+<div class="submit-container">
+  <button id="add-new-member">
+    <span>Adicionar novo participante</span>
+    <img
+      class="button-image"
+      src="{% static 'student/img/register-team/group.svg' %}"
+    />
+  </button>
+  <button type="submit" form="new-team" class="button" id="submit-form">
+    Cadastrar equipe
+  </button>
+</div>
+{% endblock %}
