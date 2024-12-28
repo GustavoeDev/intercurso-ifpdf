@@ -14,7 +14,7 @@
     />
 
     <link rel="stylesheet" href="{% static 'global.css' %}" />
-    <link rel="stylesheet" href="{% static '/student/css/login-page.css' %}" />
+    <link rel="stylesheet" href="{% static 'users/css/login-page.css' %}" />
     <title>Login</title>
   </head>
   <body>
@@ -28,12 +28,12 @@
 
         <form action="">
           <div class="inputs-container">
-            <label for="login-user">Usuário</label>
-            <input type="text" id="login-user" placeholder="Usuário" />
+            <label for="login-enrollment">Matrícula</label>
+            <input type="text" id="login-enrollment" placeholder="Matrícula" />
           </div>
           <div class="inputs-container">
             <label for="login-password">Senha</label>
-            <input type="text" id="login-password" placeholder="Senha" />
+            <input type="password" id="login-password" placeholder="Senha" />
           </div>
 
           <button type="submit">Entrar</button>
@@ -46,10 +46,10 @@
             <hr />
           </div>
 
-          <button>
-            <span>IF</span>
-            Continuar com o SUAP
-          </button>
+          <div class="login-footer-btn">
+            <p>Não tem uma conta?</p>
+            <a href="{% url 'register' %}">Cadastre-se</a>
+          </div>
         </div>
       </div>
     </div>
