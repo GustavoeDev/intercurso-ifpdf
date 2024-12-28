@@ -170,6 +170,7 @@
 
 .all-games-navigation > button {
   border: 0;
+  border-bottom: 2px solid transparent;
   background: none;
   padding: 0 0.75rem 1rem 0.75rem;
   color: var(--gray-600);
@@ -196,9 +197,6 @@
   align-items: center;
   gap: 1.5rem;
   flex-wrap: wrap;
-
-  max-width: 59.625rem;
-  margin-inline: auto;
 }
 
 .card-all-games {
