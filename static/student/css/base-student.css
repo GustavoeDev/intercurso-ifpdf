@@ -30,9 +30,10 @@ header {
 .header-content-search {
   display: flex;
   align-items: center;
+  gap: 2rem;
 }
 
-.header-content-search > a > i {
+.header-content-search-social > a > i {
   color: var(--gray-500);
   font-size: 1.25rem;
   cursor: pointer;
@@ -41,42 +42,14 @@ header {
   margin: 0 1.5rem;
 }
 
-#moon-icon {
-  color: var(--gray-500);
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: color 0.2s;
-
-  padding: 0 1.5rem;
-  margin: 0;
-  border-left: 1px solid var(--gray-200);
-}
-
-.header-content-search i:hover,
-#moon-icon:hover {
+.header-content-search-social i:hover {
   color: var(--green-900);
 }
 
-.search-box {
-  position: relative;
-  margin: 0 1.5rem;
-}
-
-.search-box input[type="text"] {
-  padding: 0.5rem 0 0.5rem 2rem;
-  font-size: 0.75rem;
-  border-radius: 6px;
-  border: 0.5px solid var(--gray-400);
-}
-
-.search-box i {
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.875rem;
-  cursor: pointer;
-  color: var(--gray-500);
+.header-logout {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-left: 1px solid #dddddd;
 }
 
 .btn-login {
@@ -86,6 +59,12 @@ header {
   border: 0.5px solid var(--gray-500);
   background: none;
   cursor: pointer;
+}
+
+.photo-hamburguer {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
 }
 
 .navigation {
@@ -192,7 +171,7 @@ footer {
   transform: translateY(-50%);
 }
 
-.nav-list .header-content-search {
+.nav-list .header-content-search-social {
   border-top: 0.5px solid #dddddd;
   padding-top: 2rem;
 
