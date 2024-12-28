@@ -8,6 +8,10 @@
 ></script>
 {% endblock %} {% block main %}
 
+{% block title %}
+  <title>Modalidades</title>
+{% endblock %}
+
 <div class="modality-title">
   <h3>Modalidades</h3>
   <button>Cadastrar modalidade</button>
@@ -64,9 +68,11 @@
             <span>Em andamento</span>
           </td>
           <td>
-            <button class="image-button edit-competition">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
+            <a href="{% url 'detail' %}">
+              <button class="image-button edit-competition">
+                <i class="fa-solid fa-pencil"></i>
+              </button>
+            </a>
 
             <button class="image-button remove-competition">
               <i class="fa-solid fa-trash-can"></i>

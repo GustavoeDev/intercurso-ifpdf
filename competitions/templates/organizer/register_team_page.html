@@ -11,16 +11,18 @@
 ></script>
 {% endblock %} {% block main %}
 <div class="card-page-title">
-  <button>
-    <i
-      class="fa-sharp-duotone fa-solid fa-chevron-left"
-      style="
-        --fa-primary-color: #000000;
-        --fa-secondary-color: #000000;
-        --fa-secondary-opacity: 1;
-      "
-    ></i>
-  </button>
+  <a href="{% url 'teams_list' %}">
+    <button>
+      <i
+        class="fa-sharp-duotone fa-solid fa-chevron-left"
+        style="
+          --fa-primary-color: #000000;
+          --fa-secondary-color: #000000;
+          --fa-secondary-opacity: 1;
+        "
+      ></i>
+    </button>
+  </a>
   <h1>Adicionar nova equipe</h1>
 </div>
 

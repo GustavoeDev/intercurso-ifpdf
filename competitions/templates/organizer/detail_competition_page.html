@@ -17,16 +17,18 @@
 {% endblock %} {% block main %}
 <div class="page-title">
   <div>
-    <button id="previus-page-button">
-      <i
-        class="fa-sharp-duotone fa-solid fa-chevron-left"
-        style="
-          --fa-primary-color: #000000;
-          --fa-secondary-color: #000000;
-          --fa-secondary-opacity: 1;
-        "
-      ></i>
-    </button>
+    <a href="{% url 'competitions_list' %}">
+      <button id="previus-page-button">
+        <i
+          class="fa-sharp-duotone fa-solid fa-chevron-left"
+          style="
+            --fa-primary-color: #000000;
+            --fa-secondary-color: #000000;
+            --fa-secondary-opacity: 1;
+          "
+        ></i>
+      </button>
+    </a>
     <h1>Basquete masculino</h1>
   </div>
 
