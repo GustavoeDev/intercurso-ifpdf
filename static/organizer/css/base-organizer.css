@@ -137,6 +137,10 @@ body {
   display: none;
 }
 
+.header-title-x {
+  position: fixed;
+}
+
 footer {
   background-color: var(--green-900);
 }
