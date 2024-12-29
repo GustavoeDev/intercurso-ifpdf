@@ -59,6 +59,8 @@ header {
   border: 0.5px solid var(--gray-500);
   background: none;
   cursor: pointer;
+  text-decoration: none;
+  color: #000000;
 }
 
 .photo-hamburguer {
