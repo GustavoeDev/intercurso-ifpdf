@@ -9,7 +9,15 @@
 .page-title div {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 1rem;
+}
+
+.page-title div a { 
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .page-title h1 {

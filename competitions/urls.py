@@ -5,7 +5,7 @@ urlpatterns = [
     # Aluno
     path('', views.view_homepage, name="homepage"),
     path('gerenciar-equipes/', views.view_manage_teams, name="manage_teams"),
-    path('registrar-equipe/', views.view_add_team, name="register_team"),
+    path('registrar-equipe/', views.view_add_team, name="register_team_student"),
     path('competicao/basquete/', views.view_league_page, name="league"), #basquete vai ser substituido pelo id/nome da competição
     path('competicao/futsal-masculino/', views.view_group_stage_page, name="group"), #futsal-masculino vai ser substituido pelo id/nome da competição
     path('competicao/volei-indoor/', views.view_qualifiers_stage_page, name="qualifiers"), #volei-indoor vai ser substituido pelo id/nome da competição
