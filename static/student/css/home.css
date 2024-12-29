@@ -336,6 +336,10 @@
   border: 1px solid var(--gray-100);
   border-radius: 6px;
   box-shadow: 0 0 20px 0 #0000002d;
+
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 }
 
 .card-info-registration-team > h3 {
@@ -353,7 +357,7 @@
   font-size: 1.125rem;
 }
 
-.card-info-registration-team > button {
+.card-info-registration-team > a {
   padding: 1rem 1.5rem;
   border: 0;
   background-color: var(--green-100);
@@ -363,8 +367,8 @@
   letter-spacing: 1px;
   cursor: pointer;
   font-size: 0.875rem;
+  text-decoration: none;
 
-  display: flex;
   margin-left: auto;
 }
 
