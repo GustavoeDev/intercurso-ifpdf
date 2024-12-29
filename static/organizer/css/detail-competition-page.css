@@ -13,11 +13,12 @@
   gap: 1rem;
 }
 
-.page-title div a { 
+.page-title div a {
   height: 1rem;
   display: flex;
   align-items: center;
   text-decoration: none;
+  color: var(--green-900);
 }
 
 .page-title h1 {
@@ -56,7 +57,7 @@ button {
   overflow-x: auto;
 }
 
-.table-container-wrapper>table {
+.table-container-wrapper > table {
   font-family: "Inter", sans-serif;
   font-size: 0.875rem;
   width: 100%;
@@ -92,12 +93,12 @@ button {
   border-bottom: 1px solid #e2e8f0;
 }
 
-.table-container-wrapper>table .table-row:last-child {
+.table-container-wrapper > table .table-row:last-child {
   border-bottom: none;
 }
 
-.table-container-wrapper>table td,
-.table-container-wrapper>table th {
+.table-container-wrapper > table td,
+.table-container-wrapper > table th {
   width: 100%;
   display: flex;
   gap: 0.5rem;
@@ -175,12 +176,12 @@ button {
   border-left: none;
 }
 
-.round-container-header>.round-span {
+.round-container-header > .round-span {
   font-size: 0.875rem;
   font-weight: 600;
 }
 
-.round-container-header>button {
+.round-container-header > button {
   font-size: 0.875rem;
   border: 0;
   background: none;
@@ -188,7 +189,7 @@ button {
   cursor: pointer;
 }
 
-.round-container-header>button.disabled {
+.round-container-header > button.disabled {
   opacity: 0.5;
 }
 
@@ -203,7 +204,7 @@ button {
   position: relative;
 }
 
-.card-round-container>img {
+.card-round-container > img {
   position: absolute;
   top: 50%;
   right: -20%;
@@ -211,7 +212,7 @@ button {
   z-index: -1;
 }
 
-.card-round-container>span {
+.card-round-container > span {
   background-color: #eeeded;
   padding: 20px;
 }
@@ -224,11 +225,11 @@ button {
   padding: 0 1rem;
 }
 
-.card-round-container-header>img {
+.card-round-container-header > img {
   width: 2rem;
 }
 
-.card-round-container-header>span {
+.card-round-container-header > span {
   padding: 0.25rem 0.5rem;
   color: #322d2d;
   font-size: 0.75rem;
@@ -268,7 +269,7 @@ button {
   word-break: break-word;
 }
 
-.card-round-container-score>span {
+.card-round-container-score > span {
   font-size: 0.875rem;
 }
 
@@ -366,7 +367,7 @@ dialog {
 
 .edit-scoreboard-dialog {
   max-width: 25rem;
-  width: 100%; 
+  width: 100%;
 }
 
 .edit-game-dialog {
@@ -374,7 +375,8 @@ dialog {
   width: 100%;
 }
 
-.edit-scoreboard-dialog-content, .edit-game-dialog-content {
+.edit-scoreboard-dialog-content,
+.edit-game-dialog-content {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -382,27 +384,29 @@ dialog {
   align-items: auto;
 }
 
-.edit-scoreboard-dialog-content>.dialog-header, .edit-game-dialog-content>.dialog-header, dialog>.dialog-header {
+.edit-scoreboard-dialog-content > .dialog-header,
+.edit-game-dialog-content > .dialog-header,
+dialog > .dialog-header {
   display: flex;
   flex-direction: row;
   gap: 2rem;
   justify-content: space-between;
 }
 
-dialog>.dialog-header>button {
+dialog > .dialog-header > button {
   background: none;
   font-size: 1.25rem;
   cursor: pointer;
   border: 0;
 }
 
-dialog>.dialog-header>h3 {
+dialog > .dialog-header > h3 {
   font-size: 1.5rem;
   font-family: "Baloo 2", sans-serif;
   color: var(--green-900);
 }
 
-dialog>button {
+dialog > button {
   background-color: var(--red-500);
   padding: 1.25rem;
   border: 0;
@@ -435,12 +439,12 @@ dialog>button {
   gap: 2rem;
 }
 
-.inputs-container>p {
+.inputs-container > p {
   font: 700 1rem "Inter", sans-serif;
   color: var(--green-900);
 }
 
-.edit-scoreboard-container>div {
+.edit-scoreboard-container > div {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -457,17 +461,17 @@ dialog>button {
 }
 
 label {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 1rem;
-  color: var(--green-900)
+  color: var(--green-900);
 }
 
 input {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 1rem;
   padding: 1rem 1rem;
 
-  border: 1px solid #D9E1E7;
+  border: 1px solid #d9e1e7;
   border-radius: 0.5rem;
 }
 
@@ -475,7 +479,7 @@ input[type="number"] {
   max-width: 4.5rem;
 }
 
-.scoreboard-container>div {
+.scoreboard-container > div {
   gap: 0.825rem;
 }
 
@@ -498,16 +502,16 @@ form > button {
   border-radius: 10px;
 }
 
-select{
+select {
   border: none;
   background-color: var(--white);
   outline: none;
-  
+
   width: 100%;
   padding: 1rem 0px;
   color: #a9a9a9;
-  
-  font-family: 'Inter', sans-serif;
+
+  font-family: "Inter", sans-serif;
   font-size: 1rem;
 }
 
@@ -525,8 +529,8 @@ option {
 
 .select-container {
   max-width: 100%;
-  
-  border: 1px solid #D9E1E7;
+
+  border: 1px solid #d9e1e7;
   border-radius: 0.5rem;
   padding: 0px 1.25rem;
   background-color: var(--white);
@@ -547,12 +551,12 @@ option {
   gap: 0.825rem;
 }
 
-.edit-game-container > .teams-container, .edit-game-container > .scoreboard-container {
+.edit-game-container > .teams-container,
+.edit-game-container > .scoreboard-container {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
-
 
 .data-inputs-container {
   display: grid;
@@ -564,9 +568,10 @@ option {
   padding: 1rem 0.5rem;
 }
 
-input[type="time"]::-webkit-calendar-picker-indicator, input[type="date"]::-webkit-calendar-picker-indicator { 
-  display: none; 
-} 
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
 
 @media screen and (max-width: 768px) {
   .editable-data-container {
@@ -584,7 +589,7 @@ input[type="time"]::-webkit-calendar-picker-indicator, input[type="date"]::-webk
 
   .round-container {
     flex-direction: column;
-    width: 100%
+    width: 100%;
   }
 
   .comp-details {
