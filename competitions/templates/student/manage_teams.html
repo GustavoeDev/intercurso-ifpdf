@@ -1,0 +1,387 @@
+{% extends "base-student.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'student/css/manage_teams.css' %}" />
+{% endblock %} {% block js%}
+<script src="{% static 'table-min-max.js' %}" defer></script>
+<script
+  src="{% static 'student/js/manage-teams/create-modal.js' %}"
+  defer
+></script>
+{% endblock %} {% block main %}
+
+<div class="card-info">
+  <h1>Gerenciar equipes</h1>
+  <p>
+    Nesta seção, você terá a possibilidade de gerenciar todas as suas equipes
+    para o Intercurso. Será possível cadastrar suas equipes em diferentes
+    competições, adicionar e organizar os membros em cada uma delas, além de
+    acompanhar e atualizar as informações dos participantes de forma prática e
+    eficiente. Clique na sua equipe, e gerencie os participantes de cada
+    competição
+  </p>
+</div>
+
+<div class="card-teams">
+  <h1>Minhas Equipes</h1>
+  <a href="{% url 'register_team_student' %}"><button class="button">Cadastrar nova equipe</button></a>
+</div>
+
+<div class="table-container not-active">
+  <div class="table-title">
+    <div class="card-title">
+      <div class="title-image">
+        <img
+          class="button-image"
+          src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+        />
+      </div>
+      <div class="title-text">
+        <span>Equipirangaz</span>
+        <p>Basquete</p>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="add-new-member">
+        <span>Adicionar novo participante</span>
+        <img
+          class="button-image"
+          src="{% static 'student/img/manage-teams/add-new-member.svg' %}"
+        />
+      </button>
+      <button class="delete-team">
+        <span>Excluir equipe</span>
+        <img
+          class="button-image"
+          src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+        />
+      </button>
+      <button class="image-button min-max-button max">
+        <img
+          class="button-image"
+          src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
+        />
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container-wrapper">
+    <table>
+      <tr class="table-header">
+        <th>Nome do participante</th>
+        <th>Matricula</th>
+        <th>Curso</th>
+        <th>Ações</th>
+      </tr>
+      <tr class="table-row">
+        <td>Gustavo</td>
+        <td>20231094040023</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button edit-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
+
+          <button class="image-button remove-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
+
+      <tr class="table-row">
+        <td>Hian Sebasthian</td>
+        <td>20231094040043</td>
+        <td>Informática</td>
+        <td>
+          <button class="image-button edit-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
+
+          <button class="image-button remove-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
+
+      <tr class="table-row">
+        <td>João Neto</td>
+        <td>20231094040011</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button edit-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
+
+          <button class="image-button remove-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
+
+      <tr class="table-row">
+        <td>Arthur Lola</td>
+        <td>20231094040029</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button edit-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
+
+          <button class="image-button remove-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="table-container not-active">
+  <div class="table-title">
+    <div class="card-title">
+      <div class="title-image">
+        <img
+          class="button-image"
+          src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+        />
+      </div>
+      <div class="title-text">
+        <span>Vôlei dos Amigos</span>
+        <p>Vôlei Indoor</p>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="add-new-member">
+        <span>Adicionar novo participante</span>
+        <img
+          class="button-image"
+          src="{% static 'student/img/manage-teams/add-new-member.svg' %}"
+        />
+      </button>
+      <button class="delete-team">
+        <span>Excluir equipe</span>
+        <img
+          class="button-image"
+          src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+        />
+      </button>
+      <button class="image-button min-max-button max">
+        <img
+          class="button-image"
+          src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
+        />
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container-wrapper">
+    <table>
+      <tr class="table-header">
+        <th>Nome do participante</th>
+        <th>Matrícula</th>
+        <th>Curso</th>
+        <th>Ações</th>
+      </tr>
+      <tr class="table-row">
+        <td>Lwkas Carvalho</td>
+        <td>20231094040001</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button edit-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
+
+          <button class="image-button remove-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
+
+      <tr class="table-row">
+        <td>Felipe Freitas</td>
+        <td>20231094040016</td>
+        <td>Informática</td>
+        <td>
+          <button class="image-button edit-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
+
+          <button class="image-button remove-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
+
+      <tr class="table-row">
+        <td>Marcos Vinícius</td>
+        <td>20231094040012</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button edit-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
+
+          <button class="image-button remove-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
+
+      <tr class="table-row">
+        <td>Kaio Eduardo</td>
+        <td>20231094040030</td>
+        <td>ADS</td>
+        <td>
+          <button class="image-button edit-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
+            />
+          </button>
+
+          <button class="image-button remove-player">
+            <img
+              class="small-image"
+              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
+            />
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<dialog class="edit-player-dialog">
+  <div class="dialog-header">
+    <h3>Editar dados de <span></span></h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="edit-player-name">Nome completo</label>
+      <input type="text" id="edit-player-name" />
+    </div>
+    <div class="inputs-container">
+      <label for="edit-player-enrollment">Matrícula</label>
+      <input type="text" id="edit-player-enrollment" />
+    </div>
+    <div class="inputs-container">
+      <label for="edit-player-course">Curso</label>
+      <input type="text" id="edit-player-course" />
+    </div>
+    <div class="inputs-container">
+      <label for="edit-player-reason">Motivo da alteração</label>
+      <textarea
+        id="edit-player-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+
+    <button type="submit">Confirmar alterações</button>
+  </form>
+</dialog>
+
+<dialog class="remove-player-dialog">
+  <div class="dialog-header">
+    <h3>Excluir <span></span> da equipe?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="remove-player-reason">Motivo da alteração</label>
+      <textarea
+        id="remove-player-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+
+    <button type="submit" class="remove-btn-modal">Excluir</button>
+  </form>
+</dialog>
+
+<dialog class="add-player-dialog">
+  <div class="dialog-header">
+    <h3>Adicionar participante</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="add-player-name">Nome completo</label>
+      <input type="text" id="add-player-name" placeholder="Nome" />
+    </div>
+    <div class="inputs-container">
+      <label for="add-player-enrollment">Matrícula</label>
+      <input type="text" id="add-player-enrollment" placeholder="Matrícula" />
+    </div>
+    <div class="inputs-container">
+      <label for="add-player-course">Curso</label>
+      <input type="text" id="add-player-course" placeholder="Curso" />
+    </div>
+
+    <button type="submit">Confirmar alterações</button>
+  </form>
+</dialog>
+
+<dialog class="remove-team-dialog">
+  <div class="dialog-header">
+    <h3>Excluir equipe <span></span>?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <form action="">
+    <div class="inputs-container">
+      <label for="remove-team-reason">Motivo da alteração</label>
+      <textarea
+        id="remove-team-reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+
+    <button type="submit" class="remove-btn-modal">Excluir</button>
+  </form>
+</dialog>
+
+{% endblock %}

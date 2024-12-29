@@ -1,0 +1,349 @@
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.card-info h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: "Baloo 2", "Inter", sans-serif;
+  color: var(--green-900);
+  line-height: 1.3;
+}
+
+.card-info p {
+  color: var(--gray-600);
+  font: 1rem, "Inter", 1.3;
+  max-width: 39.375rem;
+  width: 100%;
+}
+
+.card-teams {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: start;
+
+  margin-top: 3rem;
+}
+
+.card-teams h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Baloo 2", "Inter", sans-serif;
+  color: var(--green-900);
+  line-height: 1.3;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+.button {
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  background-color: var(--green-100);
+  color: var(--white);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.table-container-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  width: 100%;
+
+  margin-top: 1.25rem;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-gap: auto;
+  gap: 4rem;
+  align-items: center;
+
+  padding: 0.5rem 1rem;
+
+  background-color: #f9fafb;
+  color: #9ca3af;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-gap: auto;
+  gap: 4rem;
+
+  padding: 1rem;
+  color: #1e1d26;
+
+  border-bottom: 1px solid #e2e8f0;
+}
+
+table .table-row:last-child {
+  border-bottom: none;
+}
+
+td,
+th {
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  text-align: left;
+}
+
+.title-image {
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.card-title span {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.title-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-text > p {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.table-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  min-height: 46px;
+}
+
+.card-actions button {
+  font: 600 0.75rem "Inter";
+
+  background-color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button-image {
+  height: 0.875rem;
+  width: 0.875rem;
+  border-radius: 0;
+}
+
+.image-button {
+  border: none;
+  background-color: #00000000;
+}
+
+.add-new-member {
+  color: var(--green-100);
+  padding: 0.5rem 1rem;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.add-new-member .button-image {
+  stroke-width: 2px;
+}
+
+.delete-team {
+  color: var(--red-500);
+  padding: 0.5rem 1rem;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.table-container {
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 0.5rem 1.25rem 0.5rem 0.75rem;
+  margin: 2rem 0px;
+
+  width: 100%;
+}
+
+.small-image {
+  height: 1rem;
+  width: 1rem;
+}
+
+.not-active button,
+.not-active table {
+  display: none;
+}
+
+.not-active .min-max-button {
+  display: block;
+}
+
+.min-max-button {
+  border: none;
+}
+
+.min-max-button img {
+  transition: transform 0.3s ease;
+  transform: rotate(0deg);
+}
+
+.min-max-button.min img {
+  transform: rotate(180deg);
+}
+
+/* MODAL */
+
+dialog::backdrop {
+  background-color: #00000075;
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  max-width: 42.438rem;
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  padding: 2rem;
+  background-color: #f5f6fa;
+}
+
+dialog > .dialog-header {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+dialog > .dialog-header > button {
+  background: none;
+  font-size: 1.25rem;
+}
+
+dialog > .dialog-header > h3 {
+  font-size: 1.5rem;
+  font-family: "Baloo 2", sans-serif;
+  color: var(--green-900);
+}
+
+dialog > form {
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+dialog .inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+dialog .inputs-container > input {
+  padding: 1.25rem 1rem;
+  border: 0;
+  border-radius: 6px;
+}
+
+dialog .inputs-container > textarea {
+  padding: 1.25rem 1rem 6rem;
+  border: 0;
+  border-radius: 6px;
+  resize: none;
+}
+
+.edit-player-dialog > form > button[type="submit"],
+.add-player-dialog > form > button[type="submit"] {
+  padding: 1.25rem;
+  background-color: var(--green-100);
+  border: 0;
+  border-radius: 6px;
+  text-align: center;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.remove-player-dialog > form > button[type="submit"],
+.remove-team-dialog > form > button[type="submit"] {
+  background-color: var(--red-500);
+  padding: 1.25rem;
+  border: 0;
+  border-radius: 6px;
+  text-align: center;
+  color: var(--white);
+  font-weight: 500;
+}
+
+.remove-team-dialog > button {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  table {
+    width: 47rem;
+  }
+
+  .card-actions span {
+    display: none;
+  }
+
+  dialog {
+    width: 100vw;
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .card-teams {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .button {
+    font-size: 87.5%;
+  }
+}

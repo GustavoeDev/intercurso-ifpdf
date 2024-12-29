@@ -1,0 +1,414 @@
+{% extends "base-student.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'student/css/group-stage.css' %}" />
+{% endblock %} {% block js %}
+<script
+  src="{% static 'student/js/group-stage/competition-stage.js' %}"
+  defer
+></script>
+
+<script
+  src="{% static 'student/js/group-stage/card-round-container-header.js' %}"
+  defer
+></script>
+{% endblock %} {% block title %}
+<title>Volei Indoor</title>
+{% endblock %} {% block main %}
+
+<div class="group-stage-header">
+  <h2>Volei Indoor</h2>
+  <p>
+    Nesta seção, você poderá visualizar todos os dados relacionados à competição
+    de Volei indoor, incluindo as equipes participantes, tabelas de
+    classificação atualizadas e todas as rodadas de partidas. Aqui, você
+    acompanha os resultados e o cronograma completo dos jogos de forma detalhada
+    e prática.
+  </p>
+</div>
+
+<div class="competition-stage">
+  <button class="competition-stage-button prev">
+    <i class="fa-solid fa-angle-left"></i>
+  </button>
+  <h3 class="active" data-stage="round-of-16">OITAVAS DE FINAL</h3>
+  <h3 data-stage="quarter-finals">QUARTAS DE FINAL</h3>
+  <h3 data-stage="semifinal">SEMIFINAL</h3>
+  <h3 data-stage="final">FINAL</h3>
+  <button class="competition-stage-button next">
+    <i class="fa-solid fa-angle-right"></i>
+  </button>
+</div>
+
+<div class="competition-stage-wrapper-table">
+  <div class="card-container-qualifiers" id="round-of-16">
+    <div class="card-container-qualifiers-row">
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="card-container-qualifiers-row">
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="card-container-qualifiers-row">
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="card-container-qualifiers-row">
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-container-qualifiers disabled" id="quarter-finals">
+    <div class="card-container-qualifiers-row">
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="card-container-qualifiers-row">
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-container-qualifiers disabled" id="semifinal">
+    <div class="card-container-qualifiers-row">
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+      <div class="card-qualifiers">
+        <div class="card-qualifiers-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>Encerrado</span>
+        </div>
+        <div class="card-qualifiers-content">
+          <div class="card-qualifiers-name">
+            <p>INFORMÁTICA</p>
+          </div>
+          <div class="card-qualifiers-score">
+            <span>2</span>
+            <span>X</span>
+            <span>2</span>
+          </div>
+          <div class="card-qualifiers-name">
+            <p>ADS FC</p>
+          </div>
+        </div>
+        <div class="card-qualifiers-footer">
+          <p>ELIMINATÓRIAS</p>
+          <p>22 / 12 -<span>19:00</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-container-qualifiers disabled" id="final">
+    <div class="card-qualifiers">
+      <div class="card-qualifiers-header">
+        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+        <span>Encerrado</span>
+      </div>
+      <div class="card-qualifiers-content">
+        <div class="card-qualifiers-name">
+          <p>INFORMÁTICA</p>
+        </div>
+        <div class="card-qualifiers-score">
+          <span>2</span>
+          <span>X</span>
+          <span>2</span>
+        </div>
+        <div class="card-qualifiers-name">
+          <p>ADS FC</p>
+        </div>
+      </div>
+      <div class="card-qualifiers-footer">
+        <p>ELIMINATÓRIAS</p>
+        <p>22 / 12 -<span>19:00</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

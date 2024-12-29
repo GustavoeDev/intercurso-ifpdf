@@ -1,0 +1,461 @@
+{% extends "base-organizer.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'organizer/css/requests-page.css' %}" />
+{% endblock %} {% block js %}
+<script
+  src="{% static 'organizer/js/requests-page/change-table.js' %}"
+  defer
+></script>
+<script
+  src="{% static 'organizer/js/requests-page/color-type-request.js' %}"
+  defer
+></script>
+<script
+  src="{% static 'organizer/js/requests-page/create-modal.js' %}"
+  defer
+></script>
+<script
+  src="{% static 'organizer/js/requests-page/radio-change.js' %}"
+  defer
+></script>
+{% endblock %} {% block main %}
+
+<div class="table-container">
+  <div class="table-title">
+    <div class="card-title">
+      <div class="title-image">
+        <i class="fa-regular fa-bell"></i>
+      </div>
+      <div class="title-text">
+        <span>Solicitações</span>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="manage-teams-container active">
+        <i class="fa-solid fa-user-group"></i>
+        <span>Equipes</span>
+      </button>
+      <button class="manage-players-container">
+        <i class="fa-solid fa-user"></i>
+        <span>Participantes</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container-wrapper">
+    <table class="table-teams">
+      <tr class="table-header">
+        <th>Equipe solicitante</th>
+        <th>Tipo de solicitação</th>
+        <th>Data da solicitação</th>
+        <th>Ações</th>
+      </tr>
+      <tr class="table-row">
+        <td>
+          <p>Equipirangaz</p>
+          <span>Futsal Masculino</span>
+        </td>
+        <td class="type-request">Aprovar equipe</td>
+        <td>10/11/24</td>
+        <td>
+          <button class="show-request">Exibir solicitação</button>
+        </td>
+      </tr>
+      <tr class="table-row">
+        <td>
+          <p>Equipirangaz</p>
+          <span>Futsal Masculino</span>
+        </td>
+        <td class="type-request">Excluir equipe</td>
+        <td>10/11/24</td>
+        <td>
+          <button class="show-request">Exibir solicitação</button>
+        </td>
+      </tr>
+    </table>
+    <table class="table-players disabled">
+      <tr class="table-header">
+        <th>Equipe solicitante</th>
+        <th>Tipo de solicitação</th>
+        <th>Data da solicitação</th>
+        <th>Ações</th>
+      </tr>
+      <tr class="table-row">
+        <td>
+          <p>Equipirangaz</p>
+          <span>Futsal Masculino</span>
+        </td>
+        <td class="type-request">Editar dados</td>
+        <td>10/11/24</td>
+        <td>
+          <button class="show-request">Exibir solicitação</button>
+        </td>
+      </tr>
+      <tr class="table-row">
+        <td>
+          <p>Equipirangaz</p>
+          <span>Futsal Masculino</span>
+        </td>
+        <td class="type-request">Excluir participante</td>
+        <td>10/11/24</td>
+        <td>
+          <button class="show-request">Exibir solicitação</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<dialog class="approve-team-dialog">
+  <div class="dialog-header">
+    <h3>Aprovar equipe</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="team-data-container">
+    <div class="team-data">
+      <p>Nome da equipe</p>
+      <span>Equipirangaz</span>
+    </div>
+    <div class="team-data">
+      <p>Competição</p>
+      <span>Futsal masculino</span>
+    </div>
+    <div class="team-data">
+      <p>Número de membros</p>
+      <span>8 membros</span>
+    </div>
+  </div>
+  <div class="team-table-players">
+    <p>Membros</p>
+    <div class="team-table-container-wrapper">
+      <div class="table-container-approve">
+        <table>
+          <tr class="table-header">
+            <th>Nome do participante</th>
+            <th>Matrícula</th>
+            <th>Curso</th>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <form action="">
+    <div class="reason-deny">
+      <p>Caso for negado, dê um motivo</p>
+      <textarea
+        id="approve-team-reason"
+        name="reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+    <div class="radio-group">
+      <label for="approve-team-approve">
+        <input
+          type="radio"
+          id="approve-team-approve"
+          name="decision"
+          value="approve"
+          required
+        />
+        Aprovar solicitação
+      </label>
+      <label for="approve-team-deny">
+        <input
+          type="radio"
+          id="approve-team-deny"
+          name="decision"
+          value="deny"
+          required
+        />
+        Negar solicitação
+      </label>
+    </div>
+    <button type="submit">Confirmar</button>
+  </form>
+</dialog>
+
+<dialog class="remove-team-dialog">
+  <div class="dialog-header">
+    <h3>Excluir equipe</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="team-data-container">
+    <div class="team-data">
+      <p>Nome da equipe</p>
+      <span>Equipirangaz</span>
+    </div>
+    <div class="team-data">
+      <p>Competição</p>
+      <span>Futsal masculino</span>
+    </div>
+    <div class="team-data">
+      <p>Número de membros</p>
+      <span>8 membros</span>
+    </div>
+  </div>
+  <div class="team-table-players">
+    <p>Membros</p>
+    <div class="team-table-container-wrapper">
+      <div class="table-container-approve">
+        <table>
+          <tr class="table-header">
+            <th>Nome do participante</th>
+            <th>Matrícula</th>
+            <th>Curso</th>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+          <tr class="table-row">
+            <td>Gustavo</td>
+            <td>20231094040005</td>
+            <td>ADS</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="reason-change">
+    <span>Motivo da alteração</span>
+    <div class="reason-change-content">
+      <p>Desistimos de jogar</p>
+    </div>
+  </div>
+  <form action="">
+    <div class="reason-deny">
+      <p>Caso for negado, dê um motivo</p>
+      <textarea
+        id="remove-team-reason"
+        name="reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+    <div class="radio-group">
+      <label for="remove-team-approve">
+        <input
+          type="radio"
+          id="remove-team-approve"
+          name="decision"
+          value="approve"
+          required
+        />
+        Aprovar solicitação
+      </label>
+      <label for="remove-team-deny">
+        <input
+          type="radio"
+          id="remove-team-deny"
+          name="decision"
+          value="deny"
+          required
+        />
+        Negar solicitação
+      </label>
+    </div>
+    <button type="submit">Confirmar</button>
+  </form>
+</dialog>
+
+<dialog class="edit-player-dialog">
+  <div class="dialog-header">
+    <h3>Aprovar edição</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="team-data-container">
+    <div class="team-data">
+      <p>Membro a ser editado</p>
+      <span>Gustavo Emanuel Queiroz Silva</span>
+    </div>
+    <div class="team-data">
+      <p>Equipe</p>
+      <span>Equipirangaz</span>
+    </div>
+    <div class="team-data">
+      <p>Competição</p>
+      <span>Futsal masculino</span>
+    </div>
+  </div>
+  <div class="details-request">
+    <p>Detalhes da solicitação</p>
+    <div class="details-request-wrapper">
+      <div class="details-request-content">
+        <span>Nome</span>
+        <div class="details-request-text">
+          <p>Gustavo Emanuel Queiroz Silva</p>
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>Gustavo Emanuel Silva Queiroz</span>
+        </div>
+      </div>
+      <div class="details-request-content">
+        <span>Matrícula</span>
+        <div class="details-request-text">
+          <p>20231094040023</p>
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>20231094040005</span>
+        </div>
+      </div>
+      <div class="details-request-content">
+        <span>Curso</span>
+        <div class="details-request-text">
+          <p>ADS</p>
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>Nada a modificar</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reason-change">
+    <span>Motivo da alteração</span>
+    <div class="reason-change-content">
+      <p>Escrevi o nome e matrícula errados</p>
+    </div>
+  </div>
+  <form action="">
+    <div class="reason-deny">
+      <p>Caso for negado, dê um motivo</p>
+      <textarea
+        id="edit-player-reason"
+        name="reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+    <div class="radio-group">
+      <label for="edit-player-approve">
+        <input
+          type="radio"
+          id="edit-player-approve"
+          name="decision"
+          value="approve"
+          required
+        />
+        Aprovar solicitação
+      </label>
+      <label for="edit-player-deny">
+        <input
+          type="radio"
+          id="edit-player-deny"
+          name="decision"
+          value="deny"
+          required
+        />
+        Negar solicitação
+      </label>
+    </div>
+    <button type="submit">Confirmar</button>
+  </form>
+</dialog>
+
+<dialog class="remove-player-dialog">
+  <div class="dialog-header">
+    <h3>Excluir participante</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="team-data-container">
+    <div class="team-data">
+      <p>Membro a ser excluído</p>
+      <span>Gustavo Emanuel Queiroz Silva</span>
+    </div>
+    <div class="team-data">
+      <p>Equipe</p>
+      <span>Equipirangaz</span>
+    </div>
+    <div class="team-data">
+      <p>Competição</p>
+      <span>Futsal masculino</span>
+    </div>
+  </div>
+  <div class="reason-change">
+    <span>Motivo da alteração</span>
+    <div class="reason-change-content">
+      <p>Ele não quer mais jogar!</p>
+    </div>
+  </div>
+  <form action="">
+    <div class="reason-deny">
+      <p>Caso for negado, dê um motivo</p>
+      <textarea
+        id="remove-player-reason"
+        name="reason"
+        placeholder="Explique o motivo..."
+      ></textarea>
+    </div>
+    <div class="radio-group">
+      <label for="remove-player-approve">
+        <input
+          type="radio"
+          id="remove-player-approve"
+          name="decision"
+          value="approve"
+          required
+        />
+        Aprovar solicitação
+      </label>
+      <label for="remove-player-deny">
+        <input
+          type="radio"
+          id="remove-player-deny"
+          name="decision"
+          value="deny"
+          required
+        />
+        Negar solicitação
+      </label>
+    </div>
+    <button type="submit">Confirmar</button>
+  </form>
+</dialog>
+
+{% endblock %}

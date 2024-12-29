@@ -1,0 +1,392 @@
+{% extends "base-organizer.html" %} {% load static %} {% block css %}
+<link
+  rel="stylesheet"
+  href="{% static 'organizer/css/detail-competition-page.css' %}"
+/>
+{% endblock %} {% block js %}
+<script
+  src="{% static 'organizer/js/datail-competition/create-modal.js' %}"
+  defer
+></script>
+<script
+  src="{% static 'organizer/js/datail-competition/form-select-placeholder.js' %}"
+  defer
+></script>
+{% endblock %} {% block title%}
+<title>Competições</title>
+{% endblock %} {% block main %}
+<div class="page-title">
+  <div>
+    <a href="javascript:history.back()" >
+        <i
+          class="fa-sharp-duotone fa-solid fa-chevron-left"
+          style="
+            --fa-primary-color: #000000;
+            --fa-secondary-color: #000000;
+            --fa-secondary-opacity: 1;
+          "
+        ></i>
+    </a>
+    <h1>Basquete masculino</h1>
+  </div>
+
+  <button id="end-comp-button">Encerrar competição</button>
+</div>
+
+<div class="main-table-container">
+  <div class="card-title">
+    <div class="title-image">
+      <img src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
+    </div>
+    <div class="title-text">
+      <span>Competições</span>
+    </div>
+  </div>
+  <div class="table-container-wrapper">
+    <table>
+      <tr class="table-header">
+        <th>Nome da equipe</th>
+        <th>P</th>
+        <th>J</th>
+        <th>V</th>
+        <th>E</th>
+        <th>D</th>
+        <th>GP</th>
+        <th>GC</th>
+        <th>SG</th>
+      </tr>
+      <tr class="table-row">
+        <td>Falcons</td>
+        <td>3</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr class="table-row">
+        <td>Falcons</td>
+        <td>3</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr class="table-row">
+        <td>Falcons</td>
+        <td>3</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+      <tr class="table-row">
+        <td>Falcons</td>
+        <td>3</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+        <td>2</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="all-games-title">
+  <h2>Todos os jogos</h2>
+  <p>Gerencie todos os jogos desta competição</p>
+</div>
+
+<div class="editable-data-container">
+  <div class="all-games-container">
+    <div class="round-container">
+      <div class="round-container-header">
+        <span class="round-span">1° RODADA</span>
+      </div>
+      <div class="games-container">
+        <div class="card-round-container">
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
+          <div class="card-round-container-header">
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
+            <span class="game-status-span">Encerrado</span>
+          </div>
+          <div class="card-round-container-content">
+            <div class="card-round-container-name">
+              <p>INFORMÁTICA</p>
+            </div>
+            <div class="card-round-container-score">
+              <span>2</span>
+              <span>2</span>
+            </div>
+            <div class="card-round-container-name">
+              <p>ADS FC</p>
+            </div>
+          </div>
+          <div class="card-round-container-footer">
+            <p>
+              <span class="date-hour-span">22 / 12 - 17:00</span>
+              <button class="edit-game-button">
+                <i
+                  class="fa-solid fa-pen fa-xs"
+                  style="color: var(--white)"
+                ></i>
+              </button>
+            </p>
+          </div>
+        </div>
+        <div class="card-round-container">
+          <img
+            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+            alt=""
+          />
+          <div class="card-round-container-header">
+            <img
+              src="{% static 'student/img/league-page/header.svg' %}"
+              alt=""
+            />
+            <span>Encerrado</span>
+          </div>
+          <div class="card-round-container-content">
+            <div class="card-round-container-name">
+              <p>INFORMÁTICA</p>
+            </div>
+            <div class="card-round-container-score">
+              <span>2</span>
+              <span>2</span>
+            </div>
+            <div class="card-round-container-name">
+              <p>ADS FC</p>
+            </div>
+          </div>
+          <div class="card-round-container-footer">
+            <p>
+              <span class="date-hour-span">22 / 12 - 17:00</span>
+              <button class="edit-game-button">
+                <i
+                  class="fa-solid fa-pen fa-xs"
+                  style="color: var(--white)"
+                ></i>
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="comp-details">
+    <div class="comp-detail-header">
+      <h2>Detalhes da competição</h2>
+      <p>Visualize e gerencie os detalhes da competição</p>
+    </div>
+    <hr />
+    <div class="comp-detail-container">
+      <p class="detail-p" id="detail-modality">
+        Modalidade: <span>Basquete</span>
+      </p>
+      <p class="detail-p" id="detail-comp-sistem">
+        Sistema da competição: <span>Pontos corridos</span>
+      </p>
+      <div class="p-with-button">
+        <p class="detail-p" id="detail-comp-status">
+          Status da competição: <span>Em andamento</span>
+        </p>
+        <button class="p-button" id="datail-status-button">
+          <i
+            class="fa-regular fa-circle-xmark fa-sm"
+            style="color: var(--red-500)"
+          ></i>
+        </button>
+      </div>
+      <div class="p-with-button">
+        <p class="detail-p" id="detail-teams">
+          Equipes inscritas: <span>4 equipes</span>
+        </p>
+        <button class="p-button">
+          <i class="fa-solid fa-eye fa-sm" style="color: var(--gray-600)"></i>
+        </button>
+      </div>
+    </div>
+    <hr />
+    <div class="comp-detail-container">
+      <p class="detail-p" id="detail-start">
+        Data de inicio: <span>10/12/2024</span>
+      </p>
+      <p class="detail-p" id="detail-end">Data fim: <span>---</span></p>
+    </div>
+    <hr />
+    <div class="comp-detail-container">
+      <p class="detail-p" id="detail-realized-games">
+        Jogos realizados: <span>4</span>
+      </p>
+      <p class="detail-p" id="detail-realized-games">
+        Jogos não finalizados: <span>8</span>
+      </p>
+      <p class="detail-p" id="detail-not-ralized-games">
+        Jogos realizados: <span>4</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<dialog class="end-comp-dialog">
+  <div class="dialog-header">
+    <h3>Encerrar competição?</h3>
+    <button><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <button>Encerrar</button>
+</dialog>
+
+<dialog class="edit-scoreboard-dialog">
+  <div class="edit-scoreboard-dialog-content">
+    <div class="dialog-header">
+      <h3>Editar placar</h3>
+      <button><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form action="">
+      <div class="edit-scoreboard-container">
+        <div class="teams-container">
+          <div class="inputs-container">
+            <label for="home-team">Time casa</label>
+            <p class="team-name" id="home-team">ADS</p>
+          </div>
+          <div class="inputs-container">
+            <label for="away-team">Time fora</label>
+            <p class="team-name" id="away-team">INFORMÁTICA</p>
+          </div>
+        </div>
+        <div class="scoreboard-container">
+          <div class="inputs-container">
+            <label for="home-scoreboard">Placar</label>
+            <input type="number" id="home-scoreboard" name="home-scoreboard" />
+          </div>
+          <div class="inputs-container">
+            <label for="home-scoreboard">Placar</label>
+            <input type="number" id="home-scoreboard" name="home-scoreboard" />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="radio-input-container">
+        <input type="checkbox" name="end-game" id="end-game" />
+        <label for="end-game">Jogo encerrado</label>
+      </div>
+      <button type="submit">Confirmar alterações</button>
+    </form>
+  </div>
+</dialog>
+
+<dialog class="edit-game-dialog">
+  <div class="edit-game-dialog-content">
+    <div class="dialog-header">
+      <h3>Editar placar</h3>
+      <button><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form action="">
+      <div class="edit-game-container">
+        <div class="teams-container">
+          <div class="inputs-container">
+            <label for="home-team">Time casa</label>
+            <div class="inputs-container">
+              <div id="home-team" class="select-container">
+                <select required name="course">
+                  <option value="" selected disabled>
+                    Selecione uma equipe
+                  </option>
+                  <option value="ads">ADS</option>
+                  <option value="agro-industria">Agroindústria</option>
+                  <option value="alimentos">Alimentos</option>
+                  <option value="apicultura">Apicultura</option>
+                  <option value="informatica">Informática</option>
+                  <option value="quimica">Química</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="inputs-container">
+            <label for="away-team">Time fora</label>
+            <div class="inputs-container">
+              <div id="new-member-course" class="select-container">
+                <select required name="course">
+                  <option value="" selected disabled>
+                    Selecione uma equipe
+                  </option>
+                  <option value="ads">ADS</option>
+                  <option value="agro-industria">Agroindústria</option>
+                  <option value="alimentos">Alimentos</option>
+                  <option value="apicultura">Apicultura</option>
+                  <option value="informatica">Informática</option>
+                  <option value="quimica">Química</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scoreboard-container">
+          <div class="inputs-container">
+            <label for="home-scoreboard">Placar</label>
+            <input type="number" id="home-scoreboard" name="home-scoreboard" />
+          </div>
+          <div class="inputs-container">
+            <label for="home-scoreboard">Placar</label>
+            <input type="number" id="home-scoreboard" name="home-scoreboard" />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="data-inputs-container">
+        <div class="inputs-container">
+          <label for="date">Data</label>
+          <input type="date" id="date" name="date" />
+        </div>
+        <div class="inputs-container">
+          <label for="hour">Hora</label>
+          <input type="time" id="hour" name="hour" />
+        </div>
+        <div class="inputs-container">
+          <label for="round-phase">Fase</label>
+          <div class="inputs-container">
+            <div id="round-phase" class="select-container">
+              <select required name="phase">
+                <option value="" selected disabled>Selecione a fase</option>
+                <option value="group-phase">Fase de grupos</option>
+                <option value="eliminatorias">Eliminatorias</option>
+                <option value="final">Final</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="inputs-container">
+          <label for="round">Rodada</label>
+          <input type="number" id="round" name="round" />
+        </div>
+      </div>
+      <div class="radio-input-container">
+        <input type="checkbox" name="end-game" id="end-game" />
+        <label for="end-game">Jogo encerrado</label>
+      </div>
+
+      <button type="submit">Confirmar alterações</button>
+    </form>
+  </div>
+</dialog>
+
+{% endblock %}

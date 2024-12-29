@@ -1,0 +1,155 @@
+{% load static %} {% load custom_tags %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'global.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'organizer/css/base-organizer.css' %}"
+    />
+    {% block css %} {% endblock %}
+    <script src="{% static 'organizer/js/menu-hamburguer.js' %}" defer></script>
+    {% block js %} {% endblock %} {% block title %}
+    <title>Organizador</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <div class="navigation">
+        <div class="navigation-header">
+          <img src="{% static 'organizer/img/logo.svg' %}" alt="" />
+          <button>
+            <img
+              src="{% static 'organizer/img/template-base/sidebar.svg' %}"
+              alt=""
+            />
+          </button>
+        </div>
+        <p>Menu</p>
+        <div class="navigation-content">
+          {% url 'modality_list' as modality_url %}
+          <a
+            href="{{ modality_url  }}"
+            class="navigation-content-clicked {% if request.path == modality_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-basketball"></i>
+            <span>Modalidades</span>
+          </a>
+          {% url 'teams_list' as teams_url %}
+          <a
+            href="{{ teams_url }}"
+            class="navigation-content-clicked {% if request.path == teams_url or request.path|startswith:teams_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-user-group"></i>
+            <span>Equipes</span>
+          </a>
+          {% url 'competitions_list' as competitions_url %}
+          <a
+            href="{{ competitions_url }}"
+            class="navigation-content-clicked {% if request.path == competitions_url or request.path|startswith:competitions_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-trophy"></i>
+            <span>Competições</span>
+          </a>
+          {% url 'requests_list' as requests_url %}
+          <a
+            href="{{ requests_url }}"
+            class="navigation-content-clicked {% if request.path == requests_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-bell"></i>
+            <span>Solicitações</span>
+          </a>
+        </div>
+      </div>
+      <div class="navigation-menu-hamburguer">
+        <div class="navigation-content">
+          <div class="navigation-header">
+            <img src="{% static 'organizer/img/logo.svg' %}" alt="" />
+            <button>
+              <img
+                src="{% static 'organizer/img/template-base/sidebar.svg' %}"
+                alt=""
+              />
+            </button>
+          </div>
+          <p>Menu</p>
+          {% url 'modality_list' as modality_url %}
+          <a
+            href="{{ modality_url  }}"
+            class="navigation-content-clicked {% if request.path == modality_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-basketball"></i>
+            <span>Modalidades</span>
+          </a>
+          {% url 'teams_list' as teams_url %}
+          <a
+            href="{{ teams_url }}"
+            class="navigation-content-clicked {% if request.path == teams_url or request.path|startswith:teams_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-user-group"></i>
+            <span>Equipes</span>
+          </a>
+          {% url 'competitions_list' as competitions_url %}
+          <a
+            href="{{ competitions_url }}"
+            class="navigation-content-clicked {% if request.path == competitions_url or request.path|startswith:competitions_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-trophy"></i>
+            <span>Competições</span>
+          </a>
+          {% url 'requests_list' as requests_url %}
+          <a
+            href="{{ requests_url }}"
+            class="navigation-content-clicked {% if request.path == requests_url %}active{% endif %}"
+          >
+            <i class="fa-solid fa-bell"></i>
+            <span>Solicitações</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="header-content">
+        <header>
+          <div class="header-title">
+            <button class="header-title-bars">
+              <i class="fa-solid fa-bars"></i>
+            </button>
+            <button class="header-title-x">
+              <i class="fa-solid fa-x"></i>
+            </button>
+            <p>Olá, <span>organizador</span></p>
+          </div>
+
+          <img
+            src="{% static 'organizer/img/template-base/profile.svg' %}"
+            alt=""
+          />
+        </header>
+        <main class="block-main">{% block main %} {% endblock %}</main>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <p>
+          Copyright © 2024 | Instituto Federal de Educação, Ciência e Tecnologia
+          do Rio Grande do Norte
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

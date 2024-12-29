@@ -1,0 +1,303 @@
+{% extends "base-student.html" %} {% load static %} {% block css %}
+<link rel="stylesheet" href="{% static 'student/css/home.css' %}" />
+{% endblock %} {% block js %}
+<script src="{% static 'student/js/homepage/carousel.js' %}" defer></script>
+{% endblock %} {% block main %}
+
+<div class="banner-home">
+  <div class="banner-home-text">
+    <h1>No Intercurso, cada jogo é a chance de fazer história!</h1>
+    <p>
+      O campeonato que promove a integração e a competitividade entre os alunos
+      do campus. Com uma variedade de modalidades esportivas, o evento
+      proporciona momentos de superação e diversão, fortalecendo o laço entre as
+      turmas enquanto todos competem pelo título. Venha participar e celebrar o
+      esporte no IFPDF!
+    </p>
+    <div class="banner-home-text-icons">
+      <div>
+        <i class="fa-solid fa-people-group"></i>
+        <p>Espírito de equipe</p>
+      </div>
+      <div>
+        <i class="fa-solid fa-people-group"></i>
+        <p>Integração entre os cursos</p>
+      </div>
+      <div>
+        <i class="fa-solid fa-trophy"></i>
+        <p>Competitividade saudável</p>
+      </div>
+      <div>
+        <i class="fa-solid fa-basketball"></i>
+        <p>Diversidade de modalidades</p>
+      </div>
+    </div>
+  </div>
+  <div class="banner-home-image">
+    <div>
+      <img
+        src="{% static 'student/img/homepage/banner/banner1.png' %}"
+        alt=""
+      />
+      <img
+        src="{% static 'student/img/homepage/banner/banner2.png' %}"
+        alt=""
+      />
+    </div>
+    <div>
+      <img
+        src="{% static 'student/img/homepage/banner/banner3.png' %}"
+        alt=""
+      />
+      <img
+        src="{% static 'student/img/homepage/banner/banner4.png' %}"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
+
+<div class="competitions-wrapper" id="competitions-anchor">
+  <h2>Competições</h2>
+  <div class="competitions-cards-container">
+    <div class="carousel">
+      <div class="carousel-wrapper">
+        <div class="carousel-item">
+          <div class="competitions-card">
+            <img
+              src="{% static 'student/img/homepage/competitions-card/basquete-img.png' %}"
+              alt=""
+            />
+            <div class="competitions-card-text">
+              <span>Basquete</span>
+              <p>
+                Acesse a página com todas as informações sobre o basquete,
+                incluindo equipes participantes, horários dos jogos e resultados
+                atualizados.
+              </p>
+            </div>
+            <button><a href="{% url 'league' %}">Acessar</a></button>
+          </div>
+          <div class="competitions-card">
+            <img
+              src="{% static 'student/img/homepage/competitions-card/volei-areia-masculino-img.png' %}"
+              alt=""
+            />
+            <div class="competitions-card-text">
+              <span>Vôlei de Areia Masculino</span>
+              <p>
+                Acesse a página com todas as informações sobre o vôlei de areia
+                masculino, incluindo equipes participantes, horários dos jogos e
+                resultados atualizados.
+              </p>
+            </div>
+            <button>Acessar</button>
+          </div>
+          <div class="competitions-card">
+            <img
+              src="{% static 'student/img/homepage/competitions-card/volei-areia-feminino-img.png' %}"
+              alt=""
+            />
+            <div class="competitions-card-text">
+              <span>Vôlei de Areia Feminino</span>
+              <p>
+                Acesse a página com todas as informações sobre o vôlei de areia
+                feminino, incluindo equipes participantes, horários dos jogos e
+                resultados atualizados.
+              </p>
+            </div>
+            <button>Acessar</button>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="competitions-card">
+            <img
+              src="{% static 'student/img/homepage/competitions-card/volei-indoor-img.png' %}"
+              alt=""
+            />
+            <div class="competitions-card-text">
+              <span>Vôlei Indoor</span>
+              <p>
+                Acesse a página com todas as informações sobre o vôlei indoor,
+                incluindo equipes participantes, horários dos jogos e resultados
+                atualizados.
+              </p>
+            </div>
+            <button><a href="{% url 'qualifiers' %}">Acessar</a></button>
+          </div>
+          <div class="competitions-card">
+            <img
+              src="{% static 'student/img/homepage/competitions-card/futsal-masculino-img.png' %}"
+              alt=""
+            />
+            <div class="competitions-card-text">
+              <span>Futsal Masculino</span>
+              <p>
+                Acesse a página com todas as informações sobre o futsal
+                masculino, incluindo equipes participantes, horários dos jogos e
+                resultados atualizados.
+              </p>
+            </div>
+            <button><a href="{% url 'group' %}">Acessar</a></button>
+          </div>
+          <div class="competitions-card">
+            <img
+              src="{% static 'student/img/homepage/competitions-card/futsal-feminino-img.png' %}"
+              alt=""
+            />
+            <div class="competitions-card-text">
+              <span>Futsal Feminino</span>
+              <p>
+                Acesse a página com todas as informações sobre o futsal
+                feminino, incluindo equipes participantes, horários dos jogos e
+                resultados atualizados.
+              </p>
+            </div>
+            <button>Acessar</button>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="competitions-card">
+            <img
+              src="{% static 'student/img/homepage/competitions-card/handebol-img.png' %}"
+              alt=""
+            />
+            <div class="competitions-card-text">
+              <span>Handebol</span>
+              <p>
+                Acesse a página com todas as informações sobre o handebol,
+                incluindo equipes participantes, horários dos jogos e resultados
+                atualizados.
+              </p>
+            </div>
+            <button>Acessar</button>
+          </div>
+          <div class="competitions-card">
+            <img
+              src="{% static 'student/img/homepage/competitions-card/queimada-img.png' %}"
+              alt=""
+            />
+            <div class="competitions-card-text">
+              <span>Queimada</span>
+              <p>
+                Acesse a página com todas as informações sobre a queimada,
+                incluindo equipes participantes, horários dos jogos e resultados
+                atualizados.
+              </p>
+            </div>
+            <button>Acessar</button>
+          </div>
+          <div class="competitions-card">
+            <img
+              src="{% static 'student/img/homepage/competitions-card/tenis-mesa-img.png' %}"
+              alt=""
+            />
+            <div class="competitions-card-text">
+              <span>Tênis de Mesa</span>
+              <p>
+                Acesse a página com todas as informações sobre o tênis de mesa,
+                incluindo equipes participantes, horários dos jogos e resultados
+                atualizados.
+              </p>
+            </div>
+            <button>Acessar</button>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-button prev">&#10094;</button>
+      <button class="carousel-button next">&#10095;</button>
+
+      <div class="carousel-indicators">
+        <span class="indicator active"></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="games-today-wrapper" id="games-anchor">
+  <div class="games-today-content">
+    <div class="games-today-header">
+      <h2>Jogos de hoje</h2>
+      <div class="games-today-select">
+        <select>
+          <option value="all">Todos os jogos</option>
+          <option value="futsal-masc">Futsal Masculino</option>
+          <option value="volei-indoor">Vôlei Indoor</option>
+          <option value="basquete">Basquete</option>
+          <option value="queimada">Queimada</option>
+        </select>
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </div>
+    <div class="games-today-cards-container">
+      <div class="games-today-card">
+        <div class="games-today-card-game">
+          <p>ADS FC</p>
+          <span>X</span>
+          <p>Informática FC</p>
+        </div>
+        <div class="games-today-card-info-container">
+          <div class="games-today-card-info">
+            <i class="fa-regular fa-clock"></i>
+            <span>20:30h</span>
+          </div>
+          <div class="games-today-card-info">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Ginásio Poliesportivo</span>
+          </div>
+          <div class="games-today-card-info">
+            <i class="fa-solid fa-basketball"></i>
+            <span>Futsal Masculino</span>
+          </div>
+        </div>
+      </div>
+      <div class="games-today-card">
+        <div class="games-today-card-game">
+          <p>ADS FC</p>
+          <span>X</span>
+          <p>Informática FC</p>
+        </div>
+        <div class="games-today-card-info-container">
+          <div class="games-today-card-info">
+            <i class="fa-regular fa-clock"></i>
+            <span>20:30h</span>
+          </div>
+          <div class="games-today-card-info">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Ginásio Poliesportivo</span>
+          </div>
+          <div class="games-today-card-info">
+            <i class="fa-solid fa-basketball"></i>
+            <span>Futsal Masculino</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cards-info-container">
+  <div class="card-info-registration-team">
+    <h3>Inscreva sua equipe</h3>
+    <p>
+      Estamos convidando os estudantes a fazerem parte desse grande campeonato!
+      As equipes podem se inscrever em diversas modalidades, competindo pelo
+      título e fortalecendo o espírito esportivo da instituição. Utilize nosso
+      sistema de inscrição para escolher a modalidade e garantir sua
+      participação. Venha representar seu curso e faça parte da história!
+    </p>
+    <a href="{% url 'register_team_student' %}">Cadastrar equipes</a>
+  </div>
+  <div class="card-info-registration-team">
+    <h3>Verifique o regulamento</h3>
+    <p>
+      Aqui, você encontrará todas as informações essenciais para participar de
+      nossos eventos esportivos com transparência e de acordo com as regras
+      estabelecidas. Leia atentamente o regulamento e verifique as condições
+      para garantir sua participação dentro dos critérios exigidos.
+    </p>
+    <a href="#">Ir para o regulamento</a>
+  </div>
+</div>
+
+{% endblock %}
