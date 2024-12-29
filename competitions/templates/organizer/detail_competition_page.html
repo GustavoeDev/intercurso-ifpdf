@@ -17,8 +17,7 @@
 {% endblock %} {% block main %}
 <div class="page-title">
   <div>
-    <a href="{% url 'competitions_list' %}">
-      <button id="previus-page-button">
+    <a href="javascript:history.back()" >
         <i
           class="fa-sharp-duotone fa-solid fa-chevron-left"
           style="
@@ -27,7 +26,6 @@
             --fa-secondary-opacity: 1;
           "
         ></i>
-      </button>
     </a>
     <h1>Basquete masculino</h1>
   </div>

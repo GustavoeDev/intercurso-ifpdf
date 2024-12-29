@@ -13,6 +13,13 @@
   gap: 1rem;
 }
 
+.page-title div a { 
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 .page-title h1 {
   font-size: 1.5rem;
   font-weight: bold;

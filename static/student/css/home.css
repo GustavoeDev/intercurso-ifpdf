@@ -123,6 +123,11 @@
   cursor: pointer;
 }
 
+.competitions-card a {
+  text-decoration: none;
+  color: var(--white);
+}
+
 .carousel {
   position: relative;
   overflow: hidden;
