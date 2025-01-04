@@ -6,6 +6,7 @@
   src="{% static 'student/js/manage-teams/create-modal.js' %}"
   defer
 ></script>
+<script src="{% static 'form-select-placeholder.js' %}" defer></script>
 {% endblock %} {% block main %}
 
 <div class="card-info">
@@ -22,7 +23,9 @@
 
 <div class="card-teams">
   <h1>Minhas Equipes</h1>
-  <a href="{% url 'register_team_student' %}"><button class="button">Cadastrar nova equipe</button></a>
+  <a href="{% url 'register_team_student' %}"
+    ><button class="button">Cadastrar nova equipe</button></a
+  >
 </div>
 
 <div class="table-container not-active">
@@ -301,8 +304,15 @@
       <input type="text" id="add-player-enrollment" placeholder="Matrícula" />
     </div>
     <div class="inputs-container">
-      <label for="add-player-course">Curso</label>
-      <input type="text" id="add-player-course" placeholder="Curso" />
+      <label for="courses-select">Curso</label>
+      <select id="courses-select" name="modality">
+        <option value="default-value" selected disabled>
+          Selecione seu curso
+        </option>
+        <option value="info">Informática</option>
+        <option value="api">Apicultura</option>
+        <option value="ali">Alimentos</option>
+      </select>
     </div>
 
     <button type="submit">Confirmar alterações</button>
