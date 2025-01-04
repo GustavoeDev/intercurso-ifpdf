@@ -3,10 +3,6 @@ body {
   color: var(--white);
 }
 
-input::placeholder {
-  color: #a9a9a9;
-}
-
 .login-wrapper {
   min-height: 100vh;
   display: flex;
@@ -75,13 +71,13 @@ form .inputs-container > select {
   padding: 1rem 0.75rem;
   border: 0;
   border-radius: 8px;
-  color: #a9a9a9;
+  color: var(--gray-500);
 
   font-size: 1rem;
 }
 
 form .inputs-container > select.invalid {
-  color: #a9a9a9;
+  color: var(--gray-500);
 }
 
 form .inputs-container > select.valid {
