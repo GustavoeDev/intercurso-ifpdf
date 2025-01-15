@@ -6,6 +6,7 @@
   src="{% static 'student/js/manage-teams/create-modal.js' %}"
   defer
 ></script>
+<script src="{% static 'form-select-placeholder.js' %}" defer></script>
 {% endblock %} {% block main %}
 
 <div class="card-info">
@@ -22,7 +23,9 @@
 
 <div class="card-teams">
   <h1>Minhas Equipes</h1>
-  <a href="{% url 'register_team_student' %}"><button class="button">Cadastrar nova equipe</button></a>
+  <a href="{% url 'register_team_student' %}"
+    ><button class="button">Cadastrar nova equipe</button></a
+  >
 </div>
 
 <div class="table-container not-active">
@@ -76,13 +79,6 @@
         <td>20231094040023</td>
         <td>ADS</td>
         <td>
-          <button class="image-button edit-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
           <button class="image-button remove-player">
             <img
               class="small-image"
@@ -97,13 +93,6 @@
         <td>20231094040043</td>
         <td>Informática</td>
         <td>
-          <button class="image-button edit-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
           <button class="image-button remove-player">
             <img
               class="small-image"
@@ -118,13 +107,6 @@
         <td>20231094040011</td>
         <td>ADS</td>
         <td>
-          <button class="image-button edit-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
           <button class="image-button remove-player">
             <img
               class="small-image"
@@ -139,13 +121,6 @@
         <td>20231094040029</td>
         <td>ADS</td>
         <td>
-          <button class="image-button edit-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
           <button class="image-button remove-player">
             <img
               class="small-image"
@@ -209,13 +184,6 @@
         <td>20231094040001</td>
         <td>ADS</td>
         <td>
-          <button class="image-button edit-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
           <button class="image-button remove-player">
             <img
               class="small-image"
@@ -230,13 +198,6 @@
         <td>20231094040016</td>
         <td>Informática</td>
         <td>
-          <button class="image-button edit-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
           <button class="image-button remove-player">
             <img
               class="small-image"
@@ -251,13 +212,6 @@
         <td>20231094040012</td>
         <td>ADS</td>
         <td>
-          <button class="image-button edit-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
           <button class="image-button remove-player">
             <img
               class="small-image"
@@ -272,13 +226,6 @@
         <td>20231094040030</td>
         <td>ADS</td>
         <td>
-          <button class="image-button edit-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
           <button class="image-button remove-player">
             <img
               class="small-image"
@@ -357,8 +304,15 @@
       <input type="text" id="add-player-enrollment" placeholder="Matrícula" />
     </div>
     <div class="inputs-container">
-      <label for="add-player-course">Curso</label>
-      <input type="text" id="add-player-course" placeholder="Curso" />
+      <label for="courses-select">Curso</label>
+      <select id="courses-select" name="modality">
+        <option value="default-value" selected disabled>
+          Selecione seu curso
+        </option>
+        <option value="info">Informática</option>
+        <option value="api">Apicultura</option>
+        <option value="ali">Alimentos</option>
+      </select>
     </div>
 
     <button type="submit">Confirmar alterações</button>

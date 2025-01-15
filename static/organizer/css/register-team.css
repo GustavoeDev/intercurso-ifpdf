@@ -38,22 +38,22 @@ button {
   border-radius: 0.5rem;
 
   padding: 1.25rem 0rem;
-  
+
   max-width: 25.313rem;
   width: 100%;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  font: 600 1rem 'Inter', sans-serif;
+
+  font: 600 1rem "Inter", sans-serif;
   color: var(--white);
 
   background-color: var(--green-100);
 }
 
 #add-new-member {
-  font: 600 0.75rem 'Inter', sans-serif;
+  font: 600 0.75rem "Inter", sans-serif;
   color: var(--green-100);
 
   max-width: 25.313rem;
@@ -79,12 +79,8 @@ button {
 }
 /* input styles */
 
-input::placeholder {
-  color: #a9a9a9;
-}
-
 hr {
-  color: #a9a9a9;
+  color: var(--gray-500);
   display: none;
 }
 
@@ -106,50 +102,51 @@ hr {
   gap: 1.5rem;
 }
 
-label, label span {
-  font-family: 'Inter', sans-serif;
+label,
+label span {
+  font-family: "Inter", sans-serif;
   font-size: 1rem;
-  color: var(--green-900)
+  color: var(--green-900);
 }
 
 .input {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 1rem;
   padding: 1rem 1.25rem;
-  
-  border: 1px solid #D9E1E7;
+
+  border: 1px solid #d9e1e7;
   border-radius: 0.5rem;
 }
 
-select{
+select {
   border: none;
   background-color: #00000000;
   outline: none;
-  
+
   width: 100%;
   padding: 1rem 0px;
-  color: #a9a9a9;
-  
-  font-family: 'Inter', sans-serif;
+  color: var(--gray-500);
+
+  font-family: "Inter", sans-serif;
   font-size: 1rem;
 }
 
 select.invalid {
-  color: #a9a9a9;
+  color: var(--gray-500);
 }
 
 select.valid {
-  color: var(--green-900);
+  color: #000000;
 }
 
 option {
-  color: var(--green-900);
+  color: #000000;
 }
 
 .select-container {
   max-width: 100%;
-  
-  border: 1px solid #D9E1E7;
+
+  border: 1px solid #d9e1e7;
   border-radius: 0.5rem;
   padding: 0px 1.25rem;
   background-color: var(--white);

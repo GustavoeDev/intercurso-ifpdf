@@ -50,6 +50,7 @@ header {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   border-left: 1px solid #dddddd;
+  display: none;
 }
 
 .btn-login {
