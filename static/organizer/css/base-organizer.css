@@ -97,9 +97,8 @@ body {
   width: 30px;
 }
 
-.navigation-content > a:hover {
-  background-color: var(--green-900);
-  color: var(--white);
+.navigation-content > a:not(.active):hover {
+  background-color: #e4e4e7;
 }
 
 .header-content {
