@@ -93,6 +93,11 @@ class CustomUserCreationForm(forms.ModelForm):
         return user
     
 class LoginForm(AuthenticationForm):
+    error_messages = {
+        'invalid_login': "Por favor, entre com matrícula e senha corretos. ",
+        'inactive': "Esta conta está inativa."
+    }
+
     username = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'Matrícula'}),
         label="Matrícula"  
