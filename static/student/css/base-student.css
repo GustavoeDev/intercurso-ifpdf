@@ -33,7 +33,7 @@ header {
   gap: 2rem;
 }
 
-.header-content-search-social > a > i {
+.header-content-search-social a > i {
   color: var(--gray-500);
   font-size: 1.25rem;
   cursor: pointer;
@@ -52,7 +52,23 @@ header {
   border-left: 1px solid #dddddd;
 }
 
+.header-logout-span {
+  margin-left: 2rem;
+}
+
 .btn-login {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.75rem;
+  border-radius: 20px;
+  border: 0.5px solid var(--gray-500);
+  background: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000000;
+  margin-left: 2rem;
+}
+
+.btn-login-nav-list {
   padding: 0.5rem 1.25rem;
   font-size: 0.75rem;
   border-radius: 20px;
@@ -137,6 +153,7 @@ footer {
   visibility: visible;
   opacity: 1;
   transition-delay: 0s;
+  position: relative;
 }
 
 .nav-list {
@@ -155,7 +172,6 @@ footer {
 
   display: flex;
   flex-direction: column;
-  gap: 6rem;
   justify-content: space-between;
   pointer-events: none;
 }
@@ -166,11 +182,8 @@ footer {
   flex-direction: column;
   gap: 2rem;
 
-  position: absolute;
-  left: 2rem;
-  top: 50%;
-
-  transform: translateY(-50%);
+  height: 100%;
+  justify-content: center;
 }
 
 .nav-list .header-content-search-social {
@@ -180,7 +193,6 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
 }
 
 .nav-menu.active .nav-list {
