@@ -27,33 +27,57 @@
           <h3>Acesse o sistema do Intercurso IFPDF</h3>
         </div>
 
-        <form action="">
+        <form method="POST" action="{% url 'register' %}">
+          {% csrf_token %}
           <div class="inputs-container">
-            <label for="login-name">Nome completo</label>
-            <input type="text" id="login-name" placeholder="Nome" />
+            <div>{{ form.name.label_tag }}</div>
+            {{ form.name }} {% if form.name.errors %}
+            <div class="error">
+              {% for error in form.name.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+            {% endif %}
           </div>
           <div class="inputs-container">
-            <label for="login-email">E-mail</label>
-            <input type="text" id="login-email" placeholder="E-mail" />
+            <div>{{ form.email.label_tag }}</div>
+            {{ form.email }} {% if form.email.errors%}
+            <div class="error">
+              {% for error in form.email.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+            {% endif %}
           </div>
           <div class="inputs-container">
-            <label for="login-enrollment">Matrícula</label>
-            <input type="text" id="login-enrollment" placeholder="Matrícula" />
+            <div>{{ form.registration.label_tag }}</div>
+            {{ form.registration }} {% if form.registration.errors%}
+            <div class="error">
+              {% for error in form.registration.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+          <div class="inputs-container" id="login-cursos">
+            <div>{{ form.course.label_tag }}</div>
+            {{ form.course }} {% if form.course.errors %}
+            <div class="error">
+              {% for error in form.course.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+            {% endif %}
           </div>
           <div class="inputs-container">
-            <label for="login-cursos">Curso</label>
-            <select id="login-cursos">
-              <option value="default-value" selected disabled>
-                Selecione seu curso
-              </option>
-              <option value="info">Informática</option>
-              <option value="api">Apicultura</option>
-              <option value="ali">Alimentos</option>
-            </select>
-          </div>
-          <div class="inputs-container">
-            <label for="login-password">Senha</label>
-            <input type="password" id="login-password" placeholder="Senha" />
+            <div>{{ form.password.label_tag }}</div>
+            {{ form.password }} {% if form.password.errors%}
+            <div class="error">
+              {% for error in form.password.errors %}
+              <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+            {% endif %}
           </div>
 
           <button type="submit">Cadastrar</button>

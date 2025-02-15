@@ -26,6 +26,12 @@
   outline: 0;
 }
 
+input,
+select,
+textarea {
+  background-color: var(--white);
+}
+
 ::placeholder {
   color: var(--gray-500);
 }

@@ -1,8 +1,8 @@
-const selectInput = document.querySelector("#login-cursos");
+const selectInput = document.querySelector("#login-cursos select");
 
 function changeSelect() {
   selectInput.addEventListener("click", () => {
-    if (selectInput.value === "default-value") {
+    if (selectInput.value === "") {
       selectInput.classList.add("invalid");
     } else {
       selectInput.classList.remove("invalid");
