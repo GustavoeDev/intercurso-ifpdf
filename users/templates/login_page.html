@@ -46,12 +46,6 @@
           <button type="submit">Entrar</button>
         </form>
 
-        {% if user.is_authenticated %}
-        <p>Usuário logado: {{ user }}</p>
-        {% else %}
-        <p>Ninguém está logado.</p>
-        {% endif %}
-
         <div class="login-footer">
           <div class="login-footer-hr">
             <hr />
