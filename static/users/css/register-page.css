@@ -55,7 +55,7 @@ form .inputs-container {
   gap: 0.5rem;
 }
 
-form .inputs-container > label {
+form .inputs-container > div > label {
   font-size: 1.25rem;
   font-family: "Baloo 2", sans-serif;
   font-weight: 500;
@@ -68,7 +68,7 @@ form .inputs-container > input {
 }
 
 form .inputs-container > select {
-  padding: 1rem 0.75rem;
+  padding: 1rem;
   border: 0;
   border-radius: 8px;
   color: var(--gray-500);
@@ -97,6 +97,13 @@ form > button[type="submit"] {
   cursor: pointer;
   font-weight: 600;
   margin-top: 1rem;
+}
+
+.error {
+  color: #ff3737;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
 }
 
 .login-footer {

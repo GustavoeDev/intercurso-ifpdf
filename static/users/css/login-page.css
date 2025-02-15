@@ -55,10 +55,17 @@ form .inputs-container {
   gap: 0.5rem;
 }
 
-form .inputs-container > label {
+form .inputs-container > div > label {
   font-size: 1.25rem;
   font-family: "Baloo 2", sans-serif;
   font-weight: 500;
+}
+
+.error {
+  color: #ff3737;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
 }
 
 form .inputs-container > input {
