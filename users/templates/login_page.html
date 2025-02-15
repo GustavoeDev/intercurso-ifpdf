@@ -26,18 +26,31 @@
           <h3>Acesse o sistema do Intercurso IFPDF</h3>
         </div>
 
-        <form action="">
+        <form method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+
           <div class="inputs-container">
-            <label for="login-enrollment">Matrícula</label>
-            <input type="text" id="login-enrollment" placeholder="Matrícula" />
+            <div>{{ form.username.label_tag }}</div>
+            {{ form.username }}
           </div>
+
           <div class="inputs-container">
-            <label for="login-password">Senha</label>
-            <input type="password" id="login-password" placeholder="Senha" />
+            <div>{{ form.password.label_tag }}</div>
+            {{ form.password }} {% if form.non_field_errors %}
+            <div class="error">
+              <p>{{ form.non_field_errors.0 }}</p>
+            </div>
+            {% endif %}
           </div>
 
           <button type="submit">Entrar</button>
         </form>
+
+        {% if user.is_authenticated %}
+        <p>Usuário logado: {{ user }}</p>
+        {% else %}
+        <p>Ninguém está logado.</p>
+        {% endif %}
 
         <div class="login-footer">
           <div class="login-footer-hr">

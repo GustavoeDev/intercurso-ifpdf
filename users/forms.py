@@ -1,5 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate
 from .models import *
 
 class CustomUserCreationForm(forms.ModelForm):
@@ -89,3 +91,28 @@ class CustomUserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Matrícula'}),
+        label="Matrícula"  
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Senha'}),
+        label="Senha"
+    )
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')  
+        password = cleaned_data.get('password')
+
+        print(f"Tentando autenticar: {username} | {password}") 
+
+        user = authenticate(username=username, password=password) 
+        print(f"Usuário autenticado: {user}")  
+
+        if not user:
+            raise forms.ValidationError("Matrícula ou senha inválidos.")
+
+        return cleaned_data
