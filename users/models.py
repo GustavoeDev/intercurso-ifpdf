@@ -47,7 +47,7 @@ class CustomUser(AbstractUser):
    email = models.EmailField(unique=True)
    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=False, blank=False)
 
-   username = models.CharField(max_length=200, blank=False, null=False)
+   username = models.CharField(max_length=200, blank=True, null=True)
 
    USERNAME_FIELD = 'registration'
    REQUIRED_FIELDS = ['email', 'name']
