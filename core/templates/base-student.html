@@ -53,7 +53,7 @@
           <a class="header-logout" href="{% url 'logout' %}"
             ><i class="fa-solid fa-right-from-bracket"></i
           ></a>
-          <span class="header-logout-span">Olá, {{ user.name.split.0 }}</span>
+          <span class="header-logout-span">Olá, {{ user.first_name }}</span>
           {% else %}
           <a href="{% url 'login' %}" class="btn-login">Login</a>
           {% endif %}
@@ -81,7 +81,7 @@
     <nav class="nav-menu">
       <div class="nav-list">
         {% if user.is_authenticated %}
-        <span>Olá, {{ user.name.split.0 }}</span>
+        <span>Olá, {{ user.firs_name }}</span>
         {% else %}
         <a href="{% url 'login' %}" class="btn-login-nav-list photo-hamburguer"
           >Login</a

@@ -30,10 +30,10 @@
         <form method="POST" action="{% url 'register' %}">
           {% csrf_token %}
           <div class="inputs-container">
-            <div>{{ form.name.label_tag }}</div>
-            {{ form.name }} {% if form.name.errors %}
+            <div>{{ form.full_name.label_tag }}</div>
+            {{ form.full_name }} {% if form.full_name.errors %}
             <div class="error">
-              {% for error in form.name.errors %}
+              {% for error in form.full_name.errors %}
               <p>{{ error }}</p>
               {% endfor %}
             </div>
@@ -50,10 +50,10 @@
             {% endif %}
           </div>
           <div class="inputs-container">
-            <div>{{ form.registration.label_tag }}</div>
-            {{ form.registration }} {% if form.registration.errors%}
+            <div>{{ form.username.label_tag }}</div>
+            {{ form.username }} {% if form.username.errors%}
             <div class="error">
-              {% for error in form.registration.errors %}
+              {% for error in form.username.errors %}
               <p>{{ error }}</p>
               {% endfor %}
             </div>
