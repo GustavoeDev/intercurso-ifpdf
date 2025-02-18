@@ -4,62 +4,74 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from .models import *
 
+from django import forms
+from django.core.exceptions import ValidationError
+from .models import CustomUser
+
 class CustomUserCreationForm(forms.ModelForm):
     password = forms.CharField(
         widget=forms.PasswordInput,
         label="Senha"
     )
-    
+
+    full_name = forms.CharField(
+        label="Nome Completo",
+        max_length=200,
+        widget=forms.TextInput(attrs={'placeholder': 'Nome'})
+    )
+
     class Meta:
         model = CustomUser
-        fields = ['registration', 'name', 'email', 'password', 'course']
+        fields = ['username', 'full_name', 'email', 'password', 'course']
         labels = {
-            'registration': 'Matrícula',
-            'name': 'Nome Completo',
+            'username': 'Matrícula',
             'email': 'Endereço de E-mail',
             'course': 'Curso',
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
+
         self.fields['course'].choices = [
             ('', 'Selecione seu curso')
         ] + list(self.fields['course'].choices)[1:]
-    
+
         self.fields['course'].widget.attrs['required'] = True
         self.fields['course'].widget.attrs['onchange'] = "this.options[0].disabled = true;"
 
-        for field_name, field in self.fields.items(): 
+        for field_name, field in self.fields.items():
             field.widget.attrs.update({
                 'class': 'custom-input',
             })
             if isinstance(field, forms.ModelChoiceField):
                 field.widget.attrs['placeholder'] = 'Selecione seu curso'
-            elif field_name == 'registration': 
+            elif field_name == 'username':
                 field.widget.attrs['placeholder'] = 'Matrícula'
-            elif field_name == 'name':
-                field.widget.attrs['placeholder'] = 'Nome'
             elif field_name == 'email':
                 field.widget.attrs['placeholder'] = 'E-mail'
             elif field_name == 'password':
                 field.widget.attrs['placeholder'] = 'Senha'
 
-    def clean_registration(self):
+    def clean_username(self):
         """ Valida se a matrícula contém apenas números e tem um tamanho válido """
-        registration = self.cleaned_data.get('registration')
-        if not registration.isdigit():
+        username = self.cleaned_data.get('username')
+        if not username.isdigit():
             raise ValidationError("A matrícula deve conter apenas números.")
-        if len(registration) < 5 or len(registration) > 15:
+        if len(username) < 5 or len(username) > 15:
             raise ValidationError("A matrícula deve ter entre 5 e 15 dígitos.")
-        return registration
+        return username
 
-    def clean_name(self):
-        """ Valida se o nome contém apenas letras e espaços """
-        name = self.cleaned_data.get('name')
-        if not all(char.isalpha() or char.isspace() for char in name):
+    def clean_full_name(self):
+        """ Valida se o nome completo contém apenas letras e espaços """
+        full_name = self.cleaned_data.get('full_name')
+        if not all(char.isalpha() or char.isspace() for char in full_name):
             raise ValidationError("O nome deve conter apenas letras e espaços.")
-        return name
+
+        # Verifica se há pelo menos um sobrenome
+        if len(full_name.split()) < 2:
+            raise ValidationError("Digite seu nome completo (Nome e Sobrenome).")
+
+        return full_name
 
     def clean_email(self):
         """ Valida se o e-mail é único """
@@ -86,8 +98,14 @@ class CustomUserCreationForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        password = self.cleaned_data['password']
-        user.set_password(password)
+        user.password = self.cleaned_data['password']
+        user.set_password(user.password)
+
+        # Separar o nome completo em first_name e last_name
+        full_name = self.cleaned_data['full_name'].strip().split()
+        user.first_name = full_name[0]  # Primeiro nome
+        user.last_name = " ".join(full_name[1:]) if len(full_name) > 1 else ""  # Restante como sobrenome
+
         if commit:
             user.save()
         return user
