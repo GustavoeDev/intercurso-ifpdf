@@ -10,46 +10,47 @@ class Course(models.Model):
        return self.name
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, registration, email, name, password=None, **extra_fields):
-        if not registration:
+    def create_user(self, username, email, first_name, last_name, password=None, **extra_fields):
+        if not username:
             raise ValueError('O número de matrícula é obrigatório')
         if not email:
             raise ValueError('O email é obrigatório')
-        
+
         user = self.model(
-            registration=registration,
+            username=username, 
             email=self.normalize_email(email),
-            name=name,
+            first_name=first_name,
+            last_name=last_name,
             **extra_fields
         )
-        user.set_password(password) 
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, registration, email, name, password=None, **extra_fields):
+    def create_superuser(self, username, email, first_name, last_name, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        
+
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser must have is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
-        
-        return self.create_user(registration, email, name, password, **extra_fields)
+
+        return self.create_user(username, email, first_name, last_name, password, **extra_fields)
 
 class CustomUser(AbstractUser):
-   username = models.CharField(
+    username = models.CharField(
         max_length=20, 
         unique=True,
         validators=[RegexValidator(r'^\d+$', 'A matrícula deve conter apenas números.')],
     )
-   email = models.EmailField(unique=True)
-   course = models.ForeignKey(Course, on_delete=models.CASCADE, null=False, blank=False)
+    email = models.EmailField(unique=True)
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)
 
-   USERNAME_FIELD = 'username'
-   REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
-   objects = CustomUserManager()
+    objects = CustomUserManager()
 
-   def __str__(self):
-    return f"{self.first_name} {self.last_name}"
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
