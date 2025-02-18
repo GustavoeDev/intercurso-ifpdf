@@ -68,7 +68,7 @@ class Clasification(models.Model):
   def update_positions(cls, competition_instance):
       classifications = cls.objects.filter(competition=competition_instance).order_by(
       '-pontuation',
-      '-saldo_de_gols' 
+      '-points_difference' 
     )
 
     position = 1
@@ -79,7 +79,6 @@ class Clasification(models.Model):
 
   def __str__(self):
     return (self.team.name, ' - ', self.competition.name)
-
 
 class Game(models.Model):
   team_a = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_a', blank=False)
@@ -105,3 +104,20 @@ class Round(models.Model):
 
   def __str__(self):
     return self.name
+
+class Request(models.Model):
+  REQUEST_TYPE_CHOICES = [
+    ('approve_team', 'Approve Team'),
+    ('delete_team', 'Delete Team'),
+    ('remove_team_member', 'Remove Team Member'),
+  ]
+  STATUS_CHOICES = [
+    ('pendent', 'Pendent'),
+    ('done', 'Done'),
+  ]
+  request_type = models.CharField(max_length=255, choices=REQUEST_TYPE_CHOICES, blank=False)
+  team = models.ForeignKey(Team, on_delete=models.CASCADE, blank=True)
+  user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True)
+  reason = models.TextField(blank=True)
+  status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='pendent')
+  created_at = models.DateTimeField(auto_now=True)
