@@ -45,7 +45,7 @@ class CustomUser(AbstractUser):
     )
    name = models.CharField(max_length=200)
    email = models.EmailField(unique=True)
-   course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True, blank=True)
+   course = models.ForeignKey(Course, on_delete=models.CASCADE, null=False, blank=False)
 
    username = models.CharField(max_length=200, blank=True, null=True)
 
