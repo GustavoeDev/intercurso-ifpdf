@@ -48,6 +48,38 @@ class Team(models.Model):
   def __str__(self):
     return self.name
 
+class Clasification(models.Model):
+  team = models.OneToOneField(Team, on_delete=models.CASCADE, blank=False)
+  competition = models.ForeignKey(Competition, on_delete=models.CASCADE, blank=False)
+  victories = models.IntegerField(blank=False, default=0)
+  defeats = models.IntegerField(blank=False, default=0)
+  ties = models.IntegerField(blank=True, default=0)
+  pontuation = models.IntegerField(blank=False, default=0)
+  games_played = models.IntegerField(blank=False, default=0)
+  points_pro = models.IntegerField(blank=False, default=0) # Generic name to fill all sports(poits, goals, etc)
+  points_against = models.IntegerField(blank=False, default=0)
+  position = models.IntegerField(blank=False)
+
+  @property
+  def points_difference(self):
+    return self.points_pro - self.points_against
+
+  @classmethod
+  def update_positions(cls, competition_instance):
+      classifications = cls.objects.filter(competition=competition_instance).order_by(
+      '-pontuation',
+      '-saldo_de_gols' 
+    )
+
+    position = 1
+    for classification in classifications:
+      classification.position = position
+      classification.save()
+      position += 1
+
+  def __str__(self):
+    return (self.team.name, ' - ', self.competition.name)
+
 
 class Game(models.Model):
   team_a = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_a', blank=False)
