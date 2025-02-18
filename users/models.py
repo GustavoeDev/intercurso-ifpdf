@@ -38,21 +38,18 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(registration, email, name, password, **extra_fields)
 
 class CustomUser(AbstractUser):
-   registration = models.CharField(
+   username = models.CharField(
         max_length=20, 
         unique=True,
         validators=[RegexValidator(r'^\d+$', 'A matrícula deve conter apenas números.')],
     )
-   name = models.CharField(max_length=200)
    email = models.EmailField(unique=True)
    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=False, blank=False)
 
-   username = models.CharField(max_length=200, blank=True, null=True)
-
-   USERNAME_FIELD = 'registration'
-   REQUIRED_FIELDS = ['email', 'name']
+   USERNAME_FIELD = 'username'
+   REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
    objects = CustomUserManager()
 
    def __str__(self):
-       return self.name
+    return f"{self.first_name} {self.last_name}"
