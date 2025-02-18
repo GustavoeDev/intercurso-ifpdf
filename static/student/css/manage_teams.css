@@ -331,6 +331,12 @@ dialog .inputs-container > textarea {
   font-size: 1rem;
 }
 
+.error {
+  color: #ff3737;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
 .add-player-dialog select.invalid {
   color: var(--gray-500);
 }

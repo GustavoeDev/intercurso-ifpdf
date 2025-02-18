@@ -45,7 +45,11 @@
       </div>
     </div>
     <div class="card-actions">
-      <button class="add-new-member">
+      <button
+        class="add-new-member"
+        data-id="{{ team.id }}"
+        data-url="{% url 'add_member_to_team' team.id %}"
+      >
         <span>Adicionar novo participante</span>
         <img
           class="button-image"
@@ -100,37 +104,6 @@
 
 {% endfor %}
 
-<dialog class="edit-player-dialog">
-  <div class="dialog-header">
-    <h3>Editar dados de <span></span></h3>
-    <button><i class="fa-solid fa-xmark"></i></button>
-  </div>
-
-  <form action="">
-    <div class="inputs-container">
-      <label for="edit-player-name">Nome completo</label>
-      <input type="text" id="edit-player-name" />
-    </div>
-    <div class="inputs-container">
-      <label for="edit-player-enrollment">Matrícula</label>
-      <input type="text" id="edit-player-enrollment" />
-    </div>
-    <div class="inputs-container">
-      <label for="edit-player-course">Curso</label>
-      <input type="text" id="edit-player-course" />
-    </div>
-    <div class="inputs-container">
-      <label for="edit-player-reason">Motivo da alteração</label>
-      <textarea
-        id="edit-player-reason"
-        placeholder="Explique o motivo..."
-      ></textarea>
-    </div>
-
-    <button type="submit">Confirmar alterações</button>
-  </form>
-</dialog>
-
 <dialog class="remove-player-dialog">
   <div class="dialog-header">
     <h3>Excluir <span></span> da equipe?</h3>
@@ -156,26 +129,19 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  <form action="" method="POST">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="add-player-name">Nome completo</label>
-      <input type="text" id="add-player-name" placeholder="Nome" />
+      {{ add_user_form.full_name.label_tag }} {{ add_user_form.full_name }}
     </div>
     <div class="inputs-container">
-      <label for="add-player-enrollment">Matrícula</label>
-      <input type="text" id="add-player-enrollment" placeholder="Matrícula" />
+      {{ add_user_form.username.label_tag }} {{ add_user_form.username }}
     </div>
     <div class="inputs-container">
-      <label for="courses-select">Curso</label>
-      <select id="courses-select" name="modality">
-        <option value="default-value" selected disabled>
-          Selecione seu curso
-        </option>
-        <option value="info">Informática</option>
-        <option value="api">Apicultura</option>
-        <option value="ali">Alimentos</option>
-      </select>
+      {{ add_user_form.course.label_tag }} {{ add_user_form.course }}
     </div>
+
+    <div id="error-message" class="error"></div>
 
     <button type="submit">Confirmar alterações</button>
   </form>

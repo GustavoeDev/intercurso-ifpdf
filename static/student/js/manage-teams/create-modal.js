@@ -1,48 +1,10 @@
 // Players Data
 
-const btnEditPlayer = document.querySelectorAll(".table-row .edit-player");
-const modalEditPlayer = document.querySelector(".edit-player-dialog");
-const btnCloseModalEditPlayer = document.querySelector(
-  ".edit-player-dialog .dialog-header button"
-);
-
 const btnRemovePlayer = document.querySelectorAll(".table-row .remove-player");
 const modalRemovePlayer = document.querySelector(".remove-player-dialog");
 const btnCloseModalRemovePlayer = document.querySelector(
   ".remove-player-dialog .dialog-header button"
 );
-
-btnEditPlayer.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    modalEditPlayer.showModal();
-
-    const row = btn.closest("tr");
-    const cells = row.querySelectorAll("td");
-
-    const playerClicked = {
-      name: cells[0].innerText,
-      enrollmentId: cells[1].innerText,
-      course: cells[2].innerText,
-    };
-
-    const modalSpan = modalEditPlayer.querySelector("h3 span");
-    modalSpan.innerText = playerClicked.name;
-
-    const inputName = modalEditPlayer.querySelector("#edit-player-name");
-    const inputEnrollment = modalEditPlayer.querySelector(
-      "#edit-player-enrollment"
-    );
-    const inputCourse = modalEditPlayer.querySelector("#edit-player-course");
-
-    inputName.value = playerClicked.name;
-    inputEnrollment.value = playerClicked.enrollmentId;
-    inputCourse.value = playerClicked.course;
-  });
-});
-
-btnCloseModalEditPlayer.addEventListener("click", () => {
-  modalEditPlayer.close();
-});
 
 btnRemovePlayer.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -73,11 +35,50 @@ const modalAddPlayer = document.querySelector(".add-player-dialog");
 const btnCloseModalAddPlayer = document.querySelector(
   ".add-player-dialog .dialog-header button"
 );
+const formAddPlayer = document.querySelector(".add-player-dialog form");
 
+// Adicionar form action do modal add-player-dialog
 btnAddPlayer.forEach((btn) => {
   btn.addEventListener("click", () => {
+    const teamUrl = btn.dataset.url;
+    formAddPlayer.action = teamUrl;
     modalAddPlayer.showModal();
   });
+});
+
+btnCloseModalAddPlayer.addEventListener("click", (e) => {
+  e.preventDefault();
+  modalAddPlayer.close();
+});
+
+// Enviar formulário do modal add-player-dialog
+formAddPlayer.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(formAddPlayer);
+
+  try {
+    const response = await fetch(formAddPlayer.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.status === "success") {
+      modalAddPlayer.close();
+      window.location.reload();
+    } else {
+      const errorDiv = document.querySelector("#error-message");
+      errorDiv.textContent = data.message;
+      errorDiv.style.display = "block";
+    }
+  } catch (error) {
+    alert("Erro ao adicionar membro. Tente novamente.");
+  }
 });
 
 btnCloseModalAddPlayer.addEventListener("click", () => {

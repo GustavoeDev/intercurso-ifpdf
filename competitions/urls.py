@@ -5,6 +5,7 @@ urlpatterns = [
     # Aluno
     path('', view_homepage, name="homepage"),
     path('gerenciar-equipes/', ManageTeamsView.as_view(), name="manage_teams"),
+    path('gerenciar-equipes/adicionar-membro/<int:pk>/', AddNewMemberToTeamView.as_view(), name="add_member_to_team"),
     path('registrar-equipe/', view_add_team, name="register_team_student"),
     path('competicao/basquete/', view_league_page, name="league"), #basquete vai ser substituido pelo id/nome da competição
     path('competicao/futsal-masculino/', view_group_stage_page, name="group"), #futsal-masculino vai ser substituido pelo id/nome da competição
