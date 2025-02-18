@@ -1,9 +1,19 @@
+from django.views.generic import ListView
+from .models import Team
 from django.shortcuts import render
 
 # Aluno
 
 def view_homepage(request):
     return render(request, 'student/home.html')
+
+class ManageTeamsView(ListView):
+    model = Team
+    template_name = 'student/manage_teams.html'
+    context_object_name = 'teams'
+
+    def get_queryset(self):
+        return Team.objects.filter(members=self.request.user, status='approved').order_by('-register_date')
 
 def view_manage_teams(request):
     return render(request, 'student/manage_teams.html')
