@@ -349,6 +349,71 @@ option {
   color: #000000;
 }
 
+.sonner-request-container {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+  background-color: var(--white);
+  border: 1px solid var(--gray-500);
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+
+  opacity: 0;
+  transform: translateY(100%);
+  pointer-events: none;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+.sonner-request-container.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.sonner-request-container.hide {
+  opacity: 0;
+  transform: translateY(100%);
+}
+
+.sonner-request-container > .sonner-request-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sonner-request-container > .sonner-request-text > span {
+  font-size: 0.925rem;
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.sonner-request-container > .sonner-request-text > p {
+  font-size: 0.875rem;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+.sonner-request-container .sonner-request-close {
+  cursor: pointer;
+  background-color: var(--green-100);
+  padding: 0 0.75rem;
+  border-radius: 6px;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.925rem;
+  border: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media screen and (max-width: 768px) {
   table {
     width: 47rem;

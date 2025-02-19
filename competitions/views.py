@@ -5,6 +5,7 @@ from django.views.generic import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.utils.timezone import localtime
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
@@ -132,18 +133,21 @@ class RequestRemoveMemberFromTeamView(View):
                         'message': 'Esta solicitação já foi enviada.'
                     })
 
-                Request.objects.create(
+                new_request = Request.objects.create(
                     request_type='remove_team_member',
                     team=team,
                     user=user,
                     reason=form.cleaned_data['reason'],
                     status='pendent'
                 )
+
+                created_at_local = localtime(new_request.created_at)
                 
-                messages.success(request, 'Solicitação de remoção enviada com sucesso!')
+                messages.success(request, 'Solicitação enviada com sucesso!')
                 return JsonResponse({
                     'status': 'success',
-                    'message': 'Solicitação de remoção enviada com sucesso!'
+                    'message': 'Solicitação enviada com sucesso!',
+                    'created_at': created_at_local.strftime("%d/%m/%Y")
                 })
             except Exception as e:
                 return JsonResponse({

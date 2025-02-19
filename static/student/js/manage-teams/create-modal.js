@@ -52,13 +52,15 @@ formRemovePlayer.addEventListener("submit", async (e) => {
     if (data.status === "success") {
       modalRemovePlayer.close();
       formRemovePlayer.reset();
-      alert(data.message);
+      const date_request = data.created_at;
+      showSonner(data.message, date_request);
     } else {
       const errorDiv = document.querySelector("#error-message");
       errorDiv.textContent = data.message;
       errorDiv.style.display = "block";
     }
   } catch (error) {
+    console.error(error);
     alert("Erro ao enviar solicitação. Tente novamente.");
   }
 });
@@ -145,3 +147,32 @@ btnRemoveTeam.forEach((btn) => {
 btnCloseModalRemoveTeam.addEventListener("click", () => {
   modalRemoveTeam.close();
 });
+
+// Mostrar o Sonner
+
+function showSonner(textData, dateRequest) {
+  const sonner = document.querySelector(".sonner-request-container");
+  const textSonner = document.querySelector(".sonner-request-text span");
+  const dateSonner = document.querySelector(".sonner-request-text p");
+
+  if (!sonner || !textSonner) return;
+
+  textSonner.textContent = textData;
+  dateSonner.textContent = dateRequest;
+
+  sonner.classList.add("show");
+  sonner.classList.remove("hide");
+
+  setTimeout(() => {
+    sonner.classList.remove("show");
+    sonner.classList.add("hide");
+  }, 7000);
+}
+
+document
+  .querySelector(".sonner-request-close")
+  .addEventListener("click", () => {
+    const sonner = document.querySelector(".sonner-request-container");
+    sonner.classList.remove("show");
+    sonner.classList.add("hide");
+  });
