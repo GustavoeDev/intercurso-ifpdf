@@ -1,13 +1,17 @@
-// Players Data
+// Remove Player Request
 
 const btnRemovePlayer = document.querySelectorAll(".table-row .remove-player");
 const modalRemovePlayer = document.querySelector(".remove-player-dialog");
 const btnCloseModalRemovePlayer = document.querySelector(
   ".remove-player-dialog .dialog-header button"
 );
+const formRemovePlayer = document.querySelector(".remove-player-dialog form");
 
 btnRemovePlayer.forEach((btn) => {
   btn.addEventListener("click", () => {
+    const removePlayerUrl = btn.dataset.url;
+    formRemovePlayer.action = removePlayerUrl;
+
     modalRemovePlayer.showModal();
 
     const row = btn.closest("tr");
@@ -26,9 +30,40 @@ btnRemovePlayer.forEach((btn) => {
 
 btnCloseModalRemovePlayer.addEventListener("click", () => {
   modalRemovePlayer.close();
+  formRemovePlayer.reset();
 });
 
-// Teams Data
+formRemovePlayer.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(formRemovePlayer);
+
+  try {
+    const response = await fetch(formRemovePlayer.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.status === "success") {
+      modalRemovePlayer.close();
+      formRemovePlayer.reset();
+      alert(data.message);
+    } else {
+      const errorDiv = document.querySelector("#error-message");
+      errorDiv.textContent = data.message;
+      errorDiv.style.display = "block";
+    }
+  } catch (error) {
+    alert("Erro ao enviar solicitação. Tente novamente.");
+  }
+});
+
+// Add Player
 
 const btnAddPlayer = document.querySelectorAll(".add-new-member");
 const modalAddPlayer = document.querySelector(".add-player-dialog");

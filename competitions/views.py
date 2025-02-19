@@ -1,6 +1,6 @@
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView
 from .models import *
-from .forms import AddUserToTeamForm
+from .forms import AddUserToTeamForm, RemoveMemberRequestForm
 from django.views.generic import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -25,16 +25,24 @@ class ManageTeamsView(ListView):
         context = super().get_context_data(**kwargs)
         
         add_user_form = AddUserToTeamForm()
+        request_remove_member_form = RemoveMemberRequestForm()
 
         context['add_user_form'] = add_user_form
+        context['request_remove_member_form'] = request_remove_member_form
+
         return context
 
     def post(self, request, *args, **kwargs):
         add_user_form = AddUserToTeamForm(request.POST)
+        request_remove_member_form = RemoveMemberRequestForm(request.POST)
         
         if add_user_form.is_valid():
             add_user_form.save()
-            return redirect('manage_teams')  
+            return redirect('manage_teams')
+
+        if request_remove_member_form.is_valid():
+            request_remove_member_form.save()
+            return redirect('manage_teams')
 
         return self.get(request, *args, **kwargs)
     
@@ -97,8 +105,56 @@ class AddNewMemberToTeamView(View):
             'message': 'Dados inválidos. Verifique os campos e tente novamente.'
         })
 
-def view_manage_teams(request):
-    return render(request, 'student/manage_teams.html')
+class RequestRemoveMemberFromTeamView(View):
+    def post(self, request, team_pk, user_pk):
+        team = get_object_or_404(Team, pk=team_pk)
+        user = get_object_or_404(CustomUser, pk=user_pk)
+        form = RemoveMemberRequestForm(request.POST)
+
+        if user not in team.members.all():
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Este usuário não é membro desta equipe.'
+            })
+
+        if form.is_valid():
+            try:
+                existing_request = Request.objects.filter(
+                    request_type='remove_team_member',
+                    team=team,
+                    user=user,
+                    status='pendent'
+                ).exists()
+
+                if existing_request:
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Esta solicitação já foi enviada.'
+                    })
+
+                Request.objects.create(
+                    request_type='remove_team_member',
+                    team=team,
+                    user=user,
+                    reason=form.cleaned_data['reason'],
+                    status='pendent'
+                )
+                
+                messages.success(request, 'Solicitação de remoção enviada com sucesso!')
+                return JsonResponse({
+                    'status': 'success',
+                    'message': 'Solicitação de remoção enviada com sucesso!'
+                })
+            except Exception as e:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': 'Erro ao criar solicitação de remoção.'
+                })
+        else:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Por favor, forneça um motivo válido para a remoção.'
+            })
 
 def view_add_team(request):
     return render(request, 'student/register_team.html')

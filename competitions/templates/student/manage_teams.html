@@ -47,7 +47,6 @@
     <div class="card-actions">
       <button
         class="add-new-member"
-        data-id="{{ team.id }}"
         data-url="{% url 'add_member_to_team' team.id %}"
       >
         <span>Adicionar novo participante</span>
@@ -88,7 +87,10 @@
         <td>{{ player.username }}</td>
         <td>{{ player.course }}</td>
         <td>
-          <button class="image-button remove-player">
+          <button
+            class="image-button remove-player"
+            data-url="{% url 'request_remove_member' team.id player.id %}"
+          >
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -110,14 +112,14 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  <form action="" method="POST">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="remove-player-reason">Motivo da alteração</label>
-      <textarea
-        id="remove-player-reason"
-        placeholder="Explique o motivo..."
-      ></textarea>
+      <label>{{ request_remove_member_form.reason.label_tag }}</label>
+      {{ request_remove_member_form.reason }}
     </div>
+
+    <div id="error-message" class="error"></div>
 
     <button type="submit" class="remove-btn-modal">Excluir</button>
   </form>

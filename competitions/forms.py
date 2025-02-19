@@ -1,5 +1,6 @@
 from django import forms
 from users.models import *
+from .models import *
 
 class AddUserToTeamForm(forms.Form):
     username = forms.CharField(
@@ -35,3 +36,10 @@ class AddUserToTeamForm(forms.Form):
 
         self.fields['course'].widget.attrs['required'] = True
         self.fields['course'].widget.attrs['onchange'] = "this.options[0].disabled = true;"
+
+class RemoveMemberRequestForm(forms.Form):
+    reason = forms.CharField(
+        label='Motivo da alteração',
+        widget=forms.Textarea(attrs={'placeholder': 'Explique o motivo...', 'rows': 0}),
+        required=True
+    )
