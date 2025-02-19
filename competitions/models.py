@@ -118,7 +118,7 @@ class Request(models.Model):
   ]
   request_type = models.CharField(max_length=255, choices=REQUEST_TYPE_CHOICES, blank=False)
   team = models.ForeignKey(Team, on_delete=models.CASCADE, blank=True)
-  user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True)
+  user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
   reason = models.TextField(blank=True)
   status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='pendent')
   created_at = models.DateTimeField(auto_now=True)

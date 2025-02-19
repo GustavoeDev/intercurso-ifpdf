@@ -37,9 +37,24 @@ class AddUserToTeamForm(forms.Form):
         self.fields['course'].widget.attrs['required'] = True
         self.fields['course'].widget.attrs['onchange'] = "this.options[0].disabled = true;"
 
-class RemoveMemberRequestForm(forms.Form):
+class RemoveMemberRequestForm(forms.ModelForm):
     reason = forms.CharField(
         label='Motivo da alteração',
         widget=forms.Textarea(attrs={'placeholder': 'Explique o motivo...', 'rows': 0}),
         required=True
     )
+    
+    class Meta:
+        model = Request
+        fields = ['reason']
+
+class RemoveTeamRequestForm(forms.ModelForm):
+    reason = forms.CharField(
+        label='Motivo da alteração',
+        widget=forms.Textarea(attrs={'placeholder': 'Explique o motivo...', 'rows': 0}),
+        required=True
+    )
+    
+    class Meta:
+        model = Request
+        fields = ['reason']

@@ -55,7 +55,10 @@
           src="{% static 'student/img/manage-teams/add-new-member.svg' %}"
         />
       </button>
-      <button class="delete-team">
+      <button
+        class="delete-team"
+        data-url="{% url 'request_remove_team' team.id %}"
+      >
         <span>Excluir equipe</span>
         <img
           class="button-image"
@@ -155,14 +158,14 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  <form action="" method="POST">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="remove-team-reason">Motivo da alteração</label>
-      <textarea
-        id="remove-team-reason"
-        placeholder="Explique o motivo..."
-      ></textarea>
+      <label>{{ request_remove_team_form.reason.label_tag }}</label>
+      {{ request_remove_team_form.reason }}
     </div>
+
+    <div id="error-message" class="error"></div>
 
     <button type="submit" class="remove-btn-modal">Excluir</button>
   </form>

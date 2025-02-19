@@ -55,7 +55,9 @@ formRemovePlayer.addEventListener("submit", async (e) => {
       const date_request = data.created_at;
       showSonner(data.message, date_request);
     } else {
-      const errorDiv = document.querySelector("#error-message");
+      const errorDiv = document.querySelector(
+        ".remove-player-dialog #error-message"
+      );
       errorDiv.textContent = data.message;
       errorDiv.style.display = "block";
     }
@@ -86,6 +88,7 @@ btnAddPlayer.forEach((btn) => {
 btnCloseModalAddPlayer.addEventListener("click", (e) => {
   e.preventDefault();
   modalAddPlayer.close();
+  formAddPlayer.reset();
 });
 
 // Enviar formulário do modal add-player-dialog
@@ -107,9 +110,12 @@ formAddPlayer.addEventListener("submit", async (e) => {
 
     if (data.status === "success") {
       modalAddPlayer.close();
+      formAddPlayer.reset();
       window.location.reload();
     } else {
-      const errorDiv = document.querySelector("#error-message");
+      const errorDiv = document.querySelector(
+        ".add-player-dialog #error-message"
+      );
       errorDiv.textContent = data.message;
       errorDiv.style.display = "block";
     }
@@ -122,14 +128,20 @@ btnCloseModalAddPlayer.addEventListener("click", () => {
   modalAddPlayer.close();
 });
 
+// Remove Team Request
+
 const btnRemoveTeam = document.querySelectorAll(".delete-team");
 const modalRemoveTeam = document.querySelector(".remove-team-dialog");
 const btnCloseModalRemoveTeam = document.querySelector(
   ".remove-team-dialog .dialog-header button"
 );
+const formRemoveTeam = document.querySelector(".remove-team-dialog form");
 
 btnRemoveTeam.forEach((btn) => {
   btn.addEventListener("click", () => {
+    const removeTeamUrl = btn.dataset.url;
+    formRemoveTeam.action = removeTeamUrl;
+
     modalRemoveTeam.showModal();
 
     const tableTitle = btn.closest(".table-title");
@@ -144,8 +156,42 @@ btnRemoveTeam.forEach((btn) => {
   });
 });
 
+formRemoveTeam.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(formRemoveTeam);
+
+  try {
+    const response = await fetch(formRemoveTeam.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    });
+
+    const data = await response.json();
+
+    if (data.status === "success") {
+      modalRemoveTeam.close();
+      formRemoveTeam.reset();
+      const date_request = data.created_at;
+      showSonner(data.message, date_request);
+    } else {
+      const errorDiv = document.querySelector(
+        ".remove-team-dialog #error-message"
+      );
+      errorDiv.textContent = data.message;
+      errorDiv.style.display = "block";
+    }
+  } catch (error) {
+    alert("Erro ao adicionar membro. Tente novamente.");
+  }
+});
+
 btnCloseModalRemoveTeam.addEventListener("click", () => {
   modalRemoveTeam.close();
+  formRemoveTeam.reset();
 });
 
 // Mostrar o Sonner
