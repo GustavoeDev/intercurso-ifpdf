@@ -23,11 +23,12 @@ class Competition(models.Model):
   name = models.CharField(max_length=255, unique=True, blank=False)
   modality = models.ForeignKey(Modality, on_delete=models.CASCADE, blank=False)
   system = models.CharField(max_length=255, choices=SYSTEM_CHOICES, blank=False)
-  members_per_team = models.IntegerField(blank=False)
+  min_members_per_team = models.IntegerField(blank=False)
+  max_members_per_team = models.IntegerField(blank=False)
   image = models.CharField(max_length=255, blank=True) # URL
   status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='pendent')
-  start_date = models.DateField()
-  end_date = models.DateField()
+  start_date = models.DateField(null=True, blank=True)
+  end_date = models.DateField(null=True, blank=True)
 
   def __str__(self):
     return self.name
@@ -37,7 +38,8 @@ class Team(models.Model):
   members = models.ManyToManyField(CustomUser, blank=False)
   competition = models.ForeignKey(Competition, on_delete=models.CASCADE, blank=False)
   pontuation = models.IntegerField(blank=True, default=0)
-  register_date = models.DateField()
+  abbreviation = models.CharField(max_length=3)
+  register_date = models.DateField(auto_now_add=True)
   
   STATUS_CHOICES = [
     ('pendent', 'Pendent'),
@@ -116,7 +118,7 @@ class Request(models.Model):
   ]
   request_type = models.CharField(max_length=255, choices=REQUEST_TYPE_CHOICES, blank=False)
   team = models.ForeignKey(Team, on_delete=models.CASCADE, blank=True)
-  user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True)
+  user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
   reason = models.TextField(blank=True)
   status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='pendent')
   created_at = models.DateTimeField(auto_now=True)

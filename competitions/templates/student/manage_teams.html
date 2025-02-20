@@ -28,6 +28,8 @@
   >
 </div>
 
+{% for team in teams %}
+
 <div class="table-container not-active">
   <div class="table-title">
     <div class="card-title">
@@ -38,19 +40,25 @@
         />
       </div>
       <div class="title-text">
-        <span>Equipirangaz</span>
-        <p>Basquete</p>
+        <span>{{ team.name }}</span>
+        <p>{{ team.competition }}</p>
       </div>
     </div>
     <div class="card-actions">
-      <button class="add-new-member">
+      <button
+        class="add-new-member"
+        data-url="{% url 'add_member_to_team' team.id %}"
+      >
         <span>Adicionar novo participante</span>
         <img
           class="button-image"
           src="{% static 'student/img/manage-teams/add-new-member.svg' %}"
         />
       </button>
-      <button class="delete-team">
+      <button
+        class="delete-team"
+        data-url="{% url 'request_remove_team' team.id %}"
+      >
         <span>Excluir equipe</span>
         <img
           class="button-image"
@@ -74,12 +82,18 @@
         <th>Curso</th>
         <th>Ações</th>
       </tr>
+
+      {% for player in team.members.all %}
+
       <tr class="table-row">
-        <td>Gustavo</td>
-        <td>20231094040023</td>
-        <td>ADS</td>
+        <td>{{ player.first_name }} {{ player.last_name }}</td>
+        <td>{{ player.username }}</td>
+        <td>{{ player.course }}</td>
         <td>
-          <button class="image-button remove-player">
+          <button
+            class="image-button remove-player"
+            data-url="{% url 'request_remove_member' team.id player.id %}"
+          >
             <img
               class="small-image"
               src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
@@ -88,186 +102,12 @@
         </td>
       </tr>
 
-      <tr class="table-row">
-        <td>Hian Sebasthian</td>
-        <td>20231094040043</td>
-        <td>Informática</td>
-        <td>
-          <button class="image-button remove-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
-
-      <tr class="table-row">
-        <td>João Neto</td>
-        <td>20231094040011</td>
-        <td>ADS</td>
-        <td>
-          <button class="image-button remove-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
-
-      <tr class="table-row">
-        <td>Arthur Lola</td>
-        <td>20231094040029</td>
-        <td>ADS</td>
-        <td>
-          <button class="image-button remove-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
+      {% endfor %}
     </table>
   </div>
 </div>
 
-<div class="table-container not-active">
-  <div class="table-title">
-    <div class="card-title">
-      <div class="title-image">
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-        />
-      </div>
-      <div class="title-text">
-        <span>Vôlei dos Amigos</span>
-        <p>Vôlei Indoor</p>
-      </div>
-    </div>
-    <div class="card-actions">
-      <button class="add-new-member">
-        <span>Adicionar novo participante</span>
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/add-new-member.svg' %}"
-        />
-      </button>
-      <button class="delete-team">
-        <span>Excluir equipe</span>
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-        />
-      </button>
-      <button class="image-button min-max-button max">
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
-        />
-      </button>
-    </div>
-  </div>
-
-  <div class="table-container-wrapper">
-    <table>
-      <tr class="table-header">
-        <th>Nome do participante</th>
-        <th>Matrícula</th>
-        <th>Curso</th>
-        <th>Ações</th>
-      </tr>
-      <tr class="table-row">
-        <td>Lwkas Carvalho</td>
-        <td>20231094040001</td>
-        <td>ADS</td>
-        <td>
-          <button class="image-button remove-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
-
-      <tr class="table-row">
-        <td>Felipe Freitas</td>
-        <td>20231094040016</td>
-        <td>Informática</td>
-        <td>
-          <button class="image-button remove-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
-
-      <tr class="table-row">
-        <td>Marcos Vinícius</td>
-        <td>20231094040012</td>
-        <td>ADS</td>
-        <td>
-          <button class="image-button remove-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
-
-      <tr class="table-row">
-        <td>Kaio Eduardo</td>
-        <td>20231094040030</td>
-        <td>ADS</td>
-        <td>
-          <button class="image-button remove-player">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<dialog class="edit-player-dialog">
-  <div class="dialog-header">
-    <h3>Editar dados de <span></span></h3>
-    <button><i class="fa-solid fa-xmark"></i></button>
-  </div>
-
-  <form action="">
-    <div class="inputs-container">
-      <label for="edit-player-name">Nome completo</label>
-      <input type="text" id="edit-player-name" />
-    </div>
-    <div class="inputs-container">
-      <label for="edit-player-enrollment">Matrícula</label>
-      <input type="text" id="edit-player-enrollment" />
-    </div>
-    <div class="inputs-container">
-      <label for="edit-player-course">Curso</label>
-      <input type="text" id="edit-player-course" />
-    </div>
-    <div class="inputs-container">
-      <label for="edit-player-reason">Motivo da alteração</label>
-      <textarea
-        id="edit-player-reason"
-        placeholder="Explique o motivo..."
-      ></textarea>
-    </div>
-
-    <button type="submit">Confirmar alterações</button>
-  </form>
-</dialog>
+{% endfor %}
 
 <dialog class="remove-player-dialog">
   <div class="dialog-header">
@@ -275,14 +115,14 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  <form action="" method="POST">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="remove-player-reason">Motivo da alteração</label>
-      <textarea
-        id="remove-player-reason"
-        placeholder="Explique o motivo..."
-      ></textarea>
+      <label>{{ request_remove_member_form.reason.label_tag }}</label>
+      {{ request_remove_member_form.reason }}
     </div>
+
+    <div id="error-message" class="error"></div>
 
     <button type="submit" class="remove-btn-modal">Excluir</button>
   </form>
@@ -294,26 +134,19 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  <form action="" method="POST">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="add-player-name">Nome completo</label>
-      <input type="text" id="add-player-name" placeholder="Nome" />
+      {{ add_user_form.full_name.label_tag }} {{ add_user_form.full_name }}
     </div>
     <div class="inputs-container">
-      <label for="add-player-enrollment">Matrícula</label>
-      <input type="text" id="add-player-enrollment" placeholder="Matrícula" />
+      {{ add_user_form.username.label_tag }} {{ add_user_form.username }}
     </div>
     <div class="inputs-container">
-      <label for="courses-select">Curso</label>
-      <select id="courses-select" name="modality">
-        <option value="default-value" selected disabled>
-          Selecione seu curso
-        </option>
-        <option value="info">Informática</option>
-        <option value="api">Apicultura</option>
-        <option value="ali">Alimentos</option>
-      </select>
+      {{ add_user_form.course.label_tag }} {{ add_user_form.course }}
     </div>
+
+    <div id="error-message" class="error"></div>
 
     <button type="submit">Confirmar alterações</button>
   </form>
@@ -325,17 +158,25 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  <form action="" method="POST">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="remove-team-reason">Motivo da alteração</label>
-      <textarea
-        id="remove-team-reason"
-        placeholder="Explique o motivo..."
-      ></textarea>
+      <label>{{ request_remove_team_form.reason.label_tag }}</label>
+      {{ request_remove_team_form.reason }}
     </div>
+
+    <div id="error-message" class="error"></div>
 
     <button type="submit" class="remove-btn-modal">Excluir</button>
   </form>
 </dialog>
+
+<div class="sonner-request-container">
+  <div class="sonner-request-text">
+    <span></span>
+    <p>Sunday, December 03, 2023 at 9:00 AM</p>
+  </div>
+  <button class="sonner-request-close">Feito</button>
+</div>
 
 {% endblock %}
