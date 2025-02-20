@@ -92,20 +92,81 @@ hr {
 
 .two-inputs-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
 }
 
+.error-container {
+  min-height: 20px;
+}
+
+.error-message {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+#form-general-errors {
+  margin-bottom: 1rem;
+}
+
+#form-general-errors .error-message {
+  background-color: #fee2e2;
+  border: 1px solid #dc2626;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+}
+
 .member-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.remove-member {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -2rem;
+  background: none;
+  border: none;
+  color: var(--red-500);
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+
+.remove-member:hover {
+  color: darkred;
+}
+
+.form-errors,
+.field-errors {
+  color: var(--red-500);
+  font-size: 0.9em;
+}
+
+.form-errors .error,
+.field-errors .error {
+  margin-bottom: 5px;
+}
+
+.member-inputs > .member-group {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2rem;
+
+  position: relative;
 }
 
 .input-container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+}
+
+.input-container label {
+  margin-bottom: 1rem;
 }
 
 label,
@@ -115,7 +176,8 @@ label span {
   color: var(--green-900);
 }
 
-.input {
+input,
+.input-container select {
   font-family: "Inter", sans-serif;
   font-size: 1rem;
   padding: 1rem 1.25rem;
