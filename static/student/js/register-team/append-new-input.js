@@ -196,6 +196,10 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
+          const date_request = data.created_at;
+          sessionStorage.setItem("sonnerMessage", data.message);
+          sessionStorage.setItem("sonnerDate", date_request);
+
           window.location.href = "/registrar-equipe/";
         } else {
           showFormErrors({
@@ -215,3 +219,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
   updateInputsForCompetition();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const sonnerMessage = sessionStorage.getItem("sonnerMessage");
+  const sonnerDate = sessionStorage.getItem("sonnerDate");
+
+  if (sonnerMessage && sonnerDate) {
+    showSonner(sonnerMessage, sonnerDate);
+
+    sessionStorage.removeItem("sonnerMessage");
+    sessionStorage.removeItem("sonnerDate");
+  }
+});
+
+// Mostrar o Sonner
+
+function showSonner(textData, dateRequest) {
+  const sonnerContainer = document.querySelector(".sonner-request-container");
+  const sonnerText = document.querySelector(".sonner-request-text span");
+  const sonnerDate = document.querySelector(".sonner-request-text p");
+
+  if (!sonnerContainer || !sonnerText) return;
+
+  sonnerText.textContent = textData;
+  sonnerDate.textContent = dateRequest;
+
+  sonnerContainer.classList.add("show");
+  sonnerContainer.classList.remove("hide");
+
+  setTimeout(() => {
+    sonnerContainer.classList.remove("show");
+    sonnerContainer.classList.add("hide");
+  }, 7000);
+}
+
+document
+  .querySelector(".sonner-request-close")
+  .addEventListener("click", () => {
+    const sonnerContainer = document.querySelector(".sonner-request-container");
+    sonnerContainer.classList.remove("show");
+    sonnerContainer.classList.add("hide");
+  });

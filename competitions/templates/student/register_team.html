@@ -19,16 +19,6 @@
   </p>
 </div>
 
-{% if messages %}
-<div class="messages">
-  {% for message in messages %}
-  <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-    {{ message }}
-  </div>
-  {% endfor %}
-</div>
-{% endif %}
-
 <form action="{% url 'register_team_student' %}" method="POST" id="new-team">
   {% csrf_token %}
 
@@ -140,5 +130,13 @@
     </button>
   </div>
 </form>
+
+<div class="sonner-request-container">
+  <div class="sonner-request-text">
+    <span></span>
+    <p>Sunday, December 03, 2023 at 9:00 AM</p>
+  </div>
+  <button class="sonner-request-close">Feito</button>
+</div>
 
 {% endblock %}
