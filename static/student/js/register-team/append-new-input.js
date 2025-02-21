@@ -195,10 +195,12 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.success) {
-          window.location.href = "/gerenciar-equipes/";
+        if (data.status === "success") {
+          window.location.href = "/registrar-equipe/";
         } else {
-          showFormErrors(data.errors);
+          showFormErrors({
+            __all__: [data.message || "Erro desconhecido. Tente novamente."],
+          });
         }
       })
       .catch((error) => {
