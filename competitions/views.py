@@ -10,6 +10,7 @@ from django.db import transaction
 from django.core.exceptions import ValidationError
 from django.utils.timezone import localtime
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 
 # Aluno
@@ -17,7 +18,7 @@ from django.shortcuts import render, redirect
 def view_homepage(request):
     return render(request, 'student/home.html')
 
-class ManageTeamsView(ListView):
+class ManageTeamsView(LoginRequiredMixin, ListView):
     model = Team
     template_name = 'student/manage_teams.html'
     context_object_name = 'teams'
@@ -228,7 +229,7 @@ class RequestRemoveTeamView(View):
                 'message': 'Por favor, forneça um motivo válido para a remoção.'
             })
 
-class RegisterTeamView(View):
+class RegisterTeamView(LoginRequiredMixin, View):
     template_name = 'student/register_team.html'
     success_url = reverse_lazy('manage_teams')
 
