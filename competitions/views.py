@@ -308,7 +308,6 @@ class RegisterTeamView(View):
 
             try:
                 with transaction.atomic():
-
                     member_errors = []
                     for i, member_form in enumerate(valid_members):
                         username = member_form.cleaned_data.get('username')
@@ -348,12 +347,39 @@ class RegisterTeamView(View):
                             })
 
                     team = team_form.save()
+
+                    existing_request = Request.objects.filter(
+                        request_type='approve_team',
+                        team=team,
+                        status='pendent'
+                    ).exists()
+
+                    if existing_request:
+                        return JsonResponse({
+                            'status': 'error',
+                            'message': 'Esta solicitação já foi enviada.'
+                        })
+
+                    # Adicionar membros à equipe
                     for i, member_form in enumerate(valid_members):
                         username = member_form.cleaned_data.get('username')
                         user = CustomUser.objects.get(username=username)
                         team.members.add(user)
 
-                    return JsonResponse({'success': True})
+                    new_request = Request.objects.create(
+                        request_type='approve_team',
+                        team=team,
+                        status='pendent'
+                    )
+
+                    created_at_local = localtime(new_request.created_at)
+                    messages.success(request, 'Solicitação enviada com sucesso!')
+
+                    return JsonResponse({
+                        'status': 'success',
+                        'message': 'Solicitação enviada com sucesso!',
+                        'created_at': created_at_local.strftime("%d/%m/%Y")
+                    })
 
             except ValidationError as e:
                 return JsonResponse({
@@ -361,6 +387,7 @@ class RegisterTeamView(View):
                     'errors': {'__all__': e.messages if hasattr(e, 'messages') else [str(e)]}
                 })
             except Exception as e:
+                print(f"Erro ao salvar equipe: {e}")  # <-- Adiciona log no console
                 return JsonResponse({
                     'success': False,
                     'errors': {'__all__': [f"Erro ao salvar: {str(e)}"]}
