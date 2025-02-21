@@ -28,6 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const newMemberGroup = initialForm.cloneNode(true);
     newMemberGroup.classList.add("member-group");
 
+    newMemberGroup.querySelector(
+      ".member-counter"
+    ).textContent = `Participante ${index + 1}`;
+
     const inputs = newMemberGroup.querySelectorAll("input, select");
     inputs.forEach((input) => {
       const oldId = input.id;

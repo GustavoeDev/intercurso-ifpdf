@@ -60,6 +60,8 @@ class ManageTeamsView(ListView):
 class AddNewMemberToTeamView(View):
     def post(self, request, pk):
         team = get_object_or_404(Team, pk=pk)
+        competition = team.competition
+        max_members_per_team = competition.max_members_per_team
         form = AddUserToTeamForm(request.POST)
         
         if form.is_valid():
@@ -68,6 +70,12 @@ class AddNewMemberToTeamView(View):
             
             # Verifica se o usuário existe
             try:
+                if team.members.count() >= max_members_per_team:
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'A equipe já está completa.'
+                    })
+
                 user = CustomUser.objects.get(username=username)
                 
                 # Verifica se o nome informado corresponde à matrícula
@@ -120,6 +128,8 @@ class RequestRemoveMemberFromTeamView(View):
     def post(self, request, team_pk, user_pk):
         team = get_object_or_404(Team, pk=team_pk)
         user = get_object_or_404(CustomUser, pk=user_pk)
+        competition = team.competition
+        min_members_per_team = competition.min_members_per_team
         form = RemoveMemberRequestForm(request.POST)
 
         if user not in team.members.all():
@@ -130,6 +140,12 @@ class RequestRemoveMemberFromTeamView(View):
 
         if form.is_valid():
             try:
+                if team.members.count() == min_members_per_team:
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': f'A equipe deve ter pelo menos {min_members_per_team} membros.'
+                    })
+
                 existing_request = Request.objects.filter(
                     request_type='remove_team_member',
                     team=team,

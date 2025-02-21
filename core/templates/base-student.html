@@ -81,7 +81,7 @@
     <nav class="nav-menu">
       <div class="nav-list">
         {% if user.is_authenticated %}
-        <span>Olá, {{ user.firs_name }}</span>
+        <span>Olá, {{ user.first_name }}</span>
         {% else %}
         <a href="{% url 'login' %}" class="btn-login-nav-list photo-hamburguer"
           >Login</a
