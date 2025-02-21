@@ -30,7 +30,7 @@ form {
   flex-direction: column;
   gap: 2rem;
 
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-bottom: 1.5rem;
 }
 
@@ -243,13 +243,35 @@ option {
   gap: 2rem;
 }
 
+.member-counter {
+  display: none;
+}
+
 button:disabled {
   cursor: not-allowed;
   background-color: #4caf5070;
 }
 
+@media screen and (max-width: 860px) {
+  .two-inputs-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .member-inputs > .member-group {
+    margin-top: 1rem;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .member-counter {
+    display: block;
+  }
+}
+
 @media screen and (max-width: 800px) {
-  .member-inputs {
+  .member-inputs input {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -270,9 +292,4 @@ button:disabled {
 }
 
 @media screen and (max-width: 650px) {
-  .two-inputs-row {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
 }

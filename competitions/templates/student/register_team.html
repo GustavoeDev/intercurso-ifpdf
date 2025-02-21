@@ -83,6 +83,7 @@
     <div class="member-inputs">
       {{ member_formset.management_form }} {% for form in member_formset %}
       <div class="member-group">
+        <span class="member-counter">Participante {{ forloop.counter }}</span>
         <div class="input-container">
           {{ form.full_name }}
           <div
