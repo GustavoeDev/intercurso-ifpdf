@@ -87,6 +87,12 @@ class TeamForm(forms.ModelForm):
         ] + list(self.fields['competition'].choices)[1:]
         self.fields['competition'].widget.attrs['required'] = True
         self.fields['competition'].widget.attrs['onchange'] = "this.options[0].disabled = true;"
+    
+    def clean_abbreviation(self):
+        abbreviation = self.cleaned_data['abbreviation']
+        if len(abbreviation) < 3:
+            raise forms.ValidationError('A abreviação deve ter 3 caracteres.')
+        return abbreviation.upper()
 
 class TeamMemberForm(forms.Form):
     username = forms.CharField(
