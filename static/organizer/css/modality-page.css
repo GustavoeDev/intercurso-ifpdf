@@ -328,14 +328,14 @@ dialog .inputs-container > textarea {
 }
 
 
-.competition-type-selection {
+#id_system {
   display: flex;
   align-items: center;
   gap: 2rem;
   justify-content: space-between;
 }
 
-.competition-type-selection .new-competition-radio-group {
+#id_system > div {
   display: flex;
   align-items: center;
   gap: 0.5rem;
