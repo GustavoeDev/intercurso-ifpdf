@@ -39,7 +39,10 @@
             <span>Criar nova competição</span>
             <i class="fa-solid fa-trophy"></i>
           </button>
-          <button class="edit-modality">
+          <button 
+            class="edit-modality"
+            data-url="{% url 'edit_modality' modality.id %}"
+          >
             <span>Editar modalidade</span>
             <i class="fa-solid fa-pencil"></i>
           </button>
@@ -121,16 +124,19 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  
+  <form action="" method="post">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="edit-modality-name">Nome da modalidade</label>
-      <input type="text" id="edit-modality-name" />
+      <label for="edit-modality-name">{{ edit_modality_form.name.label_tag }}</label>
+      {{ edit_modality_form.name }}
     </div>
 
     <button type="submit" class="create-new-modality-btn">
       Concluir alterações
     </button>
   </form>
+
 </dialog>
 
 <dialog class="remove-modality-dialog">

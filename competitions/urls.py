@@ -15,6 +15,7 @@ urlpatterns = [
     # Organizador
     path('organizador/modalidades/', ManageModalityView.as_view(), name="modality_list"),
     path('organizador/modalidades/<int:pk>/delete/', DeleteModalityView.as_view(), name="delete_modality"),
+    path('organizador/modalidades/<int:pk>/edit/', EditModalityView.as_view(), name="edit_modality"),
     path('organizador/equipes/', view_teams_page, name="teams_list"),
     path('organizador/equipes/registrar-equipe/', view_register_team, name="register_team"),
     path('organizador/equipes/editar-equipe/', view_edit_team, name="edit_team"),

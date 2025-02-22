@@ -2,7 +2,7 @@ from django.views.generic import ListView, CreateView
 from .models import *
 from .forms import *
 from django.forms import formset_factory
-from django.views.generic import View
+from django.views.generic import View, UpdateView
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy, reverse
@@ -414,9 +414,11 @@ class ManageModalityView(ListView):
         context = super().get_context_data(**kwargs)
 
         add_modality_form = AddModalityForm()
-        
+        edit_modality_form = EditModalityForm()
+
         context['competitions'] = Competition.objects.all()
         context['add_modality_form'] = add_modality_form
+        context['edit_modality_form'] = edit_modality_form
         
         
         return context
@@ -443,6 +445,17 @@ class DeleteModalityView(View):
             messages.error(request, 'Erro ao excluir a modalidade.')
         return redirect(reverse('modality_list'))
 
+class EditModalityView(View):
+    def post(self, request, pk):
+        modality = get_object_or_404(Modality, pk=pk)
+        form = EditModalityForm(request.POST, instance=modality)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Modalidade editada com sucesso!')
+        else:
+            messages.error(request, ('Erro ao editar modalidade:\n' + form.errors.get('name')))
+
+        return redirect(reverse('modality_list')) 
 def view_modality_page(request):
     return render(request, 'organizer/modality_page.html')
 

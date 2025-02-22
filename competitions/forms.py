@@ -126,11 +126,26 @@ class TeamMemberForm(forms.Form):
 class AddModalityForm(forms.ModelForm):
     name = forms.CharField(
         label='Nome da modalidade',
-        validators=[RegexValidator(r'^[a-zA-Z]+$', 'A modalidade deve conter apenas letras.')],
+        validators=[RegexValidator(r'^[a-zA-Z\s]+$', 'A modalidade deve conter apenas letras.')],
         widget=forms.TextInput(attrs={'placeholder': 'Modalidade'}),
         error_messages={
             'unique': "Já existe uma modalidade com este nome.",
-            'invalid': "A modalidade deve conter apenas letras."
+            'invalid': "A nome deve conter apenas letras."
+        }
+    )
+
+    class Meta:
+        model = Modality
+        fields = ['name']
+
+class EditModalityForm(forms.ModelForm):
+    name = forms.CharField(
+        label='Nome da modalidade',
+        validators=[RegexValidator(r'^[a-zA-Z\s]+$', 'A modalidade deve conter apenas letras.')],
+        widget=forms.TextInput(attrs={'placeholder': 'Modalidade'}),
+        error_messages={
+            'unique': "Já existe uma modalidade com este nome.",
+            'invalid': "A nome da modalidade deve conter apenas letras."
         }
     )
 

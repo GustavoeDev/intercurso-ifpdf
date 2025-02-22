@@ -41,7 +41,7 @@ formNewModality.addEventListener("submit", async (e) => {
       errorDiv.style.display = "block";
     }
   } catch (error) {
-    alert("Erro ao adicionar modalidade. O nome deve conter apenas letras.");
+    alert("Erro ao adicionar modalidade:\nTente novamente.");
     formNewModality.reset();
   }
 });
@@ -57,22 +57,20 @@ const buttonEditModality = document.querySelectorAll(
   ".card-actions .edit-modality"
 );
 const modalEditModality = document.querySelector(".edit-modality-dialog");
-const buttonCloseModalEditModality = document.querySelector(
-  ".edit-modality-dialog .dialog-header button"
-);
-const nameEditModalityDialog = document.querySelector(
-  ".edit-modality-dialog .dialog-header span"
-);
+const buttonCloseModalEditModality = document.querySelector( ".edit-modality-dialog .dialog-header button" );
+const nameEditModalityDialog = document.querySelector(".edit-modality-dialog .dialog-header span");
+const formEditModality = document.querySelector(".edit-modality-dialog form");
 
 buttonEditModality.forEach((button) => {
   button.addEventListener("click", () => {
+    const editModalityUrl = button.dataset.url;
+    formEditModality.action = editModalityUrl;
+    
     modalEditModality.showModal();
 
     const tableContainer = button.closest(".table-container");
 
-    const modalInputName = document.querySelector(
-      ".edit-modality-dialog #edit-modality-name"
-    );
+    const modalInputName = document.querySelector(".edit-modality-dialog form input[name='name']");
 
     const nameModality = tableContainer.querySelector(".title-text span");
     modalInputName.value = nameModality.textContent;
