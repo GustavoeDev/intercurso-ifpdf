@@ -5,7 +5,7 @@ from django.forms import formset_factory
 from django.views.generic import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.db import transaction
 from django.core.exceptions import ValidationError
 from django.utils.timezone import localtime
@@ -432,6 +432,16 @@ class ManageModalityView(ListView):
             return JsonResponse({'status': 'error', 'message': "Erro ao salvar a modalidade."})
         
         return self.get(request, *args, **kwargs)
+
+class DeleteModalityView(View):
+    def post(self, request, pk):
+        modality = get_object_or_404(Modality, pk=pk)
+        try:
+            modality.delete()
+            messages.success(request, 'Modalidade excluída com sucesso!')
+        except Exception as e:
+            messages.error(request, 'Erro ao excluir a modalidade.')
+        return redirect(reverse('modality_list'))
 
 def view_modality_page(request):
     return render(request, 'organizer/modality_page.html')

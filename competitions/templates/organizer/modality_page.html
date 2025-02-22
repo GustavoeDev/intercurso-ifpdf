@@ -6,6 +6,7 @@
   src="{% static 'organizer/js/modality-page/create-modal.js' %}"
   defer
 ></script>
+<script src="{% static 'organizer/js/modality-page/show-messeges.js' %}"></script>
 {% endblock %} {% block main %}
 
 {% block title %}
@@ -16,6 +17,7 @@
   <h3>Modalidades</h3>
   <button>Cadastrar modalidade</button>
 </div>
+
 
 <div class="modality-container-wrapper">
   {% for modality in modalities %}
@@ -41,7 +43,10 @@
             <span>Editar modalidade</span>
             <i class="fa-solid fa-pencil"></i>
           </button>
-          <button class="delete-modality">
+          <button 
+            class="delete-modality" 
+            data-url="{% url 'delete_modality' modality.id %}"
+          >
             <span>Excluir modalidade</span>
             <i class="fa-solid fa-trash-can"></i>
           </button>
@@ -134,7 +139,14 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Excluir</button>
+  <p>
+    Ao excluir a modalidade, todas as competições atribuidas a ela também serão excluídas.
+  </p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" class="submit-button">Excluir</button>
+  </form>
 </dialog>
 
 <dialog class="remove-competition-dialog">
@@ -245,5 +257,11 @@
     <button type="submit">Criar competição</button>
   </form>
 </dialog>
+
+<ul class="messages" style="display: none;">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+</ul>
 
 {% endblock %}

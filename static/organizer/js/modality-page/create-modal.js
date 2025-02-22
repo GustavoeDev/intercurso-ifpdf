@@ -95,9 +95,15 @@ const buttonCloseModalDeleteModality = document.querySelector(
 const nameModalModalityDeleteModality = document.querySelector(
   ".remove-modality-dialog .dialog-header span"
 );
+const formDeleteModality = document.querySelector(
+  ".remove-modality-dialog form"
+);
 
 buttonDeleteModality.forEach((button) => {
   button.addEventListener("click", () => {
+    const deleteModalityUrl = button.dataset.url;
+    formDeleteModality.action = deleteModalityUrl;
+    
     modalDeleteModality.showModal();
 
     const tableContainer = button.closest(".table-container");

@@ -313,8 +313,20 @@ dialog .inputs-container > textarea {
   margin-top: 1rem;
 }
 
-.remove-competition-dialog > button,
-.remove-modality-dialog > button {
+.remove-modality-dialog .submit-button {
+  background-color: var(--red-500);
+  padding: 1.25rem;
+  border: 0;
+  border-radius: 6px;
+  text-align: center;
+  color: var(--white);
+  font-weight: 500;
+  cursor: pointer;
+
+  width: 100%;
+}
+
+.remove-competition-dialog > button[type="submit"] {
   background-color: var(--red-500);
   padding: 1.25rem;
   border: 0;
