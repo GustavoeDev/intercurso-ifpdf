@@ -114,7 +114,7 @@ class Request(models.Model):
   ]
   STATUS_CHOICES = [
     ('pendent', 'Pendent'),
-    ('done', 'Done'),
+    ('approved', 'Approved'),
     ('rejected', 'Rejected')
   ]
   request_type = models.CharField(max_length=255, choices=REQUEST_TYPE_CHOICES, blank=False)

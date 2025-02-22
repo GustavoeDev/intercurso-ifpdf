@@ -310,6 +310,14 @@ dialog > form {
   gap: 0.5rem;
 }
 
+.reason_rejected_field {
+  display: none;
+}
+
+.reason_rejected_field.visible {
+  display: block !important;
+}
+
 .reason-deny > label {
   display: block;
   margin-bottom: 0.5rem;

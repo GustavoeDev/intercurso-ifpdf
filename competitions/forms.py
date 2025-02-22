@@ -125,8 +125,6 @@ class TeamMemberForm(forms.Form):
 
 # Requests Forms
 
-from django import forms
-
 class RejectRequestForm(forms.ModelForm):
     ACTION_CHOICES = [
         ('approved', 'Aprovar Solicitação'),
@@ -156,7 +154,6 @@ class RejectRequestForm(forms.ModelForm):
         action = cleaned_data.get('action')
         reason_rejected = cleaned_data.get('reason_rejected')
 
-        # Se a ação for "rejected", o motivo de rejeição é obrigatório
         if action == 'rejected' and not reason_rejected:
             self.add_error('reason_rejected', 'Este campo é obrigatório ao negar a solicitação.')
 

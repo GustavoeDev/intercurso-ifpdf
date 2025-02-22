@@ -5,6 +5,7 @@
 <script src="{% static 'organizer/js/requests-page/color-type-request.js' %}" defer></script>
 <script src="{% static 'organizer/js/requests-page/create-modal.js' %}" defer></script>
 <script src="{% static 'organizer/js/requests-page/radio-change.js' %}" defer></script>
+<script src="{% static 'organizer/js/requests-page/form-submission.js' %}" defer></script>
 {% endblock %} {% block main %}
 
 <div class="table-container">
@@ -30,7 +31,6 @@
   </div>
 
   <div class="table-container-wrapper">
-    <!-- Tabela para solicitações de equipes -->
     <table class="table-teams">
       <tr class="table-header">
         <th>Equipe solicitante</th>
@@ -46,14 +46,10 @@
       <tr class="table-row">
         <td>
           <p>{{ request.team.name }}</p>
-          <!-- Nome da equipe -->
           <span>{{ request.team.competition }}</span>
-          <!-- Competição -->
         </td>
         <td class="type-request">{{ request.get_request_type_display }}</td>
-        <!-- Tipo de solicitação -->
         <td>{{ request.created_at|date:"d/m/Y" }}</td>
-        <!-- Data da solicitação -->
         <td>
           <button class="show-request" data-request-id="{{ request.id }}">Exibir solicitação</button>
         </td>
@@ -61,7 +57,6 @@
       {% endif %} {% endfor %}
     </table>
 
-    <!-- Tabela para solicitações de participantes -->
     <table class="table-players disabled">
       <tr class="table-header">
         <th>Equipe solicitante</th>
@@ -75,14 +70,10 @@
       <tr class="table-row">
         <td>
           <p>{{ request.team.name }}</p>
-          <!-- Nome da equipe -->
           <span>{{ request.team.competition }}</span>
-          <!-- Competição -->
         </td>
         <td class="type-request">{{ request.get_request_type_display }}</td>
-        <!-- Tipo de solicitação -->
         <td>{{ request.created_at|date:"d/m/Y" }}</td>
-        <!-- Data da solicitação -->
         <td>
           <button class="show-request" data-request-id="{{ request.id }}">Exibir solicitação</button>
         </td>
@@ -119,23 +110,27 @@
       </div>
     </div>
   </div>
-  <form action="" method="POST">
+  <form action="{% url 'requests_list' %}" method="POST">
     {% csrf_token %}
-    <input type="hidden" name="action" value="approve" />
     <input type="hidden" name="request_id" value="{{ request.id }}" />
 
     <div class="radio-action-group">
-      {% for choice in reject_request_form.action %}
-      <label class="radio-action-item" for="{{ choice.id_for_label }}_approve">
-        {{ choice.tag }} {{ choice.choice_label }}
+      <label for="approve" class="radio-action-item">
+        <input type="radio" name="action" value="approve" id="approve" />
+        Aprovar solicitação
       </label>
-      {% endfor %}
+
+      <label for="reject" class="radio-action-item">
+        <input type="radio" name="action" value="reject" id="reject" />
+        Rejeitar solicitação
+      </label>
     </div>
 
-    <div class="reason-deny reason_rejected_field" style="display: none">
+    <div class="reason-deny reason_rejected_field">
       <label>{{ reject_request_form.reason_rejected.label_tag }}</label>
       {{ reject_request_form.reason_rejected }}
     </div>
+
     <button type="submit">Confirmar</button>
   </form>
 </dialog>
@@ -173,16 +168,17 @@
       <p></p>
     </div>
   </div>
-  <form action="" method="POST">
-    <input type="hidden" name="action" value="reject" />
-    <input type="hidden" name="request_id" value="{{ request.id }}" />
-
+  <form action="{% url 'requests_list' %}" method="POST">
     <div class="radio-action-group">
-      {% for choice in reject_request_form.action %}
-      <label class="radio-action-item" for="{{ choice.id_for_label }}_remove">
-        {{ choice.tag }} {{ choice.choice_label }}
+      <label for="approve-team-remove" class="radio-action-item">
+        <input type="radio" name="action" value="approve" id="approve-team-remove" />
+        Aprovar solicitação
       </label>
-      {% endfor %}
+
+      <label for="reject-team-remove" class="radio-action-item">
+        <input type="radio" name="action" value="reject" id="reject-team-remove" />
+        Rejeitar solicitação
+      </label>
     </div>
 
     <div class="reason-deny reason_rejected_field" style="display: none">
@@ -218,18 +214,19 @@
       <p></p>
     </div>
   </div>
-  <form action="">
+  <form action="{% url 'requests_list' %}" method="POST">
     {% csrf_token %}
 
-    <input type="hidden" name="action" value="reject" />
-    <input type="hidden" name="request_id" value="{{ request.id }}" />
-
     <div class="radio-action-group">
-      {% for choice in reject_request_form.action %}
-      <label class="radio-action-item" for="{{ choice.id_for_label }}_player">
-        {{ choice.tag }} {{ choice.choice_label }}
+      <label for="approve-player-remove" class="radio-action-item">
+        <input type="radio" name="action" value="approve" id="approve-player-remove" />
+        Aprovar solicitação
       </label>
-      {% endfor %}
+
+      <label for="reject-player-remove" class="radio-action-item">
+        <input type="radio" name="action" value="reject" id="reject-player-remove" />
+        Rejeitar solicitação
+      </label>
     </div>
 
     <div class="reason-deny reason_rejected_field" style="display: none">

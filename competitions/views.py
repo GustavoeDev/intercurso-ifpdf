@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, UpdateView
 from .models import *
 from .forms import *
 from django.forms import formset_factory
@@ -466,30 +466,38 @@ class RequestsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
         return context
     
     def post(self, request, *args, **kwargs):
-        action = request.POST.get('action')  
-        reject_request_form = RejectRequestForm(request.POST)
+        action = request.POST.get('action')
+        request_id = request.POST.get('request_id')
+        reason_rejected = request.POST.get('reason_rejected')
 
-        if reject_request_form.is_valid():
-            
-            reject_request_instance = reject_request_form.save(commit=False)
-            
-            request_id = request.POST.get('request_id')
-            try:
-                request_instance = Request.objects.get(id=request_id)
-            except Request.DoesNotExist:
-                return redirect('requests_list')  
+        if not request_id:
+            return JsonResponse({'success': False, 'message': 'ID da solicitação não fornecido.'}, status=400)
 
-            if action == 'reject':
-                request_instance.status = 'rejected'
-                request_instance.reason_rejected = reject_request_instance.reason_rejected
-            elif action == 'approve':
+        try:
+            request_instance = Request.objects.get(id=request_id)
+        except Request.DoesNotExist:
+            return JsonResponse({'success': False, 'message': 'Requisição não encontrada.'}, status=404)
+
+        try:
+            if action == 'approve':
                 request_instance.status = 'approved'
-            
-            request_instance.save()
+                request_instance.save()
+                return JsonResponse({'success': True, 'message': 'Requisição aprovada com sucesso.'})
 
-            return redirect('requests_list') 
+            elif action == 'reject':
+                if not reason_rejected:
+                    return JsonResponse({'success': False, 'message': 'Motivo da rejeição é obrigatório.'}, status=400)
+                request_instance.status = 'rejected'
+                request_instance.reason_rejected = reason_rejected
+                request_instance.save()
+                return JsonResponse({'success': True, 'message': 'Requisição rejeitada com sucesso.'})
 
-        return self.get(request, *args, **kwargs)
+            else:
+                return JsonResponse({'success': False, 'message': 'Ação inválida.'}, status=400)
+
+        except ValidationError as e:
+            return JsonResponse({'success': False, 'message': str(e)}, status=400)
+
 
 def get_request_data(request, request_pk):
     request_obj = get_object_or_404(Request, id=request_pk)
