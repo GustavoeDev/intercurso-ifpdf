@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import Group
 from .models import *
 
 from django import forms
@@ -108,6 +109,8 @@ class CustomUserCreationForm(forms.ModelForm):
 
         if commit:
             user.save()
+            student_group = Group.objects.get(name='Student')
+            user.groups.add(student_group)
         return user
     
 class LoginForm(AuthenticationForm):
