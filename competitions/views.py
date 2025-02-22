@@ -466,8 +466,17 @@ class EditTeamView(LoginRequiredMixin, GroupRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         team = get_object_or_404(Team, pk=kwargs['pk'])
-        form = TeamMemberForm(request.POST)
 
+        action = request.POST.get('action')
+
+        if action == 'delete_team':
+            team.delete()
+            return JsonResponse({
+                'success': True,
+                'message': 'Equipe excluída com sucesso.'
+            })
+        
+        form = TeamMemberForm(request.POST)
         if form.is_valid():
             try:
                 username = form.cleaned_data['username']

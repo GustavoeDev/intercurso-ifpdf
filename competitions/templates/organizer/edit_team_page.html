@@ -91,13 +91,18 @@
   <div class="dialog-header">
     <h3>
       Excluir a equipe
-      <span class="team-name"></span>
+      <span class="team-name">{{ team.name }}</span>
       ?
     </h3>
-    <button><i class="fa-solid fa-xmark"></i></button>
+    <button type="button"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Excluir</button>
+  <form method="POST" action="{% url 'edit_team' team.pk %}" id="form-delete-team">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="delete_team" />
+    <div class="error-messages"></div>
+    <button type="submit">Excluir</button>
+  </form>
 </dialog>
 
 <dialog class="remove-member-dialog">

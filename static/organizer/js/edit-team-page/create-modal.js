@@ -18,19 +18,59 @@ buttonCloseModalAddNewMember.addEventListener("click", () => {
 // Excluir equipe
 
 const modalDeleteTeam = document.querySelector(".remove-team-dialog");
-const spanTeamName = modalDeleteTeam.querySelector(".team-name");
 const buttonCloseModalDeleteTeam = modalDeleteTeam.querySelector(".dialog-header button");
+const formDeleteTeam = modalDeleteTeam.querySelector("#form-delete-team");
 
 const deleteTeamButton = document.querySelector(".delete-team");
-const teamNameContent = deleteTeamButton.parentElement.parentElement.querySelector(".card-title span").textContent;
 
 deleteTeamButton.addEventListener("click", () => {
-  spanTeamName.textContent = teamNameContent;
   modalDeleteTeam.showModal();
 });
 
 buttonCloseModalDeleteTeam.addEventListener("click", () => {
   modalDeleteTeam.close();
+});
+
+formDeleteTeam.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+  console.log("URL do formulário:", form.action);
+  const formData = new FormData(form);
+  const errorDiv = form.querySelector(".error-messages");
+
+  try {
+    const actionUrl = form.getAttribute("action");
+    if (!actionUrl || typeof actionUrl !== "string") {
+      throw new Error("URL do formulário inválida.");
+    }
+
+    const response = await fetch(actionUrl, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-CSRFToken": formData.get("csrfmiddlewaretoken"),
+      },
+    });
+
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new TypeError("A resposta não é JSON.");
+    }
+
+    const data = await response.json();
+
+    if (data.success) {
+      window.location.href = "/organizador/equipes/";
+    } else {
+      errorDiv.innerHTML = data.message || "Ocorreu um erro ao excluir a equipe.";
+      errorDiv.style.display = "block";
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    errorDiv.innerHTML = "Ocorreu um erro ao processar a solicitação.";
+    errorDiv.style.display = "block";
+  }
 });
 
 // Remover membro
