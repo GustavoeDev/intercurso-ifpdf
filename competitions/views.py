@@ -402,6 +402,37 @@ def view_qualifiers_stage_page(request):
 
 # Organizador
 
+class ManageModalityView(ListView):
+    model = Modality
+    template_name = 'organizer/modality_page.html'
+    context_object_name = 'modalities'
+
+    def get_queryset(self):
+        return Modality.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        add_modality_form = AddModalityForm()
+        
+        context['competitions'] = Competition.objects.all()
+        context['add_modality_form'] = add_modality_form
+        
+        
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        add_modality_form = AddModalityForm(request.POST)
+
+        try:
+            if add_modality_form.is_valid():
+                add_modality_form.save()
+                return JsonResponse({'status': 'success', 'message': "Modalidade salva com sucesso."})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': "Erro ao salvar a modalidade."})
+        
+        return self.get(request, *args, **kwargs)
+
 def view_modality_page(request):
     return render(request, 'organizer/modality_page.html')
 

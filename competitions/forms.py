@@ -122,3 +122,18 @@ class TeamMemberForm(forms.Form):
         if not username:
             raise forms.ValidationError("A matrícula é obrigatória.")
         return username
+
+class AddModalityForm(forms.ModelForm):
+    name = forms.CharField(
+        label='Nome da modalidade',
+        validators=[RegexValidator(r'^[a-zA-Z]+$', 'A modalidade deve conter apenas letras.')],
+        widget=forms.TextInput(attrs={'placeholder': 'Modalidade'}),
+        error_messages={
+            'unique': "Já existe uma modalidade com este nome.",
+            'invalid': "A modalidade deve conter apenas letras."
+        }
+    )
+
+    class Meta:
+        model = Modality
+        fields = ['name']

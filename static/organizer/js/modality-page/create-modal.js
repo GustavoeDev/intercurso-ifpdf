@@ -2,6 +2,7 @@
 
 const buttonNewModality = document.querySelector(".modality-title button");
 const modalNewModality = document.querySelector(".add-new-modality-dialog");
+const formNewModality = document.querySelector(".add-new-modality-dialog form");
 const buttonCloseModalNewModality = document.querySelector(
   ".add-new-modality-dialog .dialog-header button"
 );
@@ -9,6 +10,42 @@ const buttonCloseModalNewModality = document.querySelector(
 buttonNewModality.addEventListener("click", () => {
   modalNewModality.showModal();
 });
+
+formNewModality.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(formNewModality);
+
+  try {
+    const response = await fetch(formNewModality.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    })
+
+    console.log("Resposta recebida. Status:", response.status);
+    const data = await response.json();
+    console.log("Dados da resposta:", data);
+
+    if (data.status === "success") {
+      modalNewModality.close();
+      formNewModality.reset();
+      window.location.reload();
+    } else {
+      const errorDiv = document.querySelector(
+        ".add-new-modality-dialog #error-message"
+      );
+      errorDiv.textContent = data.message;
+      errorDiv.style.display = "block";
+    }
+  } catch (error) {
+    alert("Erro ao adicionar modalidade. O nome deve conter apenas letras.");
+    formNewModality.reset();
+  }
+});
+
 
 buttonCloseModalNewModality.addEventListener("click", () => {
   modalNewModality.close();
