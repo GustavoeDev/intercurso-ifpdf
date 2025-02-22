@@ -450,8 +450,13 @@ class TeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
 def view_register_team(request):
     return render(request, 'organizer/register_team_page.html')
 
-def view_edit_team(request):
-    return render(request, 'organizer/edit_team_page.html')
+class EditTeamView(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
+    model = Team
+    form_class = TeamForm
+    template_name = 'organizer/edit_team_page.html'
+    context_object_name = 'team'
+    success_url = reverse_lazy('teams_list')
+    group_required = 'Organizer'
 
 def view_competitions_page(request):
     return render(request, 'organizer/competitions_page.html')

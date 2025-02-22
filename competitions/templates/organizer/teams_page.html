@@ -58,7 +58,7 @@
           <td>{{ team.members.count }} participantes</td>
           <td>{{ team.register_date|date:"d/m/Y" }}</td>
           <td>
-            <a href="{% url 'edit_team' %}">Gerenciar equipe</a>
+            <a href="{% url 'edit_team' team.id %}">Gerenciar equipe</a>
           </td>
         </tr>
         {% empty %}
