@@ -38,6 +38,8 @@
         <th>Data da solicitação</th>
         <th>Ações</th>
       </tr>
+
+      {% if requests %}
       <!-- prettier-ignore-start -->
       {% for request in requests %}
       <!-- Só para não quebrar o código -->
@@ -54,7 +56,19 @@
           <button class="show-request" data-request-id="{{ request.id }}">Exibir solicitação</button>
         </td>
       </tr>
-      {% endif %} {% endfor %}
+      {% else %}
+
+      <tr class="table-row">
+        <td>Não tem solicitações para alteração de equipes</td>
+      </tr>
+
+      {% endif %} {% endfor %} {% else %}
+
+      <tr class="table-row">
+        <td>Não tem solicitações para alteração de equipes</td>
+      </tr>
+
+      {% endif %}
     </table>
 
     <table class="table-players disabled">
@@ -64,7 +78,8 @@
         <th>Data da solicitação</th>
         <th>Ações</th>
       </tr>
-      {% for request in requests %}
+
+      {% if requests %} {% for request in requests %}
       <!-- Só para não quebrar o código -->
       {% if request.request_type == 'remove_team_member' %}
       <tr class="table-row">
@@ -78,7 +93,20 @@
           <button class="show-request" data-request-id="{{ request.id }}">Exibir solicitação</button>
         </td>
       </tr>
-      {% endif %} {% endfor %}
+
+      {% else %}
+
+      <tr class="table-row">
+        <td colspan="4">Não tem solicitações para alteração de participantes</td>
+      </tr>
+
+      {% endif %} {% endfor %} {% else %}
+
+      <tr class="table-row">
+        <td>Não tem solicitações para alteração de participantes</td>
+      </tr>
+
+      {% endif %}
     </table>
   </div>
 </div>
