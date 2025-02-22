@@ -19,5 +19,6 @@ urlpatterns = [
     path('organizador/equipes/editar-equipe/', view_edit_team, name="edit_team"),
     path('organizador/competicoes/', view_competitions_page, name="competitions_list"),
     path('organizador/competicoes/detalhes/', view_detail_comp_page, name="detail"), # deatail vai ser subituido pelo id/nome da competição
-    path('organizador/solicitacoes/', view_requests, name="requests_list"),
+    path('organizador/solicitacoes/', RequestsView.as_view(), name="requests_list"),
+    path('request/<int:request_pk>/', get_request_data, name='get_request_data'),
 ]
