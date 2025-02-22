@@ -35,7 +35,10 @@
           </div>
         </div>
         <div class="card-actions">
-          <button class="create-new-competition">
+          <button 
+            class="create-new-competition"
+            data-url="{% url 'create_competition' modality.id%}"  
+          >
             <span>Criar nova competição</span>
             <i class="fa-solid fa-trophy"></i>
           </button>
@@ -79,13 +82,16 @@
                   <span> {{ competition.status }}</span> <!-- Fazer função no JS para ajustar o nome do status e cor -->
                 </td>
                 <td>
-                  <a href="{% url 'detail' %}">
+                  <a href="{% url 'detail_competition' competition.name%}">
                     <button class="image-button edit-competition">
                       <i class="fa-solid fa-pencil"></i>
                     </button>
                   </a>
 
-                  <button class="image-button remove-competition">
+                  <button 
+                    class="image-button remove-competition"
+                    data-url="{% url 'delete_competition' competition.id %}"
+                  >
                     <i class="fa-solid fa-trash-can"></i>
                   </button>
                 </td>
@@ -161,7 +167,11 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Excluir</button>
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" class="submit-button">Excluir</button>
+  </form>
+  
 </dialog>
 
 <dialog class="create-new-competition-dialog">
@@ -170,94 +180,44 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  <form action="" method="post">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="new-competition-name">Nome da competição</label>
-      <input
-        type="text"
-        id="new-competition-name"
-        placeholder="Ex: Basquete masculino"
-        required
-      />
+      <label for="new-competition-name">{{ add_competition_form.name.label_tag}}</label>
+      {{ add_competition_form.name }}
     </div>
+
+
     <div class="inputs-container">
-      <label for="new-competition-system">Sistema da competição</label>
+      <label for="new-competition-system">{{ add_competition_form.system.label_tag }}</label>
 
       <div class="competition-type-selection">
-        <label class="new-competition-radio-group" for="grupos">
-          <input
-            type="radio"
-            id="grupos"
-            name="competition-type"
-            value="grupos"
-            required
-          />
-          Grupos
-        </label>
-
-        <label class="new-competition-radio-group" for="pontos-corridos">
-          <input
-            type="radio"
-            id="pontos-corridos"
-            name="competition-type"
-            value="pontos-corridos"
-            required
-          />
-          Pontos Corridos
-        </label>
-
-        <label class="new-competition-radio-group" for="eliminatorias">
-          <input
-            type="radio"
-            id="eliminatorias"
-            name="competition-type"
-            value="eliminatorias"
-            required
-          />
-          Eliminatórias
-        </label>
+        {{ add_competition_form.system }}
       </div>
     </div>
 
     <div class="quantity-players-teams-container">
       <div class="quantity-players-teams-content">
-        <label for="quantity-players-team"
-          >Quantidade mínima de participantes por equipe</label
-        >
-        <input
-          type="number"
-          id="quantity-players-team"
-          placeholder="Ex: 8"
-          required
-        />
+        <label for="quantity-players-team">
+          {{ add_competition_form.min_members_per_team.label_tag }}
+        </label>
+        {{ add_competition_form.min_members_per_team }}
       </div>
       <div class="quantity-players-teams-content">
-        <label for="quantity-players-team"
-          >Quantidade máxima de participantes por equipe</label
-        >
-        <input
-          type="number"
-          id="quantity-players-team"
-          placeholder="Ex: 12"
-          required
-        />
+        <label for="quantity-players-team">
+          {{ add_competition_form.max_members_per_team.label_tag }}  
+        </label>
+        {{ add_competition_form.max_members_per_team }}
       </div>
     </div>
 
     <div class="inputs-container">
-      <label for="image-competition">Imagem da competição</label>
+      <label for="image-competition">{{ add_competition_form.image.label_tag }}</label>
       <label for="image-competition" class="upload-label">
         <i class="fa-solid fa-upload"></i>
         Inserir imagem
       </label>
-      <input
-        type="file"
-        id="image-competition"
-        name="imagem-competicao"
-        accept="image/*"
-        class="file-input"
-        required
-      />
+      <!--{{ add_competition_form.image }}-->
     </div>
 
     <button type="submit">Criar competição</button>

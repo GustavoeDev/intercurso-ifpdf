@@ -313,7 +313,8 @@ dialog .inputs-container > textarea {
   margin-top: 1rem;
 }
 
-.remove-modality-dialog .submit-button {
+.remove-modality-dialog .submit-button,
+.remove-competition-dialog .submit-button {
   background-color: var(--red-500);
   padding: 1.25rem;
   border: 0;
@@ -326,22 +327,6 @@ dialog .inputs-container > textarea {
   width: 100%;
 }
 
-.remove-competition-dialog > button[type="submit"] {
-  background-color: var(--red-500);
-  padding: 1.25rem;
-  border: 0;
-  border-radius: 6px;
-  text-align: center;
-  color: var(--white);
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.remove-competition-dialog > button,
-.remove-modality-dialog > button {
-  margin-top: 2rem;
-  width: 100%;
-}
 
 .competition-type-selection {
   display: flex;

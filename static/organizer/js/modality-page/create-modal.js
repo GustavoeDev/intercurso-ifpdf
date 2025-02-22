@@ -117,21 +117,17 @@ buttonCloseModalDeleteModality.addEventListener("click", () => {
 
 // Excluir competição
 
-const buttonDeleteCompetition = document.querySelectorAll(
-  ".table-row .remove-competition"
-);
-const modalDeleteCompetition = document.querySelector(
-  ".remove-competition-dialog"
-);
-const buttonCloseModalDeleteCompetition = document.querySelector(
-  ".remove-competition-dialog .dialog-header button"
-);
-const nameModalModalityDeleteCompetition = document.querySelector(
-  ".remove-competition-dialog .dialog-header span"
-);
+const buttonDeleteCompetition = document.querySelectorAll(".table-row .remove-competition");
+const modalDeleteCompetition = document.querySelector(".remove-competition-dialog");
+const buttonCloseModalDeleteCompetition = document.querySelector(".remove-competition-dialog .dialog-header button");
+const nameModalModalityDeleteCompetition = document.querySelector(".remove-competition-dialog .dialog-header span");
+const formDeleteCompetition = document.querySelector(".remove-competition-dialog form");
 
 buttonDeleteCompetition.forEach((button) => {
   button.addEventListener("click", () => {
+    const deleteCompetitionUrl = button.dataset.url;
+    formDeleteCompetition.action = deleteCompetitionUrl;
+    
     modalDeleteCompetition.showModal();
 
     const row = button.closest("tr");
@@ -148,21 +144,17 @@ buttonCloseModalDeleteCompetition.addEventListener("click", () => {
 
 // Criar nova competição
 
-const buttonCreateCompetition = document.querySelectorAll(
-  ".card-actions .create-new-competition"
-);
-const modalCreateCompetition = document.querySelector(
-  ".create-new-competition-dialog"
-);
-const buttonCloseModalCreateCompetition = document.querySelector(
-  ".create-new-competition-dialog .dialog-header button"
-);
-const nameModalModalityCreateCompetition = document.querySelector(
-  ".create-new-competition-dialog .dialog-header span"
-);
+const buttonCreateCompetition = document.querySelectorAll(".card-actions .create-new-competition");
+const modalCreateCompetition = document.querySelector(".create-new-competition-dialog");
+const buttonCloseModalCreateCompetition = document.querySelector(".create-new-competition-dialog .dialog-header button");
+const nameModalModalityCreateCompetition = document.querySelector(".create-new-competition-dialog .dialog-header span");
+const formCreateCompetition = document.querySelector(".create-new-competition-dialog form");
 
 buttonCreateCompetition.forEach((button) => {
   button.addEventListener("click", () => {
+    const createCompetitionUrl = button.dataset.url;
+    formCreateCompetition.action = createCompetitionUrl;
+
     modalCreateCompetition.showModal();
 
     const tableContainer = button.closest(".table-container");

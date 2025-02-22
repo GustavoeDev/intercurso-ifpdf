@@ -20,6 +20,8 @@ urlpatterns = [
     path('organizador/equipes/registrar-equipe/', view_register_team, name="register_team"),
     path('organizador/equipes/editar-equipe/', view_edit_team, name="edit_team"),
     path('organizador/competicoes/', view_competitions_page, name="competitions_list"),
-    path('organizador/competicoes/detalhes/', view_detail_comp_page, name="detail"), # deatail vai ser subituido pelo id/nome da competição
+    path('organizador/competicoes/adicionar/<int:pk>', AddCompetitionsView.as_view(), name="create_competition"),
+    path('organizador/competicoes/<int:pk>/delete/', DeleteCompetitionsView.as_view(), name="delete_competition"),  
+    path('organizador/competicoes/<str:name>/', DetailCompetitionView.as_view(), name="detail_competition"), # deatail vai ser subituido pelo id/nome da competição
     path('organizador/solicitacoes/', view_requests, name="requests_list"),
 ]
