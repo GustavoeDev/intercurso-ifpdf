@@ -31,7 +31,7 @@ class ManageTeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        add_user_form = AddUserToTeamForm()
+        add_user_form = TeamMemberForm()
         request_remove_member_form = RemoveMemberRequestForm()
         request_remove_team_form = RemoveTeamRequestForm()
 
@@ -42,7 +42,7 @@ class ManageTeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
         return context
 
     def post(self, request, *args, **kwargs):
-        add_user_form = AddUserToTeamForm(request.POST)
+        add_user_form = TeamMemberForm(request.POST)
         request_remove_member_form = RemoveMemberRequestForm(request.POST)
         request_remove_team_form = RemoveTeamRequestForm(request.POST)
         
@@ -65,7 +65,7 @@ class AddNewMemberToTeamView(View):
         team = get_object_or_404(Team, pk=pk)
         competition = team.competition
         max_members_per_team = competition.max_members_per_team
-        form = AddUserToTeamForm(request.POST)
+        form = TeamMemberForm(request.POST)
         
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -450,13 +450,79 @@ class TeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
 def view_register_team(request):
     return render(request, 'organizer/register_team_page.html')
 
-class EditTeamView(LoginRequiredMixin, GroupRequiredMixin, UpdateView):
-    model = Team
-    form_class = TeamForm
+class EditTeamView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'organizer/edit_team_page.html'
-    context_object_name = 'team'
     success_url = reverse_lazy('teams_list')
     group_required = 'Organizer'
+
+    def get(self, request, *args, **kwargs):
+        team = get_object_or_404(Team, pk=kwargs['pk'])
+        form = TeamMemberForm()
+        context = {
+            'team': team,
+            'form': form,
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        team = get_object_or_404(Team, pk=kwargs['pk'])
+        form = TeamMemberForm(request.POST)
+
+        if form.is_valid():
+            try:
+                username = form.cleaned_data['username']
+                user = CustomUser.objects.get(username=username)
+                competition = team.competition
+                max_members_per_team = competition.max_members_per_team
+
+                if team.members.count() == max_members_per_team:
+                    return JsonResponse({
+                        'success': False,
+                        'message': f'A equipe já atingiu o número máximo de membros ({max_members_per_team}).'
+                    })
+
+                if team.members.filter(id=user.id).exists():
+                    return JsonResponse({
+                        'success': False,
+                        'message': f"O usuário {user} já está na equipe."
+                    })
+                
+                # Verifica se o usuário já está na equipe
+                if user in team.members.all():
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Este usuário já é membro desta equipe.'
+                    })
+                
+                # Verifica se este usuário já está em outro time da mesma competição
+                user_teams = Team.objects.filter(
+                    competition=team.competition,
+                    members=user
+                )
+                if user_teams.exists():
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Este usuário já está em outra equipe nesta competição.'
+                    })
+
+                team.members.add(user)
+                return JsonResponse({
+                    'success': True,
+                    'message': f"Usuário {user} adicionado à equipe com sucesso."
+                })
+
+            except CustomUser.DoesNotExist:
+                return JsonResponse({
+                    'success': False,
+                    'message': "Usuário não encontrado. Verifique as credenciais."
+                })
+
+        errors = form.errors.as_json()
+        return JsonResponse({
+            'success': False,
+            'message': "Dados inválidos. Verifique os campos.",
+            'errors': errors
+        })
 
 def view_competitions_page(request):
     return render(request, 'organizer/competitions_page.html')

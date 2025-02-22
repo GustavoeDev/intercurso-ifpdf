@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'organizer/css/edit-team-page.css' %}" />
 {% endblock %} {% block js %}
 <script src="{% static 'organizer/js/edit-team-page/create-modal.js' %}" defer></script>
-<script src="{% static 'organizer/js/edit-team-page/form-select-placeholder.js' %}" defer></script>
+<script src="{% static 'form-select-placeholder.js' %}" defer></script>
 {% endblock %} {% block title%}
 <title>Editar time</title>
 {% endblock %} {% block main %}
@@ -73,31 +73,15 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
-    <div class="inputs-container">
-      <label for="new-member-name">Nome completo</label>
-      <input type="text" id="new-member-name" placeholder="Nome completo" required />
-    </div>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="inputs-container">{{ form.full_name.label_tag }} {{ form.full_name }}</div>
 
-    <div class="inputs-container">
-      <label for="new-member-registration">Matricula</label>
-      <input type="text" id="new-member-registration" placeholder="Matricula" required />
-    </div>
+    <div class="inputs-container">{{ form.username.label_tag }} {{ form.username }}</div>
 
-    <div class="inputs-container">
-      <label for="new-member-course">Curso</label>
-      <div id="new-member-course" class="select-container">
-        <select required name="course">
-          <option value="" selected disabled>Curso</option>
-          <option value="ads">ADS</option>
-          <option value="agro-industria">Agroindústria</option>
-          <option value="alimentos">Alimentos</option>
-          <option value="apicultura">Apicultura</option>
-          <option value="informatica">Informática</option>
-          <option value="quimica">Química</option>
-        </select>
-      </div>
-    </div>
+    <div class="inputs-container">{{ form.course.label_tag }} {{ form.course }}</div>
+
+    <div class="error-messages"></div>
 
     <button type="submit">Confirmar</button>
   </form>
