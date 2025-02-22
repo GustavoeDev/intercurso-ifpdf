@@ -2,10 +2,7 @@
 <link rel="stylesheet" href="{% static 'organizer/css/teams-page.css' %}" />
 {% endblock %} {% block js %}
 <script src="{% static 'table-min-max.js' %}" defer></script>
-<script
-  src="{% static 'organizer/js/teams-page/create-modal.js' %}"
-  defer
-></script>
+<script src="{% static 'organizer/js/teams-page/create-modal.js' %}" defer></script>
 
 {% endblock %} {% block title %}
 <title>Equipes</title>
@@ -16,21 +13,20 @@
 </div>
 
 <div class="container-wrapper">
+  {% for competition in competitions %}
+
   <div class="table-container not-active">
     <div class="table-title">
       <div class="card-title">
         <div class="title-image">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-          />
+          <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
         </div>
         <div class="title-text">
-          <span>Basquete</span>
+          <span>{{ competition.name }}</span>
         </div>
       </div>
       <div class="card-actions">
-        <a href="{% url 'register_team' %}" style="text-decoration: none;">
+        <a href="{% url 'register_team' %}" style="text-decoration: none">
           <button class="create-new-team">
             <span>Adicionar nova equipe</span>
             <i class="fa-solid fa-user-group"></i>
@@ -38,10 +34,7 @@
         </a>
 
         <button class="image-button min-max-button max">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
-          />
+          <img class="button-image" src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
         </button>
       </div>
     </div>
@@ -55,203 +48,38 @@
           <th>Ações</th>
         </tr>
 
-        <tr class="table-row">
-          <td class="team-item">
-            <span>Equipirangaz</span>
-            <span class="modality-span">Basquete</span>
-          </td>
-          <td>8 participantes</td>
-          <td>27/11/2024</td>
-          <td>
-            <a href="{% url 'edit_team' %}">
-              <button class="image-button edit-team">
-                <i class="fa-solid fa-pencil"></i>
-              </button>
-            </a>
-
-            <button class="image-button remove-team">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
+        {% for team in competition.team_set.all %}
 
         <tr class="table-row">
           <td class="team-item">
-            <span>Amigos do baskas</span>
-            <span class="modality-span">Basquete</span>
+            <span>{{ team.name }}</span>
+            <span class="modality-span">{{ competition.name }}</span>
           </td>
-          <td>8 participantes</td>
-          <td>27/11/2024</td>
+          <td>{{ team.members.count }} participantes</td>
+          <td>{{ team.register_date|date:"d/m/Y" }}</td>
           <td>
-            <button class="image-button edit-team">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-team">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
+            <a href="{% url 'edit_team' %}">Gerenciar equipe</a>
           </td>
         </tr>
+        {% empty %}
+        <tr class="table-row">
+          <td>Nenhuma equipe cadastrada nesta competição.</td>
+        </tr>
+        {% endfor %}
       </table>
     </div>
   </div>
 
-  <div class="table-container not-active">
-    <div class="table-title">
-      <div class="card-title">
-        <div class="title-image">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-          />
-        </div>
-        <div class="title-text">
-          <span>Vôlei</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="create-new-team">
-          <span>Adicionar nova equipe</span>
-          <i class="fa-solid fa-user-group"></i>
-        </button>
-
-        <button class="image-button min-max-button max">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
-          />
-        </button>
-      </div>
-    </div>
-
-    <div class="table-container-wrapper">
-      <table>
-        <tr class="table-header">
-          <th>Nome da Equipe</th>
-          <th>Participantes inscritos</th>
-          <th>Data de inscrição</th>
-          <th>Ações</th>
-        </tr>
-
-        <tr class="table-row">
-          <td class="team-item">
-            <span>Equipirangaz</span>
-            <span class="modality-span">Vôlei</span>
-          </td>
-          <td>8 participantes</td>
-          <td>27/11/2024</td>
-          <td>
-            <button class="image-button edit-team">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-team">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-
-        <tr class="table-row">
-          <td class="team-item">
-            <span>Amigos do vôlei</span>
-            <span class="modality-span">Vôlei</span>
-          </td>
-          <td>8 participantes</td>
-          <td>27/11/2024</td>
-          <td>
-            <button class="image-button edit-team">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-team">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="table-container not-active">
-    <div class="table-title">
-      <div class="card-title">
-        <div class="title-image">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-          />
-        </div>
-        <div class="title-text">
-          <span>Futsal</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="create-new-team">
-          <span>Adicionar nova equipe</span>
-          <i class="fa-solid fa-user-group"></i>
-        </button>
-
-        <button class="image-button min-max-button max">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
-          />
-        </button>
-      </div>
-    </div>
-
-    <div class="table-container-wrapper">
-      <table>
-        <tr class="table-header">
-          <th>Nome da Equipe</th>
-          <th>Participantes inscritos</th>
-          <th>Data de inscrição</th>
-          <th>Ações</th>
-        </tr>
-
-        <tr class="table-row">
-          <td class="team-item">
-            <span>Equipirangaz</span>
-            <span class="modality-span">Futsal</span>
-          </td>
-          <td>8 participantes</td>
-          <td>27/11/2024</td>
-          <td>
-            <button class="image-button edit-team">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-team">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-
-        <tr class="table-row">
-          <td class="team-item">
-            <span>Amigos do fut</span>
-            <span class="modality-span">Futsal</span>
-          </td>
-          <td>8 participantes</td>
-          <td>27/11/2024</td>
-          <td>
-            <button class="image-button edit-team">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-team">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 
 <dialog class="remove-team-dialog">
   <div class="dialog-header">
-    <h3>Excluir a equipe <span class="team-name"></span>?</h3>
+    <h3>
+      Excluir a equipe
+      <span class="team-name"></span>
+      ?
+    </h3>
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 

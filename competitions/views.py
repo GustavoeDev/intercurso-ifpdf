@@ -435,8 +435,17 @@ def view_qualifiers_stage_page(request):
 def view_modality_page(request):
     return render(request, 'organizer/modality_page.html')
 
-def view_teams_page(request):
-    return render(request, 'organizer/teams_page.html')
+class TeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
+    model = Team
+    template_name = 'organizer/teams_page.html'
+    context_object_name = 'teams'
+    group_required = 'Organizer'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)  
+        context['competitions'] = Competition.objects.all()  
+        return context  
+
 
 def view_register_team(request):
     return render(request, 'organizer/register_team_page.html')

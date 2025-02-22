@@ -14,7 +14,7 @@ urlpatterns = [
     path('competicao/volei-indoor/', view_qualifiers_stage_page, name="qualifiers"), #volei-indoor vai ser substituido pelo id/nome da competição
     # Organizador
     path('organizador/modalidades/', view_modality_page, name="modality_list"),
-    path('organizador/equipes/', view_teams_page, name="teams_list"),
+    path('organizador/equipes/', TeamsView.as_view(), name="teams_list"),
     path('organizador/equipes/registrar-equipe/', view_register_team, name="register_team"),
     path('organizador/equipes/editar-equipe/', view_edit_team, name="edit_team"),
     path('organizador/competicoes/', view_competitions_page, name="competitions_list"),
