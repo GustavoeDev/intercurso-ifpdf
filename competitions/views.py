@@ -450,5 +450,66 @@ def view_competitions_page(request):
 def view_detail_comp_page(request):
     return render(request, 'organizer/detail_competition_page.html')
 
-def view_requests(request):
-    return render(request, 'organizer/requests_page.html')
+class RequestsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
+    model = Request
+    template_name = 'organizer/requests_page.html'
+    context_object_name = 'requests'
+    group_required = 'Organizer'
+
+    def get_queryset(self):
+        return Request.objects.filter(status='pendent').order_by('-created_at')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context['reject_request_form'] = RejectRequestForm()
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get('action')  
+        reject_request_form = RejectRequestForm(request.POST)
+
+        if reject_request_form.is_valid():
+            
+            reject_request_instance = reject_request_form.save(commit=False)
+            
+            request_id = request.POST.get('request_id')
+            try:
+                request_instance = Request.objects.get(id=request_id)
+            except Request.DoesNotExist:
+                return redirect('requests_list')  
+
+            if action == 'reject':
+                request_instance.status = 'rejected'
+                request_instance.reason_rejected = reject_request_instance.reason_rejected
+            elif action == 'approve':
+                request_instance.status = 'approved'
+            
+            request_instance.save()
+
+            return redirect('requests_list') 
+
+        return self.get(request, *args, **kwargs)
+
+def get_request_data(request, request_pk):
+    request_obj = get_object_or_404(Request, id=request_pk)
+    
+    data = {
+        'id': request_obj.id,
+        'team_name': request_obj.team.name,
+        'competition': request_obj.team.competition.name,
+        'request_type': request_obj.request_type,
+        'created_at': request_obj.created_at.strftime('%d/%m/%Y'),
+        'user_remove': f"{request_obj.user.first_name} {request_obj.user.last_name}" if request_obj.user else 'Usuário não especificado',
+        'reason': request_obj.reason,
+        'members': [
+            {
+                'name': f"{member.first_name} {member.last_name}",
+                'registration': member.username,
+                'course': member.course.name if member.course else ''
+            }
+            for member in request_obj.team.members.all()
+        ],
+    }
+    
+    return JsonResponse(data)

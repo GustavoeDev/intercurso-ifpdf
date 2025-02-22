@@ -122,3 +122,42 @@ class TeamMemberForm(forms.Form):
         if not username:
             raise forms.ValidationError("A matrícula é obrigatória.")
         return username
+
+# Requests Forms
+
+from django import forms
+
+class RejectRequestForm(forms.ModelForm):
+    ACTION_CHOICES = [
+        ('approved', 'Aprovar Solicitação'),
+        ('rejected', 'Negar Solicitação'),
+    ]
+
+    action = forms.ChoiceField(
+        choices=ACTION_CHOICES,
+        widget=forms.RadioSelect(attrs={'class': 'radio-group'}),
+        required=True,
+    )
+
+    class Meta:
+        model = Request
+        fields = ['reason_rejected']
+        widgets = {
+            'reason_rejected': forms.Textarea(attrs={'placeholder': 'Explique o motivo...', 'rows': 0}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['reason_rejected'].required = False
+        self.fields['reason_rejected'].label = 'Motivo da rejeição'
+
+    def clean(self):
+        cleaned_data = super().clean()
+        action = cleaned_data.get('action')
+        reason_rejected = cleaned_data.get('reason_rejected')
+
+        # Se a ação for "rejected", o motivo de rejeição é obrigatório
+        if action == 'rejected' and not reason_rejected:
+            self.add_error('reason_rejected', 'Este campo é obrigatório ao negar a solicitação.')
+
+        return cleaned_data

@@ -108,17 +108,19 @@ class Round(models.Model):
 
 class Request(models.Model):
   REQUEST_TYPE_CHOICES = [
-    ('approve_team', 'Approve Team'),
-    ('delete_team', 'Delete Team'),
-    ('remove_team_member', 'Remove Team Member'),
+    ('approve_team', 'Aprovar equipe'),
+    ('delete_team', 'Excluir equipe'),
+    ('remove_team_member', 'Excluir participante'),
   ]
   STATUS_CHOICES = [
     ('pendent', 'Pendent'),
     ('done', 'Done'),
+    ('rejected', 'Rejected')
   ]
   request_type = models.CharField(max_length=255, choices=REQUEST_TYPE_CHOICES, blank=False)
   team = models.ForeignKey(Team, on_delete=models.CASCADE, blank=True)
   user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
   reason = models.TextField(blank=True)
+  reason_rejected = models.TextField(blank=True, null=True)
   status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='pendent')
   created_at = models.DateTimeField(auto_now=True)

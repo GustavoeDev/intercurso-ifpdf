@@ -1,10 +1,7 @@
 const typeRequest = document.querySelectorAll(".type-request");
 
 typeRequest.forEach((type) => {
-  if (
-    type.textContent.trim() === "Aprovar equipe" ||
-    type.textContent.trim() === "Editar dados"
-  ) {
+  if (type.textContent.trim() === "Aprovar equipe") {
     type.classList.add("approve-request");
   }
   if (
