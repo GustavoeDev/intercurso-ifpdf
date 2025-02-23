@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 from django.views.generic import ListView, DetailView
-=======
-from django.views.generic import ListView, DeleteView
->>>>>>> a82691227bdf2fe71a924c1d3cc1efbb5d831129
 from .models import *
 from .forms import *
 from django.forms import formset_factory

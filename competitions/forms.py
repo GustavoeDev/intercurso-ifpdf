@@ -3,44 +3,6 @@ from django.core.exceptions import ValidationError
 from users.models import *
 from .models import *
 
-<<<<<<< HEAD
-class AddUserToTeamForm(forms.Form):
-  username = forms.CharField(
-    label='Matrícula',
-    max_length=20,
-    validators=[RegexValidator(r'^\d+$', 'A matrícula deve conter apenas números.')],
-    widget=forms.TextInput(attrs={'placeholder': 'Matrícula'})
-  )
-  full_name = forms.CharField(
-    label='Nome completo',
-    max_length=255,
-    widget=forms.TextInput(attrs={'placeholder': 'Nome'})
-  )
-  course = forms.ModelChoiceField(
-    label='Curso',
-    queryset=Course.objects.all(),
-    empty_label=None,
-    widget=forms.Select(attrs={'placeholder': 'Escolha seu curso'})
-  )
-
-  def clean_username(self):
-    username = self.cleaned_data['username']
-    if not username.isdigit():
-      raise forms.ValidationError('A matrícula deve conter apenas números.')
-    return username
-  
-  def __init__(self, *args, **kwargs):
-    super().__init__(*args, **kwargs)
-
-    self.fields['course'].choices = [
-      ('', 'Selecione seu curso')
-    ] + list(self.fields['course'].choices)[1:]
-
-    self.fields['course'].widget.attrs['required'] = True
-    self.fields['course'].widget.attrs['onchange'] = "this.options[0].disabled = true;"
-
-=======
->>>>>>> a82691227bdf2fe71a924c1d3cc1efbb5d831129
 class RemoveMemberRequestForm(forms.ModelForm):
   reason = forms.CharField(
     label='Motivo da alteração',
@@ -194,7 +156,6 @@ class AddCompetitionForm(forms.ModelForm):
         }),
         min_value=1  # Valor mínimo permitido
     )
-<<<<<<< HEAD
 
     max_members_per_team = forms.IntegerField(
         label="Quantidade máxima de participantes por equipe",
@@ -220,24 +181,6 @@ class AddCompetitionForm(forms.ModelForm):
     class Meta:
         model = Competition
         fields = ['name', 'system', 'min_members_per_team', 'max_members_per_team']
-
-    
-=======
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['course'].choices = [
-            ('', 'Selecione seu curso')
-        ] + list(self.fields['course'].choices)[1:]
-        self.fields['course'].widget.attrs['required'] = True
-        self.fields['course'].widget.attrs['onchange'] = "this.options[0].disabled = true;"
-    
-    def clean_username(self):
-        username = self.cleaned_data.get('username')
-        if not username:
-            raise forms.ValidationError("A matrícula é obrigatória.")
-        return username
-
 # Requests Forms
 
 class RejectRequestForm(forms.ModelForm):
@@ -273,4 +216,3 @@ class RejectRequestForm(forms.ModelForm):
             self.add_error('reason_rejected', 'Este campo é obrigatório ao negar a solicitação.')
 
         return cleaned_data
->>>>>>> a82691227bdf2fe71a924c1d3cc1efbb5d831129
