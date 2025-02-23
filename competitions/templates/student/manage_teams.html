@@ -2,116 +2,95 @@
 <link rel="stylesheet" href="{% static 'student/css/manage_teams.css' %}" />
 {% endblock %} {% block js%}
 <script src="{% static 'table-min-max.js' %}" defer></script>
-<script
-  src="{% static 'student/js/manage-teams/create-modal.js' %}"
-  defer
-></script>
+<script src="{% static 'student/js/manage-teams/create-modal.js' %}" defer></script>
 <script src="{% static 'form-select-placeholder.js' %}" defer></script>
 {% endblock %} {% block main %}
 
 <div class="card-info">
   <h1>Gerenciar equipes</h1>
   <p>
-    Nesta seção, você terá a possibilidade de gerenciar todas as suas equipes
-    para o Intercurso. Será possível cadastrar suas equipes em diferentes
-    competições, adicionar e organizar os membros em cada uma delas, além de
-    acompanhar e atualizar as informações dos participantes de forma prática e
-    eficiente. Clique na sua equipe, e gerencie os participantes de cada
-    competição
+    Nesta seção, você terá a possibilidade de gerenciar todas as suas equipes para o Intercurso. Será possível cadastrar
+    suas equipes em diferentes competições, adicionar e organizar os membros em cada uma delas, além de acompanhar e
+    atualizar as informações dos participantes de forma prática e eficiente. Clique na sua equipe, e gerencie os
+    participantes de cada competição
   </p>
 </div>
 
 <div class="card-teams">
   <h1>Minhas Equipes</h1>
-  <a href="{% url 'register_team_student' %}"
-    ><button class="button">Cadastrar nova equipe</button></a
-  >
+  <a href="{% url 'register_team_student' %}"><button class="button">Cadastrar nova equipe</button></a>
 </div>
 
-{% for team in teams %}
+<div class="container-table-content">
+  {% if teams %} {% for team in teams %}
 
-<div class="table-container not-active">
-  <div class="table-title">
-    <div class="card-title">
-      <div class="title-image">
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-        />
+  <div class="table-container not-active">
+    <div class="table-title">
+      <div class="card-title">
+        <div class="title-image">
+          <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
+        </div>
+        <div class="title-text">
+          <span>{{ team.name }}</span>
+          <p>{{ team.competition }}</p>
+        </div>
       </div>
-      <div class="title-text">
-        <span>{{ team.name }}</span>
-        <p>{{ team.competition }}</p>
+      <div class="card-actions">
+        <button class="add-new-member" data-url="{% url 'add_member_to_team' team.id %}">
+          <span>Adicionar novo participante</span>
+          <img class="button-image" src="{% static 'student/img/manage-teams/add-new-member.svg' %}" />
+        </button>
+        <button class="delete-team" data-url="{% url 'request_remove_team' team.id %}">
+          <span>Excluir equipe</span>
+          <img class="button-image" src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
+        </button>
+        <button class="image-button min-max-button max">
+          <img class="button-image" src="{% static 'student/img/manage-teams/arrow-down.svg' %}" />
+        </button>
       </div>
     </div>
-    <div class="card-actions">
-      <button
-        class="add-new-member"
-        data-url="{% url 'add_member_to_team' team.id %}"
-      >
-        <span>Adicionar novo participante</span>
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/add-new-member.svg' %}"
-        />
-      </button>
-      <button
-        class="delete-team"
-        data-url="{% url 'request_remove_team' team.id %}"
-      >
-        <span>Excluir equipe</span>
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-        />
-      </button>
-      <button class="image-button min-max-button max">
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
-        />
-      </button>
+
+    <div class="table-container-wrapper">
+      <table>
+        <tr class="table-header">
+          <th>Nome do participante</th>
+          <th>Matricula</th>
+          <th>Curso</th>
+          <th>Ações</th>
+        </tr>
+
+        {% for player in team.members.all %}
+
+        <tr class="table-row">
+          <td>{{ player.first_name }} {{ player.last_name }}</td>
+          <td>{{ player.username }}</td>
+          <td>{{ player.course }}</td>
+          <td>
+            <button class="image-button remove-player" data-url="{% url 'request_remove_member' team.id player.id %}">
+              <img class="small-image" src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
+            </button>
+          </td>
+        </tr>
+
+        {% endfor %}
+      </table>
     </div>
   </div>
 
-  <div class="table-container-wrapper">
-    <table>
-      <tr class="table-header">
-        <th>Nome do participante</th>
-        <th>Matricula</th>
-        <th>Curso</th>
-        <th>Ações</th>
-      </tr>
+  {% endfor %} {% else %}
 
-      {% for player in team.members.all %}
+  <p>Você ainda não faz parte de uma equipe...</p>
 
-      <tr class="table-row">
-        <td>{{ player.first_name }} {{ player.last_name }}</td>
-        <td>{{ player.username }}</td>
-        <td>{{ player.course }}</td>
-        <td>
-          <button
-            class="image-button remove-player"
-            data-url="{% url 'request_remove_member' team.id player.id %}"
-          >
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
-
-      {% endfor %}
-    </table>
-  </div>
+  {% endif %}
 </div>
-
-{% endfor %}
 
 <dialog class="remove-player-dialog">
   <div class="dialog-header">
-    <h3>Excluir <span></span> da equipe?</h3>
+    <h3>
+      Excluir
+      <span></span>
+      da equipe?
+    </h3>
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
@@ -136,15 +115,9 @@
 
   <form action="" method="POST">
     {% csrf_token %}
-    <div class="inputs-container">
-      {{ add_user_form.full_name.label_tag }} {{ add_user_form.full_name }}
-    </div>
-    <div class="inputs-container">
-      {{ add_user_form.username.label_tag }} {{ add_user_form.username }}
-    </div>
-    <div class="inputs-container">
-      {{ add_user_form.course.label_tag }} {{ add_user_form.course }}
-    </div>
+    <div class="inputs-container">{{ add_user_form.full_name.label_tag }} {{ add_user_form.full_name }}</div>
+    <div class="inputs-container">{{ add_user_form.username.label_tag }} {{ add_user_form.username }}</div>
+    <div class="inputs-container">{{ add_user_form.course.label_tag }} {{ add_user_form.course }}</div>
 
     <div id="error-message" class="error"></div>
 
@@ -154,7 +127,11 @@
 
 <dialog class="remove-team-dialog">
   <div class="dialog-header">
-    <h3>Excluir equipe <span></span>?</h3>
+    <h3>
+      Excluir equipe
+      <span></span>
+      ?
+    </h3>
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
