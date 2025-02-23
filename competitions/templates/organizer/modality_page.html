@@ -67,14 +67,14 @@
 
       <div class="table-container-wrapper">
         <table>
+          <tr class="table-header">
+            <th>Nome da competição</th>
+            <th>Equipes inscritas</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
           {% for competition in competitions %}
             {% if competition.modality == modality %}
-              <tr class="table-header">
-                <th>Nome da competição</th>
-                <th>Equipes inscritas</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
               <tr class="table-row">
                 <td>{{ competition.name }}</td>
                 <td>{{ competition.team_set.count }}</td>
