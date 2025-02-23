@@ -2,27 +2,22 @@
 <link rel="stylesheet" href="{% static 'student/css/register-team.css' %}" />
 {% endblock %} {% block js%}
 <script src="{% static 'form-select-placeholder.js' %}" defer></script>
-<script
-  src="{% static 'student/js/register-team/append-new-input.js' %}"
-  defer
-></script>
+<script src="{% static 'student/js/register-team/append-new-input.js' %}" defer></script>
 {% endblock %} {% block main %}
 <div class="card-info">
   <h1>Cadastrar nova equipe</h1>
   <p>
-    Nesta seção, você poderá cadastrar uma nova equipe para o Intercurso,
-    escolhendo a modalidade desejada e preenchendo todas as informações dos
-    alunos participantes. Disponibilizamos os campos mínimos necessários para
-    inserir os dados dos integrantes da equipe, mas, caso queira adicionar mais
-    participantes, basta clicar no botão "Adicionar Participante" para incluir
-    novos membros de forma simples e rápida.
+    Nesta seção, você poderá cadastrar uma nova equipe para o Intercurso, escolhendo a modalidade desejada e preenchendo
+    todas as informações dos alunos participantes. Disponibilizamos os campos mínimos necessários para inserir os dados
+    dos integrantes da equipe, mas, caso queira adicionar mais participantes, basta clicar no botão "Adicionar
+    Participante" para incluir novos membros de forma simples e rápida.
   </p>
 </div>
 
-<form action="{% url 'register_team_student' %}" method="POST" id="new-team">
+<form action="{% url 'register_team_student' %}" method="POST" class="new-team-form">
   {% csrf_token %}
 
-  <div id="form-general-errors"></div>
+  <div class="form-general-errors"></div>
 
   <div class="two-inputs-row">
     <div class="input-container">
@@ -44,29 +39,18 @@
     </div>
 
     {% for comp_id, data in competition_data.items %}
-    <span
-      class="competition-min"
-      data-comp-id="{{ comp_id }}"
-      style="display: none"
-    >
-      {{ data.min }}
-    </span>
-    <span
-      class="competition-max"
-      data-comp-id="{{ comp_id }}"
-      style="display: none"
-    >
-      {{ data.max }}
-    </span>
+    <span class="competition-min" data-comp-id="{{ comp_id }}" style="display: none">{{ data.min }}</span>
+    <span class="competition-max" data-comp-id="{{ comp_id }}" style="display: none">{{ data.max }}</span>
     {% endfor %}
   </div>
 
   <div id="members-input-container">
     <div>
       <label>
-        Participantes - <span id="total-inputs">1</span>/<span id="max-inputs"
-          >1</span
-        >
+        Participantes -
+        <span class="total-inputs">1</span>
+        /
+        <span class="max-inputs">1</span>
       </label>
     </div>
 
@@ -76,26 +60,17 @@
         <span class="member-counter">Participante {{ forloop.counter }}</span>
         <div class="input-container">
           {{ form.full_name }}
-          <div
-            class="error-container"
-            id="error-members-{{ forloop.counter0 }}-full_name"
-          ></div>
+          <div class="error-container" id="error-members-{{ forloop.counter0 }}-full_name"></div>
         </div>
 
         <div class="input-container">
           {{ form.username }}
-          <div
-            class="error-container"
-            id="error-members-{{ forloop.counter0 }}-username"
-          ></div>
+          <div class="error-container" id="error-members-{{ forloop.counter0 }}-username"></div>
         </div>
 
         <div class="input-container">
           {{ form.course }}
-          <div
-            class="error-container"
-            id="error-members-{{ forloop.counter0 }}-course"
-          ></div>
+          <div class="error-container" id="error-members-{{ forloop.counter0 }}-course"></div>
         </div>
       </div>
       {% endfor %}
@@ -106,28 +81,18 @@
   <div class="submit-container">
     <button type="button" id="add-new-member">
       <span>Adicionar novo participante</span>
-      <img
-        class="button-image"
-        src="{% static 'student/img/register-team/group.svg' %}"
-      />
+      <img class="button-image" src="{% static 'student/img/register-team/group.svg' %}" />
     </button>
 
     <div class="checkbox-container">
       <input type="checkbox" name="agree" id="agree" />
-      <label for="agree"
-        >Eu li e concordo com o <a href="">regulamento da competição</a></label
-      >
+      <label for="agree">
+        Eu li e concordo com o
+        <a href="">regulamento da competição</a>
+      </label>
     </div>
 
-    <button
-      type="submit"
-      form="new-team"
-      class="button submit-form-create-team"
-      id="submit-form"
-      disabled
-    >
-      Cadastrar equipe
-    </button>
+    <button type="submit" class="button submit-form-create-team" id="submit-form" disabled>Cadastrar equipe</button>
   </div>
 </form>
 
