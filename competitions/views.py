@@ -484,6 +484,14 @@ class DeleteCompetitionsView(View):
             messages.error(request, 'Erro ao excluir a competição.')
         return redirect(reverse('modality_list'))
 
+class ManageCompetitionsView(ListView):
+    model = Competition
+    template_name = 'organizer/competitions_page.html'
+    context_object_name = 'competitions'
+
+    def get_queryset(self):
+        return Competition.objects.all()
+
 class DetailCompetitionView(DetailView):
     model = Competition 
     template_name = 'organizer/detail_competition_page.html'  
