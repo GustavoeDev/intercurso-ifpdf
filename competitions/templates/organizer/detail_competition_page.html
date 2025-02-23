@@ -27,10 +27,14 @@
           "
         ></i>
     </a>
-    <h1>Basquete masculino</h1>
+    <h1>{{ competition.name }}</h1>
   </div>
 
-  <button id="end-comp-button">Encerrar competição</button>
+  {% if competition.status == "pendent" %}
+    <button id="end-comp-button" style="background-color: var(--green-100);">Iniciar competição</button>
+  {% elif competition.status == 'in_course' %}
+    <button id="end-comp-button">Encerrar competição</button>
+  {% endif %}
 </div>
 
 <div class="main-table-container">
@@ -55,50 +59,19 @@
         <th>GC</th>
         <th>SG</th>
       </tr>
-      <tr class="table-row">
-        <td>Falcons</td>
-        <td>3</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr class="table-row">
-        <td>Falcons</td>
-        <td>3</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr class="table-row">
-        <td>Falcons</td>
-        <td>3</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-      </tr>
-      <tr class="table-row">
-        <td>Falcons</td>
-        <td>3</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-        <td>2</td>
-      </tr>
+      {% for classification in classifications %}   
+        <tr class="table-row">
+          <td>{{ classification.team.name }}</td>
+          <td>{{ classification.pontuation }}</td>
+          <td>{{ classification.games_played }}</td>
+          <td>{{ classification.victories }}</td>
+          <td>{{ classification.ties }}</td>
+          <td>{{ classification.defeats }}</td>
+          <td>{{ classification.points_pro }}</td>
+          <td>{{ classification.points_against}}</td>
+          <td>{{ classification.points_difference}}</td>
+        </tr>
+      {% endfor %}
     </table>
   </div>
 </div>
@@ -110,85 +83,65 @@
 
 <div class="editable-data-container">
   <div class="all-games-container">
-    <div class="round-container">
-      <div class="round-container-header">
-        <span class="round-span">1° RODADA</span>
-      </div>
-      <div class="games-container">
-        <div class="card-round-container">
-          <img
-            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-            alt=""
-          />
-          <div class="card-round-container-header">
-            <img
-              src="{% static 'student/img/league-page/header.svg' %}"
-              alt=""
-            />
-            <span class="game-status-span">Encerrado</span>
-          </div>
-          <div class="card-round-container-content">
-            <div class="card-round-container-name">
-              <p>INFORMÁTICA</p>
-            </div>
-            <div class="card-round-container-score">
-              <span>2</span>
-              <span>2</span>
-            </div>
-            <div class="card-round-container-name">
-              <p>ADS FC</p>
-            </div>
-          </div>
-          <div class="card-round-container-footer">
-            <p>
-              <span class="date-hour-span">22 / 12 - 17:00</span>
-              <button class="edit-game-button">
-                <i
-                  class="fa-solid fa-pen fa-xs"
-                  style="color: var(--white)"
-                ></i>
-              </button>
-            </p>
-          </div>
+    {% for round in rounds %} 
+      <div class="round-container">
+        <div class="round-container-header">
+          <span class="round-span">{{ round.number }}° RODADA</span>
         </div>
-        <div class="card-round-container">
-          <img
-            src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-            alt=""
-          />
-          <div class="card-round-container-header">
-            <img
-              src="{% static 'student/img/league-page/header.svg' %}"
-              alt=""
-            />
-            <span>Encerrado</span>
-          </div>
-          <div class="card-round-container-content">
-            <div class="card-round-container-name">
-              <p>INFORMÁTICA</p>
+        <div class="games-container">
+          {% for game in round.game_set.all %}
+            <div class="card-round-container">
+              <img
+                src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+                alt=""
+              />
+              <div class="card-round-container-header">
+                <img
+                  src="{% static 'student/img/league-page/header.svg' %}"
+                  alt=""
+                />
+                <span class="game-status-span">{{game.status}}</span>
+              </div>
+              <div class="card-round-container-content">
+                <div class="card-round-container-name">
+                  <p>{{ game.team_a.abbreviation }}</p>
+                </div>
+                <div class="card-round-container-score">
+                  <span>
+                    {% if game.score_b == None %}
+                      0
+                    {% else %}
+                      {{ game.score_b }}  
+                    {% endif %}
+                  </span>
+                  <span>
+                    {% if game.score_a == None %}
+                      0
+                    {% else %}
+                      {{ game.score_a }}  
+                    {% endif %}
+                  </span>
+                </div>
+                <div class="card-round-container-name">
+                  <p>{{ game.team_b.abbreviation }}</p>
+                </div>
+              </div>
+              <div class="card-round-container-footer">
+                <p>
+                  <span class="date-hour-span">{{ game.date|date:"d/m"}} - {{ game.date|time:"H:i" }}</span>
+                  <button class="edit-game-button">
+                    <i
+                      class="fa-solid fa-pen fa-xs"
+                      style="color: var(--white)"
+                    ></i>
+                  </button>
+                </p>
+              </div>
             </div>
-            <div class="card-round-container-score">
-              <span>2</span>
-              <span>2</span>
-            </div>
-            <div class="card-round-container-name">
-              <p>ADS FC</p>
-            </div>
-          </div>
-          <div class="card-round-container-footer">
-            <p>
-              <span class="date-hour-span">22 / 12 - 17:00</span>
-              <button class="edit-game-button">
-                <i
-                  class="fa-solid fa-pen fa-xs"
-                  style="color: var(--white)"
-                ></i>
-              </button>
-            </p>
-          </div>
+          {% endfor %}
         </div>
       </div>
-    </div>
+    {% endfor %}
   </div>
 
   <div class="comp-details">
@@ -199,14 +152,14 @@
     <hr />
     <div class="comp-detail-container">
       <p class="detail-p" id="detail-modality">
-        Modalidade: <span>Basquete</span>
+        Modalidade: <span>{{ competition.name }}</span>
       </p>
       <p class="detail-p" id="detail-comp-sistem">
-        Sistema da competição: <span>Pontos corridos</span>
+        Sistema da competição: <span>{{ competition.system }}</span>
       </p>
       <div class="p-with-button">
         <p class="detail-p" id="detail-comp-status">
-          Status da competição: <span>Em andamento</span>
+          Status da competição: <span>{{ competition.status }}</span>
         </p>
         <button class="p-button" id="datail-status-button">
           <i
@@ -217,7 +170,7 @@
       </div>
       <div class="p-with-button">
         <p class="detail-p" id="detail-teams">
-          Equipes inscritas: <span>4 equipes</span>
+          Equipes inscritas: <span>{{ competition.team_set.count }}</span>
         </p>
         <button class="p-button">
           <i class="fa-solid fa-eye fa-sm" style="color: var(--gray-600)"></i>
@@ -227,20 +180,33 @@
     <hr />
     <div class="comp-detail-container">
       <p class="detail-p" id="detail-start">
-        Data de inicio: <span>10/12/2024</span>
+        Data de inicio: <span>
+          {% if not competition.start_date %}
+            ---
+          {% else %}
+            {{ competition.start_date|date:"d/m/Y" }}
+          {% endif %}
+        </span>
       </p>
-      <p class="detail-p" id="detail-end">Data fim: <span>---</span></p>
+      <p class="detail-p" id="detail-end">Data fim: <span>
+        {% if not competition.end_date %}
+          ---
+        {% else %}
+          {{ competition.end_date|date:"d/m/Y" }}
+        {% endif %}
+      </span></p>
     </div>
     <hr />
     <div class="comp-detail-container">
+      
       <p class="detail-p" id="detail-realized-games">
-        Jogos realizados: <span>4</span>
+        Total de jogos: <span> {{ total_games }} </span>
       </p>
       <p class="detail-p" id="detail-realized-games">
-        Jogos não finalizados: <span>8</span>
+        Jogos não finalizados: <span> {{ not_finished_games }} </span>
       </p>
       <p class="detail-p" id="detail-not-ralized-games">
-        Jogos realizados: <span>4</span>
+        Jogos realizados: <span> {{ finished_games }} </span>
       </p>
     </div>
   </div>
@@ -248,11 +214,23 @@
 
 <dialog class="end-comp-dialog">
   <div class="dialog-header">
-    <h3>Encerrar competição?</h3>
+    {% if competition.status == "pendent" %}
+      <h3>Iniciar competição?</h3>
+    {% elif competition.status == 'in_course' %}
+      <h3>Encerrar competição?</h3>
+    {% endif %}
+
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Encerrar</button>
+  {% if competition.status == "pendent" %}
+    <a href="{% url 'start_competition' competition.id %}">    
+      <button style="background-color: var(--green-100);">Iniciar</button>
+    </a>
+    {% elif competition.status == 'in_course' %}
+    <button>Encerrar</button>
+  {% endif %}
+  
 </dialog>
 
 <dialog class="edit-scoreboard-dialog">
@@ -388,5 +366,11 @@
     </form>
   </div>
 </dialog>
+
+<ul class="messages" style="display: none;">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+</ul>
 
 {% endblock %}

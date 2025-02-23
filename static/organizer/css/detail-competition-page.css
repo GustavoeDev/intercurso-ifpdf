@@ -406,7 +406,8 @@ dialog > .dialog-header > h3 {
   color: var(--green-900);
 }
 
-dialog > button {
+dialog > button,
+dialog > a > button {
   background-color: var(--red-500);
   padding: 1.25rem;
   border: 0;

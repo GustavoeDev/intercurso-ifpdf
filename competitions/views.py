@@ -499,6 +499,73 @@ class DetailCompetitionView(DetailView):
     slug_field = 'name' 
     slug_url_kwarg = 'name'
 
+    def get_context_data(self, **kwargs):
+        games = Game.objects.filter(related_round__competition=self.object)
+        finished_games = games.filter(status='finished').count()
+        total_games = games.count()
+        not_finished_games = total_games - finished_games
+
+
+        context = super().get_context_data(**kwargs)
+        context['classifications'] = Clasification.objects.filter(competition=self.object).order_by('position')
+        context['rounds'] = Round.objects.filter(competition=self.object)
+        context['games'] = games
+        context['finished_games'] = finished_games
+        context['total_games'] = total_games
+        context['not_finished_games'] = not_finished_games
+
+        return context
+    
+
+def auto_generate_rounds(request, pk):
+    competition = get_object_or_404(Competition, pk=pk)
+    teams = Team.objects.filter(competition=competition)
+    teams_count = teams.count()
+
+    if teams_count < 2:
+        messages.error(request, 'Não é possível gerar rodadas com menos de 2 times.')
+        return redirect('detail_competition', name=competition.name)
+
+    if competition.system == 'league':
+        # Número de rodadas necessárias
+        num_rounds = teams_count - 1
+
+        # Lista de times para facilitar o pareamento
+        teams_list = list(teams)
+
+        # Gera as rodadas e os jogos
+        for round_number in range(1, num_rounds + 1):
+            # Cria a rodada
+            round_obj = Round.objects.create(number=round_number, competition=competition)
+
+            # Pareamento dos times
+            for i in range(teams_count // 2):
+                team_a = teams_list[i]
+                team_b = teams_list[teams_count - 1 - i]
+
+                # Cria o jogo
+                Game.objects.create(
+                    team_a=team_a,
+                    team_b=team_b,
+                    related_round=round_obj,
+                    status='pendent',
+                    date=competition.start_date  # Use a data de início da competição ou ajuste conforme necessário
+                )
+
+            # Rotaciona os times para a próxima rodada (exceto o primeiro time)
+            teams_list.insert(1, teams_list.pop())
+
+        competition.status = 'in_course'
+        competition.save()
+        messages.success(request, 'Rodadas geradas com sucesso!')
+        return redirect('detail_competition', name=competition.name)
+    elif competition.system == 'qualifiers':
+        print("Eliminatórias")
+    else:
+        messages.error(request, 'Sistema de competição não suportado.')
+        return redirect('detail_competition', name=competition.name)
+
+
 def view_teams_page(request):
     return render(request, 'organizer/teams_page.html')
 

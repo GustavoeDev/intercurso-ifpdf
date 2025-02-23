@@ -35,7 +35,13 @@
             </td>
             <td><span class="status">{{ competition.status }}</span></td>
             <td>{{ competition.team_set.count }}</td>
-            <td>{{ competition.start_date|date:"d/m/Y" }}</td>
+            <td>
+              {% if not competition.start_date %}
+                ---
+              {% else %}
+                {{ competition.start_date|date:"d/m/Y" }}
+             {% endif %}
+            </td>
             <td>
               <a href="{% url 'detail_competition' competition.name %}">Gerenciar competição</a>
             </td>

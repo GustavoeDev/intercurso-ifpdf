@@ -98,7 +98,8 @@ class Game(models.Model):
   team_b = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_b', blank=False)
   score_a = models.IntegerField(blank=True, null=True)
   score_b = models.IntegerField(blank=True, null=True)
-  date = models.DateTimeField()
+  date = models.DateTimeField(blank=True, null=True)
+  related_round = models.ForeignKey('Round', on_delete=models.CASCADE, blank=True, null=True)
 
   STATUS_CHOICES = [
     ('pendent', 'Pendent'),
@@ -113,10 +114,9 @@ class Game(models.Model):
 class Round(models.Model):
   number = models.IntegerField(blank=False)
   competition = models.ForeignKey(Competition, on_delete=models.CASCADE, blank=False)
-  games = models.ManyToManyField(Game, blank=True)
 
   def __str__(self):
-    return self.name
+    return f'{self.number}'
 
 class Request(models.Model):
   REQUEST_TYPE_CHOICES = [
