@@ -15,7 +15,7 @@
   <h1>Adicionar nova equipe</h1>
 </div>
 
-<form action="{% url 'register_team' %}" method="POST" class="new-team-form">
+<form action="{% url 'register_team' competition_pk=competition.pk %}" method="POST" class="new-team-form">
   {% csrf_token %}
 
   <div class="form-general-errors"></div>
@@ -26,6 +26,8 @@
       {{ team_form.name }}
       <div class="error-container" id="error-name"></div>
     </div>
+
+    <input type="hidden" class="competition-id-input" value="{{ competition.pk }}" />
 
     <div class="input-container">
       <label>{{ team_form.abbreviation.label_tag }}</label>

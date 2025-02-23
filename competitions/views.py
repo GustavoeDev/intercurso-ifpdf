@@ -13,6 +13,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from users.mixins import GroupRequiredMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse
 
 # Aluno
 
@@ -232,10 +233,13 @@ class RequestRemoveTeamView(View):
             })
 
 class RegisterTeamView(LoginRequiredMixin, View):
-    success_url = reverse_lazy('manage_teams')
+    def get_success_url(self):
+        return reverse_lazy('register_team', kwargs={'competition_pk': self.kwargs['competition_pk']})
 
-    def get(self, request, *args, **kwargs):
-        team_form = TeamForm()
+    def get(self, request, competition_pk, *args, **kwargs):
+        competition = get_object_or_404(Competition, pk=competition_pk)
+
+        team_form = TeamForm(initial={'competition': competition})
         MemberFormSet = formset_factory(TeamMemberForm, extra=1, max_num=9, validate_max=True)
         member_formset = MemberFormSet(prefix='members')
 
@@ -245,18 +249,21 @@ class RegisterTeamView(LoginRequiredMixin, View):
             for comp in competitions
         }
 
+        # Determinação do template a ser usado
         if request.resolver_match.view_name == 'register_team_student':
-            template_name = 'student/register_team.html'  
+            template_name = 'student/register_team.html'
         elif request.resolver_match.view_name == 'register_team':
-            template_name = 'organizer/register_team_page.html' 
+            template_name = 'organizer/register_team_page.html'
         else:
-            template_name = 'student/register_team.html'  
+            template_name = 'student/register_team.html'
 
         return render(request, template_name, {
             'team_form': team_form,
             'member_formset': member_formset,
             'competition_data': competition_data,
+            'competition': competition
         })
+
 
     def post(self, request, *args, **kwargs):
         team_form = TeamForm(request.POST)
@@ -468,9 +475,6 @@ class TeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
             competition.teams = Team.objects.filter(competition=competition, status='approved')
         
         return context
-
-def view_register_team(request):
-    return render(request, 'organizer/register_team_page.html')
 
 class EditTeamView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'organizer/edit_team_page.html'

@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="card-actions">
-        <a href="{% url 'register_team' %}" style="text-decoration: none">
+        <a href="{% url 'register_team' competition_pk=competition.pk %}" style="text-decoration: none">
           <button class="create-new-team">
             <span>Adicionar nova equipe</span>
             <i class="fa-solid fa-user-group"></i>
@@ -69,18 +69,5 @@
   </div>
   {% endfor %}
 </div>
-
-<dialog class="remove-team-dialog">
-  <div class="dialog-header">
-    <h3>
-      Excluir a equipe
-      <span class="team-name"></span>
-      ?
-    </h3>
-    <button><i class="fa-solid fa-xmark"></i></button>
-  </div>
-
-  <button>Excluir</button>
-</dialog>
 
 {% endblock %}

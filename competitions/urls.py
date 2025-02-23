@@ -15,7 +15,7 @@ urlpatterns = [
     # Organizador
     path('organizador/modalidades/', view_modality_page, name="modality_list"),
     path('organizador/equipes/', TeamsView.as_view(), name="teams_list"),
-    path('organizador/equipes/registrar-equipe/', RegisterTeamView.as_view(), name="register_team"),
+    path('organizador/equipes/registrar-equipe/competicao/<int:competition_pk>/', RegisterTeamView.as_view(), name="register_team"),
     path('organizador/equipes/editar-equipe/<int:pk>', EditTeamView.as_view(), name="edit_team"),
     path('organizador/equipes/editar-equipe/<int:pk>/remover-membro/<int:member_id>', RemoveMemberView.as_view(), name="remove_team"),
     path('organizador/competicoes/', view_competitions_page, name="competitions_list"),

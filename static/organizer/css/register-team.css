@@ -186,6 +186,10 @@ input,
   border-radius: 0.5rem;
 }
 
+.competition-select {
+  pointer-events: none;
+}
+
 select {
   border: none;
   background-color: #00000000;

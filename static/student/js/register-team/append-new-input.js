@@ -8,9 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const competitionSelect = document.querySelector(".competition-select select");
   const managementForm = document.querySelector("#id_members-TOTAL_FORMS");
   const teamForm = document.querySelectorAll(".new-team-form");
-  const initialForm = document.querySelector(".member-inputs .member-group").cloneNode(true); // Template for new members
+  const initialForm = document.querySelector(".member-inputs .member-group").cloneNode(true);
 
-  // Enable/Disable submit button based on checkbox state
+  const currentPath = window.location.pathname;
+
+  const competitionInputPk = document.querySelector(".competition-id-input").value;
+
+  if (currentPath === `/organizador/equipes/registrar-equipe/competicao/${competitionInputPk}/`) {
+    competitionSelect.readOnly = true;
+  }
+
   agreeCheckbox.addEventListener("change", () => {
     if (agreeCheckbox.checked) {
       submitButton.forEach((btn) => {
@@ -25,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Create a new member form field
   function createNewMemberFields(index) {
     const newMemberGroup = initialForm.cloneNode(true);
     newMemberGroup.classList.add("member-group");
@@ -51,7 +57,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const errorMessages = newMemberGroup.querySelectorAll(".error-message");
     errorMessages.forEach((el) => el.remove());
 
-    // Get competition limits
     const limits = getCompetitionLimits();
     if (limits && index >= limits.min) {
       const removeButton = document.createElement("button");
@@ -70,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
     membersContainer.appendChild(newMemberGroup);
   }
 
-  // Update member count and disable the add button if max is reached
   function updateMemberCount() {
     const currentCount = parseInt(managementForm.value);
     const maxMembers = parseInt(maxInputsSpan.textContent);
@@ -80,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
     addButton.classList.toggle("disabled", currentCount >= maxMembers);
   }
 
-  // Get competition limits based on the selected competition
   function getCompetitionLimits() {
     const selectedCompetition = competitionSelect.value;
     if (!selectedCompetition) return null;
@@ -97,7 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return null;
   }
 
-  // Adjust the number of member fields based on competition limits
   function adjustMemberFields(targetCount) {
     const currentCount = parseInt(managementForm.value);
 
@@ -116,12 +118,10 @@ document.addEventListener("DOMContentLoaded", function () {
     totalInputsSpan.textContent = targetCount;
   }
 
-  // Update inputs based on the selected competition
   function updateInputsForCompetition() {
     const limits = getCompetitionLimits();
 
     if (limits) {
-      console.log("Limits found:", limits);
       maxInputsSpan.textContent = limits.max;
       adjustMemberFields(limits.min);
     } else {
@@ -132,12 +132,10 @@ document.addEventListener("DOMContentLoaded", function () {
     updateMemberCount();
   }
 
-  // Clear any error messages
   function clearErrors() {
     document.querySelectorAll(".error-message").forEach((el) => el.remove());
   }
 
-  // Show specific error for a field
   function showFieldError(fieldName, errorMessage) {
     const input = document.querySelector(`[name="${fieldName}"]`);
     if (input) {
@@ -148,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Show form errors
   function showFormErrors(errors) {
     clearErrors();
 
@@ -166,7 +163,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Add new member when the button is clicked
   addButton.addEventListener("click", function () {
     const currentCount = parseInt(managementForm.value);
     const limits = getCompetitionLimits();
@@ -178,13 +174,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Update form when the competition is changed
   competitionSelect.addEventListener("change", function () {
     console.log("Competition changed to:", this.value);
     updateInputsForCompetition();
   });
 
-  // Submit form via AJAX
   teamForm.forEach((form) => {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -202,7 +196,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => response.json())
         .then((data) => {
           if (data.success === true) {
-            // Handle successful submission
             const date_request = data.created_at;
             sessionStorage.setItem("sonnerMessage", data.message);
             sessionStorage.setItem("sonnerDate", date_request);
@@ -211,13 +204,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (currentPath === "/registrar-equipe/") {
               window.location.href = "/registrar-equipe/";
             } else {
-              window.location.href = "/organizador/equipes/registrar-equipe/";
+              window.location.href = `/organizador/equipes/registrar-equipe/competicao/${competitionInputPk}/`;
             }
           } else if (data.errors) {
-            // Handle validation errors
             showFormErrors(data.errors);
           } else {
-            // Handle unknown errors
             showFormErrors({
               __all__: [
                 data.message || "Erro ao processar o formulário. Por favor, verifique os dados e tente novamente.",
@@ -234,7 +225,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Update the error display function
   function showFormErrors(errors) {
     clearErrors();
 
@@ -251,7 +241,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Scroll to the first error
     const firstError = document.querySelector(".error-message");
     if (firstError) {
       firstError.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -273,7 +262,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Mostrar o Sonner
 function showSonner(textData, dateRequest) {
   const sonnerContainer = document.querySelector(".sonner-request-container");
   const sonnerText = document.querySelector(".sonner-request-text span");
