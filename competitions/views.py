@@ -232,7 +232,6 @@ class RequestRemoveTeamView(View):
             })
 
 class RegisterTeamView(LoginRequiredMixin, View):
-    template_name = 'student/register_team.html'
     success_url = reverse_lazy('manage_teams')
 
     def get(self, request, *args, **kwargs):
@@ -246,7 +245,14 @@ class RegisterTeamView(LoginRequiredMixin, View):
             for comp in competitions
         }
 
-        return render(request, self.template_name, {
+        if request.resolver_match.view_name == 'register_team_student':
+            template_name = 'student/register_team.html'  
+        elif request.resolver_match.view_name == 'register_team':
+            template_name = 'organizer/register_team_page.html' 
+        else:
+            template_name = 'student/register_team.html'  
+
+        return render(request, template_name, {
             'team_form': team_form,
             'member_formset': member_formset,
             'competition_data': competition_data,
@@ -311,7 +317,7 @@ class RegisterTeamView(LoginRequiredMixin, View):
 
             try:
                 with transaction.atomic():
-                    member_errors = []
+                    member_users = []
                     for i, member_form in enumerate(valid_members):
                         username = member_form.cleaned_data.get('username')
                         full_name = member_form.cleaned_data.get('full_name', '').strip()
@@ -342,6 +348,8 @@ class RegisterTeamView(LoginRequiredMixin, View):
                                     'success': False,
                                     'errors': {f'members-{i}-username': [f"O usuário {username} já está inscrito na equipe '{existing_team.name}' nesta competição."]}
                                 })
+                            
+                            member_users.append(user)
                                 
                         except CustomUser.DoesNotExist:
                             return JsonResponse({
@@ -351,38 +359,46 @@ class RegisterTeamView(LoginRequiredMixin, View):
 
                     team = team_form.save()
 
-                    existing_request = Request.objects.filter(
-                        request_type='approve_team',
-                        team=team,
-                        status='pendent'
-                    ).exists()
-
-                    if existing_request:
-                        return JsonResponse({
-                            'status': 'error',
-                            'message': 'Esta solicitação já foi enviada.'
-                        })
-
-                    # Adicionar membros à equipe
-                    for i, member_form in enumerate(valid_members):
-                        username = member_form.cleaned_data.get('username')
-                        user = CustomUser.objects.get(username=username)
+                    for user in member_users:
                         team.members.add(user)
 
-                    new_request = Request.objects.create(
-                        request_type='approve_team',
-                        team=team,
-                        status='pendent'
-                    )
+                    if request.resolver_match.view_name == 'register_team_student':
+                        # Verificar se já existe uma solicitação pendente
+                        existing_request = Request.objects.filter(
+                            request_type='approve_team',
+                            team=team,
+                            status='pendent'
+                        ).exists()
 
-                    created_at_local = localtime(new_request.created_at)
-                    messages.success(request, 'Solicitação enviada com sucesso!')
+                        if existing_request:
+                            return JsonResponse({
+                                'success': False,
+                                'message': 'Esta solicitação já foi enviada.'
+                            })
+                        
+                        # Criar nova solicitação
+                        new_request = Request.objects.create(
+                            request_type='approve_team',
+                            team=team,
+                            status='pendent'
+                        )
 
-                    return JsonResponse({
-                        'status': 'success',
-                        'message': 'Solicitação enviada com sucesso!',
-                        'created_at': created_at_local.strftime("%d/%m/%Y")
-                    })
+                        created_at_local = localtime(new_request.created_at)
+                        return JsonResponse({
+                            'success': True,
+                            'message': 'Solicitação enviada com sucesso!',
+                            'created_at': created_at_local.strftime("%d/%m/%Y")
+                        })
+
+                    elif request.resolver_match.view_name == 'register_team':
+                        
+                        team.status = 'approved'
+                        team.save()
+
+                        return JsonResponse({
+                            'success': True,
+                            'message': 'Equipe registrada com sucesso!',
+                        })
 
             except ValidationError as e:
                 return JsonResponse({
@@ -390,7 +406,7 @@ class RegisterTeamView(LoginRequiredMixin, View):
                     'errors': {'__all__': e.messages if hasattr(e, 'messages') else [str(e)]}
                 })
             except Exception as e:
-                print(f"Erro ao salvar equipe: {e}")  # <-- Adiciona log no console
+                print(f"Erro ao salvar equipe: {e}")
                 return JsonResponse({
                     'success': False,
                     'errors': {'__all__': [f"Erro ao salvar: {str(e)}"]}
