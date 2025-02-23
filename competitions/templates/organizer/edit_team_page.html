@@ -1,14 +1,8 @@
 {% extends "base-organizer.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'organizer/css/edit-team-page.css' %}" />
 {% endblock %} {% block js %}
-<script
-  src="{% static 'organizer/js/edit-team-page/create-modal.js' %}"
-  defer
-></script>
-<script
-  src="{% static 'organizer/js/edit-team-page/form-select-placeholder.js' %}"
-  defer
-></script>
+<script src="{% static 'organizer/js/edit-team-page/create-modal.js' %}" defer></script>
+<script src="{% static 'form-select-placeholder.js' %}" defer></script>
 {% endblock %} {% block title%}
 <title>Editar time</title>
 {% endblock %} {% block main %}
@@ -17,12 +11,7 @@
     <button>
       <i
         class="fa-sharp-duotone fa-solid fa-chevron-left"
-        style="
-          --fa-primary-color: #000000;
-          --fa-secondary-color: #000000;
-          --fa-secondary-opacity: 1;
-        "
-      ></i>
+        style="--fa-primary-color: #000000; --fa-secondary-color: #000000; --fa-secondary-opacity: 1"></i>
     </button>
   </a>
   <h1>Editar dados da equipe</h1>
@@ -32,30 +21,21 @@
   <div class="table-title">
     <div class="card-title">
       <div class="title-image">
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-        />
+        <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
       </div>
       <div class="title-text">
-        <span>Equipirangaz</span>
-        <p>Basquete</p>
+        <span>{{ team.name }}</span>
+        <p>{{ team.competition }}</p>
       </div>
     </div>
     <div class="card-actions">
       <button class="add-new-member">
         <span>Adicionar novo participante</span>
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/add-new-member.svg' %}"
-        />
+        <img class="button-image" src="{% static 'student/img/manage-teams/add-new-member.svg' %}" />
       </button>
       <button class="delete-team">
         <span>Excluir equipe</span>
-        <img
-          class="button-image"
-          src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-        />
+        <img class="button-image" src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
       </button>
     </div>
   </div>
@@ -68,89 +48,21 @@
         <th>Curso</th>
         <th>Ações</th>
       </tr>
-      <tr class="table-row">
-        <td>Gustavo</td>
-        <td>20231094040023</td>
-        <td>ADS</td>
-        <td>
-          <button class="image-button edit-member">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
 
-          <button class="image-button remove-member">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
+      {% for member in team.members.all %}
+
+      <tr class="table-row">
+        <td>{{ member.first_name }} {{ member.last_name }}</td>
+        <td>{{ member.username }}</td>
+        <td>{{ member.course }}</td>
+        <td>
+          <button class="image-button remove-member" data-member-id="{{ member.id }}" data-team-id="{{ team.id }}">
+            <img class="small-image" src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
           </button>
         </td>
       </tr>
 
-      <tr class="table-row">
-        <td>Hian Sebasthian</td>
-        <td>20231094040043</td>
-        <td>Informática</td>
-        <td>
-          <button class="image-button edit-member">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
-          <button class="image-button remove-member">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
-
-      <tr class="table-row">
-        <td>João Neto</td>
-        <td>20231094040011</td>
-        <td>ADS</td>
-        <td>
-          <button class="image-button edit-member">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
-          <button class="image-button remove-member">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
-
-      <tr class="table-row">
-        <td>Arthur Lola</td>
-        <td>20231094040029</td>
-        <td>ADS</td>
-        <td>
-          <button class="image-button edit-member">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/pencil-icon.svg' %}"
-            />
-          </button>
-
-          <button class="image-button remove-member">
-            <img
-              class="small-image"
-              src="{% static 'student/img/manage-teams/trash-icon.svg' %}"
-            />
-          </button>
-        </td>
-      </tr>
+      {% endfor %}
     </table>
   </div>
 </div>
@@ -161,41 +73,15 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
-    <div class="inputs-container">
-      <label for="new-member-name">Nome completo</label>
-      <input
-        type="text"
-        id="new-member-name"
-        placeholder="Nome completo"
-        required
-      />
-    </div>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="inputs-container">{{ form.full_name.label_tag }} {{ form.full_name }}</div>
 
-    <div class="inputs-container">
-      <label for="new-member-registration">Matricula</label>
-      <input
-        type="text"
-        id="new-member-registration"
-        placeholder="Matricula"
-        required
-      />
-    </div>
+    <div class="inputs-container">{{ form.username.label_tag }} {{ form.username }}</div>
 
-    <div class="inputs-container">
-      <label for="new-member-course"> Curso </label>
-      <div id="new-member-course" class="select-container">
-        <select required name="course">
-          <option value="" selected disabled>Curso</option>
-          <option value="ads">ADS</option>
-          <option value="agro-industria">Agroindústria</option>
-          <option value="alimentos">Alimentos</option>
-          <option value="apicultura">Apicultura</option>
-          <option value="informatica">Informática</option>
-          <option value="quimica">Química</option>
-        </select>
-      </div>
-    </div>
+    <div class="inputs-container">{{ form.course.label_tag }} {{ form.course }}</div>
+
+    <div class="error-messages"></div>
 
     <button type="submit">Confirmar</button>
   </form>
@@ -203,64 +89,36 @@
 
 <dialog class="remove-team-dialog">
   <div class="dialog-header">
-    <h3>Excluir a equipe <span class="team-name"></span>?</h3>
-    <button><i class="fa-solid fa-xmark"></i></button>
+    <h3>
+      Excluir a equipe
+      <span class="team-name">{{ team.name }}</span>
+      ?
+    </h3>
+    <button type="button"><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Excluir</button>
-</dialog>
-
-<dialog class="edit-member-dialog">
-  <div class="dialog-header">
-    <h3>Editar dados do participante</h3>
-    <button><i class="fa-solid fa-xmark"></i></button>
-  </div>
-
-  <form action="">
-    <div class="inputs-container">
-      <label for="member-name">Nome completo</label>
-      <input
-        type="text"
-        id="member-name"
-        placeholder="Nome completo"
-        required
-      />
-    </div>
-
-    <div class="inputs-container">
-      <label for="member-registration">Matricula</label>
-      <input
-        type="text"
-        id="member-registration"
-        placeholder="Matricula"
-        required
-      />
-    </div>
-
-    <div class="inputs-container">
-      <label for="member-course"> Curso </label>
-      <div id="member-course" class="select-container">
-        <select required name="course">
-          <option value="ads">ADS</option>
-          <option value="agro-industria">Agroindústria</option>
-          <option value="alimentos">Alimentos</option>
-          <option value="apicultura">Apicultura</option>
-          <option value="informatica">Informática</option>
-          <option value="quimica">Química</option>
-        </select>
-      </div>
-    </div>
-
-    <button type="submit">Confirmar alterações</button>
+  <form method="POST" action="{% url 'edit_team' team.pk %}" id="form-delete-team">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="delete_team" />
+    <div class="error-messages"></div>
+    <button type="submit">Excluir</button>
   </form>
 </dialog>
 
 <dialog class="remove-member-dialog">
   <div class="dialog-header">
-    <h3>Excluir o membro <span class="member-name-span"></span>?</h3>
+    <h3>
+      Excluir o membro
+      <span class="member-name-span"></span>
+      ?
+    </h3>
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Excluir</button>
+  <form method="POST" action="" id="form-delete-member">
+    {% csrf_token %}
+    <div class="error-messages"></div>
+    <button type="submit">Excluir</button>
+  </form>
 </dialog>
 {% endblock %}

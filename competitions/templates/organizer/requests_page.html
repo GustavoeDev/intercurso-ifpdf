@@ -1,22 +1,11 @@
 {% extends "base-organizer.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'organizer/css/requests-page.css' %}" />
 {% endblock %} {% block js %}
-<script
-  src="{% static 'organizer/js/requests-page/change-table.js' %}"
-  defer
-></script>
-<script
-  src="{% static 'organizer/js/requests-page/color-type-request.js' %}"
-  defer
-></script>
-<script
-  src="{% static 'organizer/js/requests-page/create-modal.js' %}"
-  defer
-></script>
-<script
-  src="{% static 'organizer/js/requests-page/radio-change.js' %}"
-  defer
-></script>
+<script src="{% static 'organizer/js/requests-page/change-table.js' %}" defer></script>
+<script src="{% static 'organizer/js/requests-page/color-type-request.js' %}" defer></script>
+<script src="{% static 'organizer/js/requests-page/create-modal.js' %}" defer></script>
+<script src="{% static 'organizer/js/requests-page/radio-change.js' %}" defer></script>
+<script src="{% static 'organizer/js/requests-page/form-submission.js' %}" defer></script>
 {% endblock %} {% block main %}
 
 <div class="table-container">
@@ -49,29 +38,39 @@
         <th>Data da solicitação</th>
         <th>Ações</th>
       </tr>
+
+      {% if requests %}
+      <!-- prettier-ignore-start -->
+      {% for request in requests %}
+      <!-- Só para não quebrar o código -->
+      {% if request.request_type == 'approve_team' or request.request_type == 'delete_team' %}
+      <!-- prettier-ignore-end -->
       <tr class="table-row">
         <td>
-          <p>Equipirangaz</p>
-          <span>Futsal Masculino</span>
+          <p>{{ request.team.name }}</p>
+          <span>{{ request.team.competition }}</span>
         </td>
-        <td class="type-request">Aprovar equipe</td>
-        <td>10/11/24</td>
+        <td class="type-request">{{ request.get_request_type_display }}</td>
+        <td>{{ request.created_at|date:"d/m/Y" }}</td>
         <td>
-          <button class="show-request">Exibir solicitação</button>
+          <button class="show-request" data-request-id="{{ request.id }}">Exibir solicitação</button>
         </td>
       </tr>
+      {% else %}
+
       <tr class="table-row">
-        <td>
-          <p>Equipirangaz</p>
-          <span>Futsal Masculino</span>
-        </td>
-        <td class="type-request">Excluir equipe</td>
-        <td>10/11/24</td>
-        <td>
-          <button class="show-request">Exibir solicitação</button>
-        </td>
+        <td colspan="4">Não tem solicitações para alteração de equipes</td>
       </tr>
+
+      {% endif %} {% endfor %} {% else %}
+
+      <tr class="table-row">
+        <td colspan="4">Não tem solicitações para alteração de equipes</td>
+      </tr>
+
+      {% endif %}
     </table>
+
     <table class="table-players disabled">
       <tr class="table-header">
         <th>Equipe solicitante</th>
@@ -79,17 +78,35 @@
         <th>Data da solicitação</th>
         <th>Ações</th>
       </tr>
+
+      {% if requests %} {% for request in requests %}
+      <!-- Só para não quebrar o código -->
+      {% if request.request_type == 'remove_team_member' %}
       <tr class="table-row">
         <td>
-          <p>Equipirangaz</p>
-          <span>Futsal Masculino</span>
+          <p>{{ request.team.name }}</p>
+          <span>{{ request.team.competition }}</span>
         </td>
-        <td class="type-request">Excluir participante</td>
-        <td>10/11/24</td>
+        <td class="type-request">{{ request.get_request_type_display }}</td>
+        <td>{{ request.created_at|date:"d/m/Y" }}</td>
         <td>
-          <button class="show-request">Exibir solicitação</button>
+          <button class="show-request" data-request-id="{{ request.id }}">Exibir solicitação</button>
         </td>
       </tr>
+
+      {% else %}
+
+      <tr class="table-row">
+        <td colspan="4">Não tem solicitações para alteração de participantes</td>
+      </tr>
+
+      {% endif %} {% endfor %} {% else %}
+
+      <tr class="table-row">
+        <td colspan="4">Não tem solicitações para alteração de participantes</td>
+      </tr>
+
+      {% endif %}
     </table>
   </div>
 </div>
@@ -117,78 +134,31 @@
     <p>Membros</p>
     <div class="team-table-container-wrapper">
       <div class="table-container-approve">
-        <table>
-          <tr class="table-header">
-            <th>Nome do participante</th>
-            <th>Matrícula</th>
-            <th>Curso</th>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-        </table>
+        <table></table>
       </div>
     </div>
   </div>
-  <form action="">
-    <div class="reason-deny">
-      <p>Caso for negado, dê um motivo</p>
-      <textarea
-        id="approve-team-reason"
-        name="reason"
-        placeholder="Explique o motivo..."
-      ></textarea>
-    </div>
-    <div class="radio-group">
-      <label for="approve-team-approve">
-        <input
-          type="radio"
-          id="approve-team-approve"
-          name="decision"
-          value="approve"
-          required
-        />
+  <form action="{% url 'requests_list' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="request_id" value="{{ request.id }}" />
+
+    <div class="radio-action-group">
+      <label for="approve" class="radio-action-item">
+        <input type="radio" name="action" value="approve" id="approve" />
         Aprovar solicitação
       </label>
-      <label for="approve-team-deny">
-        <input
-          type="radio"
-          id="approve-team-deny"
-          name="decision"
-          value="deny"
-          required
-        />
-        Negar solicitação
+
+      <label for="reject" class="radio-action-item">
+        <input type="radio" name="action" value="reject" id="reject" />
+        Rejeitar solicitação
       </label>
     </div>
+
+    <div class="reason-deny reason_rejected_field">
+      <label>{{ reject_request_form.reason_rejected.label_tag }}</label>
+      {{ reject_request_form.reason_rejected }}
+    </div>
+
     <button type="submit">Confirmar</button>
   </form>
 </dialog>
@@ -201,98 +171,47 @@
   <div class="team-data-container">
     <div class="team-data">
       <p>Nome da equipe</p>
-      <span>Equipirangaz</span>
+      <span></span>
     </div>
     <div class="team-data">
       <p>Competição</p>
-      <span>Futsal masculino</span>
+      <span></span>
     </div>
     <div class="team-data">
       <p>Número de membros</p>
-      <span>8 membros</span>
+      <span></span>
     </div>
   </div>
   <div class="team-table-players">
     <p>Membros</p>
     <div class="team-table-container-wrapper">
       <div class="table-container-approve">
-        <table>
-          <tr class="table-header">
-            <th>Nome do participante</th>
-            <th>Matrícula</th>
-            <th>Curso</th>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-          <tr class="table-row">
-            <td>Gustavo</td>
-            <td>20231094040005</td>
-            <td>ADS</td>
-          </tr>
-        </table>
+        <table></table>
       </div>
     </div>
   </div>
   <div class="reason-change">
     <span>Motivo da alteração</span>
     <div class="reason-change-content">
-      <p>Desistimos de jogar</p>
+      <p></p>
     </div>
   </div>
-  <form action="">
-    <div class="reason-deny">
-      <p>Caso for negado, dê um motivo</p>
-      <textarea
-        id="remove-team-reason"
-        name="reason"
-        placeholder="Explique o motivo..."
-      ></textarea>
-    </div>
-    <div class="radio-group">
-      <label for="remove-team-approve">
-        <input
-          type="radio"
-          id="remove-team-approve"
-          name="decision"
-          value="approve"
-          required
-        />
+  <form action="{% url 'requests_list' %}" method="POST">
+    <div class="radio-action-group">
+      <label for="approve-team-remove" class="radio-action-item">
+        <input type="radio" name="action" value="approve" id="approve-team-remove" />
         Aprovar solicitação
       </label>
-      <label for="remove-team-deny">
-        <input
-          type="radio"
-          id="remove-team-deny"
-          name="decision"
-          value="deny"
-          required
-        />
-        Negar solicitação
+
+      <label for="reject-team-remove" class="radio-action-item">
+        <input type="radio" name="action" value="reject" id="reject-team-remove" />
+        Rejeitar solicitação
       </label>
+    </div>
+
+    <div class="reason-deny reason_rejected_field" style="display: none">
+      <label>{{ reject_request_form.reason_rejected.label_tag }}</label>
+      {{ reject_request_form.reason_rejected }}
     </div>
     <button type="submit">Confirmar</button>
   </form>
@@ -306,54 +225,43 @@
   <div class="team-data-container">
     <div class="team-data">
       <p>Membro a ser excluído</p>
-      <span>Gustavo Emanuel Queiroz Silva</span>
+      <span></span>
     </div>
     <div class="team-data">
       <p>Equipe</p>
-      <span>Equipirangaz</span>
+      <span></span>
     </div>
     <div class="team-data">
       <p>Competição</p>
-      <span>Futsal masculino</span>
+      <span></span>
     </div>
   </div>
   <div class="reason-change">
     <span>Motivo da alteração</span>
     <div class="reason-change-content">
-      <p>Ele não quer mais jogar!</p>
+      <p></p>
     </div>
   </div>
-  <form action="">
-    <div class="reason-deny">
-      <p>Caso for negado, dê um motivo</p>
-      <textarea
-        id="remove-player-reason"
-        name="reason"
-        placeholder="Explique o motivo..."
-      ></textarea>
-    </div>
-    <div class="radio-group">
-      <label for="remove-player-approve">
-        <input
-          type="radio"
-          id="remove-player-approve"
-          name="decision"
-          value="approve"
-          required
-        />
+  <form action="{% url 'requests_list' %}" method="POST">
+    {% csrf_token %}
+
+    <div class="radio-action-group">
+      <label for="approve-player-remove" class="radio-action-item">
+        <input type="radio" name="action" value="approve" id="approve-player-remove" />
         Aprovar solicitação
       </label>
-      <label for="remove-player-deny">
-        <input
-          type="radio"
-          id="remove-player-deny"
-          name="decision"
-          value="deny"
-          required
-        />
-        Negar solicitação
+
+      <label for="reject-player-remove" class="radio-action-item">
+        <input type="radio" name="action" value="reject" id="reject-player-remove" />
+        Rejeitar solicitação
       </label>
     </div>
+
+    <div class="reason-deny reason_rejected_field" style="display: none">
+      <label>{{ reject_request_form.reason_rejected.label_tag }}</label>
+      {{ reject_request_form.reason_rejected }}
+    </div>
+
     <button type="submit">Confirmar</button>
   </form>
 </dialog>

@@ -97,7 +97,7 @@
   gap: 0.5rem;
 }
 
-.create-new-team{
+.create-new-team {
   color: var(--green-100);
   padding: 0.5rem 1rem;
 
@@ -170,6 +170,11 @@ table {
   border-bottom: 1px solid #e2e8f0;
 }
 
+td a {
+  color: var(--blue-500);
+  font: 500 0.875rem "Inter";
+  text-decoration: none;
+}
 
 table .table-row:last-child {
   border-bottom: none;

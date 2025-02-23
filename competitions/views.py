@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from django.views.generic import ListView, DetailView
+=======
+from django.views.generic import ListView, DeleteView
+>>>>>>> a82691227bdf2fe71a924c1d3cc1efbb5d831129
 from .models import *
 from .forms import *
 from django.forms import formset_factory
@@ -10,17 +14,21 @@ from django.db import transaction
 from django.core.exceptions import ValidationError
 from django.utils.timezone import localtime
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from users.mixins import GroupRequiredMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse
 
 # Aluno
 
 def view_homepage(request):
     return render(request, 'student/home.html')
 
-class ManageTeamsView(ListView):
+class ManageTeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Team
     template_name = 'student/manage_teams.html'
     context_object_name = 'teams'
+    group_required = 'Student'
 
     def get_queryset(self):
         return Team.objects.filter(members=self.request.user, status='approved').order_by('-register_date')
@@ -28,7 +36,7 @@ class ManageTeamsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        add_user_form = AddUserToTeamForm()
+        add_user_form = TeamMemberForm()
         request_remove_member_form = RemoveMemberRequestForm()
         request_remove_team_form = RemoveTeamRequestForm()
 
@@ -39,7 +47,7 @@ class ManageTeamsView(ListView):
         return context
 
     def post(self, request, *args, **kwargs):
-        add_user_form = AddUserToTeamForm(request.POST)
+        add_user_form = TeamMemberForm(request.POST)
         request_remove_member_form = RemoveMemberRequestForm(request.POST)
         request_remove_team_form = RemoveTeamRequestForm(request.POST)
         
@@ -62,7 +70,7 @@ class AddNewMemberToTeamView(View):
         team = get_object_or_404(Team, pk=pk)
         competition = team.competition
         max_members_per_team = competition.max_members_per_team
-        form = AddUserToTeamForm(request.POST)
+        form = TeamMemberForm(request.POST)
         
         if form.is_valid():
             username = form.cleaned_data['username']
@@ -228,26 +236,65 @@ class RequestRemoveTeamView(View):
                 'message': 'Por favor, forneça um motivo válido para a remoção.'
             })
 
-class RegisterTeamView(View):
-    template_name = 'student/register_team.html'
-    success_url = reverse_lazy('manage_teams')
+class RegisterTeamView(LoginRequiredMixin, View):
+    def get_success_url(self):
+        if 'competition_pk' in self.kwargs:
+            return reverse_lazy('register_team', kwargs={'competition_pk': self.kwargs['competition_pk']})
+        else:
+            return reverse_lazy('register_team_student')
 
     def get(self, request, *args, **kwargs):
-        team_form = TeamForm()
-        MemberFormSet = formset_factory(TeamMemberForm, extra=1, max_num=9, validate_max=True)
-        member_formset = MemberFormSet(prefix='members')
+        competition_pk = kwargs.get('competition_pk')
 
-        competitions = Competition.objects.all()
-        competition_data = {
-            comp.id: {'min': comp.min_members_per_team, 'max': comp.max_members_per_team}
-            for comp in competitions
-        }
+        if competition_pk:
+            competition = get_object_or_404(Competition, pk=competition_pk)
+            team_form = TeamForm(initial={'competition': competition})
+            MemberFormSet = formset_factory(TeamMemberForm, extra=1, max_num=9, validate_max=True)
+            member_formset = MemberFormSet(prefix='members')
 
-        return render(request, self.template_name, {
-            'team_form': team_form,
-            'member_formset': member_formset,
-            'competition_data': competition_data,
-        })
+            competitions = Competition.objects.all()
+            competition_data = {
+                comp.id: {'min': comp.min_members_per_team, 'max': comp.max_members_per_team}
+                for comp in competitions
+            }
+
+            if request.resolver_match.view_name == 'register_team_student':
+                template_name = 'student/register_team.html'
+            elif request.resolver_match.view_name == 'register_team':
+                template_name = 'organizer/register_team_page.html'
+            else:
+                template_name = 'student/register_team.html'
+
+            return render(request, template_name, {
+                'team_form': team_form,
+                'member_formset': member_formset,
+                'competition_data': competition_data,
+                'competition': competition
+            })
+        else:
+            team_form = TeamForm()
+            MemberFormSet = formset_factory(TeamMemberForm, extra=1, max_num=9, validate_max=True)
+            member_formset = MemberFormSet(prefix='members')
+
+            competitions = Competition.objects.all()
+            competition_data = {
+                comp.id: {'min': comp.min_members_per_team, 'max': comp.max_members_per_team}
+                for comp in competitions
+            }
+
+            if request.resolver_match.view_name == 'register_team_student':
+                template_name = 'student/register_team.html'
+            elif request.resolver_match.view_name == 'register_team':
+                template_name = 'organizer/register_team_page.html'
+            else:
+                template_name = 'student/register_team.html'
+
+            return render(request, template_name, {
+                'team_form': team_form,
+                'member_formset': member_formset,
+                'competition_data': competition_data,
+            })
+
 
     def post(self, request, *args, **kwargs):
         team_form = TeamForm(request.POST)
@@ -308,8 +355,7 @@ class RegisterTeamView(View):
 
             try:
                 with transaction.atomic():
-
-                    member_errors = []
+                    member_users = []
                     for i, member_form in enumerate(valid_members):
                         username = member_form.cleaned_data.get('username')
                         full_name = member_form.cleaned_data.get('full_name', '').strip()
@@ -340,6 +386,8 @@ class RegisterTeamView(View):
                                     'success': False,
                                     'errors': {f'members-{i}-username': [f"O usuário {username} já está inscrito na equipe '{existing_team.name}' nesta competição."]}
                                 })
+                            
+                            member_users.append(user)
                                 
                         except CustomUser.DoesNotExist:
                             return JsonResponse({
@@ -348,12 +396,47 @@ class RegisterTeamView(View):
                             })
 
                     team = team_form.save()
-                    for i, member_form in enumerate(valid_members):
-                        username = member_form.cleaned_data.get('username')
-                        user = CustomUser.objects.get(username=username)
+
+                    for user in member_users:
                         team.members.add(user)
 
-                    return JsonResponse({'success': True})
+                    if request.resolver_match.view_name == 'register_team_student':
+                        # Verificar se já existe uma solicitação pendente
+                        existing_request = Request.objects.filter(
+                            request_type='approve_team',
+                            team=team,
+                            status='pendent'
+                        ).exists()
+
+                        if existing_request:
+                            return JsonResponse({
+                                'success': False,
+                                'message': 'Esta solicitação já foi enviada.'
+                            })
+                        
+                        # Criar nova solicitação
+                        new_request = Request.objects.create(
+                            request_type='approve_team',
+                            team=team,
+                            status='pendent'
+                        )
+
+                        created_at_local = localtime(new_request.created_at)
+                        return JsonResponse({
+                            'success': True,
+                            'message': 'Solicitação enviada com sucesso!',
+                            'created_at': created_at_local.strftime("%d/%m/%Y")
+                        })
+
+                    elif request.resolver_match.view_name == 'register_team':
+                        
+                        team.status = 'approved'
+                        team.save()
+
+                        return JsonResponse({
+                            'success': True,
+                            'message': 'Equipe registrada com sucesso!',
+                        })
 
             except ValidationError as e:
                 return JsonResponse({
@@ -361,6 +444,7 @@ class RegisterTeamView(View):
                     'errors': {'__all__': e.messages if hasattr(e, 'messages') else [str(e)]}
                 })
             except Exception as e:
+                print(f"Erro ao salvar equipe: {e}")
                 return JsonResponse({
                     'success': False,
                     'errors': {'__all__': [f"Erro ao salvar: {str(e)}"]}
@@ -491,20 +575,225 @@ class DetailCompetitionView(DetailView):
     slug_field = 'name' 
     slug_url_kwarg = 'name'
 
-def view_teams_page(request):
-    return render(request, 'organizer/teams_page.html')
+class TeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
+    model = Team
+    template_name = 'organizer/teams_page.html'
+    context_object_name = 'teams'
+    group_required = 'Organizer'
 
-def view_register_team(request):
-    return render(request, 'organizer/register_team_page.html')
+    def get_queryset(self):
+        return Team.objects.filter(status='approved').order_by('-register_date')
+        
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)  
+        context['competitions'] = Competition.objects.all()
+        
+        for competition in context['competitions']:
+            competition.teams = Team.objects.filter(competition=competition, status='approved')
+        
+        return context
 
-def view_edit_team(request):
-    return render(request, 'organizer/edit_team_page.html')
+class EditTeamView(LoginRequiredMixin, GroupRequiredMixin, View):
+    template_name = 'organizer/edit_team_page.html'
+    success_url = reverse_lazy('teams_list')
+    group_required = 'Organizer'
 
+    def get(self, request, *args, **kwargs):
+        team = get_object_or_404(Team, pk=kwargs['pk'])
+        form = TeamMemberForm()
+        context = {
+            'team': team,
+            'form': form,
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        team = get_object_or_404(Team, pk=kwargs['pk'])
+
+        action = request.POST.get('action')
+
+        if action == 'delete_team':
+            team.delete()
+            return JsonResponse({
+                'success': True,
+                'message': 'Equipe excluída com sucesso.'
+            })
+        
+        form = TeamMemberForm(request.POST)
+        if form.is_valid():
+            try:
+                username = form.cleaned_data['username']
+                user = CustomUser.objects.get(username=username)
+                competition = team.competition
+                max_members_per_team = competition.max_members_per_team
+
+                if team.members.count() == max_members_per_team:
+                    return JsonResponse({
+                        'success': False,
+                        'message': f'A equipe já atingiu o número máximo de membros ({max_members_per_team}).'
+                    })
+
+                if team.members.filter(id=user.id).exists():
+                    return JsonResponse({
+                        'success': False,
+                        'message': f"O usuário {user} já está na equipe."
+                    })
+                
+                # Verifica se o usuário já está na equipe
+                if user in team.members.all():
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Este usuário já é membro desta equipe.'
+                    })
+                
+                # Verifica se este usuário já está em outro time da mesma competição
+                user_teams = Team.objects.filter(
+                    competition=team.competition,
+                    members=user
+                )
+                if user_teams.exists():
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': 'Este usuário já está em outra equipe nesta competição.'
+                    })
+
+                team.members.add(user)
+                return JsonResponse({
+                    'success': True,
+                    'message': f"Usuário {user} adicionado à equipe com sucesso."
+                })
+
+            except CustomUser.DoesNotExist:
+                return JsonResponse({
+                    'success': False,
+                    'message': "Usuário não encontrado. Verifique as credenciais."
+                })
+
+        errors = form.errors.as_json()
+        return JsonResponse({
+            'success': False,
+            'message': "Dados inválidos. Verifique os campos.",
+            'errors': errors
+        })
+
+class RemoveMemberView(LoginRequiredMixin, GroupRequiredMixin, View):
+    success_url = reverse_lazy('teams_list')
+    group_required = 'Organizer'
+
+    def post(self, request, *args, **kwargs):
+        team_id = kwargs.get('pk')
+        member_id = request.POST.get('member_id')
+        
+        try:
+            team = Team.objects.get(pk=team_id)
+        except Team.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'message': 'Equipe não encontrada.'
+            })
+        
+        competition = team.competition
+        min_members_per_team = competition.min_members_per_team
+        
+        if team.members.count() == min_members_per_team:
+            return JsonResponse({
+                'success': False,
+                'message': f'A equipe atingiu o número mínimo de membros ({min_members_per_team}).'
+            })
+        
+        try:
+            member = CustomUser.objects.get(pk=member_id)
+        except CustomUser.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'message': 'Membro não encontrado.'
+            })
+        
+        team.members.remove(member)
+
+        return JsonResponse({
+            'success': True,
+            'message': 'Membro removido com sucesso.'
+        })
+    
 def view_competitions_page(request):
     return render(request, 'organizer/competitions_page.html')
 
 def view_detail_comp_page(request):
     return render(request, 'organizer/detail_competition_page.html')
 
-def view_requests(request):
-    return render(request, 'organizer/requests_page.html')
+class RequestsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
+    model = Request
+    template_name = 'organizer/requests_page.html'
+    context_object_name = 'requests'
+    group_required = 'Organizer'
+
+    def get_queryset(self):
+        return Request.objects.filter(status='pendent').order_by('-created_at')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context['reject_request_form'] = RejectRequestForm()
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get('action')
+        request_id = request.POST.get('request_id')
+        reason_rejected = request.POST.get('reason_rejected')
+
+        if not request_id:
+            return JsonResponse({'success': False, 'message': 'ID da solicitação não fornecido.'}, status=400)
+
+        try:
+            request_instance = Request.objects.get(id=request_id)
+        except Request.DoesNotExist:
+            return JsonResponse({'success': False, 'message': 'Requisição não encontrada.'}, status=404)
+
+        try:
+            if action == 'approve':
+                if request_instance.request_type == 'approve_team':
+                    team = request_instance.team
+                    team.status = 'approved'
+                    team.save()
+                    
+                request_instance.status = 'approved'
+                request_instance.save()
+                return JsonResponse({'success': True, 'message': 'Requisição aprovada com sucesso.'})
+
+            elif action == 'reject':
+                if not reason_rejected:
+                    return JsonResponse({'success': False, 'message': 'Motivo da rejeição é obrigatório.'}, status=400)
+                request_instance.status = 'rejected'
+                request_instance.reason_rejected = reason_rejected
+                request_instance.save()
+                return JsonResponse({'success': True, 'message': 'Requisição rejeitada com sucesso.'})
+
+            else:
+                return JsonResponse({'success': False, 'message': 'Ação inválida.'}, status=400)
+
+        except ValidationError as e:
+            return JsonResponse({'success': False, 'message': str(e)}, status=400)
+
+def get_request_data(request, request_pk):
+    request_obj = get_object_or_404(Request, id=request_pk)
+    
+    data = {
+        'id': request_obj.id,
+        'team_name': request_obj.team.name,
+        'competition': request_obj.team.competition.name,
+        'request_type': request_obj.request_type,
+        'created_at': request_obj.created_at.strftime('%d/%m/%Y'),
+        'user_remove': f"{request_obj.user.first_name} {request_obj.user.last_name}" if request_obj.user else 'Usuário não especificado',
+        'reason': request_obj.reason,
+        'members': [
+            {
+                'name': f"{member.first_name} {member.last_name}",
+                'registration': member.username,
+                'course': member.course.name if member.course else ''
+            }
+            for member in request_obj.team.members.all()
+        ],
+    }
+    
+    return JsonResponse(data)
