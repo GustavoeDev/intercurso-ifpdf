@@ -202,8 +202,8 @@ class AddCompetitionForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        min_players = cleaned_data.get('min_players_per_team')
-        max_players = cleaned_data.get('max_players_per_team')
+        min_players = cleaned_data.get('min_members_per_team')
+        max_players = cleaned_data.get('max_members_per_team')
 
         if min_players and max_players and min_players > max_players:
             raise forms.ValidationError(
