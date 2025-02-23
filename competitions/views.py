@@ -234,35 +234,70 @@ class RequestRemoveTeamView(View):
 
 class RegisterTeamView(LoginRequiredMixin, View):
     def get_success_url(self):
-        return reverse_lazy('register_team', kwargs={'competition_pk': self.kwargs['competition_pk']})
-
-    def get(self, request, competition_pk, *args, **kwargs):
-        competition = get_object_or_404(Competition, pk=competition_pk)
-
-        team_form = TeamForm(initial={'competition': competition})
-        MemberFormSet = formset_factory(TeamMemberForm, extra=1, max_num=9, validate_max=True)
-        member_formset = MemberFormSet(prefix='members')
-
-        competitions = Competition.objects.all()
-        competition_data = {
-            comp.id: {'min': comp.min_members_per_team, 'max': comp.max_members_per_team}
-            for comp in competitions
-        }
-
-        # Determinação do template a ser usado
-        if request.resolver_match.view_name == 'register_team_student':
-            template_name = 'student/register_team.html'
-        elif request.resolver_match.view_name == 'register_team':
-            template_name = 'organizer/register_team_page.html'
+        if 'competition_pk' in self.kwargs:
+            return reverse_lazy('register_team', kwargs={'competition_pk': self.kwargs['competition_pk']})
         else:
-            template_name = 'student/register_team.html'
+            return reverse_lazy('register_team_student')
 
-        return render(request, template_name, {
-            'team_form': team_form,
-            'member_formset': member_formset,
-            'competition_data': competition_data,
-            'competition': competition
-        })
+    def get(self, request, *args, **kwargs):
+        competition_pk = kwargs.get('competition_pk')
+
+        if competition_pk:
+            # Se competition_pk for fornecido, procure pela competição
+            competition = get_object_or_404(Competition, pk=competition_pk)
+            team_form = TeamForm(initial={'competition': competition})
+            MemberFormSet = formset_factory(TeamMemberForm, extra=1, max_num=9, validate_max=True)
+            member_formset = MemberFormSet(prefix='members')
+
+            # Obter dados de competição
+            competitions = Competition.objects.all()
+            competition_data = {
+                comp.id: {'min': comp.min_members_per_team, 'max': comp.max_members_per_team}
+                for comp in competitions
+            }
+
+            # Determinação do template com base na URL
+            if request.resolver_match.view_name == 'register_team_student':
+                template_name = 'student/register_team.html'
+            elif request.resolver_match.view_name == 'register_team':
+                template_name = 'organizer/register_team_page.html'
+            else:
+                template_name = 'student/register_team.html'
+
+            # Renderizar o template com os dados necessários
+            return render(request, template_name, {
+                'team_form': team_form,
+                'member_formset': member_formset,
+                'competition_data': competition_data,
+                'competition': competition
+            })
+        else:
+            # Caso competition_pk não seja fornecido, usar outra lógica
+            team_form = TeamForm()
+            MemberFormSet = formset_factory(TeamMemberForm, extra=1, max_num=9, validate_max=True)
+            member_formset = MemberFormSet(prefix='members')
+
+            # Obter dados de competição (mesmo sem competition_pk)
+            competitions = Competition.objects.all()
+            competition_data = {
+                comp.id: {'min': comp.min_members_per_team, 'max': comp.max_members_per_team}
+                for comp in competitions
+            }
+
+            # Determinação do template com base na URL
+            if request.resolver_match.view_name == 'register_team_student':
+                template_name = 'student/register_team.html'
+            elif request.resolver_match.view_name == 'register_team':
+                template_name = 'organizer/register_team_page.html'
+            else:
+                template_name = 'student/register_team.html'
+
+            # Renderizar o template com os dados necessários
+            return render(request, template_name, {
+                'team_form': team_form,
+                'member_formset': member_formset,
+                'competition_data': competition_data,
+            })
 
 
     def post(self, request, *args, **kwargs):

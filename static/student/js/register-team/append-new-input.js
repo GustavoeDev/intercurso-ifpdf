@@ -5,17 +5,20 @@ document.addEventListener("DOMContentLoaded", function () {
   const maxInputsSpan = document.querySelector(".max-inputs");
   const agreeCheckbox = document.getElementById("agree");
   const submitButton = document.querySelectorAll(".submit-form-create-team");
-  const competitionSelect = document.querySelector(".competition-select select");
+  const competitionSelect = document.querySelectorAll(".competition-select select");
   const managementForm = document.querySelector("#id_members-TOTAL_FORMS");
   const teamForm = document.querySelectorAll(".new-team-form");
   const initialForm = document.querySelector(".member-inputs .member-group").cloneNode(true);
 
   const currentPath = window.location.pathname;
 
-  const competitionInputPk = document.querySelector(".competition-id-input").value;
+  const competitionInputElement = document.querySelector(".competition-id-input");
+  const competitionInputPk = competitionInputElement ? competitionInputElement.value : null;
 
   if (currentPath === `/organizador/equipes/registrar-equipe/competicao/${competitionInputPk}/`) {
-    competitionSelect.readOnly = true;
+    competitionSelect.forEach((select) => {
+      select.readOnly = true;
+    });
   }
 
   agreeCheckbox.addEventListener("change", () => {
@@ -85,7 +88,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function getCompetitionLimits() {
-    const selectedCompetition = competitionSelect.value;
+    const select = competitionSelect[0];
+    const selectedCompetition = select.value;
+
     if (!selectedCompetition) return null;
 
     const minElement = document.querySelector(`.competition-min[data-comp-id="${selectedCompetition}"]`);
@@ -174,9 +179,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  competitionSelect.addEventListener("change", function () {
-    console.log("Competition changed to:", this.value);
-    updateInputsForCompetition();
+  competitionSelect.forEach((select) => {
+    select.addEventListener("change", function () {
+      updateInputsForCompetition();
+    });
   });
 
   teamForm.forEach((form) => {
