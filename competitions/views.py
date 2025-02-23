@@ -243,20 +243,17 @@ class RegisterTeamView(LoginRequiredMixin, View):
         competition_pk = kwargs.get('competition_pk')
 
         if competition_pk:
-            # Se competition_pk for fornecido, procure pela competição
             competition = get_object_or_404(Competition, pk=competition_pk)
             team_form = TeamForm(initial={'competition': competition})
             MemberFormSet = formset_factory(TeamMemberForm, extra=1, max_num=9, validate_max=True)
             member_formset = MemberFormSet(prefix='members')
 
-            # Obter dados de competição
             competitions = Competition.objects.all()
             competition_data = {
                 comp.id: {'min': comp.min_members_per_team, 'max': comp.max_members_per_team}
                 for comp in competitions
             }
 
-            # Determinação do template com base na URL
             if request.resolver_match.view_name == 'register_team_student':
                 template_name = 'student/register_team.html'
             elif request.resolver_match.view_name == 'register_team':
@@ -264,7 +261,6 @@ class RegisterTeamView(LoginRequiredMixin, View):
             else:
                 template_name = 'student/register_team.html'
 
-            # Renderizar o template com os dados necessários
             return render(request, template_name, {
                 'team_form': team_form,
                 'member_formset': member_formset,
@@ -272,19 +268,16 @@ class RegisterTeamView(LoginRequiredMixin, View):
                 'competition': competition
             })
         else:
-            # Caso competition_pk não seja fornecido, usar outra lógica
             team_form = TeamForm()
             MemberFormSet = formset_factory(TeamMemberForm, extra=1, max_num=9, validate_max=True)
             member_formset = MemberFormSet(prefix='members')
 
-            # Obter dados de competição (mesmo sem competition_pk)
             competitions = Competition.objects.all()
             competition_data = {
                 comp.id: {'min': comp.min_members_per_team, 'max': comp.max_members_per_team}
                 for comp in competitions
             }
 
-            # Determinação do template com base na URL
             if request.resolver_match.view_name == 'register_team_student':
                 template_name = 'student/register_team.html'
             elif request.resolver_match.view_name == 'register_team':
@@ -292,7 +285,6 @@ class RegisterTeamView(LoginRequiredMixin, View):
             else:
                 template_name = 'student/register_team.html'
 
-            # Renderizar o template com os dados necessários
             return render(request, template_name, {
                 'team_form': team_form,
                 'member_formset': member_formset,
@@ -670,6 +662,11 @@ class RequestsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
 
         try:
             if action == 'approve':
+                if request_instance.request_type == 'approve_team':
+                    team = request_instance.team
+                    team.status = 'approved'
+                    team.save()
+                    
                 request_instance.status = 'approved'
                 request_instance.save()
                 return JsonResponse({'success': True, 'message': 'Requisição aprovada com sucesso.'})
@@ -687,7 +684,6 @@ class RequestsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
 
         except ValidationError as e:
             return JsonResponse({'success': False, 'message': str(e)}, status=400)
-
 
 def get_request_data(request, request_pk):
     request_obj = get_object_or_404(Request, id=request_pk)
