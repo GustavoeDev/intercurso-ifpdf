@@ -441,11 +441,17 @@ class TeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     context_object_name = 'teams'
     group_required = 'Organizer'
 
+    def get_queryset(self):
+        return Team.objects.filter(status='approved').order_by('-register_date')
+        
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)  
-        context['competitions'] = Competition.objects.all()  
-        return context  
-
+        context['competitions'] = Competition.objects.all()
+        
+        for competition in context['competitions']:
+            competition.teams = Team.objects.filter(competition=competition, status='approved')
+        
+        return context
 
 def view_register_team(request):
     return render(request, 'organizer/register_team_page.html')

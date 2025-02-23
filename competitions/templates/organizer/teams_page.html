@@ -14,7 +14,6 @@
 
 <div class="container-wrapper">
   {% for competition in competitions %}
-
   <div class="table-container not-active">
     <div class="table-title">
       <div class="card-title">
@@ -48,12 +47,11 @@
           <th>Ações</th>
         </tr>
 
-        {% for team in competition.team_set.all %}
-
+        {% for team in competition.teams %}
         <tr class="table-row">
           <td class="team-item">
             <span>{{ team.name }}</span>
-            <span class="modality-span">{{ competition.name }}</span>
+            <span class="modality-span">{{ team.competition.name }}</span>
           </td>
           <td>{{ team.members.count }} participantes</td>
           <td>{{ team.register_date|date:"d/m/Y" }}</td>
@@ -69,7 +67,6 @@
       </table>
     </div>
   </div>
-
   {% endfor %}
 </div>
 
