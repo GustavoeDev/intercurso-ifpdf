@@ -1,4 +1,4 @@
-from django.views.generic import ListView, UpdateView
+from django.views.generic import ListView, DeleteView
 from .models import *
 from .forms import *
 from django.forms import formset_factory
@@ -539,6 +539,46 @@ class EditTeamView(LoginRequiredMixin, GroupRequiredMixin, View):
             'errors': errors
         })
 
+class RemoveMemberView(LoginRequiredMixin, GroupRequiredMixin, View):
+    success_url = reverse_lazy('teams_list')
+    group_required = 'Organizer'
+
+    def post(self, request, *args, **kwargs):
+        team_id = kwargs.get('pk')
+        member_id = request.POST.get('member_id')
+        
+        try:
+            team = Team.objects.get(pk=team_id)
+        except Team.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'message': 'Equipe não encontrada.'
+            })
+        
+        competition = team.competition
+        min_members_per_team = competition.min_members_per_team
+        
+        if team.members.count() == min_members_per_team:
+            return JsonResponse({
+                'success': False,
+                'message': f'A equipe atingiu o número mínimo de membros ({min_members_per_team}).'
+            })
+        
+        try:
+            member = CustomUser.objects.get(pk=member_id)
+        except CustomUser.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'message': 'Membro não encontrado.'
+            })
+        
+        team.members.remove(member)
+
+        return JsonResponse({
+            'success': True,
+            'message': 'Membro removido com sucesso.'
+        })
+    
 def view_competitions_page(request):
     return render(request, 'organizer/competitions_page.html')
 

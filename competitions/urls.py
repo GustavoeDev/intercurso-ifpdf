@@ -17,6 +17,7 @@ urlpatterns = [
     path('organizador/equipes/', TeamsView.as_view(), name="teams_list"),
     path('organizador/equipes/registrar-equipe/', view_register_team, name="register_team"),
     path('organizador/equipes/editar-equipe/<int:pk>', EditTeamView.as_view(), name="edit_team"),
+    path('organizador/equipes/editar-equipe/<int:pk>/remover-membro/<int:member_id>', RemoveMemberView.as_view(), name="remove_team"),
     path('organizador/competicoes/', view_competitions_page, name="competitions_list"),
     path('organizador/competicoes/detalhes/', view_detail_comp_page, name="detail"), # deatail vai ser subituido pelo id/nome da competição
     path('organizador/solicitacoes/', RequestsView.as_view(), name="requests_list"),

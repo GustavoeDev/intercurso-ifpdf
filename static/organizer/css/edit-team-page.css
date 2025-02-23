@@ -268,7 +268,8 @@ dialog > form {
   gap: 1.5rem;
 }
 
-.remove-team-dialog > form {
+.remove-team-dialog > form,
+.remove-member-dialog > form {
   margin-top: 0;
 }
 
@@ -299,8 +300,17 @@ dialog > form > button[type="submit"] {
   width: 100%;
 }
 
-.remove-team-dialog form > button[type="submit"] {
+.remove-team-dialog form > button[type="submit"],
+.remove-member-dialog form > button[type="submit"] {
   background-color: var(--red-500);
+}
+
+.remove-member-dialog form > button[type="submit"] {
+  margin-top: 0;
+}
+
+.remove-member-dialog .error-messages {
+  margin-top: 1rem;
 }
 
 select {

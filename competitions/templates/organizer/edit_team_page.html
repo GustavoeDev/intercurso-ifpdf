@@ -56,7 +56,7 @@
         <td>{{ member.username }}</td>
         <td>{{ member.course }}</td>
         <td>
-          <button class="image-button remove-member">
+          <button class="image-button remove-member" data-member-id="{{ member.id }}" data-team-id="{{ team.id }}">
             <img class="small-image" src="{% static 'student/img/manage-teams/trash-icon.svg' %}" />
           </button>
         </td>
@@ -115,6 +115,10 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Excluir</button>
+  <form method="POST" action="" id="form-delete-member">
+    {% csrf_token %}
+    <div class="error-messages"></div>
+    <button type="submit">Excluir</button>
+  </form>
 </dialog>
 {% endblock %}
