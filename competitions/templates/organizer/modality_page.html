@@ -6,6 +6,7 @@
   src="{% static 'organizer/js/modality-page/create-modal.js' %}"
   defer
 ></script>
+<script src="{% static 'organizer/js/modality-page/show-messeges.js' %}"></script>
 {% endblock %} {% block main %}
 
 {% block title %}
@@ -17,262 +18,90 @@
   <button>Cadastrar modalidade</button>
 </div>
 
+
 <div class="modality-container-wrapper">
-  <div class="table-container not-active">
-    <div class="table-title">
-      <div class="card-title">
-        <div class="title-image">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-          />
+  {% for modality in modalities %}
+    <div class="table-container not-active">
+      <div class="table-title">
+        <div class="card-title">
+          <div class="title-image">
+            <img
+              class="button-image"
+              src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
+            />
+          </div>
+          <div class="title-text">
+            <span>{{ modality.name }}</span>
+          </div>
         </div>
-        <div class="title-text">
-          <span>Basquete</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="create-new-competition">
-          <span>Criar nova competição</span>
-          <i class="fa-solid fa-trophy"></i>
-        </button>
-        <button class="edit-modality">
-          <span>Editar modalidade</span>
-          <i class="fa-solid fa-pencil"></i>
-        </button>
-        <button class="delete-modality">
-          <span>Excluir modalidade</span>
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
-        <button class="image-button min-max-button max">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
-          />
-        </button>
-      </div>
-    </div>
-
-    <div class="table-container-wrapper">
-      <table>
-        <tr class="table-header">
-          <th>Nome da competição</th>
-          <th>Equipes inscritas</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-        <tr class="table-row">
-          <td>Basquete masculino</td>
-          <td>20 equipes</td>
-          <td>
-            <span>Em andamento</span>
-          </td>
-          <td>
-            <a href="{% url 'detail' %}">
-              <button class="image-button edit-competition">
-                <i class="fa-solid fa-pencil"></i>
-              </button>
-            </a>
-
-            <button class="image-button remove-competition">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-
-        <tr class="table-row">
-          <td>Basquete feminino</td>
-          <td>20 equipes</td>
-          <td>
-            <span>Em andamento</span>
-          </td>
-          <td>
-            <button class="image-button edit-competition">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-competition">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <div class="table-container not-active">
-    <div class="table-title">
-      <div class="card-title">
-        <div class="title-image">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-          />
-        </div>
-        <div class="title-text">
-          <span>Vôlei</span>
+        <div class="card-actions">
+          <button 
+            class="create-new-competition"
+            data-url="{% url 'create_competition' modality.id%}"  
+          >
+            <span>Criar nova competição</span>
+            <i class="fa-solid fa-trophy"></i>
+          </button>
+          <button 
+            class="edit-modality"
+            data-url="{% url 'edit_modality' modality.id %}"
+          >
+            <span>Editar modalidade</span>
+            <i class="fa-solid fa-pencil"></i>
+          </button>
+          <button 
+            class="delete-modality" 
+            data-url="{% url 'delete_modality' modality.id %}"
+          >
+            <span>Excluir modalidade</span>
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+          <button class="image-button min-max-button max">
+            <img
+              class="button-image"
+              src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
+            />
+          </button>
         </div>
       </div>
-      <div class="card-actions">
-        <button class="create-new-competition">
-          <span>Criar nova competição</span>
-          <i class="fa-solid fa-trophy"></i>
-        </button>
-        <button class="edit-modality">
-          <span>Editar modalidade</span>
-          <i class="fa-solid fa-pencil"></i>
-        </button>
-        <button class="delete-modality">
-          <span>Excluir modalidade</span>
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
-        <button class="image-button min-max-button max">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
-          />
-        </button>
+
+      <div class="table-container-wrapper">
+        <table>
+          {% for competition in competitions %}
+            {% if competition.modality == modality %}
+              <tr class="table-header">
+                <th>Nome da competição</th>
+                <th>Equipes inscritas</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+              <tr class="table-row">
+                <td>{{ competition.name }}</td>
+                <td>{{ competition.team_set.count }}</td>
+                <td>
+                  <span> {{ competition.status }}</span> <!-- Fazer função no JS para ajustar o nome do status e cor -->
+                </td>
+                <td>
+                  <a href="{% url 'detail_competition' competition.name%}">
+                    <button class="image-button edit-competition">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                  </a>
+
+                  <button 
+                    class="image-button remove-competition"
+                    data-url="{% url 'delete_competition' competition.id %}"
+                  >
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </table>
       </div>
     </div>
-
-    <div class="table-container-wrapper">
-      <table>
-        <tr class="table-header">
-          <th>Nome da competição</th>
-          <th>Equipes inscritas</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-        <tr class="table-row">
-          <td>Vôlei Indoor</td>
-          <td>20 equipes</td>
-          <td>
-            <span>Em andamento</span>
-          </td>
-          <td>
-            <button class="image-button edit-competition">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-competition">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-
-        <tr class="table-row">
-          <td>Vôlei de areia masculino</td>
-          <td>20 equipes</td>
-          <td>
-            <span>Em andamento</span>
-          </td>
-          <td>
-            <button class="image-button edit-competition">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-competition">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-        <tr class="table-row">
-          <td>Vôlei de areia feminino</td>
-          <td>20 equipes</td>
-          <td>
-            <span>Em andamento</span>
-          </td>
-          <td>
-            <button class="image-button edit-competition">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-competition">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <div class="table-container not-active">
-    <div class="table-title">
-      <div class="card-title">
-        <div class="title-image">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-          />
-        </div>
-        <div class="title-text">
-          <span>Futsal</span>
-        </div>
-      </div>
-      <div class="card-actions">
-        <button class="create-new-competition">
-          <span>Criar nova competição</span>
-          <i class="fa-solid fa-trophy"></i>
-        </button>
-        <button class="edit-modality">
-          <span>Editar modalidade</span>
-          <i class="fa-solid fa-pencil"></i>
-        </button>
-        <button class="delete-modality">
-          <span>Excluir modalidade</span>
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
-        <button class="image-button min-max-button max">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/arrow-down.svg' %}"
-          />
-        </button>
-      </div>
-    </div>
-
-    <div class="table-container-wrapper">
-      <table>
-        <tr class="table-header">
-          <th>Nome da competição</th>
-          <th>Equipes inscritas</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-        <tr class="table-row">
-          <td>Futsal masculino</td>
-          <td>20 equipes</td>
-          <td>
-            <span>Em andamento</span>
-          </td>
-          <td>
-            <button class="image-button edit-competition">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-competition">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-
-        <tr class="table-row">
-          <td>Futsal feminino</td>
-          <td>20 equipes</td>
-          <td>
-            <span>Em andamento</span>
-          </td>
-          <td>
-            <button class="image-button edit-competition">
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-
-            <button class="image-button remove-competition">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 
 <dialog class="add-new-modality-dialog">
@@ -281,15 +110,12 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  <form action="" method="POST">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="new-modality-name">Nome da modalidade</label>
-      <input
-        type="text"
-        id="new-modality-name"
-        placeholder="Modalidade"
-        required
-      />
+      <label for="new-modality-name">{{ add_modality_form.name.label_tag }}
+      </label>
+      {{ add_modality_form.name }}
     </div>
 
     <button type="submit" class="create-new-modality-btn">
@@ -304,16 +130,19 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  
+  <form action="" method="post">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="edit-modality-name">Nome da modalidade</label>
-      <input type="text" id="edit-modality-name" />
+      <label for="edit-modality-name">{{ edit_modality_form.name.label_tag }}</label>
+      {{ edit_modality_form.name }}
     </div>
 
     <button type="submit" class="create-new-modality-btn">
       Concluir alterações
     </button>
   </form>
+
 </dialog>
 
 <dialog class="remove-modality-dialog">
@@ -322,7 +151,14 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Excluir</button>
+  <p>
+    Ao excluir a modalidade, todas as competições atribuidas a ela também serão excluídas.
+  </p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" class="submit-button">Excluir</button>
+  </form>
 </dialog>
 
 <dialog class="remove-competition-dialog">
@@ -331,7 +167,11 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <button>Excluir</button>
+  <form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" class="submit-button">Excluir</button>
+  </form>
+  
 </dialog>
 
 <dialog class="create-new-competition-dialog">
@@ -340,98 +180,54 @@
     <button><i class="fa-solid fa-xmark"></i></button>
   </div>
 
-  <form action="">
+  <form action="" method="post">
+    {% csrf_token %}
     <div class="inputs-container">
-      <label for="new-competition-name">Nome da competição</label>
-      <input
-        type="text"
-        id="new-competition-name"
-        placeholder="Ex: Basquete masculino"
-        required
-      />
+      <label for="new-competition-name">{{ add_competition_form.name.label_tag}}</label>
+      {{ add_competition_form.name }}
     </div>
+
+
     <div class="inputs-container">
-      <label for="new-competition-system">Sistema da competição</label>
+      <label for="new-competition-system">{{ add_competition_form.system.label_tag }}</label>
 
       <div class="competition-type-selection">
-        <label class="new-competition-radio-group" for="grupos">
-          <input
-            type="radio"
-            id="grupos"
-            name="competition-type"
-            value="grupos"
-            required
-          />
-          Grupos
-        </label>
-
-        <label class="new-competition-radio-group" for="pontos-corridos">
-          <input
-            type="radio"
-            id="pontos-corridos"
-            name="competition-type"
-            value="pontos-corridos"
-            required
-          />
-          Pontos Corridos
-        </label>
-
-        <label class="new-competition-radio-group" for="eliminatorias">
-          <input
-            type="radio"
-            id="eliminatorias"
-            name="competition-type"
-            value="eliminatorias"
-            required
-          />
-          Eliminatórias
-        </label>
+        {{ add_competition_form.system }}
       </div>
     </div>
 
     <div class="quantity-players-teams-container">
       <div class="quantity-players-teams-content">
-        <label for="quantity-players-team"
-          >Quantidade mínima de participantes por equipe</label
-        >
-        <input
-          type="number"
-          id="quantity-players-team"
-          placeholder="Ex: 8"
-          required
-        />
+        <label for="quantity-players-team">
+          {{ add_competition_form.min_members_per_team.label_tag }}
+        </label>
+        {{ add_competition_form.min_members_per_team }}
       </div>
       <div class="quantity-players-teams-content">
-        <label for="quantity-players-team"
-          >Quantidade máxima de participantes por equipe</label
-        >
-        <input
-          type="number"
-          id="quantity-players-team"
-          placeholder="Ex: 12"
-          required
-        />
+        <label for="quantity-players-team">
+          {{ add_competition_form.max_members_per_team.label_tag }}  
+        </label>
+        {{ add_competition_form.max_members_per_team }}
       </div>
     </div>
 
     <div class="inputs-container">
-      <label for="image-competition">Imagem da competição</label>
+      <label for="image-competition">{{ add_competition_form.image.label_tag }}</label>
       <label for="image-competition" class="upload-label">
         <i class="fa-solid fa-upload"></i>
         Inserir imagem
       </label>
-      <input
-        type="file"
-        id="image-competition"
-        name="imagem-competicao"
-        accept="image/*"
-        class="file-input"
-        required
-      />
+      <!--{{ add_competition_form.image }}-->
     </div>
 
     <button type="submit">Criar competição</button>
   </form>
 </dialog>
+
+<ul class="messages" style="display: none;">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+</ul>
 
 {% endblock %}

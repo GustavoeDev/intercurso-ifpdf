@@ -13,11 +13,15 @@ urlpatterns = [
     path('competicao/futsal-masculino/', view_group_stage_page, name="group"), #futsal-masculino vai ser substituido pelo id/nome da competição
     path('competicao/volei-indoor/', view_qualifiers_stage_page, name="qualifiers"), #volei-indoor vai ser substituido pelo id/nome da competição
     # Organizador
-    path('organizador/modalidades/', view_modality_page, name="modality_list"),
+    path('organizador/modalidades/', ManageModalityView.as_view(), name="modality_list"),
+    path('organizador/modalidades/<int:pk>/delete/', DeleteModalityView.as_view(), name="delete_modality"),
+    path('organizador/modalidades/<int:pk>/edit/', EditModalityView.as_view(), name="edit_modality"),
     path('organizador/equipes/', view_teams_page, name="teams_list"),
     path('organizador/equipes/registrar-equipe/', view_register_team, name="register_team"),
     path('organizador/equipes/editar-equipe/', view_edit_team, name="edit_team"),
     path('organizador/competicoes/', view_competitions_page, name="competitions_list"),
-    path('organizador/competicoes/detalhes/', view_detail_comp_page, name="detail"), # deatail vai ser subituido pelo id/nome da competição
+    path('organizador/competicoes/adicionar/<int:pk>', AddCompetitionsView.as_view(), name="create_competition"),
+    path('organizador/competicoes/<int:pk>/delete/', DeleteCompetitionsView.as_view(), name="delete_competition"),  
+    path('organizador/competicoes/<str:name>/', DetailCompetitionView.as_view(), name="detail_competition"), # deatail vai ser subituido pelo id/nome da competição
     path('organizador/solicitacoes/', view_requests, name="requests_list"),
 ]

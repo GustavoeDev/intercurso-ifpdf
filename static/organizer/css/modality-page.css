@@ -313,8 +313,8 @@ dialog .inputs-container > textarea {
   margin-top: 1rem;
 }
 
-.remove-competition-dialog > button,
-.remove-modality-dialog > button {
+.remove-modality-dialog .submit-button,
+.remove-competition-dialog .submit-button {
   background-color: var(--red-500);
   padding: 1.25rem;
   border: 0;
@@ -323,22 +323,19 @@ dialog .inputs-container > textarea {
   color: var(--white);
   font-weight: 500;
   cursor: pointer;
-}
 
-.remove-competition-dialog > button,
-.remove-modality-dialog > button {
-  margin-top: 2rem;
   width: 100%;
 }
 
-.competition-type-selection {
+
+#id_system {
   display: flex;
   align-items: center;
   gap: 2rem;
   justify-content: space-between;
 }
 
-.competition-type-selection .new-competition-radio-group {
+#id_system > div {
   display: flex;
   align-items: center;
   gap: 0.5rem;

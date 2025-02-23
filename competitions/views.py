@@ -1,11 +1,11 @@
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, DetailView
 from .models import *
 from .forms import *
 from django.forms import formset_factory
 from django.views.generic import View
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.db import transaction
 from django.core.exceptions import ValidationError
 from django.utils.timezone import localtime
@@ -402,8 +402,94 @@ def view_qualifiers_stage_page(request):
 
 # Organizador
 
-def view_modality_page(request):
-    return render(request, 'organizer/modality_page.html')
+class ManageModalityView(ListView):
+    model = Modality
+    template_name = 'organizer/modality_page.html'
+    context_object_name = 'modalities'
+
+    def get_queryset(self):
+        return Modality.objects.all()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        add_modality_form = AddModalityForm()
+        edit_modality_form = EditModalityForm()
+        add_competition_form = AddCompetitionForm()
+
+        context['competitions'] = Competition.objects.all()
+        context['add_modality_form'] = add_modality_form
+        context['edit_modality_form'] = edit_modality_form
+        context['add_competition_form'] = add_competition_form
+        
+        
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        add_modality_form = AddModalityForm(request.POST)
+
+        try:
+            if add_modality_form.is_valid():
+                add_modality_form.save()
+                return JsonResponse({'status': 'success', 'message': "Modalidade salva com sucesso."})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': "Erro ao salvar a modalidade."})
+        
+        return self.get(request, *args, **kwargs)
+
+class DeleteModalityView(View):
+    def post(self, request, pk):
+        modality = get_object_or_404(Modality, pk=pk)
+        try:
+            modality.delete()
+            messages.success(request, 'Modalidade excluída com sucesso!')
+        except Exception as e:
+            messages.error(request, 'Erro ao excluir a modalidade.')
+        return redirect(reverse('modality_list'))
+
+class EditModalityView(View):
+    def post(self, request, pk):
+        modality = get_object_or_404(Modality, pk=pk)
+        form = EditModalityForm(request.POST, instance=modality)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Modalidade editada com sucesso!')
+        else:
+            messages.error(request, ('Erro ao editar modalidade:\n' + form.errors.get('name')))
+
+        return redirect(reverse('modality_list')) 
+
+class AddCompetitionsView(View):
+    def post(self, request, pk):
+        modality = get_object_or_404(Modality, pk=pk)
+
+        form = AddCompetitionForm(request.POST, request.FILES)
+        if form.is_valid():
+            competition = form.save(commit=False)
+            competition.modality = modality
+            competition.save()
+            messages.success(request, 'Competição adicionada com sucesso!')
+        else:
+            messages.error(request, form.errors)
+        
+        return redirect(reverse('modality_list'))
+
+class DeleteCompetitionsView(View):
+    def post(self, request, pk):
+        competition = get_object_or_404(Competition, pk=pk)
+        try:
+            competition.delete()
+            messages.success(request, 'Competição excluída com sucesso!')
+        except Exception as e:
+            messages.error(request, 'Erro ao excluir a competição.')
+        return redirect(reverse('modality_list'))
+
+class DetailCompetitionView(DetailView):
+    model = Competition 
+    template_name = 'organizer/detail_competition_page.html'  
+    context_object_name = 'competition'  
+    slug_field = 'name' 
+    slug_url_kwarg = 'name'
 
 def view_teams_page(request):
     return render(request, 'organizer/teams_page.html')
