@@ -8,10 +8,10 @@
 {% endblock %} {% block main %}
 
 <div class="league-header">
-  <h2>Basquete</h2>
+  <h2>{{ competition.name }}</h2>
   <p>
     Nesta seção, você poderá visualizar todos os dados relacionados à competição
-    de basquete, incluindo as equipes participantes, tabela de classificação
+    de {{ competition.name }}, incluindo as equipes participantes, tabela de classificação
     atualizadas e todas as rodadas de partidas. Aqui, você acompanha os
     resultados e o cronograma completo dos jogos de forma detalhada e prática.
   </p>
@@ -32,7 +32,7 @@
           />
         </div>
         <div class="title-text">
-          <span>Basquete</span>
+          <span>{{ competition.name }}</span>
         </div>
       </div>
     </div>
@@ -50,50 +50,19 @@
           <th>GC</th>
           <th>SG</th>
         </tr>
-        <tr class="table-row">
-          <td>Falcons</td>
-          <td>3</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr class="table-row">
-          <td>Falcons</td>
-          <td>3</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr class="table-row">
-          <td>Falcons</td>
-          <td>3</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
-        <tr class="table-row">
-          <td>Falcons</td>
-          <td>3</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-          <td>2</td>
-        </tr>
+        {% for classification in classifications %}   
+          <tr class="table-row">
+            <td>{{ classification.team.name }}</td>
+            <td>{{ classification.pontuation }}</td>
+            <td>{{ classification.games_played }}</td>
+            <td>{{ classification.victories }}</td>
+            <td>{{ classification.ties }}</td>
+            <td>{{ classification.defeats }}</td>
+            <td>{{ classification.points_pro }}</td>
+            <td>{{ classification.points_against}}</td>
+            <td>{{ classification.points_difference}}</td>
+          </tr>
+        {% endfor %}
       </table>
     </div>
   </div>
@@ -104,451 +73,48 @@
     <h3>Todos os jogos</h3>
     <p>Acompanhe os jogos e resultados da sua equipe preferida de basquete</p>
   </div>
-  <div class="all-games-navigation"></div>
+  <div class="all-games-navigation">
+  </div>
 
-  <div class="games-card-container">
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>INFORMÁTICA</p>
-          <span>2</span>
+  {% for round in rounds %}
+    <div class="games-card-container">
+      {% for game in games %}
+        {% if game.related_round == round %}
+          <div class="card-all-games">
+        <img
+          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
+          alt=""
+        />
+        <div class="card-all-games-header">
+          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+          <span>
+            {% if game.status == 'pendent' %}
+              Pendente
+            {% elif game.status == 'in_course' %}
+              Em andamento
+            {% else %}
+              Encerrado
+            {% endif %}
+          </span>
         </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
+        <div class="card-all-games-content">
+          <div class="card-all-games-score">
+            <p>{{ game.team_a }}</p>
+            <span>{{ game.score_a }}</span>
+          </div>
+          <div class="card-all-games-score">
+            <p>{{ game.team_b }}</p>
+            <span>{{ game.score_b }}</span>
+          </div>
         </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
+        <div class="card-all-games-footer">
+          <p>{{ game.date|date:"d/m"}} -<span>{{ game.date|time:"H:i" }}</span></p>
+        </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-  </div>
-  <div class="games-card-container">
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>API FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-  </div>
-  <div class="games-card-container">
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>GAROTOS DE PROGRAMAssss</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-    <div class="card-all-games">
-      <img
-        src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-        alt=""
-      />
-      <div class="card-all-games-header">
-        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-        <span>Encerrado</span>
-      </div>
-      <div class="card-all-games-content">
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-        <div class="card-all-games-score">
-          <p>ADS FC</p>
-          <span>2</span>
-        </div>
-      </div>
-      <div class="card-all-games-footer">
-        <p>22 / 12 -<span>19:00</span></p>
-      </div>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}

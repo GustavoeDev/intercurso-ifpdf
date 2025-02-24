@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils import timezone
 from users.models import *
 from .models import *
 
@@ -104,7 +105,7 @@ class AddModalityForm(forms.ModelForm):
     model = Modality
     fields = ['name']
 
-class EditModalityForm(forms.Form):
+class EditModalityForm(forms.ModelForm):
   name = forms.CharField(
     label='Nome da modalidade',
     validators=[RegexValidator(r'^[a-zA-Z\s]+$', 'A modalidade deve conter apenas letras.')],
@@ -216,3 +217,79 @@ class RejectRequestForm(forms.ModelForm):
             self.add_error('reason_rejected', 'Este campo é obrigatório ao negar a solicitação.')
 
         return cleaned_data
+class EditScoreboardForm(forms.ModelForm):
+    score_a = forms.IntegerField(
+       required=False,
+    )
+    score_b = forms.IntegerField(
+       required=False,
+    )
+    status = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput,
+    )
+
+    date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),  # Usa um input de data HTML5
+        required=False,  # Torna o campo opcional
+    )
+    time = forms.TimeField(
+        widget=forms.TimeInput(attrs={'type': 'time'}),  # Usa um input de hora HTML5
+        required=False,  # Torna o campo opcional
+    )
+    
+    def save(self, commit=True):
+        game = super().save(commit=False)
+
+        if self.cleaned_data.get('score_a') is not "":
+            game.score_a = self.cleaned_data['score_a']
+
+        if self.cleaned_data.get('score_b') is not "":
+            game.score_b = self.cleaned_data['score_b']
+
+        if self.cleaned_data.get('date') and self.cleaned_data.get('time'):
+            game.date = timezone.make_aware(
+                timezone.datetime.combine(
+                    self.cleaned_data['date'],
+                    self.cleaned_data['time']
+                )
+            )
+        elif self.cleaned_data.get('date'):
+            # Se apenas a data for fornecida, define a hora como 00:00
+            game.date = timezone.make_aware(
+                timezone.datetime.combine(
+                    self.cleaned_data['date'],
+                    timezone.datetime.min.time()
+                )
+            )
+        elif self.cleaned_data.get('time'):
+            # Se apenas a hora for fornecida, define a data como a data atual
+            game.date = timezone.make_aware(
+                timezone.datetime.combine(
+                    timezone.now().date(),
+                    self.cleaned_data['time']
+                )
+            )
+        else:
+            # Se nenhum valor for fornecido, define o campo como None
+            game.date = None
+
+        # Salva o objeto se commit=True
+        if commit:
+            game.save()
+        
+        # Retorna o objeto game
+            return game
+
+        #Atualiza o status com base no valor do checkbox
+        if self.cleaned_data['status']:
+            game.status = 'finished'
+        else:
+            game.status = 'in_course'
+        if commit:
+            game.save()
+            return game
+
+    class Meta:
+        model = Game
+        fields = ['score_a', 'score_b']

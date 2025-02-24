@@ -67,19 +67,27 @@
 
       <div class="table-container-wrapper">
         <table>
+          <tr class="table-header">
+            <th>Nome da competição</th>
+            <th>Equipes inscritas</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
           {% for competition in competitions %}
             {% if competition.modality == modality %}
-              <tr class="table-header">
-                <th>Nome da competição</th>
-                <th>Equipes inscritas</th>
-                <th>Status</th>
-                <th>Ações</th>
-              </tr>
               <tr class="table-row">
                 <td>{{ competition.name }}</td>
                 <td>{{ competition.team_set.count }}</td>
                 <td>
-                  <span> {{ competition.status }}</span> <!-- Fazer função no JS para ajustar o nome do status e cor -->
+                  <span> 
+                    {% if competition.status == 'pendent' %}
+                      Pendente
+                    {% elif competition.status == 'in_course' %}
+                      Em andamento
+                    {% else %}
+                      Encerrado
+                    {% endif %}
+                  </span>
                 </td>
                 <td>
                   <a href="{% url 'detail_competition' competition.name%}">

@@ -60,33 +60,46 @@ class Clasification(models.Model):
     games_played = models.IntegerField(blank=False, default=0)
     points_pro = models.IntegerField(blank=False, default=0) 
     points_against = models.IntegerField(blank=False, default=0)
-    position = models.IntegerField(blank=False)
+    position = models.IntegerField(blank=False, default=0)
 
     @property
     def points_difference(self):
         return self.points_pro - self.points_against
 
+    @points_difference.setter
+    def points_difference(self, value):
+        # Ignora a atribuição, pois points_difference é calculado
+        pass
+
     @classmethod
     def update_positions(cls, competition_instance):
-        classifications = cls.objects.filter(competition=competition_instance).order_by(
+        classifications = cls.objects.filter(competition=competition_instance).annotate(
+          points_difference=models.F('points_pro') - models.F('points_against')
+        ).order_by(
             '-pontuation',
             '-points_difference'
         )
         position = 1
         for classification in classifications:
-            classification.position = position
-            classification.save()
+            cls.objects.filter(id=classification.id).update(position=position)
             position += 1
 
+    def save(self, *args, **kwargs):
+        # Salva o objeto
+        super().save(*args, **kwargs)
+        # Atualiza as posições após salvar
+        self.update_positions(self.competition)
+
     def __str__(self):
-        return (self.team.name, ' - ', self.competition.name)
+        return f"{self.team.name} - {self.competition.name}"
 
 class Game(models.Model):
   team_a = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_a', blank=False)
   team_b = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='team_b', blank=False)
   score_a = models.IntegerField(blank=True, null=True)
   score_b = models.IntegerField(blank=True, null=True)
-  date = models.DateTimeField()
+  date = models.DateTimeField(blank=True, null=True)
+  related_round = models.ForeignKey('Round', on_delete=models.CASCADE, blank=True, null=True)
 
   STATUS_CHOICES = [
     ('pendent', 'Pendent'),
@@ -101,10 +114,9 @@ class Game(models.Model):
 class Round(models.Model):
   number = models.IntegerField(blank=False)
   competition = models.ForeignKey(Competition, on_delete=models.CASCADE, blank=False)
-  games = models.ManyToManyField(Game, blank=True)
 
   def __str__(self):
-    return self.name
+    return f'{self.number}'
 
 class Request(models.Model):
   REQUEST_TYPE_CHOICES = [

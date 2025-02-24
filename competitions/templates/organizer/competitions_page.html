@@ -26,18 +26,36 @@
         <th>Data inicio</th>
         <th>Ações</th>
       </tr>
-      <tr class="table-row">
-        <td class="comp-item">
-          <span>Basquete masculino</span>
-          <span class="modality-span">Basquete</span>
-        </td>
-        <td><span class="status">Em andamento</span></td>
-        <td>20 equipes</td>
-        <td>27/11/2025</td>
-        <td>
-          <a href="{% url 'detail' %}">Gerenciar competição</a>
-        </td>
-      </tr>
+      {% for competition in competitions %}
+        {% if competition.status == "in_course" or competition.status == "pendent"%}
+          <tr class="table-row">
+            <td class="comp-item">
+              <span>{{ competition.name }}</span>
+              <span class="modality-span">{{ competition.modality.name }}</span>
+            </td>
+            <td><span class="status">
+              {% if competition.status == 'pendent' %}
+              Pendente
+              {% elif competition.status == 'in_course' %}
+                Em andamento
+              {% else %}
+                Encerrado
+              {% endif %}
+            </span></td>
+            <td>{{ competition.team_set.count }}</td>
+            <td>
+              {% if not competition.start_date %}
+                ---
+              {% else %}
+                {{ competition.start_date|date:"d/m/Y" }}
+             {% endif %}
+            </td>
+            <td>
+              <a href="{% url 'detail_competition' competition.name %}">Gerenciar competição</a>
+            </td>
+          </tr>
+        {% endif %}
+      {% endfor %}
     </table>
   </div>
 </div>
