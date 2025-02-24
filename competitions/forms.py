@@ -93,7 +93,7 @@ class TeamMemberForm(forms.Form):
 class AddModalityForm(forms.ModelForm):
   name = forms.CharField(
     label='Nome da modalidade',
-    validators=[RegexValidator(r'^[a-zA-Z\s]+$', 'A modalidade deve conter apenas letras.')],
+    validators=[RegexValidator(r'^[a-zA-ZÀ-ÿ\s]+$', 'A modalidade deve conter apenas letras.')],
     widget=forms.TextInput(attrs={'placeholder': 'Modalidade'}),
     error_messages={
       'unique': "Já existe uma modalidade com este nome.",
@@ -108,7 +108,7 @@ class AddModalityForm(forms.ModelForm):
 class EditModalityForm(forms.ModelForm):
   name = forms.CharField(
     label='Nome da modalidade',
-    validators=[RegexValidator(r'^[a-zA-Z\s]+$', 'A modalidade deve conter apenas letras.')],
+     validators=[RegexValidator(r'^[a-zA-ZÀ-ÿ\s]+$', 'A modalidade deve conter apenas letras.')],
     widget=forms.TextInput(attrs={'placeholder': 'Modalidade'}),
     error_messages={
       'unique': "Já existe uma modalidade com este nome.",
@@ -128,7 +128,7 @@ class AddCompetitionForm(forms.ModelForm):
             'placeholder': 'Ex: Basquete mascsulino',
             'required': 'required',
         }),
-        validators=[RegexValidator(r'^[A-Za-z\s]+$', 'O nome da competição deve conter apenas letras e espaços.')],
+        validators=[RegexValidator(r'^[a-zA-ZÀ-ÿ\s]+$', 'O nome da competição deve conter apenas letras e espaços.')],
         error_messages={
             'unique': "Já existe uma competição com este nome.",
             'invalid': "O nome da competição deve conter apenas letras e espaços."

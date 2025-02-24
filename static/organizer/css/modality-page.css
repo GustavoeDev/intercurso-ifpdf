@@ -230,6 +230,10 @@ th {
   transform: rotate(180deg);
 }
 
+.row td {
+  padding: 1rem 0;
+}
+
 /* MODAL */
 
 dialog::backdrop {
@@ -326,7 +330,6 @@ dialog .inputs-container > textarea {
 
   width: 100%;
 }
-
 
 #id_system {
   display: flex;

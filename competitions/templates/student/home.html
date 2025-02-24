@@ -59,30 +59,32 @@
 
 <div class="competitions-wrapper" id="competitions">
   <h2>Competições</h2>
+  {% if competitions %}
   <div class="competitions-cards-container">
     <div class="carousel">
       <div class="carousel-wrapper">
-        {% for competition in competitions %}
-          {% if competition.status == 'in_course' or competition.status == 'pendent' %}
-            <div class="carousel-item">
-              <div class="competitions-card">
-                <img
-                  src="{% static 'student/img/homepage/competitions-card/basquete-img.png' %}"
-                  alt=""
-                />
-                <div class="competitions-card-text">
-                  <span>{{ competition.name }}</span>
-                  <p>
-                    Acesse a página com todas as informações sobre o {{ competition.name }},
-                    incluindo equipes participantes, horários dos jogos e resultados
-                    atualizados.
-                  </p>
+        
+          {% for competition in competitions %}
+            {% if competition.status == 'in_course' or competition.status == 'pendent' %}
+              <div class="carousel-item">
+                <div class="competitions-card">
+                  <img
+                    src="{% static 'student/img/homepage/competitions-card/basquete-img.png' %}"
+                    alt=""
+                  />
+                  <div class="competitions-card-text">
+                    <span>{{ competition.name }}</span>
+                    <p>
+                      Acesse a página com todas as informações sobre o {{ competition.name }},
+                      incluindo equipes participantes, horários dos jogos e resultados
+                      atualizados.
+                    </p>
+                  </div>
+                  <button><a href="{% url 'league' competition.name %}">Acessar</a></button>
                 </div>
-                <button><a href="{% url 'league' competition.name %}">Acessar</a></button>
-              </div>
-            </div> 
-          {% endif %}
-        {% endfor %}
+              </div> 
+            {% endif %}
+          {% endfor %}
       </div>
       <button class="carousel-button prev">&#10094;</button>
       <button class="carousel-button next">&#10095;</button>
@@ -92,6 +94,9 @@
       </div>
     </div>
   </div>
+  {% else %}
+    <p style="margin: 2rem 0;">Não há competições em andamento</p>
+  {% endif %}
 </div>
 
 <div class="games-today-wrapper" id="games-anchor">
@@ -114,29 +119,33 @@
       </div>
     </div>
     <div class="games-today-cards-container">
-      {% for game in games %}
-        <div class="games-today-card">
-        <div class="games-today-card-game">
-          <p>{{ game.team_a.abbreviation }}</p>
-          <span>X</span>
-          <p>{{ game.team_b.abbreviation }}</p>
-        </div>
-        <div class="games-today-card-info-container">
-          <div class="games-today-card-info">
-            <i class="fa-regular fa-clock"></i>
-            <span>{{ game.date|time:'H:i' }}</span>
-          </div>
-          <div class="games-today-card-info">
-            <i class="fa-solid fa-location-dot"></i>
-            <span>Ginásio Poliesportivo</span>
-          </div>
-          <div class="games-today-card-info">
-            <i class="fa-solid fa-basketball"></i>
-            <span>{{ game.related_round.competition }}</span>
-          </div>
-        </div>
-        </div>
-      {% endfor %}
+        {% if games %}
+          {% for game in games %}
+            <div class="games-today-card">
+            <div class="games-today-card-game">
+              <p>{{ game.team_a.abbreviation }}</p>
+              <span>X</span>
+              <p>{{ game.team_b.abbreviation }}</p>
+            </div>
+            <div class="games-today-card-info-container">
+              <div class="games-today-card-info">
+                <i class="fa-regular fa-clock"></i>
+                <span>{{ game.date|time:'H:i' }}</span>
+              </div>
+              <div class="games-today-card-info">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Ginásio Poliesportivo</span>
+              </div>
+              <div class="games-today-card-info">
+                <i class="fa-solid fa-basketball"></i>
+                <span>{{ game.related_round.competition }}</span>
+              </div>
+            </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>Não há jogos para hoje</p>
+        {% endif %}
       </div>
     </div>
   </div>

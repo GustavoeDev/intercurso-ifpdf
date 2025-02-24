@@ -1,18 +1,14 @@
 {% extends "base-student.html" %} {% load static %} {% block css %}
 <link rel="stylesheet" href="{% static 'student/css/league-page.css' %}" />
 {% endblock %} {% block js %}
-<script
-  src="{% static 'student/js/league-page/card-games.js' %}"
-  defer
-></script>
+<script src="{% static 'student/js/league-page/card-games.js' %}" defer></script>
 {% endblock %} {% block main %}
 
 <div class="league-header">
   <h2>{{ competition.name }}</h2>
   <p>
-    Nesta seção, você poderá visualizar todos os dados relacionados à competição
-    de {{ competition.name }}, incluindo as equipes participantes, tabela de classificação
-    atualizadas e todas as rodadas de partidas. Aqui, você acompanha os
+    Nesta seção, você poderá visualizar todos os dados relacionados à competição de {{ competition.name }}, incluindo as
+    equipes participantes, tabela de classificação atualizadas e todas as rodadas de partidas. Aqui, você acompanha os
     resultados e o cronograma completo dos jogos de forma detalhada e prática.
   </p>
 </div>
@@ -26,10 +22,7 @@
     <div class="table-title">
       <div class="card-title">
         <div class="title-image">
-          <img
-            class="button-image"
-            src="{% static 'student/img/manage-teams/sport-icon.svg' %}"
-          />
+          <img class="button-image" src="{% static 'student/img/manage-teams/sport-icon.svg' %}" />
         </div>
         <div class="title-text">
           <span>{{ competition.name }}</span>
@@ -50,19 +43,23 @@
           <th>GC</th>
           <th>SG</th>
         </tr>
-        {% for classification in classifications %}   
-          <tr class="table-row">
-            <td>{{ classification.team.name }}</td>
-            <td>{{ classification.pontuation }}</td>
-            <td>{{ classification.games_played }}</td>
-            <td>{{ classification.victories }}</td>
-            <td>{{ classification.ties }}</td>
-            <td>{{ classification.defeats }}</td>
-            <td>{{ classification.points_pro }}</td>
-            <td>{{ classification.points_against}}</td>
-            <td>{{ classification.points_difference}}</td>
-          </tr>
-        {% endfor %}
+        {% if classifications %} {% for classification in classifications %}
+        <tr class="table-row">
+          <td>{{ classification.team.name }}</td>
+          <td>{{ classification.pontuation }}</td>
+          <td>{{ classification.games_played }}</td>
+          <td>{{ classification.victories }}</td>
+          <td>{{ classification.ties }}</td>
+          <td>{{ classification.defeats }}</td>
+          <td>{{ classification.points_pro }}</td>
+          <td>{{ classification.points_against}}</td>
+          <td>{{ classification.points_difference}}</td>
+        </tr>
+        {% endfor %} {% else %}
+        <tr>
+          <td style="padding: 1rem 0">Essa competição ainda não foi iniciada!</td>
+        </tr>
+        {% endif %}
       </table>
     </div>
   </div>
@@ -73,48 +70,42 @@
     <h3>Todos os jogos</h3>
     <p>Acompanhe os jogos e resultados da sua equipe preferida de basquete</p>
   </div>
-  <div class="all-games-navigation">
-  </div>
+  <div class="all-games-navigation"></div>
 
-  {% for round in rounds %}
-    <div class="games-card-container">
-      {% for game in games %}
-        {% if game.related_round == round %}
-          <div class="card-all-games">
-        <img
-          src="{% static 'student/img/league-page/bg-rectangle.png' %}"
-          alt=""
-        />
-        <div class="card-all-games-header">
-          <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
-          <span>
-            {% if game.status == 'pendent' %}
-              Pendente
-            {% elif game.status == 'in_course' %}
-              Em andamento
-            {% else %}
-              Encerrado
-            {% endif %}
-          </span>
+  {% if rounds %} {% for round in rounds %}
+  <div class="games-card-container">
+    {% for game in games %} {% if game.related_round == round %}
+    <div class="card-all-games">
+      <img src="{% static 'student/img/league-page/bg-rectangle.png' %}" alt="" />
+      <div class="card-all-games-header">
+        <img src="{% static 'student/img/league-page/header.svg' %}" alt="" />
+        <span>
+          {% if game.status == 'pendent' %} Pendente {% elif game.status == 'in_course' %} Em andamento {% else %}
+          Encerrado {% endif %}
+        </span>
+      </div>
+      <div class="card-all-games-content">
+        <div class="card-all-games-score">
+          <p>{{ game.team_a }}</p>
+          <span>{{ game.score_a }}</span>
         </div>
-        <div class="card-all-games-content">
-          <div class="card-all-games-score">
-            <p>{{ game.team_a }}</p>
-            <span>{{ game.score_a }}</span>
-          </div>
-          <div class="card-all-games-score">
-            <p>{{ game.team_b }}</p>
-            <span>{{ game.score_b }}</span>
-          </div>
+        <div class="card-all-games-score">
+          <p>{{ game.team_b }}</p>
+          <span>{{ game.score_b }}</span>
         </div>
-        <div class="card-all-games-footer">
-          <p>{{ game.date|date:"d/m"}} -<span>{{ game.date|time:"H:i" }}</span></p>
-        </div>
-          </div>
-        {% endif %}
-      {% endfor %}
+      </div>
+      <div class="card-all-games-footer">
+        <p>
+          {{ game.date|date:"d/m"}} -
+          <span>{{ game.date|time:"H:i" }}</span>
+        </p>
+      </div>
     </div>
-  {% endfor %}
+    {% endif %} {% endfor %}
+  </div>
+  {% endfor %} {% else %}
+  <p style="margin: 2rem 0">Não há jogos disponíveis</p>
+  {% endif %}
 </div>
 
 {% endblock %}
