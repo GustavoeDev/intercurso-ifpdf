@@ -530,10 +530,22 @@ class EditScoreBoardView(View):
 
         return redirect(reverse('detail_competition', kwargs={'name': game.related_round.competition.name})) 
 
+class EndCompetitionView(View):
+    def get(self, request, pk):
+        competition = get_object_or_404(Competition, pk=pk)
+        competition.status = 'finished'
+        competition.save()
+        messages.success(request, 'Competição finalizada com sucesso!')
+        return redirect(reverse('competitions_list'))
+    
+
 def auto_generate_rounds(request, pk):
     competition = get_object_or_404(Competition, pk=pk)
     teams = Team.objects.filter(competition=competition)
     teams_count = teams.count()
+    
+    competition.status = 'in_course'
+    competition.save()
 
     if teams_count < 2:
         messages.error(request, 'Não é possível gerar rodadas com menos de 2 times.')

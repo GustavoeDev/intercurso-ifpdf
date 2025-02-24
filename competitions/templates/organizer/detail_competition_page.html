@@ -232,7 +232,9 @@
       <button style="background-color: var(--green-100);">Iniciar</button>
     </a>
     {% elif competition.status == 'in_course' %}
-    <button>Encerrar</button>
+    <a href="{% url 'end_competition' competition.id %}">   
+      <button>Encerrar</button>
+    </a>
   {% endif %}
   
 </dialog>
