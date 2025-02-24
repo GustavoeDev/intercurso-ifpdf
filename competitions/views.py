@@ -624,11 +624,6 @@ class DetailCompetitionView(DetailView):
     slug_field = 'name' 
     slug_url_kwarg = 'name'
 
-class TeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
-    model = Team
-    template_name = 'organizer/teams_page.html'
-    context_object_name = 'teams'
-    group_required = 'Organizer'
     def get_context_data(self, **kwargs):
         games = Game.objects.filter(related_round__competition=self.object)
         finished_games = games.filter(status='finished').count()
@@ -644,6 +639,24 @@ class TeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
         context['total_games'] = total_games
         context['not_finished_games'] = not_finished_games
         context['edit_scoreboard_form'] = edit_scoreboard_form
+
+        return context
+
+class TeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
+    model = Team
+    template_name = 'organizer/teams_page.html'
+    context_object_name = 'teams'
+    group_required = 'Organizer'
+
+    def get_queryset(self):
+        return Team.objects.filter(status='approved').order_by('-register_date')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)  
+        context['competitions'] = Competition.objects.all()
+
+        for competition in context['competitions']:
+            competition.teams = Team.objects.filter(competition=competition, status='approved')
 
         return context
 
@@ -757,7 +770,6 @@ class EndCompetitionView(View):
         messages.success(request, 'Competição finalizada com sucesso!')
         return redirect(reverse('competitions_list'))
     
-
 def auto_generate_rounds(request, pk):
     competition = get_object_or_404(Competition, pk=pk)
     teams = Team.objects.filter(competition=competition)
@@ -799,22 +811,6 @@ def auto_generate_rounds(request, pk):
     else:
         messages.error(request, 'Sistema de competição não suportado.')
         return redirect('detail_competition', name=competition.name)
-
-
-def view_teams_page(request):
-    return render(request, 'organizer/teams_page.html')
-
-    def get_queryset(self):
-        return Team.objects.filter(status='approved').order_by('-register_date')
-        
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)  
-        context['competitions'] = Competition.objects.all()
-        
-        for competition in context['competitions']:
-            competition.teams = Team.objects.filter(competition=competition, status='approved')
-        
-        return context
 
 class EditTeamView(LoginRequiredMixin, GroupRequiredMixin, View):
     template_name = 'organizer/edit_team_page.html'
@@ -937,13 +933,7 @@ class RemoveMemberView(LoginRequiredMixin, GroupRequiredMixin, View):
         return JsonResponse({
             'success': True,
             'message': 'Membro removido com sucesso.'
-        })
-    
-def view_competitions_page(request):
-    return render(request, 'organizer/competitions_page.html')
-
-def view_detail_comp_page(request):
-    return render(request, 'organizer/detail_competition_page.html')
+        })   
 
 class RequestsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Request
