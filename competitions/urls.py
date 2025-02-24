@@ -23,6 +23,7 @@ urlpatterns = [
     path('organizador/competicoes/adicionar/<int:pk>', AddCompetitionsView.as_view(), name="create_competition"),
     path('organizador/competicoes/<int:pk>/delete/', DeleteCompetitionsView.as_view(), name="delete_competition"),
     path('organizador/competicoes/<int:pk>/start/', auto_generate_rounds, name="start_competition"),
-    path('organizador/competicoes/<str:name>/', DetailCompetitionView.as_view(), name="detail_competition"), # deatail vai ser subituido pelo id/nome da competição
+    path('organizador/competicoes/<str:name>/', DetailCompetitionView.as_view(), name="detail_competition"),
+    path('organizador/competicoes/<int:pk>/editar-placar/', EditScoreBoardView.as_view(), name="edit_scoreboard"),
     path('organizador/solicitacoes/', view_requests, name="requests_list"),
 ]

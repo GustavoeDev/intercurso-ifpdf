@@ -504,7 +504,7 @@ class DetailCompetitionView(DetailView):
         finished_games = games.filter(status='finished').count()
         total_games = games.count()
         not_finished_games = total_games - finished_games
-
+        edit_scoreboard_form = EditScoreboardForm()
 
         context = super().get_context_data(**kwargs)
         context['classifications'] = Clasification.objects.filter(competition=self.object).order_by('position')
@@ -513,9 +513,21 @@ class DetailCompetitionView(DetailView):
         context['finished_games'] = finished_games
         context['total_games'] = total_games
         context['not_finished_games'] = not_finished_games
+        context['edit_scoreboard_form'] = edit_scoreboard_form
 
         return context
     
+class EditScoreBoardView(View):
+    def post(self, request, pk):
+        game = get_object_or_404(Game, pk=pk)
+        form = EditScoreboardForm(request.POST, instance=game)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Placar atualizado com sucesso!')
+        else:
+            messages.error(request, ('Erro ao editar placar.'))
+
+        return redirect(reverse('detail_competition', kwargs={'name': game.related_round.competition.name})) 
 
 def auto_generate_rounds(request, pk):
     competition = get_object_or_404(Competition, pk=pk)

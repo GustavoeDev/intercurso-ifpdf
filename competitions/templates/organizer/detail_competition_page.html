@@ -81,7 +81,7 @@
   <p>Gerencie todos os jogos desta competição</p>
 </div>
 
-<div class="editable-data-container">
+<div class="editable-data-container"> 
   <div class="all-games-container">
     {% for round in rounds %} 
       <div class="round-container">
@@ -102,7 +102,7 @@
                 />
                 <span class="game-status-span">{{game.status}}</span>
               </div>
-              <div class="card-round-container-content">
+              <div class="card-round-container-content" data-url="{% url 'edit_scoreboard' game.id %}" data-status="{{ game.status }}">
                 <div class="card-round-container-name">
                   <p>{{ game.team_a.abbreviation }}</p>
                 </div>
@@ -152,7 +152,7 @@
     <hr />
     <div class="comp-detail-container">
       <p class="detail-p" id="detail-modality">
-        Modalidade: <span>{{ competition.name }}</span>
+        Modalidade: <span>{{ competition.modality.name }}</span>
       </p>
       <p class="detail-p" id="detail-comp-sistem">
         Sistema da competição: <span>{{ competition.system }}</span>
@@ -239,32 +239,33 @@
       <h3>Editar placar</h3>
       <button><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <form action="">
+    <form action="" method="post">
+      {% csrf_token %}
       <div class="edit-scoreboard-container">
         <div class="teams-container">
           <div class="inputs-container">
             <label for="home-team">Time casa</label>
-            <p class="team-name" id="home-team">ADS</p>
+            <p class="team-name" id="home-team"></p>
           </div>
           <div class="inputs-container">
             <label for="away-team">Time fora</label>
-            <p class="team-name" id="away-team">INFORMÁTICA</p>
+            <p class="team-name" id="away-team"></p>
           </div>
         </div>
         <div class="scoreboard-container">
           <div class="inputs-container">
             <label for="home-scoreboard">Placar</label>
-            <input type="number" id="home-scoreboard" name="home-scoreboard" />
+            {{ edit_scoreboard_form.score_a }}
           </div>
           <div class="inputs-container">
             <label for="home-scoreboard">Placar</label>
-            <input type="number" id="home-scoreboard" name="home-scoreboard" />
+            {{ edit_scoreboard_form.score_b }}
           </div>
         </div>
       </div>
       <hr />
       <div class="radio-input-container">
-        <input type="checkbox" name="end-game" id="end-game" />
+        {{ edit_scoreboard_form.status }}
         <label for="end-game">Jogo encerrado</label>
       </div>
       <button type="submit">Confirmar alterações</button>

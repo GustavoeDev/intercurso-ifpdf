@@ -138,7 +138,7 @@ class AddModalityForm(forms.ModelForm):
     model = Modality
     fields = ['name']
 
-class EditModalityForm(forms.Form):
+class EditModalityForm(forms.ModelForm):
   name = forms.CharField(
     label='Nome da modalidade',
     validators=[RegexValidator(r'^[a-zA-Z\s]+$', 'A modalidade deve conter apenas letras.')],
@@ -216,4 +216,25 @@ class AddCompetitionForm(forms.ModelForm):
         model = Competition
         fields = ['name', 'system', 'min_members_per_team', 'max_members_per_team']
 
-    
+class EditScoreboardForm(forms.ModelForm):
+    score_a = forms.IntegerField()
+    score_b = forms.IntegerField()
+    status = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput,
+    )
+
+    def save(self, commit=True):
+        game = super().save(commit=False)
+        # Atualiza o status com base no valor do checkbox
+        if self.cleaned_data['status']:
+            game.status = 'finished'
+        else:
+            game.status = 'in_course'
+        if commit:
+            game.save()
+        return game
+
+    class Meta:
+        model = Game
+        fields = ['score_a', 'score_b']
