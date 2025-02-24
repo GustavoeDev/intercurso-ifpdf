@@ -125,7 +125,7 @@ class AddCompetitionForm(forms.ModelForm):
         label="Nome da competição",
         max_length=100,
         widget=forms.TextInput(attrs={
-            'placeholder': 'Ex: Basquete mascsulino',
+            'placeholder': 'Ex: Basquete masculino',
             'required': 'required',
         }),
         validators=[RegexValidator(r'^[a-zA-ZÀ-ÿ\s]+$', 'O nome da competição deve conter apenas letras e espaços.')],
@@ -167,6 +167,15 @@ class AddCompetitionForm(forms.ModelForm):
         min_value=1  # Valor mínimo permitido
     )
 
+    image = forms.CharField(
+      label="Imagem da competição",
+      required=False,
+      widget=forms.TextInput(attrs={
+          'placeholder': 'Ex: https://example.com/image.jpg',
+          'required': 'required',
+      })
+    )
+
     def clean(self):
         cleaned_data = super().clean()
         min_players = cleaned_data.get('min_members_per_team')
@@ -181,7 +190,7 @@ class AddCompetitionForm(forms.ModelForm):
 
     class Meta:
         model = Competition
-        fields = ['name', 'system', 'min_members_per_team', 'max_members_per_team']
+        fields = ['name', 'system', 'min_members_per_team', 'max_members_per_team', 'image']
 # Requests Forms
 
 class RejectRequestForm(forms.ModelForm):
@@ -241,10 +250,10 @@ class EditScoreboardForm(forms.ModelForm):
     def save(self, commit=True):
         game = super().save(commit=False)
 
-        if self.cleaned_data.get('score_a') is not "":
+        if self.cleaned_data.get('score_a') != "":
             game.score_a = self.cleaned_data['score_a']
 
-        if self.cleaned_data.get('score_b') is not "":
+        if self.cleaned_data.get('score_b') != "":
             game.score_b = self.cleaned_data['score_b']
 
         if self.cleaned_data.get('date') and self.cleaned_data.get('time'):

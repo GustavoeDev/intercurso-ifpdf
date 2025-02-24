@@ -90,7 +90,13 @@
 
 .competitions-card > img {
   border-radius: 4px;
+  max-width: 20rem;
   width: 100%;
+  height: 11.5rem;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
 }
 
 .competitions-card-text {

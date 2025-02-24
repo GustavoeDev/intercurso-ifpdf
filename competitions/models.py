@@ -25,7 +25,7 @@ class Competition(models.Model):
   system = models.CharField(max_length=255, choices=SYSTEM_CHOICES, blank=False)
   min_members_per_team = models.IntegerField(blank=False)
   max_members_per_team = models.IntegerField(blank=False)
-  image = models.CharField(max_length=255, blank=True) # URL
+  image = models.CharField(max_length=255) # URL
   status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='pendent')
   start_date = models.DateField(null=True, blank=True)
   end_date = models.DateField(null=True, blank=True)
