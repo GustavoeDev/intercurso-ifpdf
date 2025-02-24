@@ -13,11 +13,21 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from users.mixins import GroupRequiredMixin
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.http import HttpResponseForbidden
+
 from django.urls import reverse
+
+class NonOrganizerRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return not self.request.user.groups.filter(name='Organizer').exists()
+    
+    def handle_no_permission(self):
+        return redirect('modality_list')
 
 # Aluno
 
-class HomepageView(ListView):
+class HomepageView(NonOrganizerRequiredMixin, ListView):
     model = Competition
     template_name = 'student/home.html'
     context_object_name = 'competitions'
@@ -50,7 +60,7 @@ class HomepageView(ListView):
             'games': games
         })
     
-class LeagueView(DetailView):
+class LeagueView(NonOrganizerRequiredMixin, DetailView):
     model = Competition 
     template_name = 'student/league_page.html'  
     context_object_name = 'competition'  
@@ -65,7 +75,7 @@ class LeagueView(DetailView):
 
         return context
 
-class ManageTeamsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
+class ManageTeamsView(NonOrganizerRequiredMixin, LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Team
     template_name = 'student/manage_teams.html'
     context_object_name = 'teams'
@@ -277,7 +287,7 @@ class RequestRemoveTeamView(View):
                 'message': 'Por favor, forneça um motivo válido para a remoção.'
             })
 
-class RegisterTeamView(LoginRequiredMixin, View):
+class RegisterTeamView(NonOrganizerRequiredMixin, LoginRequiredMixin, View):
     def get_success_url(self):
         if 'competition_pk' in self.kwargs:
             return reverse_lazy('register_team', kwargs={'competition_pk': self.kwargs['competition_pk']})
@@ -527,10 +537,11 @@ def view_qualifiers_stage_page(request):
 
 # Organizador
 
-class ManageModalityView(ListView):
+class ManageModalityView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Modality
     template_name = 'organizer/modality_page.html'
     context_object_name = 'modalities'
+    group_required = 'Organizer'
 
     def get_queryset(self):
         return Modality.objects.all()
@@ -609,20 +620,22 @@ class DeleteCompetitionsView(View):
             messages.error(request, 'Erro ao excluir a competição.')
         return redirect(reverse('modality_list'))
 
-class ManageCompetitionsView(ListView):
+class ManageCompetitionsView(LoginRequiredMixin, GroupRequiredMixin, ListView):
     model = Competition
     template_name = 'organizer/competitions_page.html'
     context_object_name = 'competitions'
+    group_required = 'Organizer'
 
     def get_queryset(self):
         return Competition.objects.all()
 
-class DetailCompetitionView(DetailView):
+class DetailCompetitionView(LoginRequiredMixin, GroupRequiredMixin, DetailView):
     model = Competition 
     template_name = 'organizer/detail_competition_page.html'  
     context_object_name = 'competition'  
     slug_field = 'name' 
     slug_url_kwarg = 'name'
+    group_required = 'Organizer'
 
     def get_context_data(self, **kwargs):
         games = Game.objects.filter(related_round__competition=self.object)
