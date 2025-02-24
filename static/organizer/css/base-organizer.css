@@ -109,7 +109,7 @@ body {
 
 .header-content > header {
   width: 100%;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem;
   background-color: var(--white);
   border-bottom: 1px solid var(--gray-100);
 
