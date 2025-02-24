@@ -16,9 +16,8 @@
     <link rel="stylesheet" href="{% static 'organizer/css/base-organizer.css' %}" />
 
     {% block css %} {% endblock %}
-    <!--
-    <script src="{% static 'student/js/menu-hamburguer.js' %}" defer></script>
-    -->
+
+    <script src="{% static 'organizer/js/menu-hamburguer.js' %}" defer></script>
     {% block js %} {% endblock %} {% block title %}
     <title>Organizador</title>
     {% endblock %}
@@ -28,9 +27,9 @@
       <div class="navigation">
         <div class="navigation-header">
           <img src="{% static 'organizer/img/logo.svg' %}" alt="" />
-          <button>
+          <a href="{% url 'logout' %}">
             <img src="{% static 'organizer/img/template-base/sidebar.svg' %}" alt="" />
-          </button>
+          </a>
         </div>
         <p>Menu</p>
         <div class="navigation-content">
@@ -68,9 +67,9 @@
         <div class="navigation-content">
           <div class="navigation-header">
             <img src="{% static 'organizer/img/logo.svg' %}" alt="" />
-            <button>
+            <a href="{% url 'logout' %}">
               <img src="{% static 'organizer/img/template-base/sidebar.svg' %}" alt="" />
-            </button>
+            </a>
           </div>
           <p>Menu</p>
           {% url 'modality_list' as modality_url %}
