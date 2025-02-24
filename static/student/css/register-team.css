@@ -127,7 +127,7 @@ hr {
 .remove-member {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-100%);
   right: -2rem;
   background: none;
   border: none;
@@ -317,6 +317,12 @@ button:disabled {
   background-color: #4caf5070;
 }
 
+@media screen and (max-width: 1000px) {
+  form {
+    margin: 1rem 3rem 1.5rem 0;
+  }
+}
+
 @media screen and (max-width: 860px) {
   .two-inputs-row {
     display: flex;
@@ -354,7 +360,4 @@ button:disabled {
   hr:last-of-type {
     display: none;
   }
-}
-
-@media screen and (max-width: 650px) {
 }

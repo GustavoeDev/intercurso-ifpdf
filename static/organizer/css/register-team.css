@@ -49,8 +49,7 @@ form {
   flex-direction: column;
   gap: 2rem;
 
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
+  margin: 1rem 3rem 1.5rem 0;
 }
 
 button {
@@ -146,7 +145,7 @@ hr {
 .remove-member {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-100%);
   right: -2rem;
   background: none;
   border: none;
