@@ -287,7 +287,7 @@ class RequestRemoveTeamView(View):
                 'message': 'Por favor, forneça um motivo válido para a remoção.'
             })
 
-class RegisterTeamView(NonOrganizerRequiredMixin, LoginRequiredMixin, View):
+class RegisterTeamView(LoginRequiredMixin, View):
     def get_success_url(self):
         if 'competition_pk' in self.kwargs:
             return reverse_lazy('register_team', kwargs={'competition_pk': self.kwargs['competition_pk']})
