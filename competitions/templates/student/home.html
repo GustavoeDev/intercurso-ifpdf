@@ -99,14 +99,18 @@
     <div class="games-today-header">
       <h2>Jogos de hoje</h2>
       <div class="games-today-select">
-        <select>
-          <option value="all">Todos os jogos</option>
-          <option value="futsal-masc">Futsal Masculino</option>
-          <option value="volei-indoor">Vôlei Indoor</option>
-          <option value="basquete">Basquete</option>
-          <option value="queimada">Queimada</option>
-        </select>
-        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        <form action="{% url 'homepage' %}" method="post">
+          {% csrf_token %}
+          <select name="competition_id">
+              <option value="all">Todos os jogos</option>
+              {% for competition in competitions %}
+                  <option value="{{ competition.id }}">{{ competition.name }}</option>
+              {% endfor %}
+          </select>
+          <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
       </div>
     </div>
     <div class="games-today-cards-container">

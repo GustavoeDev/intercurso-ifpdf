@@ -30,6 +30,23 @@ class HomepageView(ListView):
 
         return context
     
+    def post(self, request, *args, **kwargs):
+        competitions = Competition.objects.all()
+        competition_id = request.POST.get('competition_id')
+
+        print(competition_id)
+
+        if competition_id == 'all':
+            games = Game.objects.all()
+        else:
+            competition = get_object_or_404(Competition, id=competition_id)
+            games = Game.objects.filter(related_round__competition=competition)
+
+        return render(request, self.template_name, {
+            'competitions': competitions,
+            'games': games
+        })
+    
 class LeagueView(DetailView):
     model = Competition 
     template_name = 'student/league_page.html'  
@@ -44,8 +61,6 @@ class LeagueView(DetailView):
         context['rounds'] = Round.objects.filter(competition=self.object)
 
         return context
-
-        
 
 class ManageTeamsView(ListView):
     model = Team

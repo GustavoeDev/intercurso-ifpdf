@@ -236,7 +236,7 @@
   max-width: 18.75rem;
 }
 
-.games-today-select > select {
+.games-today-select > form > select {
   width: 100%;
   appearance: none;
   border: 1px solid #ccc;
@@ -251,17 +251,22 @@
   background-position: right 0.625rem center;
 }
 
-.games-today-select > select:focus {
+.games-today-select > form {
+  display: flex;
+  width: 100%;
+}
+
+.games-today-select > form > select:focus {
   outline: none;
   border-color: var(--green-500);
   box-shadow: 0 0 5px var(--green-500);
 }
 
-.games-today-select > select:hover {
+.games-today-select > form > select:hover {
   border-color: #888;
 }
 
-.games-today-select > button {
+.games-today-select > form > button {
   border: 1px solid #ccc;
   border-left: none;
   background-color: var(--green-100);
