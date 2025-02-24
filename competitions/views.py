@@ -37,9 +37,12 @@ class HomepageView(NonOrganizerRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        games = Game.objects.all()
 
-        context['games'] = games
+        today = timezone.now().date()
+    
+        games_today = Game.objects.filter(date__date=today)
+
+        context['games'] = games_today
 
         return context
     
@@ -480,7 +483,11 @@ class RegisterTeamView(LoginRequiredMixin, View):
                         })
 
                     elif request.resolver_match.view_name == 'register_team':
-                        
+                        Clasification.objects.create(
+                            team=team,
+                            competition=competition,
+                        )
+
                         team.status = 'approved'
                         team.save()
 
@@ -793,34 +800,34 @@ def auto_generate_rounds(request, pk):
         return redirect('detail_competition', name=competition.name)
 
     if competition.system == 'league':
-        num_rounds = teams_count - 1
-
+        # Para sistema de liga (todos contra todos, uma vez)
+        round_number = 1
+        round_obj = Round.objects.create(number=round_number, competition=competition)
+        
         teams_list = list(teams)
-
-        for round_number in range(1, num_rounds + 1):
-            round_obj = Round.objects.create(number=round_number, competition=competition)
-
-
-            for i in range(teams_count // 2):
+        
+        # Gera todos os confrontos possíveis (cada time enfrenta todos os outros uma vez)
+        for i in range(teams_count):
+            for j in range(i + 1, teams_count):
                 team_a = teams_list[i]
-                team_b = teams_list[teams_count - 1 - i]
-
+                team_b = teams_list[j]
+                
+                # Criar o jogo
                 Game.objects.create(
                     team_a=team_a,
                     team_b=team_b,
                     related_round=round_obj,
                     status='pendent',
-                    date=competition.start_date  # Use a data de início da competição ou ajuste conforme necessário
+                    date=competition.start_date
                 )
-
-            teams_list.insert(1, teams_list.pop())
-
+        
         competition.status = 'in_course'
         competition.save()
-        messages.success(request, 'Rodadas geradas com sucesso!')
+        messages.success(request, 'Jogos gerados com sucesso!')
         return redirect('detail_competition', name=competition.name)
     elif competition.system == 'qualifiers':
         print("Eliminatórias")
+        # Implementar lógica para sistema eliminatório
     else:
         messages.error(request, 'Sistema de competição não suportado.')
         return redirect('detail_competition', name=competition.name)

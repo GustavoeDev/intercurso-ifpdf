@@ -87,11 +87,19 @@
       <div class="card-all-games-content">
         <div class="card-all-games-score">
           <p>{{ game.team_a }}</p>
+          {% if game.score_a == "None" %}
           <span>{{ game.score_a }}</span>
+          {% else %}
+          <span></span>
+          {% endif %}
         </div>
         <div class="card-all-games-score">
           <p>{{ game.team_b }}</p>
+          {% if game.score_b == "None" %}
           <span>{{ game.score_b }}</span>
+          {% else %}
+          <span></span>
+          {% endif %}
         </div>
       </div>
       <div class="card-all-games-footer">

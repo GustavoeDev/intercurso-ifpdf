@@ -146,7 +146,8 @@ button {
 
 .editable-data-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 3rem;
   justify-content: space-between;
 
   margin-top: 1.875rem;
