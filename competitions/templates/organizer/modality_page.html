@@ -79,7 +79,15 @@
                 <td>{{ competition.name }}</td>
                 <td>{{ competition.team_set.count }}</td>
                 <td>
-                  <span> {{ competition.status }}</span> <!-- Fazer função no JS para ajustar o nome do status e cor -->
+                  <span> 
+                    {% if competition.status == 'pendent' %}
+                      Pendente
+                    {% elif competition.status == 'in_course' %}
+                      Em andamento
+                    {% else %}
+                      Encerrado
+                    {% endif %}
+                  </span>
                 </td>
                 <td>
                   <a href="{% url 'detail_competition' competition.name%}">

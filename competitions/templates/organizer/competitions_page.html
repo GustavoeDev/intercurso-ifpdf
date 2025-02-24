@@ -33,7 +33,15 @@
               <span>{{ competition.name }}</span>
               <span class="modality-span">{{ competition.modality.name }}</span>
             </td>
-            <td><span class="status">{{ competition.status }}</span></td>
+            <td><span class="status">
+              {% if competition.status == 'pendent' %}
+              Pendente
+              {% elif competition.status == 'in_course' %}
+                Em andamento
+              {% else %}
+                Encerrado
+              {% endif %}
+            </span></td>
             <td>{{ competition.team_set.count }}</td>
             <td>
               {% if not competition.start_date %}

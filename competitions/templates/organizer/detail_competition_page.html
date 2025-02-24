@@ -163,22 +163,21 @@
       </p>
       <div class="p-with-button">
         <p class="detail-p" id="detail-comp-status">
-          Status da competição: <span>{{ competition.status }}</span>
+          Status da competição: <span>
+            {% if competition.status == 'pendent' %}
+              Pendente
+            {% elif competition.status == 'in_course' %}
+              Em andamento
+            {% else %}
+              Encerrado
+            {% endif %}
+          </span>
         </p>
-        <button class="p-button" id="datail-status-button">
-          <i
-            class="fa-regular fa-circle-xmark fa-sm"
-            style="color: var(--red-500)"
-          ></i>
-        </button>
       </div>
       <div class="p-with-button">
         <p class="detail-p" id="detail-teams">
           Equipes inscritas: <span>{{ competition.team_set.count }}</span>
         </p>
-        <button class="p-button">
-          <i class="fa-solid fa-eye fa-sm" style="color: var(--gray-600)"></i>
-        </button>
       </div>
     </div>
     <hr />
