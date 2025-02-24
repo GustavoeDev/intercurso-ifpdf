@@ -228,6 +228,7 @@ class EditScoreboardForm(forms.ModelForm):
         required=False,
         widget=forms.CheckboxInput,
     )
+
     date = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date'}),  # Usa um input de data HTML5
         required=False,  # Torna o campo opcional
@@ -236,11 +237,16 @@ class EditScoreboardForm(forms.ModelForm):
         widget=forms.TimeInput(attrs={'type': 'time'}),  # Usa um input de hora HTML5
         required=False,  # Torna o campo opcional
     )
-
+    
     def save(self, commit=True):
         game = super().save(commit=False)
 
-        # Combina a data e a hora em um objeto datetime
+        if self.cleaned_data.get('score_a') is not "":
+            game.score_a = self.cleaned_data['score_a']
+
+        if self.cleaned_data.get('score_b') is not "":
+            game.score_b = self.cleaned_data['score_b']
+
         if self.cleaned_data.get('date') and self.cleaned_data.get('time'):
             game.date = timezone.make_aware(
                 timezone.datetime.combine(
@@ -268,14 +274,21 @@ class EditScoreboardForm(forms.ModelForm):
             # Se nenhum valor for fornecido, define o campo como None
             game.date = None
 
-        # Atualiza o status com base no valor do checkbox
+        # Salva o objeto se commit=True
+        if commit:
+            game.save()
+        
+        # Retorna o objeto game
+            return game
+
+        #Atualiza o status com base no valor do checkbox
         if self.cleaned_data['status']:
             game.status = 'finished'
         else:
             game.status = 'in_course'
         if commit:
             game.save()
-        return game
+            return game
 
     class Meta:
         model = Game

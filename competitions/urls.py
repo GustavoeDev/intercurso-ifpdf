@@ -25,6 +25,7 @@ urlpatterns = [
     path('organizador/competicoes/<int:pk>/start/', auto_generate_rounds, name="start_competition"),
     path('organizador/competicoes/<str:name>/', DetailCompetitionView.as_view(), name="detail_competition"),
     path('organizador/competicoes/<int:pk>/edit-game/', EditScoreBoardView.as_view(), name="edit_game"),
+    path('organizador/competicoes/<int:pk>/edit-round/', EditGameDateView.as_view(), name="edit_game_date"),
     path('organizador/competicoes/<int:pk>/end/', EndCompetitionView.as_view(), name="end_competition"),
     path('organizador/solicitacoes/', view_requests, name="requests_list"),
 ]

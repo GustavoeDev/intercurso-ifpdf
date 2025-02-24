@@ -33,9 +33,9 @@ cardsRoundContent.forEach(card => {
     const team_b = document.querySelector(".edit-scoreboard-dialog form .edit-scoreboard-container .teams-container #away-team")
     team_b.textContent = teams[1].textContent
     const score_a = editScoreboardForm.querySelector("#id_score_a")
-    score_a.value = parseInt(scores[0].textContent)
+    score_a.value = parseInt(scores[1].textContent)
     const score_b = editScoreboardForm.querySelector("#id_score_b")
-    score_b.value = parseInt(scores[1].textContent)
+    score_b.value = parseInt(scores[0].textContent)
 
     const finishedInput = editScoreboardForm.querySelector("#id_status")
     

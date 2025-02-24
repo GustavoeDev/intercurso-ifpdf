@@ -516,13 +516,102 @@ class DetailCompetitionView(DetailView):
         context['edit_scoreboard_form'] = edit_scoreboard_form
 
         return context
-    
+
+class EditGameDateView(View):
+    def post(self, request, pk):
+        game = get_object_or_404(Game, pk=pk)
+        form = EditScoreboardForm(request.POST, instance=game)
+
+        if form.is_valid():
+            if 'date' in form.cleaned_data and form.cleaned_data['date'] is not None:
+                if 'time' in form.cleaned_data and form.cleaned_data['time'] is not None:
+                    # Combina data e hora fornecidas
+                    new_date = timezone.make_aware(
+                        timezone.datetime.combine(
+                            form.cleaned_data['date'],
+                            form.cleaned_data['time']
+                        )
+                    )
+                else:
+                    # Apenas a data foi fornecida, define a hora como 00:00
+                    new_date = timezone.make_aware(
+                        timezone.datetime.combine(
+                            form.cleaned_data['date'],
+                            timezone.datetime.min.time()
+                        )
+                    )
+            elif 'time' in form.cleaned_data and form.cleaned_data['time'] is not None:
+                # Apenas a hora foi fornecida, define a data como a data atual
+                new_date = timezone.make_aware(
+                    timezone.datetime.combine(
+                        timezone.now().date(),
+                        form.cleaned_data['time']
+                    )
+                )
+            
+
+            # Salva as alterações no banco de dados
+            Game.objects.filter(pk=game.pk).update(date=new_date)
+
+            messages.success(request, 'Placar atualizado com sucesso!')
+        else:
+            print(form.errors)
+            messages.error(request, ('Erro ao editar placar.'))
+
+        return redirect(reverse('detail_competition', kwargs={'name': game.related_round.competition.name})) 
+
 class EditScoreBoardView(View):
     def post(self, request, pk):
         game = get_object_or_404(Game, pk=pk)
         form = EditScoreboardForm(request.POST, instance=game)
+
+        placar_a = request.POST.get('score_a')
+        placar_b = request.POST.get('score_b')
+        status = game.status
+        req_status = request.POST.get('status')
+        team_a_points = 0
+        team_b_points = 0
+
+        if status == 'finished':
+            if placar_a == placar_b:
+                game.related_round.competition.clasification_set.filter(team=game.team_a).update(ties=models.F('ties') + 1)
+                game.related_round.competition.clasification_set.filter(team=game.team_b).update(ties=models.F('ties') + 1)
+                team_a_points = 1
+                team_b_points = 1
+            elif placar_a > placar_b:
+                game.related_round.competition.clasification_set.filter(team=game.team_a).update(victories=models.F('victories') + 1)
+                game.related_round.competition.clasification_set.filter(team=game.team_b).update(defeats=models.F('defeats') + 1)
+                team_a_points = 3
+                team_b_points = 0
+            else:
+                game.related_round.competition.clasification_set.filter(team=game.team_b).update(victories=models.F('victories') + 1)
+                game.related_round.competition.clasification_set.filter(team=game.team_a).update(defeats=models.F('defeats') + 1)
+                team_a_points = 0
+                team_b_points = 3
+
+            game.related_round.competition.clasification_set.filter(team=game.team_a).update(
+                games_played=models.F('games_played') + 1,
+                points_pro=models.F('points_pro') + placar_a,
+                points_against=models.F('points_against') + placar_b,
+                pontuation=models.F('pontuation') + team_a_points
+            )
+
+            game.related_round.competition.clasification_set.filter(team=game.team_b).update(
+                games_played=models.F('games_played') + 1,
+                points_pro=models.F('points_pro') + placar_b,
+                points_against=models.F('points_against') + placar_a,
+                pontuation=models.F('pontuation') + team_b_points
+            )
+
+            Clasification.update_positions(game.related_round.competition)    
         if form.is_valid():
-            form.save()
+            Game.objects.filter(pk=game.pk).update(score_a=placar_a)
+            Game.objects.filter(pk=game.pk).update(score_b=placar_b)
+            if req_status == 'on':
+                Game.objects.filter(pk=game.pk).update(status='finished')
+            else:
+                Game.objects.filter(pk=game.pk).update(status='in-course')
+                
             messages.success(request, 'Placar atualizado com sucesso!')
         else:
             print(form.errors)

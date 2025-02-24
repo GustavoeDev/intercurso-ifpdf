@@ -130,7 +130,7 @@
                 <p>
                   <span class="date-hour-span">{{ game.date|date:"d/m"}} - {{ game.date|time:"H:i" }}</span>
                   <button class="edit-game-button" 
-                    data-url="{% url 'edit_game' game.id %}"
+                    data-url="{% url 'edit_game_date' game.id %}"
                     data-date="{{ game.date|date:'Y-m-d' }}"
                     data-time="{{ game.date|time:'H:i' }}"
                   >
@@ -282,7 +282,7 @@
 <dialog class="edit-game-dialog">
   <div class="edit-game-dialog-content">
     <div class="dialog-header">
-      <h3>Editar jogo</h3>
+      <h3>Editar data do jogo</h3>
       <button><i class="fa-solid fa-xmark"></i></button>
     </div>
     <form action="" method="post">
@@ -290,7 +290,7 @@
       <div class="data-inputs-container">
         <div class="inputs-container">
           <label for="date">Data</label>
-          {{ edit_scoreboard_form.date }}
+          {{edit_scoreboard_form.date }}
         </div>
         <div class="inputs-container">
           <label for="hour">Hora</label>
