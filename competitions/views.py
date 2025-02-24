@@ -14,8 +14,38 @@ from django.shortcuts import render, redirect
 
 # Aluno
 
-def view_homepage(request):
-    return render(request, 'student/home.html')
+class HomepageView(ListView):
+    model = Competition
+    template_name = 'student/home.html'
+    context_object_name = 'competitions'
+
+    def get_queryset(self):
+        return Competition.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        games = Game.objects.all()
+
+        context['games'] = games
+
+        return context
+    
+class LeagueView(DetailView):
+    model = Competition 
+    template_name = 'student/league_page.html'  
+    context_object_name = 'competition'  
+    slug_field = 'name' 
+    slug_url_kwarg = 'name'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['games'] = Game.objects.filter(related_round__competition=self.object)
+        context['classifications'] = Clasification.objects.filter(competition=self.object).order_by('position')
+        context['rounds'] = Round.objects.filter(competition=self.object)
+
+        return context
+
+        
 
 class ManageTeamsView(ListView):
     model = Team
@@ -632,32 +662,24 @@ def auto_generate_rounds(request, pk):
     competition = get_object_or_404(Competition, pk=pk)
     teams = Team.objects.filter(competition=competition)
     teams_count = teams.count()
-    
-    competition.status = 'in_course'
-    competition.save()
 
     if teams_count < 2:
         messages.error(request, 'Não é possível gerar rodadas com menos de 2 times.')
         return redirect('detail_competition', name=competition.name)
 
     if competition.system == 'league':
-        # Número de rodadas necessárias
         num_rounds = teams_count - 1
 
-        # Lista de times para facilitar o pareamento
         teams_list = list(teams)
 
-        # Gera as rodadas e os jogos
         for round_number in range(1, num_rounds + 1):
-            # Cria a rodada
             round_obj = Round.objects.create(number=round_number, competition=competition)
 
-            # Pareamento dos times
+
             for i in range(teams_count // 2):
                 team_a = teams_list[i]
                 team_b = teams_list[teams_count - 1 - i]
 
-                # Cria o jogo
                 Game.objects.create(
                     team_a=team_a,
                     team_b=team_b,
@@ -666,7 +688,6 @@ def auto_generate_rounds(request, pk):
                     date=competition.start_date  # Use a data de início da competição ou ajuste conforme necessário
                 )
 
-            # Rotaciona os times para a próxima rodada (exceto o primeiro time)
             teams_list.insert(1, teams_list.pop())
 
         competition.status = 'in_course'
