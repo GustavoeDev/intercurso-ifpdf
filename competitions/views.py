@@ -525,6 +525,7 @@ class EditScoreBoardView(View):
             form.save()
             messages.success(request, 'Placar atualizado com sucesso!')
         else:
+            print(form.errors)
             messages.error(request, ('Erro ao editar placar.'))
 
         return redirect(reverse('detail_competition', kwargs={'name': game.related_round.competition.name})) 

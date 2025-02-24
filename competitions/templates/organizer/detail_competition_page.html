@@ -102,7 +102,7 @@
                 />
                 <span class="game-status-span">{{game.status}}</span>
               </div>
-              <div class="card-round-container-content" data-url="{% url 'edit_scoreboard' game.id %}" data-status="{{ game.status }}">
+              <div class="card-round-container-content" data-url="{% url 'edit_game' game.id %}" data-status="{{ game.status }}">
                 <div class="card-round-container-name">
                   <p>{{ game.team_a.abbreviation }}</p>
                 </div>
@@ -129,7 +129,11 @@
               <div class="card-round-container-footer">
                 <p>
                   <span class="date-hour-span">{{ game.date|date:"d/m"}} - {{ game.date|time:"H:i" }}</span>
-                  <button class="edit-game-button">
+                  <button class="edit-game-button" 
+                    data-url="{% url 'edit_game' game.id %}"
+                    data-date="{{ game.date|date:'Y-m-d' }}"
+                    data-time="{{ game.date|time:'H:i' }}"
+                  >
                     <i
                       class="fa-solid fa-pen fa-xs"
                       style="color: var(--white)"
@@ -276,93 +280,21 @@
 <dialog class="edit-game-dialog">
   <div class="edit-game-dialog-content">
     <div class="dialog-header">
-      <h3>Editar placar</h3>
+      <h3>Editar jogo</h3>
       <button><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <form action="">
-      <div class="edit-game-container">
-        <div class="teams-container">
-          <div class="inputs-container">
-            <label for="home-team">Time casa</label>
-            <div class="inputs-container">
-              <div id="home-team" class="select-container">
-                <select required name="course">
-                  <option value="" selected disabled>
-                    Selecione uma equipe
-                  </option>
-                  <option value="ads">ADS</option>
-                  <option value="agro-industria">Agroindústria</option>
-                  <option value="alimentos">Alimentos</option>
-                  <option value="apicultura">Apicultura</option>
-                  <option value="informatica">Informática</option>
-                  <option value="quimica">Química</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="inputs-container">
-            <label for="away-team">Time fora</label>
-            <div class="inputs-container">
-              <div id="new-member-course" class="select-container">
-                <select required name="course">
-                  <option value="" selected disabled>
-                    Selecione uma equipe
-                  </option>
-                  <option value="ads">ADS</option>
-                  <option value="agro-industria">Agroindústria</option>
-                  <option value="alimentos">Alimentos</option>
-                  <option value="apicultura">Apicultura</option>
-                  <option value="informatica">Informática</option>
-                  <option value="quimica">Química</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="scoreboard-container">
-          <div class="inputs-container">
-            <label for="home-scoreboard">Placar</label>
-            <input type="number" id="home-scoreboard" name="home-scoreboard" />
-          </div>
-          <div class="inputs-container">
-            <label for="home-scoreboard">Placar</label>
-            <input type="number" id="home-scoreboard" name="home-scoreboard" />
-          </div>
-        </div>
-      </div>
-      <hr />
+    <form action="" method="post">
+      {% csrf_token %}
       <div class="data-inputs-container">
         <div class="inputs-container">
           <label for="date">Data</label>
-          <input type="date" id="date" name="date" />
+          {{ edit_scoreboard_form.date }}
         </div>
         <div class="inputs-container">
           <label for="hour">Hora</label>
-          <input type="time" id="hour" name="hour" />
-        </div>
-        <div class="inputs-container">
-          <label for="round-phase">Fase</label>
-          <div class="inputs-container">
-            <div id="round-phase" class="select-container">
-              <select required name="phase">
-                <option value="" selected disabled>Selecione a fase</option>
-                <option value="group-phase">Fase de grupos</option>
-                <option value="eliminatorias">Eliminatorias</option>
-                <option value="final">Final</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="inputs-container">
-          <label for="round">Rodada</label>
-          <input type="number" id="round" name="round" />
+          {{ edit_scoreboard_form.time }}
         </div>
       </div>
-      <div class="radio-input-container">
-        <input type="checkbox" name="end-game" id="end-game" />
-        <label for="end-game">Jogo encerrado</label>
-      </div>
-
       <button type="submit">Confirmar alterações</button>
     </form>
   </div>

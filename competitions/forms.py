@@ -1,4 +1,5 @@
 from django import forms
+from django.utils import timezone
 from users.models import *
 from .models import *
 
@@ -217,15 +218,56 @@ class AddCompetitionForm(forms.ModelForm):
         fields = ['name', 'system', 'min_members_per_team', 'max_members_per_team']
 
 class EditScoreboardForm(forms.ModelForm):
-    score_a = forms.IntegerField()
-    score_b = forms.IntegerField()
+    score_a = forms.IntegerField(
+       required=False,
+    )
+    score_b = forms.IntegerField(
+       required=False,
+    )
     status = forms.BooleanField(
         required=False,
         widget=forms.CheckboxInput,
     )
+    date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),  # Usa um input de data HTML5
+        required=False,  # Torna o campo opcional
+    )
+    time = forms.TimeField(
+        widget=forms.TimeInput(attrs={'type': 'time'}),  # Usa um input de hora HTML5
+        required=False,  # Torna o campo opcional
+    )
 
     def save(self, commit=True):
         game = super().save(commit=False)
+
+        # Combina a data e a hora em um objeto datetime
+        if self.cleaned_data.get('date') and self.cleaned_data.get('time'):
+            game.date = timezone.make_aware(
+                timezone.datetime.combine(
+                    self.cleaned_data['date'],
+                    self.cleaned_data['time']
+                )
+            )
+        elif self.cleaned_data.get('date'):
+            # Se apenas a data for fornecida, define a hora como 00:00
+            game.date = timezone.make_aware(
+                timezone.datetime.combine(
+                    self.cleaned_data['date'],
+                    timezone.datetime.min.time()
+                )
+            )
+        elif self.cleaned_data.get('time'):
+            # Se apenas a hora for fornecida, define a data como a data atual
+            game.date = timezone.make_aware(
+                timezone.datetime.combine(
+                    timezone.now().date(),
+                    self.cleaned_data['time']
+                )
+            )
+        else:
+            # Se nenhum valor for fornecido, define o campo como None
+            game.date = None
+
         # Atualiza o status com base no valor do checkbox
         if self.cleaned_data['status']:
             game.status = 'finished'

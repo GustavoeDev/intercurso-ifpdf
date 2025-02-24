@@ -54,12 +54,19 @@ closeEditScoreboardDialog.addEventListener('click', () => {
   editScoreboardDialog.close()
 })
 
-const buttonsEditScoreboard = document.querySelectorAll(".edit-game-button")
+const buttonsEditGame = document.querySelectorAll(".edit-game-button")
 const editGameDialog = document.querySelector(".edit-game-dialog")
 const closeEditGameDialog = editGameDialog.querySelector(".edit-game-dialog-content .dialog-header button")
+const editGameForm = editGameDialog.querySelector(".edit-game-dialog form")
 
-buttonsEditScoreboard.forEach(btn => {
-  btn.addEventListener('click', () => {
+buttonsEditGame.forEach(btn => {
+  btn.addEventListener('click', () => { 
+    editGameForm.action = btn.dataset.url
+    const inputDate = editGameForm.querySelector("#id_date")
+    inputDate.value = btn.dataset.date
+    const inputTime = editGameForm.querySelector("#id_time")
+    inputTime.value = btn.dataset.time
+
     editGameDialog.showModal()
   })
 });
