@@ -234,70 +234,63 @@ class EditScoreboardForm(forms.ModelForm):
        required=False,
     )
     status = forms.BooleanField(
-        required=False,
-        widget=forms.CheckboxInput,
+      required=False,
+      widget=forms.CheckboxInput,
+      initial=False, 
     )
 
     date = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'}),  # Usa um input de data HTML5
-        required=False,  # Torna o campo opcional
+        widget=forms.DateInput(attrs={'type': 'date'}),  
+        required=False,  
     )
     time = forms.TimeField(
-        widget=forms.TimeInput(attrs={'type': 'time'}),  # Usa um input de hora HTML5
-        required=False,  # Torna o campo opcional
+        widget=forms.TimeInput(attrs={'type': 'time'}), 
+        required=False, 
     )
     
     def save(self, commit=True):
-        game = super().save(commit=False)
-
-        if self.cleaned_data.get('score_a') != "":
-            game.score_a = self.cleaned_data['score_a']
-
-        if self.cleaned_data.get('score_b') != "":
-            game.score_b = self.cleaned_data['score_b']
-
-        if self.cleaned_data.get('date') and self.cleaned_data.get('time'):
-            game.date = timezone.make_aware(
-                timezone.datetime.combine(
-                    self.cleaned_data['date'],
-                    self.cleaned_data['time']
-                )
-            )
-        elif self.cleaned_data.get('date'):
-            # Se apenas a data for fornecida, define a hora como 00:00
-            game.date = timezone.make_aware(
-                timezone.datetime.combine(
-                    self.cleaned_data['date'],
-                    timezone.datetime.min.time()
-                )
-            )
-        elif self.cleaned_data.get('time'):
-            # Se apenas a hora for fornecida, define a data como a data atual
-            game.date = timezone.make_aware(
-                timezone.datetime.combine(
-                    timezone.now().date(),
-                    self.cleaned_data['time']
-                )
-            )
-        else:
-            # Se nenhum valor for fornecido, define o campo como None
-            game.date = None
-
-        # Salva o objeto se commit=True
-        if commit:
-            game.save()
-        
-        # Retorna o objeto game
-            return game
-
-        #Atualiza o status com base no valor do checkbox
-        if self.cleaned_data['status']:
-            game.status = 'finished'
-        else:
-            game.status = 'in_course'
-        if commit:
-            game.save()
-            return game
+      print(self.cleaned_data)
+      game = super().save(commit=False)
+      
+      if self.cleaned_data.get('score_a') is not None:
+          game.score_a = self.cleaned_data['score_a']
+          
+      if self.cleaned_data.get('score_b') is not None:
+          game.score_b = self.cleaned_data['score_b']
+          
+      if self.cleaned_data.get('status'):
+          game.status = 'finished'
+      else:
+          game.status = 'in_course'
+          
+      if self.cleaned_data.get('date') and self.cleaned_data.get('time'):
+          game.date = timezone.make_aware(
+              timezone.datetime.combine(
+                  self.cleaned_data['date'],
+                  self.cleaned_data['time']
+              )
+          )
+      elif self.cleaned_data.get('date'):
+          game.date = timezone.make_aware(
+              timezone.datetime.combine(
+                  self.cleaned_data['date'],
+                  timezone.datetime.min.time()
+              )
+          )
+      elif self.cleaned_data.get('time'):
+          game.date = timezone.make_aware(
+              timezone.datetime.combine(
+                  timezone.now().date(),
+                  self.cleaned_data['time']
+              )
+          )
+      else:
+          game.date = None
+          
+      if commit:
+          game.save()
+          
+      return game
 
     class Meta:
         model = Game
