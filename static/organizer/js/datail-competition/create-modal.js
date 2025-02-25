@@ -43,9 +43,8 @@ cardsRoundContent.forEach((card) => {
       finishedInput.checked = true;
     } else {
       finishedInput.checked = false;
+      editScoreboardDialog.showModal();
     }
-
-    editScoreboardDialog.showModal();
   });
 });
 
@@ -66,7 +65,9 @@ buttonsEditGame.forEach((btn) => {
     const inputTime = editGameForm.querySelector("#id_time");
     inputTime.value = btn.dataset.time;
 
-    editGameDialog.showModal();
+    if (btn.dataset.status !== "finished") {
+      editGameDialog.showModal();
+    }
   });
 });
 

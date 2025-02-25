@@ -133,6 +133,7 @@
                     data-url="{% url 'edit_game_date' game.id %}"
                     data-date="{{ game.date|date:'Y-m-d' }}"
                     data-time="{{ game.date|time:'H:i' }}"
+                    data-status="{{ game.status }}"
                   >
                     <i
                       class="fa-solid fa-pen fa-xs"
